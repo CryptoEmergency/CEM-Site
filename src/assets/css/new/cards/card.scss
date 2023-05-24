@@ -23,7 +23,7 @@
     &_courses {
         border: 4px dashed #593F62;
         border-radius: 20px;
-        background: #1D222E;
+        background: #2f3440;
 
         @media(max-width: 522px) {
             border-width: 3px;
@@ -44,6 +44,7 @@
 
         &_background {
                 background-image: url("../images/background/course-background.png");
+                border-radius: 20px;
             }
     }
 
@@ -181,7 +182,7 @@
             line-height: 115%;
             border-radius: 20px;
             background: 
-                    linear-gradient(#1D222E, #1D222E) padding-box,
+                    linear-gradient(#282828e0, #2f3440) padding-box,
                     linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%)border-box;
             border-radius: 50em;
             border: 2px solid transparent;

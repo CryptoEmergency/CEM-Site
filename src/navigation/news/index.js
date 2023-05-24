@@ -28,7 +28,8 @@ const start = function (data, ID) {
           filter: {
             type: "news",
             "languages.code": Variable.lang.code == "ru" ? "ru" : "en",
-            moderation: true
+            moderation: true,
+            showDate: { $lte: new Date() }
           },
           limit: 20,
           select: { comments: 1 }
@@ -52,7 +53,8 @@ const start = function (data, ID) {
                       type: "news",
                       "languages.code":
                         Variable.lang.code == "ru" ? "ru" : "en",
-                      moderation: true
+                      moderation: true,
+                      showDate: { $lte: new Date() }
                     },
 
                   },
@@ -148,7 +150,8 @@ const start = function (data, ID) {
                   filter: {
                     type: "news",
                     "languages.code": Variable.lang.code == "ru" ? "ru" : "en",
-                    moderation: true
+                    moderation: true,
+                    showDate: { $lte: new Date()}
                   },
                   limit: 20,
                   offset: Static.records.length

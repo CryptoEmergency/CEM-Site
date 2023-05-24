@@ -203,6 +203,7 @@ const BlockProjects = async function () {
   return (
     <div class="c-projects">
       <Swiper
+        style="max-width: 1300px"
         slide={projectRecords}
         options={swiperOptions}
         className="swiper-icons"

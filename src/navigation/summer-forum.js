@@ -433,9 +433,9 @@ const start = function (data, ID) {
             show: false,
         },
         {
-            name: "Ренат Каличенко",
-            position: "Turov Invest",
-            photo: "summer_forum/speaker11",
+            name: "Кирилл Филимонов",
+            position: "Основатель Россграмм",
+            photo: "summer_forum/speaker25",
             show: false,
         },
         {
@@ -504,6 +504,12 @@ const start = function (data, ID) {
             photo: "summer_forum/speaker24",
             show: false,
         },
+        // {
+        //     name: "Ренат Каличенко",
+        //     position: "Turov Invest",
+        //     photo: "summer_forum/speaker11",
+        //     show: false,
+        // },
     ]
 
     const guests = [
@@ -1296,7 +1302,7 @@ const start = function (data, ID) {
                                     class="c-partnersforum__item"
                                 >
                                     <img
-                                        style="width: 80px"
+                                        // style="width: 80px"
                                         src={images["forum/partner_31"]} 
                                     />
                                 </a>
@@ -1416,7 +1422,9 @@ const start = function (data, ID) {
                                     href="https://pro-blockchain.com/crypto-news"
                                     class="c-partnersforum__item"
                                 >
-                                    <img src={images["summer_forum/partner_23"]} />
+                                    <img src={svg["summer_forum/partner_23"]} 
+                                        style="width: 120px"
+                                    />
                                 </a>
                                 <a target="_blank"
                                     rel="nofollow nooopener"
@@ -1453,13 +1461,13 @@ const start = function (data, ID) {
                                 >
                                     <img src={images["summer_forum/partner_29"]} />
                                 </a>
-                                <a target="_blank"
+                                {/* <a target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://www.dixxi.net"
                                     class="c-partnersforum__item"
                                 >
                                     <img src={images["summer_forum/partner_30"]} />
-                                </a>
+                                </a> */}
                                 <a target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://t.me/channel_SoulMate"
@@ -1476,24 +1484,10 @@ const start = function (data, ID) {
                                 </a>
                                 <a target="_blank"
                                     rel="nofollow nooopener"
-                                    href="https://trader-income.live"
-                                    class="c-partnersforum__item"
-                                >
-                                    <img src={images["summer_forum/partner_33"]} />
-                                </a>
-                                <a target="_blank"
-                                    rel="nofollow nooopener"
                                     href="https://daogogreen.com"
                                     class="c-partnersforum__item"
                                 >
                                     <img src={images["summer_forum/partner_34"]} style="height: 60px" />
-                                </a>
-                                <a target="_blank"
-                                    rel="nofollow nooopener"
-                                    href="https://cryptonews.net/ru/?utm_campaign=Cryptonewssite&utm_medium=search&utm_source=Yandex"
-                                    class="c-partnersforum__item"
-                                >
-                                    <img src={images["summer_forum/partner_35"]} />
                                 </a>
                             </div>
                             <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">

@@ -172,22 +172,34 @@ const start = function (data, ID) {
             <div class="roadmap appearience">
               {Static.item.roadMap.length ? <h2 class="startap-title">{Variable.lang.h.road_map}</h2> : null}
 
+              {
+                Static.item.roadMap.length && Static.item.roadMap[0].image
+                  ?
+                  <div
+                    style="display: flex; justify-content: center;"
+                  >
+                    <img 
+                      src={`/assets/upload/worldPress/${Static.item.roadMap[0].image}`} 
+                      style="max-width: 100%"
+                    />
+                  </div>
+                  :
+                  <div class="roadmap-inner">
+                    {
+                      Static.item.roadMap.length ?
+                        Static.item.roadMap.map((item) => {
+                          return (
+                            <div class="roadmap-item">
+                              <div class="roadmap-item_year fiolet">{item.year}</div>
+                              <p class="roadmap-item_text">{item.description}</p>
+                            </div>
+                          )
+                        })
+                        : null
+                    }
+                  </div>
+              }
 
-
-              <div class="roadmap-inner">
-                {
-                  Static.item.roadMap.length ?
-                    Static.item.roadMap.map((item) => {
-                      return (
-                        <div class="roadmap-item">
-                          <div class="roadmap-item_year fiolet">{item.year}</div>
-                          <p class="roadmap-item_text">{item.description}</p>
-                        </div>
-                      )
-                    })
-                    : null
-                }
-              </div>
             </div>
 
             <div class="promovideo">
@@ -247,7 +259,7 @@ const start = function (data, ID) {
                       }}
                     </div>
                   </div>
-                  <div class="diagramm-line">
+                  {/* <div class="diagramm-line">
                     <div>
                       {showLines(Static.item.tokenomica)}
                     </div>
@@ -256,7 +268,7 @@ const start = function (data, ID) {
                       {showPoints(Static.item.tokenomica)}
                     </div>
 
-                  </div>
+                  </div> */}
                 </div>
                 :
                 null

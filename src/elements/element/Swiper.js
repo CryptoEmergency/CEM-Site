@@ -10,10 +10,13 @@ const swiperInit = function ($el, options, swiperElem) {
     swiperElem = new SwiperJs($el, options);
 }
 
-const Swiper = function ({ slide, options, className, navigation = false, swiperElem, replace = false }) {
+const Swiper = function ({ slide, options, className, navigation = false, swiperElem, replace = false, style }) {
     if (navigation) {
         return (
-            <div class="swiper-container" replace={replace}>
+            <div class="swiper-container" 
+                replace={replace}
+                style={style}
+            >
                 <div
                     class={["swiper", className]}
                     After={(el) => {
