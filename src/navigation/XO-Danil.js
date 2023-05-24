@@ -49,6 +49,11 @@ const start = function (data, ID) {
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
     }
+    function restartGame(){
+        for(var i = 0; i < arrGame; i++){
+            arr[i].innerHTML =  "";
+        }
+    }
     function autoWay() {
         if (count >=9){
             alert('игра стоп')
@@ -132,7 +137,17 @@ const start = function (data, ID) {
                                                 else {
                                                     alert('поле занято')
                                                 }
-                                            }}>
+
+
+                                                // if (isVictory(cells)) {
+                                                //     alert(this.textContent); // выводим имя победителя
+                                                // }
+                                                // else if (i == 8) {
+                                                //     alert('ничья');
+                                                // }
+                                            }}
+                                            
+                                            >
                                             {/* {item == 1 ? 'x' : item == 0 ? "0" : null}  */}
                                             <img class="diz-gm" src={item == 1 ? svg['train/krest_2'] : item == 0 ? svg['train/null'] : null}>  </img>
                                         </div>
@@ -157,7 +172,8 @@ const start = function (data, ID) {
                             <div>Проиграл-{ }</div>
                         </div>
                         <div class="restart_game">
-                            <button class="btn_reset_gm">
+                            
+                            <button class="btn_reset_gm" onclick="restartGame()">
                                 Заново ;)
                             </button>
                         </div>
