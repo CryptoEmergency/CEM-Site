@@ -504,6 +504,12 @@ const start = function (data, ID) {
             photo: "summer_forum/speaker24",
             show: false,
         },
+        {
+            name: "Кирилл Филимонов",
+            position: "Основатель Россграмм",
+            photo: "summer_forum/speaker25",
+            show: false,
+        },
     ]
 
     const guests = [
