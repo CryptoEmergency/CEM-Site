@@ -367,6 +367,12 @@ const start = function (data, ID) {
             show: true,
         },
         {
+            name: "Павел Гудимов",
+            position: "Директор по развитию РАКИБ",
+            photo: "summer_forum/speaker27",
+            show: true,
+        },
+        {
             name: "Алексей Зюзин",
             position: "Организатор Crypto Summit",
             photo: "summer_forum/speaker5",
@@ -394,7 +400,7 @@ const start = function (data, ID) {
             name: "Сергей Павлович",
             position: "Люди PRO",
             photo: "summer_forum/speaker14",
-            show: true,
+            show: false,
         },
         {
             name: "Андрей Тугарин",
@@ -434,7 +440,7 @@ const start = function (data, ID) {
         },
         {
             name: "Кирилл Филимонов",
-            position: "Основатель Россграмм",
+            position: "Основатель Россграм",
             photo: "summer_forum/speaker25",
             show: false,
         },
@@ -442,6 +448,12 @@ const start = function (data, ID) {
             name: "Вячеслав Носков",
             position: "PRO BLOCKCHAIN MEDIA",
             photo: "summer_forum/speaker12",
+            show: false,
+        },
+        {
+            name: "Бурков Максим",
+            position: "Основатель группы web3 компаний Pro Blockchain Media",
+            photo: "summer_forum/speaker26",
             show: false,
         },
         {
@@ -504,12 +516,7 @@ const start = function (data, ID) {
             photo: "summer_forum/speaker24",
             show: false,
         },
-        // {
-        //     name: "Ренат Каличенко",
-        //     position: "Turov Invest",
-        //     photo: "summer_forum/speaker11",
-        //     show: false,
-        // },
+        
     ]
 
     const guests = [
@@ -1488,6 +1495,13 @@ const start = function (data, ID) {
                                     class="c-partnersforum__item"
                                 >
                                     <img src={images["summer_forum/partner_34"]} style="height: 60px" />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://rossgram.ru"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_37"]}/>
                                 </a>
                             </div>
                             <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
