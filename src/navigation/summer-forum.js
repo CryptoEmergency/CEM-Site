@@ -434,7 +434,7 @@ const start = function (data, ID) {
         },
         {
             name: "Кирилл Филимонов",
-            position: "Основатель Россграмм",
+            position: "Основатель Россграм",
             photo: "summer_forum/speaker25",
             show: false,
         },
@@ -1488,6 +1488,13 @@ const start = function (data, ID) {
                                     class="c-partnersforum__item"
                                 >
                                     <img src={images["summer_forum/partner_34"]} style="height: 60px" />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://rossgram.ru"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_37"]}/>
                                 </a>
                             </div>
                             <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
