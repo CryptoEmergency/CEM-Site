@@ -199,7 +199,7 @@ const start = function (data, ID) {
                     }
                   </div>
               }
-              
+
             </div>
 
             <div class="promovideo">
@@ -259,7 +259,7 @@ const start = function (data, ID) {
                       }}
                     </div>
                   </div>
-                  <div class="diagramm-line">
+                  {/* <div class="diagramm-line">
                     <div>
                       {showLines(Static.item.tokenomica)}
                     </div>
@@ -268,7 +268,7 @@ const start = function (data, ID) {
                       {showPoints(Static.item.tokenomica)}
                     </div>
 
-                  </div>
+                  </div> */}
                 </div>
                 :
                 null

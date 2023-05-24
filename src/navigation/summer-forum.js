@@ -433,9 +433,9 @@ const start = function (data, ID) {
             show: false,
         },
         {
-            name: "Ренат Каличенко",
-            position: "Turov Invest",
-            photo: "summer_forum/speaker11",
+            name: "Кирилл Филимонов",
+            position: "Основатель Россграмм",
+            photo: "summer_forum/speaker25",
             show: false,
         },
         {
@@ -505,9 +505,9 @@ const start = function (data, ID) {
             show: false,
         },
         {
-            name: "Кирилл Филимонов",
-            position: "Основатель Россграмм",
-            photo: "summer_forum/speaker25",
+            name: "Ренат Каличенко",
+            position: "Turov Invest",
+            photo: "summer_forum/speaker11",
             show: false,
         },
     ]
@@ -1422,7 +1422,9 @@ const start = function (data, ID) {
                                     href="https://pro-blockchain.com/crypto-news"
                                     class="c-partnersforum__item"
                                 >
-                                    <img src={images["summer_forum/partner_23"]} />
+                                    <img src={svg["summer_forum/partner_23"]} 
+                                        style="width: 120px"
+                                    />
                                 </a>
                                 <a target="_blank"
                                     rel="nofollow nooopener"
