@@ -504,12 +504,12 @@ const start = function (data, ID) {
             photo: "summer_forum/speaker24",
             show: false,
         },
-        {
-            name: "Ренат Каличенко",
-            position: "Turov Invest",
-            photo: "summer_forum/speaker11",
-            show: false,
-        },
+        // {
+        //     name: "Ренат Каличенко",
+        //     position: "Turov Invest",
+        //     photo: "summer_forum/speaker11",
+        //     show: false,
+        // },
     ]
 
     const guests = [
