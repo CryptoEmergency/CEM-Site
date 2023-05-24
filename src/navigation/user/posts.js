@@ -288,7 +288,7 @@ const start = function (data, ID) {
       files[0],
       "posts",
       async function () {
-        Static.mediaInputs.show = true;
+        Static.audioInputs.show = true;
 
 
         // Static.mediaInputs.value.push(obj);
@@ -820,7 +820,6 @@ const start = function (data, ID) {
                     // console.log('=2e07f3=', item)
                     if (item.type != "audio") {
 
-
                       return (
                         <MediaPreview
                           item={item}
@@ -830,7 +829,6 @@ const start = function (data, ID) {
                           sendPhotoChat={(cropper) => sendPhoto(cropper, index)}
                         />
                       );
-
 
                     }
                   })
@@ -842,7 +840,6 @@ const start = function (data, ID) {
                 {
                   Static.audioInputs.value.length > 0 ?
                     Static.audioInputs.value.map((item, index) => {
-                      // console.log('=82305a= el = ',el)
 
                       return (
                         <MediaPreview

@@ -10,7 +10,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
   // console.log("============on load",Static,"=======item",item)
   // console.log('=MediaPreview=', Static)
 
-  // console.log('=2bf636=', item)
+  // console.log('=AUDIO=', Static)
   if (item.type == "audio") {
     el[index] = Variable.setRef();
   }
@@ -112,7 +112,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                             } else {
                               Static.mediaInputs.value[0].activePreview = true
                             }
-                            console.log('=34795d= Static.mediaInputs.value = ', Static.mediaInputs.value)
+                            // console.log('=34795d= Static.mediaInputs.value = ', Static.mediaInputs.value)
                             initReload();
                           }
                         },
@@ -184,7 +184,7 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                     onClick={(e) => {
                       e.preventDefault()
                       e.stopPropagation()
-                      console.log('=f7c5f1=', Static.mediaInputs.value)
+                      // console.log('=f7c5f1=', Static.mediaInputs.value)
                       Static.mediaInputs.value.splice(index, 1);
                       if (Static.mediaInputs.value.length == 0) {
                         Static.mediaInputs.selectAspect = null;
@@ -462,17 +462,18 @@ const MediaPreview = function ({ item, index, type, Static, el, sendPhotoChat = 
                   onClick={(e) => {
                     e.preventDefault()
                     e.stopPropagation()
-                    console.log('=AUDIO=', item, index)
-                    Static.mediaInputs.value.splice(index, 1);
+                    
+                    Static.audioInputs.value.splice(index, 1);
+                    // console.log('=1be371=', Static)
                     if (Static.mediaInputs.value.length == 0) {
-                      Static.mediaInputs.selectAspect = null;
-                      Static.mediaInputs.show = false
+                      Static.audioInputs.selectAspect = null;
+                      Static.audioInputs.show = false
                       // if (Static.textInputs && Static.textInputs.value.length == 0 && Static.audioInputs && Static.audioInputs.value.length == 0) {
                       if (Static.mediaInputs.value.length == 0 && Static.textInputs.value.length == 0 && Static.audioInputs.value.length == 0) {
                         Static.isValid = false;
                       }
-                    } else if (!Static.mediaInputs.value.filter((item) => { return item.activePreview })[0]) {
-                      Static.mediaInputs.value[0].activePreview = true;
+                    } else if (!Static.audioInputs.value.filter((item) => { return item.activePreview })[0]) {
+                      Static.audioInputs.value[0].activePreview = true;
                     }
                     initReload();
                   }}
