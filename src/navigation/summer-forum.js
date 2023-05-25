@@ -516,7 +516,12 @@ const start = function (data, ID) {
             photo: "summer_forum/speaker24",
             show: false,
         },
-        
+        {
+            name: "Наталья Сазонова",
+            position: "CEO Rabotavkripte",
+            photo: "summer_forum/speaker28",
+            show: false,
+        },
     ]
 
     const guests = [
