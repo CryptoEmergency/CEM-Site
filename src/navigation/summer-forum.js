@@ -1508,6 +1508,13 @@ const start = function (data, ID) {
                                 >
                                     <img src={images["summer_forum/partner_37"]}/>
                                 </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://altcoinlog.com/"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_38"]} />
+                                </a>
                             </div>
                             <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
                                 <span class="c-button__text">{Variable.lang.button.becomePartner}</span>
