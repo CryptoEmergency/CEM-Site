@@ -42,6 +42,7 @@ const forExport = function ({ item, onClick_add, children, className, Static, on
                     Static.elTitle = $el
                 }}
                 Static={Static}
+
                 textContent={Static.activeNotes && Static.activeNotes.title != "" ? Static.activeNotes.title : ""}
                 oninput={oninput_addTitle}
             />
