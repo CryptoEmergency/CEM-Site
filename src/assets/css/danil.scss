@@ -651,6 +651,8 @@
     
 }
 .stats_view{
+    display: flex;
+    justify-content: center;
     border: 1px solid rgb(221, 212, 212);
     //outline-style: solid;
    
@@ -727,7 +729,13 @@
     //text-align: center;
     //font-weight: bold;
 }
-
+#modalsetin{
+    padding-top: 140px;
+    font-size: 25px;
+    color:#8859ec;
+    height: auto;
+    text-align: center;
+}
 
 
 
