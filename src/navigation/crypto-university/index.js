@@ -19,6 +19,33 @@ import 'swiper/css/bundle';
 
 const { images, svg, fn } = CEM
 
+const isMobile = {
+    Android: function () {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function () {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    IOS: function () {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function () {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function () {
+        return navigator.userAgent.match(/IEMobile/i);
+    },
+    any: function () {
+        return (
+            isMobile.Android() ||
+            isMobile.BlackBerry() ||
+            isMobile.IOS() ||
+            isMobile.Opera() ||
+            isMobile.Windows()
+        )
+    }
+};
+
 const Tags = function ({ Static, classActive, text, type }) {
     return (
         <div class={["tag_button", classActive]}
@@ -105,13 +132,17 @@ const start = function (data, ID = "mainBlock") {
                                             <div class="category__item">
                                                 <div class="category__item-title">
                                                     {item.name}
+                                                    <p class={isMobile.Android() || isMobile.BlackBerry() || isMobile.IOS() ? null : "category__subtitle"}>{item.title}</p>
                                                 </div>
                                                 <img class="category__image" src={`/assets/upload/worldPress/${item.background}`} />
-                                                <p class="category__description">{item.description}</p>
+                                                <p class={[ "category__description",
+                                                    isMobile.Android() || isMobile.BlackBerry() || isMobile.IOS() ? null : "category__description_desktop"]}>{item.description}</p>
                                                 {
                                                     item.soon
                                                     ?
-                                                    <div class="category__soon">Скоро</div>
+                                                        <img src={images["university/soon1"]} 
+                                                            class="category__soon"
+                                                        />
                                                     :
                                                     null
                                                 }
@@ -163,6 +194,18 @@ const start = function (data, ID = "mainBlock") {
                                         <div class="university-test__button">
                                             <span>Пройти бесплатно</span>
                                         </div>
+                                        <img src={images["university/soon1"]} class="category__soon" />
+                                    </div>
+                                </div>
+                                <div class="university-review">
+                                    <div class="university-test__container">
+                                        <div class="university-review__title">
+                                            Отзывы
+                                        </div>
+                                        <p class="university-review__soon">
+                                            <span>Отзывы ещё не оставлены</span>
+                                        </p>
+                                        <img class="university-author__image" src={images["university/test"]} />
                                     </div>
                                 </div>
                             </div>
