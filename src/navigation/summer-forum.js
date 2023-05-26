@@ -516,7 +516,12 @@ const start = function (data, ID) {
             photo: "summer_forum/speaker24",
             show: false,
         },
-        
+        {
+            name: "Наталья Сазонова",
+            position: "CEO Rabotavkripte",
+            photo: "summer_forum/speaker28",
+            show: false,
+        },
     ]
 
     const guests = [
@@ -1502,6 +1507,13 @@ const start = function (data, ID) {
                                     class="c-partnersforum__item"
                                 >
                                     <img src={images["summer_forum/partner_37"]}/>
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://altcoinlog.com/"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_38"]} />
                                 </a>
                             </div>
                             <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
