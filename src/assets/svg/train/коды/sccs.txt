@@ -1,0 +1,36 @@
+#game-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#winner {
+    color: lightseagreen;
+}
+
+#cells-container {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+}
+
+.cell {
+    border: 2px solid darkcyan;
+    height: 100px;
+    width: 100px;
+    font-size: 70px;
+    text-align: center;
+}
+
+#turn-info {
+    font-size: 40px;
+    font-weight: bold;
+    color: lime;
+}
+
+#restart-button {
+    font-size: 25px;
+    border: 2px solid deepskyblue;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
