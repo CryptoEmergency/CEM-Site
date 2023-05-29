@@ -421,6 +421,12 @@ const start = function (data, ID) {
             show: false,
         },
         {
+            name: "Олег Иванов",
+            position: "Серийный предприниматель, инвестор",
+            photo: "summer_forum/speaker29",
+            show: false,
+        },
+        {
             name: "Валерий Осипов",
             position: "ArtEmotioChain",
             photo: "summer_forum/speaker8",
@@ -462,12 +468,12 @@ const start = function (data, ID) {
             photo: "summer_forum/speaker13",
             show: false,
         },
-        {
-            name: "Евгений Азизов",
-            position: "Управляющий делами администрации города Новороссийска",
-            photo: "summer_forum/speaker16",
-            show: false,
-        },
+        // {
+        //     name: "Евгений Азизов",
+        //     position: "Управляющий делами администрации города Новороссийска",
+        //     photo: "summer_forum/speaker16",
+        //     show: false,
+        // },
         {
             name: "Сергей Грабский",
             position: "Руководитель Ассоциации цифрового развития Краснодарского края",
