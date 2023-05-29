@@ -108,7 +108,6 @@ const start = function (data, ID = "mainBlock") {
             Static.records = await fn.socket.get({ method: "Courses", params: { filter: {} } })
         },
         fn: () => {
-            console.log('=38ddb1=', Static.CryptoUniversityCategory)
             return (
                 <div class="page-main">
                     <div class="page-main__container">
@@ -119,7 +118,11 @@ const start = function (data, ID = "mainBlock") {
                                         <img src={svg["mortarboard"]} />
                                         <p>{Variable.lang.a.university}</p>
                                     </div>
-                                    <div class="university-header__courses tag_button">
+                                    <div class="university-header__courses tag_button"
+                                        onclick={(e) => {
+                                            fn.siteLink(`/crypto-university/course/`)
+                                        }}
+                                    >
                                         <span>{Variable.lang.span.allCourses}</span>
                                     </div>
                                 </div>
@@ -129,9 +132,20 @@ const start = function (data, ID = "mainBlock") {
                                 <div class="category">
                                     {Static.CryptoUniversityCategory.map((item) => {
                                         return (
-                                            <div class="category__item">
+                                            <a
+                                                class="category__item"
+                                                href={`/crypto-university/course/${item._id}`}
+                                                onclick={function (e) {
+                                                    fn.siteLink(e, { title: "", item: {}, items: {} })
+                                                }}
+                                            >
                                                 <div class="category__item-title">
-                                                    {item.name}
+                                                    {item.name == "Бесплатные часы"
+                                                        ?
+                                                        `${item.name} от Crypto Emergency`
+                                                        :
+                                                        `${item.name}`
+                                                    }
                                                     <p class={isMobile.Android() || isMobile.BlackBerry() || isMobile.IOS() ? null : "category__subtitle"}>{item.title}</p>
                                                 </div>
                                                 <img class="category__image" src={`/assets/upload/worldPress/${item.background}`} />
@@ -146,7 +160,7 @@ const start = function (data, ID = "mainBlock") {
                                                     :
                                                     null
                                                 }
-                                            </div>
+                                            </a>
                                         )
                                     })}
                                 </div>
@@ -205,7 +219,7 @@ const start = function (data, ID = "mainBlock") {
                                         <p class="university-review__soon">
                                             <span>Отзывы ещё не оставлены</span>
                                         </p>
-                                        <img class="university-author__image" src={images["university/test"]} />
+                                        <img class="university-author__image" src={images["university/reviews"]} />
                                     </div>
                                 </div>
                             </div>

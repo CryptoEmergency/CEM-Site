@@ -8,17 +8,12 @@
         display: flex;
         justify-content: space-between;
 
-        @media(max-width: 422px) {
-            flex-direction: column;
-        }
-
         &__title {
             display: flex;
             align-items: center;
 
             @media(max-width: 422px) {
                 justify-content: center;
-                margin-bottom: 12px;
             }
 
             img {
@@ -37,6 +32,14 @@
 
                 @media(max-width: 599px) {
                     font-size: 18px;
+                }
+
+                @media(max-width: 422px) {
+                    font-size: 16px;
+                }
+
+                @media(max-width: 350px) {
+                    font-size: 13px;
                 }
             }
         }
@@ -58,21 +61,21 @@
     &__slogan {
         display: flex;
         margin: 30px auto;
-        width: 62%;
+        width: 67%;
 
         @media(max-width: 1220px) {
             width: 78%;
         }
 
         @media(max-width: 992px) {
-            width: 90%;
+            width: 92%;
         }
 
         h3 {
             text-align: center;
 
             @media(max-width: 992px) {
-                font-size: 26px;
+                font-size: 24px;
             }
             
             @media(max-width: 599px) {
@@ -84,7 +87,7 @@
             }
 
             @media(max-width: 370px) {
-                font-size: 16px;
+                font-size: 15px;
             }
         }
     }
@@ -145,6 +148,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            color: #ffffff;
 
             @media(max-width: 530px) {
                 padding: 8px;
