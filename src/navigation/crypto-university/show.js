@@ -123,12 +123,6 @@ const start = function (data, ID) {
                     params: {
                         populate: {
                             path: 'teachers company',
-                            select: {
-                                name: 1,
-                                image: 1,
-                                description: 1,
-                                profession: 1
-                            },
                         }
                     }
                 })
@@ -214,9 +208,12 @@ const start = function (data, ID) {
                                                 <div class="swiper-wrapper">
                                                     {Static.item.teachers?.map((item) => {
                                                         return (
-                                                            <a class="swiper-slide">
+                                                            <a class="swiper-slide"
+                                                                onclick={() => [
+                                                                    fn.modals.ModalTeachers(item)
+                                                                ]}
+                                                            >
                                                                 <div class="course-teachers__item">
-                                                                    
                                                                     <img src={`/assets/upload/worldPress/${item.image}`} />
                                                                     <span class="course-teachers__name">{item.name}</span>
                                                                     <span>{item.profession}</span>
