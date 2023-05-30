@@ -134,7 +134,7 @@ const start = function (data, ID = "mainBlock") {
                                         return (
                                             <a
                                                 class="category__item"
-                                                href={`/crypto-university/course/${item._id}`}
+                                                href={item.soon ? null : `/crypto-university/course/${item._id}`}
                                                 onclick={function (e) {
                                                     fn.siteLink(e, { title: "", item: {}, items: {} })
                                                 }}
@@ -170,23 +170,33 @@ const start = function (data, ID = "mainBlock") {
                                             <div class="university-author swiper-slide">
                                                 <div class="university-author__container">
                                                     <div class="university-author__title">
-                                                        Переход из мира финансов в сферу IT
+                                                        Путь в крипте. Оcнователь ArtEmotioChain
                                                     </div>
-                                                    <div class="university-author__read">
+                                                    <a class="university-author__read"
+                                                        href={`/lenta-users/show/6475f7c9d3fae5f5248f5000`}
+                                                        onclick={function (e) {
+                                                            fn.siteLinkModal(e, { title: "Переход из мира финансов в сферу IT"})
+                                                        }}
+                                                    >
                                                         <span>Читать</span>
-                                                    </div>
-                                                    <img class="university-author__image" src={images["university/author"]} />
+                                                    </a>
+                                                    <img class="university-author__image" src={images["university/author_1"]} />
                                                 </div>
                                             </div>
                                             <div class="university-author swiper-slide">
                                                 <div class="university-author__container">
                                                     <div class="university-author__title">
-                                                        Переход из мира финансов в сферу IT
+                                                        Как родился ArtEmotioChain
                                                     </div>
-                                                    <div class="university-author__read">
+                                                    <a class="university-author__read"
+                                                        href={`/lenta-users/show/64760004d3fae5f5249097c4`}
+                                                        onclick={function (e) {
+                                                            fn.siteLinkModal(e, { title: "Как родился ArtEmotioChain" })
+                                                        }}
+                                                    >
                                                         <span>Читать</span>
-                                                    </div>
-                                                    <img class="university-author__image" src={images["university/author"]} />
+                                                    </a>
+                                                    <img class="university-author__image" src={images["university/author_2"]} />
                                                 </div>
                                             </div>
                                             
@@ -205,7 +215,11 @@ const start = function (data, ID = "mainBlock") {
                                             Узнай, какая профессия наиболее подходит именно тебе, с помощью нашего теста на профориентацию
                                         </div>
                                         <img class="university-author__image" src={images["university/test"]} />
-                                        <div class="university-test__button">
+                                        <div class="university-test__button"
+                                            onclick={() => {
+                                                fn.modals.ModalComingSoon()
+                                            }}
+                                        >
                                             <span>Пройти бесплатно</span>
                                         </div>
                                         <img src={images["university/soon1"]} class="category__soon" />

@@ -6152,3 +6152,51 @@ s
 		}
 	}
 }
+
+.modal-teacher {
+	display: flex;
+
+	&__social {
+		margin-right: 10px;
+
+		&_list {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 5px;
+		}
+
+		&_item {
+			position: relative;
+		}
+
+		&_link {
+			background-color: #353a46;
+			color: #ffffff;
+			width: 30px;
+			height: 30px;
+			border-radius: 100%;
+			font-size: 16px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			transition: all 0.2s;
+			cursor: pointer;
+			text-decoration: none;
+
+			img {
+				max-height: 17px;
+			}
+		}
+
+		> img {
+			width: 100px;
+			border-radius: 8px;
+		}
+	}
+
+	&__description {
+		h3 {
+			font-size: 20px;
+		}
+	}
+}

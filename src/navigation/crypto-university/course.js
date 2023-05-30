@@ -14,7 +14,7 @@ import 'swiper/css/bundle';
 
 const { images, svg, fn } = CEM
 
-const costCourse = [
+const costCourses = [
     {
         cost: "Все",
         name: "all"
@@ -89,7 +89,7 @@ const start = function (data, ID) {
     Static.selectCost = false
     Static.elCategory = null
     Static.nameCategory = null
-    Static.costCourse = null
+    Static.costCourses = null
     Static.elCost = null
 
     Static.category = [
@@ -162,16 +162,16 @@ const start = function (data, ID) {
                 <div class="page-main">
                     <div class="page-main__container">
                         <div class="page-main__content">
-                            <div class="course">
-                                <div class="course__container">
+                            <div class="courses">
+                                <div class="courses__container">
                                     <div class="university-header__title">
                                         <img src={svg["mortarboard"]} />
                                         <p>{Variable.lang.a.university}</p>
                                     </div>
-                                    <div class="course__filter">
-                                        <div class="course__filter-container">
-                                            <div class="course-select">
-                                                <div class="course-select--default"
+                                    <div class="courses__filter">
+                                        <div class="courses__filter-container">
+                                            <div class="courses-select">
+                                                <div class="courses-select--default"
                                                     onclick={() => {
                                                         if (!Static.selectCategory) {
                                                             Static.selectCategory = true
@@ -185,13 +185,13 @@ const start = function (data, ID) {
                                                         () => {
                                                             if (Static.categoryName) {
                                                                 return (
-                                                                    <span class="course-select--default-weight">
+                                                                    <span class="courses-select--default-weight">
                                                                         {Static.categoryName}
                                                                     </span>
                                                                 )
                                                             } else if (Static.item && Static.item.name) {
                                                                 return (
-                                                                    <span class="course-select--default-weight">
+                                                                    <span class="courses-select--default-weight">
                                                                         {Static.item.name}
                                                                     </span>
                                                                 )
@@ -204,11 +204,11 @@ const start = function (data, ID) {
                                                     () => {
                                                         if (Static.selectCategory) {
                                                             return (
-                                                                <div class="course-select-container">
+                                                                <div class="courses-select-container">
                                                                     {Static.category.map((item) => {
                                                                         
                                                                         return (
-                                                                            <div class="course-select__list"
+                                                                            <div class="courses-select__list"
                                                                                 // HiddenOut={true}
                                                                             >
                                                                                 <label>
@@ -251,8 +251,8 @@ const start = function (data, ID) {
                                                     }
                                                 }
                                             </div>
-                                            <div class="course-select">
-                                                <div class="course-select--default"
+                                            <div class="courses-select">
+                                                <div class="courses-select--default"
                                                     onclick={() => {
                                                         if (!Static.selectCost) {
                                                             Static.selectCost = true
@@ -266,7 +266,7 @@ const start = function (data, ID) {
                                                         () => {
                                                             if (Static.costCourse) {
                                                                 return (
-                                                                    <span class="course-select--default-weight">
+                                                                    <span class="courses-select--default-weight">
                                                                         {Static.costCourse}
                                                                     </span>
                                                                 )
@@ -285,10 +285,10 @@ const start = function (data, ID) {
                                                     () => {
                                                         if (Static.selectCost) {
                                                             return (
-                                                                <div class="course-select-container">
-                                                                    {costCourse.map((item) => {
+                                                                <div class="courses-select-container">
+                                                                    {costCourses.map((item) => {
                                                                         return (
-                                                                            <div class="course-select__list">
+                                                                            <div class="courses-select__list">
                                                                                 <label>
                                                                                     {item.cost}
                                                                                     <input
@@ -301,7 +301,7 @@ const start = function (data, ID) {
                                                                                         }}
                                                                                         onclick={async (e) => {
                                                                                             Static.selectCost = false
-                                                                                            Static.costCourse = item.cost
+                                                                                            Static.costCourses = item.cost
                                                                                             Static.filtersSearch.cost = item.name
                                                                                             filterCost = makeFilters(Static)
                                                                                             Static.courses = await fn.socket.get({
@@ -326,7 +326,7 @@ const start = function (data, ID) {
                                                 }
                                             </div>
                                         </div>
-                                        <div class="course__filter-search">
+                                        <div class="courses__filter-search">
                                             <input
                                                 Element={($el) => {
                                                     Static.elInput = $el
@@ -358,10 +358,10 @@ const start = function (data, ID) {
                                                         <li class="card card_courses">
                                                             <a
                                                                 class="card__link card__link_background"
-                                                                href={`/crypto-university/course/${item._id}`}
-                                                                onclick={function (e) {
-                                                                    fn.siteLink(e, { title: "", item: {}, items: {} })
-                                                                }}
+                                                                // href={`/crypto-university/course/${item._id}`}
+                                                                // onclick={function (e) {
+                                                                //     fn.siteLink(e, { title: "", item: {}, items: {} })
+                                                                // }}
                                                             >
                                                                 <div class="card__title card__title_courses">
                                                                     {item.name}
@@ -391,9 +391,15 @@ const start = function (data, ID) {
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="card__more card__more_indent_course">
-                                                                    <span>Больше информации</span>
-                                                                </div>
+                                                                <a class="card__more card__more_indent_course">
+                                                                    <span
+                                                                        onclick={function (e) {
+                                                                            fn.siteLink(`/crypto-university/show/${item._id}`)
+                                                                        }}
+                                                                    >
+                                                                        Больше информации
+                                                                    </span>
+                                                                </a>
                                                                 <div class="card__category">
                                                                     <span>{item.category}</span>
                                                                 </div>

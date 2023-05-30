@@ -20,6 +20,8 @@ const forExport = function (data, type) {
             return Helpers.moment(data).format('YYYY-MM-DD HH:mm')
         case "chatdate":
             return Helpers.moment(data).format("dd, D MMM");
+        case "course":
+            return Helpers.moment(data).format("D MMM");
         case "chattime":
             let secondsBefore = Math.round(
                 (Helpers.moment().format("x") - Helpers.moment(data).format("x")) / 1000

@@ -271,16 +271,16 @@
             position: relative;
             z-index: 2;
             font-size: 34px;
-            max-width: 380px;
+            max-width: 490px;
             margin-bottom: 24px;
 
             @media(max-width: 640px) {
-                width: 70%;
+                width: 84%;
                 font-size: 26px;
             }
 
             @media(max-width: 500px) {
-                width: 90%;
+                width: 100%;
                 font-size: 22px;
             }
         }
@@ -289,6 +289,7 @@
             position: relative;
             z-index: 2;
             cursor: pointer;
+            color: #ffffff;
             
             span {
                 padding: 6px 20px;
@@ -307,7 +308,7 @@
             top: -140px;
             left: 0;
             width: 100%;
-            opacity: 0.7;
+            opacity: 0.5;
 
             @media(max-width: 1200px) {
                 top: -80px;
