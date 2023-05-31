@@ -418,7 +418,8 @@
             }
 
             &:first-child,
-            &:nth-child(2) {
+            &:nth-child(2),
+            &:nth-child(3) {
                 width: 70%;
                 max-width: 850px;
                 padding: 0;
@@ -440,7 +441,8 @@
                 }
             }
 
-            &:nth-child(2) {
+            &:nth-child(2),
+            &:nth-child(3) {
                 width: 100%;
                 max-width: 100%;
                 margin-bottom: 70px;

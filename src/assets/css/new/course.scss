@@ -7,15 +7,31 @@
     &__subtitle {
         margin-top: 30px;
         margin-bottom: 20px;
+        text-align: center;
         font-size: 38px;
         font-weight: 700;
+
+        @media(max-width: 800px) {
+            font-size: 32px;
+        }
+
+        @media(max-width: 550px) {
+            font-size: 26px;
+        }
     }
 
     &-header {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        min-height: 400px;
+
         &__background {
             position: relative;
             width: 100%;
-            opacity: 0.5;
+            object-fit: cover;
+            height: auto;
+            opacity: 0.3;
             border-bottom-left-radius: 16px;
             border-bottom-right-radius: 16px;
         }
@@ -23,23 +39,61 @@
         &__container {
             position: absolute;
             top: 80px;
+            width: 90%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+
+            @media(max-width: 1100px) {
+                width: 90%;
+                top: 10%;
+                left: 50%;
+                transform: translate(-50%, -66%);
+            }
+
+            @media(max-width: 620px) {
+                top: 8%;
+            }
         }
 
         &__title {
             margin-bottom: 30px;
             font-size: 44px;
             font-weight: 700;
+            text-align: center;
+
+            @media(max-width: 992px) {
+                font-size: 36px;
+            }
+
+            @media(max-width: 800px) {
+                font-size: 30px;
+            }
+
+            @media(max-width: 620px) {
+                font-size: 26px;
+                margin-bottom: 20px;
+            }
+
+            @media(max-width: 480px) {
+                font-size: 22px;
+            }
         }
 
         &__description {
             margin-bottom: 120px;
-            width: 80%;
             font-size: 18px;
             text-align: center;
+
+            @media(max-width: 800px) {
+                margin-bottom: 70px;
+                font-size: 16px;
+            }
+
+            @media(max-width: 620px) {
+                margin-bottom: 50px;
+            }
         }
 
         &__company {
@@ -61,10 +115,16 @@
     }
 
     &-learn {
+        padding: 0 10px;
+
         &__list {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
+
+            @media(max-width: 800px) {
+                grid-template-columns: 1fr;
+            }
         }
 
         &__item {
@@ -81,6 +141,8 @@
     }
 
     &-teachers {
+        padding: 0 10px;
+        
         &__item {
             display: flex;
             flex-direction: column;
@@ -88,21 +150,40 @@
             color: #ffffff;
             cursor: pointer;
 
+            @media(max-width: 767px) {
+                margin: 0 20px;
+            }
+
+            @media(max-width: 620px) {
+                margin: 0 40px;
+            }
+
             img {
                 margin-bottom: 10px;
-                border-radius: 50%;
+                border-radius: 10px;
+
+                &:hover {
+                    opacity: 0.7;
+                }
             }
         }
 
         &__name {
             margin-bottom: 10px;
+            text-decoration: underline;
+
+            &:hover {
+                opacity: 0.7;
+            }
         }
     }
 
     &-reviews {
+        padding: 0 10px;
+
         &__container {
             position: relative;
-            height: 200px;
+            height: 280px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 12px;
             background: rgba(255, 255, 255, 0.02);
@@ -122,6 +203,21 @@
             cursor: pointer;
             text-align: center;
 
+            @media(max-width: 800px) {
+                margin: 0 38%;
+                margin-bottom: 20px;
+            }
+
+            @media(max-width: 650px) {
+                margin: 0 30%;
+                margin-bottom: 20px;
+            }
+
+            @media(max-width: 420px) {
+                margin: 0 20%;
+                margin-bottom: 20px;
+            }
+
             span {
                 display: block;
                 padding: 6px 0;
@@ -133,12 +229,23 @@
         }
     }
 
+    &-questions {
+        padding: 0 10px;
+    }
+
     &-footer {
+        padding: 0 10px;
+
         &__container {
             margin-top: 30px;
+            padding-bottom: 40px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
+
+            @media(max-width: 700px) {
+                grid-template-columns: 1fr;
+            }
         }
 
         &__info {
@@ -149,22 +256,63 @@
             &-header {
                 display: flex;
                 justify-content: space-between;
+
+                @media(max-width: 860px) {
+                    flex-direction: column-reverse;
+                }
+
+                @media(max-width: 700px) {
+                    flex-direction: row;
+                }
+
+                @media(max-width: 428px) {
+                    flex-direction: column-reverse;
+                }
             }
             
             &_price {
-                max-width: 240px;
+                max-width: 260px;
                 font-size: 42px;
                 font-weight: 700;
                 line-height: 40px;
+
+                @media(max-width: 1100px) {
+                    font-size: 36px;
+                }
+
+                @media(max-width: 950px) {
+                    font-size: 28px;
+                }
+
+                @media(max-width: 700px) {
+                    font-size: 36px;
+                }
+
+                @media(max-width: 480px) {
+                    font-size: 28px;
+                }
             }
 
             &_data {
                 font-size: 14px;
                 text-align: right;
+
+                @media(max-width: 992px) {
+                    font-size: 12px;
+                }
+
+                @media(max-width: 860px) {
+                    text-align: start;
+                }
             }
 
             &_duration {
                 font-size: 14px;
+                white-space: nowrap;
+
+                @media(max-width: 992px) {
+                    font-size: 12px;
+                }
             }
         }
 
@@ -219,6 +367,63 @@
         &__enroll {
             margin-top: 30px;
             margin-bottom: 0;
+        }
+
+        &__company {
+            text-align: center;
+
+            .btn-item {
+                display: flex;
+                justify-content: center;
+                margin: 0 auto;
+                margin-bottom: 20px;
+                width: 140px;
+                color: #FFFFFF;
+                background: none;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 14px;
+                padding: 10px 0;
+                border: 5px solid;
+                border-image-slice: 1;
+                border-width: 2px;
+                border-image-source: linear-gradient(to left, #679FEF, #A87FFF);
+                border-radius: 6px;
+                cursor: pointer;
+            }
+        }
+
+        &__social {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+
+            &_item {
+                position: relative;
+            }
+
+            &_link {
+                background-color: #232733;
+                color: #ffffff;
+                width: 36px;
+                height: 36px;
+                border-radius: 100%;
+                font-size: 16px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: all 0.2s;
+                cursor: pointer;
+                text-decoration: none;
+
+                &:hover {
+                    background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
+                }
+
+                img {
+                    max-height: 20px;
+                }
+            }
         }
     }
 }

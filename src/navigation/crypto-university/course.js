@@ -45,7 +45,7 @@ const makeFilters = function (Static, item) {
     if (Static.filtersSearch.sortDate) {
         sort._id = 1;
     }
-    
+
     if (Static.filtersSearch.textSearch) {
         find["$and"] = [];
         find["$and"].push({ name: { $regex: Static.filtersSearch.textSearch, $options: "i" } });
@@ -54,12 +54,16 @@ const makeFilters = function (Static, item) {
     if (Static.filtersSearch.cost == "junior") {
         filter["$and"] = [];
         filter["$and"].push({ costAll: { $lte: 30000 } });
-        filter["$and"].push({ category: Static.filtersSearch.categoryActive });
+        if (Static.filtersSearch.categoryActive != "") {
+            filter["$and"].push({ category: Static.filtersSearch.categoryActive });
+        }
     } else if (Static.filtersSearch.cost == "middle") {
         filter["$and"] = [];
         filter["$and"].push({ costAll: { $gte: 30000 } });
         filter["$and"].push({ costAll: { $lte: 60000 } });
-        filter["$and"].push({ category: Static.filtersSearch.categoryActive });
+        if (Static.filtersSearch.categoryActive != "") {
+            filter["$and"].push({ category: Static.filtersSearch.categoryActive });
+        }
     } else if (Static.filtersSearch.cost == "senior") {
         filter["$and"] = [];
         filter["$and"].push({ costAll: { $gte: 60000 } });
@@ -71,7 +75,9 @@ const makeFilters = function (Static, item) {
     else if (Static.filtersSearch.cost == "lead") {
         filter["$and"] = [];
         filter["$and"].push({ costAll: { $gte: 100000 } });
-        filter["$and"].push({ category: Static.filtersSearch.categoryActive });
+        if (Static.filtersSearch.categoryActive != "") {
+            filter["$and"].push({ category: Static.filtersSearch.categoryActive });
+        }
     } else if (Static.filtersSearch.categoryActive) {
         filter["$and"] = [];
         filter["$and"].push({ category: Static.filtersSearch.categoryActive });
@@ -206,10 +212,10 @@ const start = function (data, ID) {
                                                             return (
                                                                 <div class="courses-select-container">
                                                                     {Static.category.map((item) => {
-                                                                        
+
                                                                         return (
                                                                             <div class="courses-select__list"
-                                                                                // HiddenOut={true}
+                                                                            // HiddenOut={true}
                                                                             >
                                                                                 <label>
                                                                                     {item.name}
@@ -263,21 +269,15 @@ const start = function (data, ID) {
                                                     }}
                                                 >
                                                     {
-                                                        () => {
-                                                            if (Static.costCourse) {
-                                                                return (
-                                                                    <span class="courses-select--default-weight">
-                                                                        {Static.costCourse}
-                                                                    </span>
-                                                                )
-                                                            } else {
-                                                                return (
-                                                                    <span>
-                                                                        Стоимость
-                                                                    </span>
-                                                                )
-                                                            }
-                                                        }
+                                                        Static.costCourses
+                                                            ?
+                                                            <span class="courses-select--default-weight">
+                                                                {Static.costCourses}
+                                                            </span>
+                                                            :
+                                                            <span>
+                                                                Стоимость
+                                                            </span>
                                                     }
                                                     <img src={svg["select_arrow"]} />
                                                 </div>
@@ -293,9 +293,8 @@ const start = function (data, ID) {
                                                                                     {item.cost}
                                                                                     <input
                                                                                         type="checkbox"
-                                                                                        // placeholder="Выбери язык"
                                                                                         readonly
-                                                                                        value={item.direction}
+                                                                                        value={item.cost}
                                                                                         Element={(el) => {
                                                                                             Static.elCost = el
                                                                                         }}
@@ -353,15 +352,17 @@ const start = function (data, ID) {
                                     <div class="cards">
                                         <div class="cards__container cards__container_type_courses">
                                             {
-                                                Static.courses?.map((item) => {
+                                                Static.courses.length != 0
+                                                ?
+                                                Static.courses.map((item) => {
                                                     return (
                                                         <li class="card card_courses">
                                                             <a
                                                                 class="card__link card__link_background"
-                                                                // href={`/crypto-university/course/${item._id}`}
-                                                                // onclick={function (e) {
-                                                                //     fn.siteLink(e, { title: "", item: {}, items: {} })
-                                                                // }}
+                                                            // href={`/crypto-university/course/${item._id}`}
+                                                            // onclick={function (e) {
+                                                            //     fn.siteLink(e, { title: "", item: {}, items: {} })
+                                                            // }}
                                                             >
                                                                 <div class="card__title card__title_courses">
                                                                     {item.name}
@@ -410,35 +411,13 @@ const start = function (data, ID) {
                                                         </li>
                                                     )
                                                 })
+                                                :
+                                                <div class="card__undefined">
+                                                    <span>По данному фильтру курсов не найдено</span>
+                                                </div>
                                             }
                                         </div>
                                     </div>
-                                    {/* <div class="course__company course__company_indent">
-                                        {Static.item.company?.map((item) => {
-                                            return (
-                                                <div class="course__company-container">
-                                                    <div class="course__company-icon">
-                                                        <img src={`/assets/upload/worldPress/${item.image}`} />
-                                                    </div>
-                                                    <div class="course__company-about">
-                                                        <a 
-                                                            href={`/crypto-university/show/${item._id}`}
-                                                            onclick={function (e) {
-                                                                fn.siteLink(e, { title: "", items: {} })
-                                                            }}
-                                                        >
-                                                            <h3 class="course__company-name">
-                                                                {item.name}
-                                                            </h3>
-                                                        </a>
-                                                        <div class="course__company-description">
-                                                            {item.description}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            )
-                                        })}
-                                    </div> */}
                                 </div>
                             </div>
                         </div>

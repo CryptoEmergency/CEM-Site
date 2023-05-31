@@ -187,7 +187,7 @@ const start = function (data, ID) {
                                     <div class="stats_view"> {staticRounds.draw} </div>
                                 </div>
                             </div>
-                            <button class="st-gm"> Показать ряд </button>
+                            <div class="">  </div>
                         </div>
                         <div class="one_game ">
 
@@ -243,7 +243,9 @@ const start = function (data, ID) {
 
                                         >
                                             {/* {item == 1 ? 'x' : item == 0 ? "0" : null}  */}
-                                            <img class="diz-gm" src={item == 1 ? svg['train/krest_2'] : item == 0 ? svg['train/null'] : ""}>  </img>
+                                            
+                                            <img class="diz-gm" src={item == 1 ? svg['train/krest_2'] : item == 0 ? svg['train/null'] : ""} style="fill:red"> </img>
+                                            
                                         </div>
                                     )
 
@@ -262,8 +264,8 @@ const start = function (data, ID) {
 
                         </div>
                         <div class="wi_lo">
-                            <div>Выйграл-{ }</div>
-                            <div>Проиграл-{ }</div>
+                            {/* <div>Выйграл-{ }</div>
+                            <div>Проиграл-{ }</div> */}
                         </div>
                         <div class="restart_game">
 
