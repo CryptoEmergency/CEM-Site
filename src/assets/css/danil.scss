@@ -660,6 +660,7 @@
 
 
 .st-gm{
+    //не используется
     background: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
         padding: 13px;
         border-radius: 8px;
@@ -690,14 +691,15 @@
     width: 150px;
     height: auto;
 }
-.diz-gm{
+.diz-gm {
     display:flex;
     justify-content: center;
     align-content: center;
     color:random($limit: 10);
-    
+    fill:#8859ec;
     width: 140px;
     height: auto;
+    
 }
 
 .restart_game {
