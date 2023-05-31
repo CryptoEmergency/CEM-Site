@@ -6154,15 +6154,20 @@ s
 }
 
 .modal-teacher {
-	display: flex;
+
+	&__body {
+		padding: 20px;
+	}
 
 	&__social {
+		float: left;
 		margin-right: 10px;
 
 		&_list {
-			display: flex;
-			flex-wrap: wrap;
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
 			gap: 5px;
+			padding-top: 6px;
 		}
 
 		&_item {
@@ -6196,7 +6201,26 @@ s
 
 	&__description {
 		h3 {
+			width: 96%;
 			font-size: 20px;
+
+			@media(max-width: 356px) {
+				font-size: 16px;
+			}
+		}
+
+		&_profession {
+			@media(max-width: 356px) {
+				font-size: 14px;
+			}
+		}
+
+		&_text {
+			font-size: 14px;
+
+			@media(max-width: 356px) {
+				font-size: 12px;
+			}
 		}
 	}
 }

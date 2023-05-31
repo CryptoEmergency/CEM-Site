@@ -137,12 +137,14 @@ const start = function (data, ID) {
             return (
                 <div class="page-main">
                     <div class="page-main__container">
-                        <div class="page-main__content">
+                        <div class="page-main__content"
+                            style="padding: 0;"
+                        >
                             <div class="course">
                                 <div class="course__container">
                                     <div class="course-header">
                                         <img class="course-header__background"
-                                            src={images["university/background_it"]}
+                                            src={`/assets/upload/worldPress/${Static.item.cover}`}
                                         />
                                         <div class="course-header__container">
                                             <div class="course-header__title">
@@ -151,7 +153,13 @@ const start = function (data, ID) {
                                             <div class="course-header__description">
                                                 {Static.item.description}
                                             </div>
-                                            <div class="course-header__company">
+                                            <div class="course-header__company"
+                                                onclick={() => [
+                                                    Static.item.company.map((item) => {
+                                                        fn.modals.ModalTeachers(item)
+                                                    })
+                                                ]}
+                                            >
                                                 <span>Подробнее о школе</span>
                                             </div>
                                         </div>
@@ -161,42 +169,20 @@ const start = function (data, ID) {
                                             Вы научитесь
                                         </div>
                                         <ul class="course-learn__list">
-                                            <li class="course-learn__item">
-                                                <div class="course-learn__subtitle">
-                                                    Проводить анализ и диагностику продукта
-                                                </div>
-                                                <div class="course-learn__description">
-                                                    Исходя из полученных результатов вы сможете проектировать решения по изменению продукта
-                                                </div>
-
-                                            </li>
-                                            <li class="course-learn__item">
-                                                <div class="course-learn__subtitle">
-                                                    Принимать решения по развитию продукта
-                                                </div>
-                                                <div class="course-learn__description">
-                                                    Начнёте приоритизировать варианты развития продукта, исходя из целей компании и продуктовой аналитики
-                                                </div>
-
-                                            </li>
-                                            <li class="course-learn__item">
-                                                <div class="course-learn__subtitle">
-                                                    Помогать бизнесу расти
-                                                </div>
-                                                <div class="course-learn__description">
-                                                    Будете выявлять возможности для кратного роста продукта, формулировать концепции роста и монетизации
-                                                </div>
-
-                                            </li>
-                                            <li class="course-learn__item">
-                                                <div class="course-learn__subtitle">
-                                                    Планировать и согласовывать развитие
-                                                </div>
-                                                <div class="course-learn__description">
-                                                    Сможете формировать стратегический план развития продукта и согласовывать его со стейкхолдерами
-                                                </div>
-
-                                            </li>
+                                            {
+                                                Static.item.learn?.map((item) => {
+                                                    return (
+                                                        <li class="course-learn__item">
+                                                            <div class="course-learn__subtitle">
+                                                                {item.title}
+                                                            </div>
+                                                            <div class="course-learn__description">
+                                                                {item.description}
+                                                            </div>
+                                                        </li>
+                                                    )
+                                                })
+                                            }
                                         </ul>
                                     </div>
                                     <div class="course-teachers">
@@ -230,6 +216,9 @@ const start = function (data, ID) {
                                             Отзывы
                                         </div>
                                         <div class="course-reviews__container">
+                                            <p class="university-review__soon" style="margin-top: 80px">
+                                                <span style="font-size: 26px;">Отзывы ещё не оставлены</span>
+                                            </p>
                                             <div class="course-reviews__add"
                                                 onclick={() => {
                                                     fn.modals.ModalComingSoon()
@@ -253,7 +242,7 @@ const start = function (data, ID) {
                                                     <div class="course-footer__info_price">
                                                         Стоимость курса
                                                     </div>
-                                                    <div>   
+                                                    <div>
                                                         <div class="course-footer__info_duration">
                                                             Длительность курса: {Static.item.duration}
                                                             <span>
@@ -266,11 +255,18 @@ const start = function (data, ID) {
                                                                 }
                                                             </span>
                                                         </div>
-                                                        <div class="course-footer__info_data">
-                                                            Старт курса: {fn.getDateFormat(Static.item.dateStart, "course")}
-                                                        </div>
+                                                        {
+                                                            !Static.item.dateIsKnow
+                                                                ?
+                                                                <div class="course-footer__info_data">
+                                                                    Старт курса: {fn.getDateFormat(Static.item.dateStart, "course")}
+                                                                </div>
+                                                                :
+                                                                <div class="course-footer__info_data">
+                                                                    Курс в записи
+                                                                </div>
+                                                        }
                                                     </div>
-                                                    
                                                 </div>
                                                 <div class="course-footer__prices">
                                                     <div class="course-footer__cost">
@@ -282,18 +278,55 @@ const start = function (data, ID) {
                                                                 <span>-30%</span>
                                                             </div>
                                                         </div>
-                                                        
+
                                                         <div class="course-footer__cost_new">
                                                             {Static.item.costAll} ₽
                                                             <div>Новая цена</div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="course-footer__enroll tag_button">
+                                                <a class="course-footer__enroll tag_button"
+                                                    target="_blank"
+                                                    href={Static.item.linkRecord}
+                                                >
                                                     <span>Записаться на курс</span>
-                                                </div>
+                                                </a>
                                             </div>
-                                            
+                                            <div class="course-footer__info">
+                                                {
+                                                    Static.item.company.map((item) => {
+                                                        return (
+                                                            <div class="course-footer__company">
+                                                                <h3>Школа «{item.name}»</h3>
+                                                                <div>
+                                                                    <a href={item.siteLink} target="_blank" class={["btn-item", !item.siteLink ? "social-btn_passive" : null]}>
+                                                                        <div class="btn-item_text">Веб-сайт</div>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="course-footer__social">
+                                                                    {
+                                                                        item.social?.map((item) => {
+                                                                            return (
+                                                                                <div class="course-footer__social_item">
+                                                                                    <a
+                                                                                        href={item.url}
+                                                                                        target="_blank"
+                                                                                        class="course-footer__social_link"
+                                                                                    >
+                                                                                        <img
+                                                                                            src={svg[`${item.channel}-icon`]}
+                                                                                        />
+                                                                                    </a>
+                                                                                </div>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

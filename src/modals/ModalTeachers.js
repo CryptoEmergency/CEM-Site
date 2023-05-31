@@ -22,7 +22,7 @@ const ModalTeachers = function (data, ID) {
 
         },
         fn: () => {
-            console.log('=2ce562=',data)
+            console.log('=2ce562=', data)
             return (
                 <div class="c-modal c-modal--open" onclick={function (e) {
                     if (close) {
@@ -35,10 +35,10 @@ const ModalTeachers = function (data, ID) {
                         onmouseleave={function () {
                             close = true
                         }}>
-                        <header class="c-modal__header">
+                        <header>
                             {/* <h2 class="c-modal__title">Updating</h2> */}
                             <button
-                                style="top: 15px; right: 15px;"
+                                style="top: 10px; right: 10px;"
                                 type="button"
                                 class="c-modal__close"
                                 onclick={() => {
@@ -46,48 +46,65 @@ const ModalTeachers = function (data, ID) {
                                 }}
                             ></button>
                         </header>
-                        <div class="c-modal__body">
+                        <div class="modal-teacher__body">
                             <div class="modal-teacher">
                                 <div class="modal-teacher__social">
                                     <img src={`/assets/upload/worldPress/${data.image}`} />
-                                    <div class="modal-teacher__social_list">
-                                        {
-                                            data.social?.map((item) => {
-                                                return (
+                                    <div>
+                                        <div class="modal-teacher__social_list">
+                                            {
+                                                data.siteLink
+                                                    ?
                                                     <div class="modal-teacher__social_item">
                                                         <a
-                                                            href={item.url}
+                                                            href={data.siteLink}
                                                             target="_blank"
                                                             class="modal-teacher__social_link"
                                                         >
                                                             <img
-                                                                
-                                                                src={svg[`${item.channel}-icon`]}
+                                                                src={svg[`site-icon`]}
                                                             />
                                                         </a>
                                                     </div>
-                                                )
-                                                
-                                            })
-                                        }
+                                                    :
+                                                    null
+                                            }
+                                            {
+                                                data.social?.map((item) => {
+                                                    return (
+                                                        <div class="modal-teacher__social_item">
+                                                            <a
+                                                                href={item.url}
+                                                                target="_blank"
+                                                                class="modal-teacher__social_link"
+                                                            >
+                                                                <img
+                                                                    src={svg[`${item.channel}-icon`]}
+                                                                />
+                                                            </a>
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="modal-teacher__description">
                                     <h3>{data.name}</h3>
-                                    <p>{data.profession}</p>
-                                    <p>{data.experience}</p>
+                                    {
+                                        data.profession
+                                            ?
+                                            <p
+                                                class="modal-teacher__description_profession"
+                                                style="margin-bottom: 6px"
+                                            >{data.profession}</p>
+                                            :
+                                            null
+                                    }
+                                    <p class="modal-teacher__description_text">{data.description}</p>
                                 </div>
                             </div>
                         </div>
-                        {/* <footer class="c-modal__footer">
-                            <button class="c-button c-button--primary"
-                                onclick={() => {
-                                    fn.modals.close(ID)
-                                }}
-                            >
-                                <span>Закрыть</span>
-                            </button>
-                        </footer> */}
                     </section>
                 </div>
             )
