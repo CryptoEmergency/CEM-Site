@@ -390,17 +390,17 @@ const start = function (data, ID) {
             photo: "summer_forum/speaker1",
             show: true,
         },
-        {
-            name: "Александр Балахонцев",
-            position: "Директор Blockchain 24",
-            photo: "summer_forum/speaker4",
-            show: true,
-        },
+        // {
+        //     name: "Александр Балахонцев",
+        //     position: "Директор Blockchain 24",
+        //     photo: "summer_forum/speaker4",
+        //     show: true,
+        // },
         {
             name: "Сергей Павлович",
             position: "Люди PRO",
             photo: "summer_forum/speaker14",
-            show: false,
+            show: true,
         },
         {
             name: "Андрей Тугарин",
@@ -644,6 +644,32 @@ const start = function (data, ID) {
                                     </div>
                                     При поддержке
                                     <img src={images["summer_forum/partner_21"]} />
+                                </p>
+                                <p>
+                                    Расписание форума
+                                    <div style="display: flex; justify-content: center; padding-top: 20px; flex-wrap: wrap; gap: 20px;">
+                                        <img style="margin: 0; max-height: max-content; cursor: pointer;" src={images["summer_forum/forum_schedule1"]} 
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                e.preventDefault();
+                                                fn.modals.ModalViewPhoto({
+                                                    path: images["summer_forum/forum_schedule1"],
+                                                    fullPath: true
+                                                });
+                                            }}
+                                        />
+                                        <img style="margin: 0; max-height: max-content; cursor: pointer;" src={images["summer_forum/forum_schedule2"]} 
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                e.preventDefault();
+                                                fn.modals.ModalViewPhoto({
+                                                    path: images["summer_forum/forum_schedule2"],
+                                                    fullPath: true
+                                                });
+                                            }}
+                                        />
+                                    </div>
+                                    
                                 </p>
                                 <p>
                                     <b>Crypto Юг 2023</b> - прекрасная возможность провести время приятно и с пользой, открыть для себя новые возможности, повысить экспертность и увеличить доход.
