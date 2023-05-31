@@ -191,6 +191,7 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
     
 }
 
+
 .c-modal__closse-1{
         position: absolute;
         width: 24px;
@@ -266,19 +267,18 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
 } 
  
 .start__pr { 
-    display: flex; 
-    justify-content: center; 
-    font-size: 30px; 
-    color: #8859ec; 
-    padding-top: 15px; 
-    padding-bottom: 15px; 
+    display: flex;
+    justify-content: center;
+   font-size: 40px;
+    font-weight: bold;
+    // background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
 } 
  
 .start__game { 
     display: flex; 
     justify-content: center; 
     font-size: 30px; 
-    color: #8859ec; 
+    // background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
     padding-top: 15px; 
     padding-bottom: 15px; 
 } 
@@ -294,6 +294,7 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
     display: grid; 
     grid-template-columns: 40% 60%;  
     grid-template-rows: 1fr 1fr; 
+
      
 } 
 .stats_2{ 
@@ -304,6 +305,7 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
 .stats_view_pr{ 
     display: grid; 
     grid-template-columns: 1fr 1fr 1fr; 
+    background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%)
      
 } 
 .stats_view{ 
@@ -314,7 +316,8 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
  
  
 .st-gm{ 
-    background: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%); 
+    background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
+     
         padding: 13px; 
         border-radius: 8px; 
          
@@ -331,6 +334,7 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
     display: flex; 
     justify-content: center; 
     height: auto; 
+    
 } 
  
 .wi_lo { 
@@ -340,15 +344,21 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
     margin-bottom: 20px; 
 } 
 .block__size__1{ 
-    border: 1px solid rgb(221, 212, 212); 
-    width: 150px; 
+    // border: 1px solid  darkcyan;
+    // width: 150px; 
     height: auto; 
+    border: 2px solid darkcyan;
+    // height: 100px;
+    width: 150px;
+    font-size: 70px;
+    text-align: center;
 } 
 .diz-gm{ 
     display:flex; 
     justify-content: center; 
     align-content: center; 
-    color:random($limit: 10); 
+    background: linear-gradient(45deg, #000000 0%,);
+     
      
     width: 140px; 
     height: auto; 
@@ -360,17 +370,10 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
     border-radius: 8px; 
 } 
 .btn_reset_gm{ 
-        background: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%); 
-        padding: 13px; 
-        border-radius: 8px; 
-         
-        height: 50 px; 
-        //text-decoration: none; 
-        color: #FFFFFF; 
-        //display: flex; 
-        text-align: center; 
-        //justify-content: space-between; 
-        font-size: 20px; 
+       font-size: 25px;
+    border: 2px solid deepskyblue;
+    border-radius: 10px;
+    padding: 10px 20px; 
 } 
  
 #field  { 
@@ -385,8 +388,13 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
 }
     
 .see-rest{
-    display: block;
+    display: flex;
     margin: 20px;
+    font-size:18px;
+    border: 2px solid deepskyblue;
+    border-radius: 10px;
+    padding: 10px 20px;
+    justify-content: right;
 }
 
 
@@ -426,3 +434,146 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
     border-radius: 10px;
     padding: 10px 20px;
 }
+
+#modalsetin{
+    padding-top: 140px;
+    font-size: 25px;
+    color: #8859ec;
+    height: auto;
+    text-align: center;
+}
+
+// .conteiner-game {
+//     max-width: 1240px;
+//     margin: 0px auto;
+// }
+
+// .start__pr {
+//     display: flex;
+//     justify-content: center;
+//     font-size: 30px;
+//     color: #8859ec;
+//     padding-top: 15px;
+//     padding-bottom: 15px;
+// }
+
+// .start__game {
+//     display: flex;
+//     justify-content: center;
+//     font-size: 30px;
+//     color: #8859ec;
+//     padding-top: 15px;
+//     padding-bottom: 15px;
+// }
+
+// .stats_main {
+//     display: flex;
+//     justify-content: space-around;
+//     padding-top: 20px;
+//     padding-bottom: 20px;
+// }
+
+// .stats_1 {
+//     display: grid;
+//     grid-template-columns: 40% 60%; 
+//     grid-template-rows: 1fr 1fr;
+    
+// }
+// .stats_2{
+//     display:grid;
+//     grid-template-columns: 1fr 1fr 1fr;
+// }
+
+// .stats_view_pr{
+//     display: grid;
+//     grid-template-columns: 1fr 1fr 1fr;
+    
+// }
+// .stats_view{
+//     display: flex;
+//     justify-content: center;
+//     border: 1px solid rgb(221, 212, 212);
+//     //outline-style: solid;
+   
+// }
+
+
+// .st-gm{
+//     //не используется
+//     background: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
+//         padding: 13px;
+//         border-radius: 8px;
+        
+//         height: 50 px;
+//         //text-decoration: none;
+//         color: #FFFFFF;
+//         //display: flex;
+//         text-align: center;
+//         //justify-content: space-between;
+//         font-size: 20px;
+// }
+
+// .one_game {
+//     display: flex;
+//     justify-content: center;
+//     height: auto;
+// }
+
+// .wi_lo {
+//     display: flex;
+//     justify-content: space-around;
+//     margin-top: 20px;
+//     margin-bottom: 20px;
+// }
+// .block__size__1{
+//     border: 1px solid rgb(221, 212, 212);
+//     width: 150px;
+//     height: auto;
+// }
+// .diz-gm {
+//     display:flex;
+//     justify-content: center;
+//     align-content: center;
+//     color:random($limit: 10);
+//     fill:#8859ec;
+//     width: 140px;
+//     height: auto;
+    
+// }
+
+// .restart_game {
+//     display: flex;
+//     justify-content: center;
+//     border-radius: 8px;
+// }
+// .btn_reset_gm{
+//         background: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
+//         padding: 13px;
+//         border-radius: 8px;
+        
+//         height: 50 px;
+//         //text-decoration: none;
+//         color: #FFFFFF;
+//         //display: flex;
+//         text-align: center;
+//         //justify-content: space-between;
+//         font-size: 20px;
+// }
+
+// #field  {
+//     display: grid;
+//     grid-template-columns:3fr 3fr 3fr;
+//     grid-template-rows: 3fr 3fr 3fr;
+//     width: 450px;
+//     height: 450px;
+//     border: 1px solid rgb(221, 212, 212);
+//     //text-align: center;
+//     //font-weight: bold;
+// }
+// #modalsetin{
+//     padding-top: 140px;
+//     font-size: 25px;
+//     color:#8859ec;
+//     height: auto;
+//     text-align: center;
+// }
