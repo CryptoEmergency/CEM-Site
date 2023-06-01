@@ -137,6 +137,7 @@
         "modal_comment": "Comment ",
         "modal_complain": "Make a complaint",
         "modal_success": "Your message has been sent",
+        "modal_soon": "Updating",
         "popular": "Popular",
         "modal_overdue": "You have not completed registration",
         "modal_notConfirm": "You have not completed registration",
@@ -340,6 +341,9 @@
         "mediumFont": "medium",
         "largeFont": "large",
         "allCourses": "All courses",
+        "photoFormat": "Photo format",
+        "underDevelopment": "Section under development",
+        "modal_soon": "Coming soon",
         "--------------------------новые слова--------------": "--добавить перевод--"
     },
     "p": {

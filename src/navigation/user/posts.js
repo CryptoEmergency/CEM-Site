@@ -1133,7 +1133,7 @@ const start = function (data, ID) {
               <div class="checkbox">
 
                 <label class="" for="">
-                  формат фото
+                  {Variable.lang.span.photoFormat}
                   <span class="cont_a-link"></span>
                 </label>
               </div>
@@ -1200,7 +1200,7 @@ const start = function (data, ID) {
                 onClick={(e) => { document.getElementsByClassName('c-userpanel__icon--active')[0].click() }}
               >
                 <span class="c-button__text">
-                  Отменить
+                  {Variable.lang.button.resetCrop}
                 </span>
               </button>
               <button

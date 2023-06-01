@@ -192,10 +192,6 @@
                         margin-top: 2px;
                         font-size: 10px;
                     }
-
-                    @media(max-width: 500px) {
-                        font-size: 9px;
-                    }
                 }
             }
         }
@@ -210,6 +206,10 @@
             left: 0;
             width: 100%;
             height: auto;
+
+            &_opacity {
+                    opacity: 0.6;
+                }
         }
 
         &__description {
@@ -232,11 +232,17 @@
             }
 
             @media(max-width: 500px) {
-                font-size: 9px;
+                font-size: 10px;
             }
 
             &_desktop {
                 display: none;
+            }
+
+            &_mobile {
+                @media(max-width: 444px) {
+                    display: none;
+                }
             }
         }
 

@@ -23,28 +23,31 @@ const ModalComingSoon = function (data, ID) {
     load({
         ID,
         fnLoad: async () => {
-            
+
         },
         fn: () => {
             return (
-                <div class="c-modal c-modal--open" onclick={function (e) {
-                    if (close) {
+                <div class="c-modal c-modal--open"
+                    onclick={function (e) {
+                        if (close) {
 
-                        fn.modals.close(ID)
-                    }
-                }}>
-                    <section class="c-modal__dialog" onmouseover={function () {
+                            fn.modals.close(ID)
+                        }
+                    }}>
+                    <section class="c-modal__dialog"
+                        style="max-width: 320px;"
+                        onmouseover={function () {
 
-                        close = false
+                            close = false
 
-                    }}
+                        }}
                         onmouseleave={function () {
 
                             close = true
 
                         }}>
                         <header class="c-modal__header">
-                            <h2 class="c-modal__title">Updating</h2>
+                            <h2 class="c-modal__title">{Variable.lang.h.modal_soon}</h2>
                             <button
                                 type="button"
                                 class="c-modal__close"
@@ -53,9 +56,9 @@ const ModalComingSoon = function (data, ID) {
                                 }}
                             ></button>
                         </header>
-                        <div class="c-modal__body">
-                            <p>Section under development</p>
-                            <p>Coming soon</p>
+                        <div class="c-modal__body" style="text-align: center;">
+                            <p>{Variable.lang.span.underDevelopment}</p>
+                            <p>{Variable.lang.span.modal_soon}</p>
                         </div>
                         <footer class="c-modal__footer">
                             <button class="c-button c-button--primary"
