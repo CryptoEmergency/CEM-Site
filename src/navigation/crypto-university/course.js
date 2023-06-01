@@ -167,7 +167,7 @@ const start = function (data, ID) {
             })
         },
         fn: () => {
-            console.log('=022f2b=', Static.courses)
+            
             return (
                 <div class="page-main">
                     <div class="page-main__container">
@@ -353,6 +353,7 @@ const start = function (data, ID) {
                                                 oninput={async function (e) {
                                                     Static.filtersSearch.textSearch = this.value
                                                     filterCost = makeFilters(Static)
+                                                    console.log('=022f2b= makeFILTER', filterCost)
                                                     Static.courses = await fn.socket.get({
                                                         method: "Courses",
                                                         params: {
@@ -364,6 +365,7 @@ const start = function (data, ID) {
                                                             }
                                                         }
                                                     })
+                                                    console.log('=5d7eed=', Static.courses)
                                                     initReload()
                                                 }}
                                             />
