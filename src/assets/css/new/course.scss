@@ -378,6 +378,10 @@
         &__enroll {
             margin-top: 30px;
             margin-bottom: 0;
+
+            span {
+                color: #ffffff;
+            }
         }
 
         &__company {
@@ -385,6 +389,7 @@
 
             &_title {
                 display: flex;
+                justify-content: center;
 
                 img {
                     height: 30px;

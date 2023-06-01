@@ -142,6 +142,12 @@ const BlockProjects = async function () {
         modal: true,
       },
       {
+        title: Variable.lang.a.university,
+        icon: "mortarboard",
+        link: "crypto-university",
+        modal: true,
+      },
+      {
         title: Variable.lang.a.experts,
         icon: "preview_line_experts",
         link: "experts",

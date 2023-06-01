@@ -291,7 +291,7 @@ const ModalMainPageIconsMenu = function (data, ID) {
                 </div>
                 <div class="c-allservices__group">
                   <a
-                    href="/university/"
+                    href="/crypto-university/"
                     class="c-allservices__link"
                     onclick={function (e) {
                       fn.siteLink(e);

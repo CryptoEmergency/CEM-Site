@@ -30,21 +30,15 @@ const ModalComingSoon = function (data, ID) {
                 <div class="c-modal c-modal--open"
                     onclick={function (e) {
                         if (close) {
-
                             fn.modals.close(ID)
                         }
                     }}>
-                    <section class="c-modal__dialog"
-                        style="max-width: 320px;"
+                    <section class="c-modal__dialog_soon"
                         onmouseover={function () {
-
                             close = false
-
                         }}
                         onmouseleave={function () {
-
                             close = true
-
                         }}>
                         <header class="c-modal__header">
                             <h2 class="c-modal__title">{Variable.lang.h.modal_soon}</h2>

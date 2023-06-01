@@ -24,11 +24,13 @@ const ModalTeachers = function (data, ID) {
         fn: () => {
             console.log('=2ce562=', data)
             return (
-                <div class="c-modal c-modal--open" onclick={function (e) {
-                    if (close) {
-                        fn.modals.close(ID)
-                    }
-                }}>
+                <div class="c-modal c-modal--open"
+                    style="background: rgba(0, 0, 0, 0.7);"
+                    onclick={function (e) {
+                        if (close) {
+                            fn.modals.close(ID)
+                        }
+                    }}>
                     <section class="c-modal__dialog" onmouseover={function () {
                         close = false
                     }}
@@ -104,7 +106,6 @@ const ModalTeachers = function (data, ID) {
                                     <p class="modal-teacher__description_text">
                                         {
                                             fn.editText(data.description, { clear: true, paragraph: true, html: true })
-                                            
                                         }
                                     </p>
                                 </div>

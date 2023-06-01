@@ -6233,3 +6233,19 @@ s
 		}
 	}
 }
+
+.c-modal__dialog_soon {
+	position: relative;
+	width: auto;
+	margin: 0.5rem auto;
+	color: #ffffff;
+	background: #202432;
+	box-shadow: 0px 0px 70px #191c24;
+	border-radius: 20px;
+	border: 1px solid #303545;
+
+	@media(min-width: 380px) {
+		max-width: 320px;
+		margin: 1.75rem auto;
+	}
+}
