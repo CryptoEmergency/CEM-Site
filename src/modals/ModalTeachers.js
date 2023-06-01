@@ -101,7 +101,12 @@ const ModalTeachers = function (data, ID) {
                                             :
                                             null
                                     }
-                                    <p class="modal-teacher__description_text">{data.description}</p>
+                                    <p class="modal-teacher__description_text">
+                                        {
+                                            fn.editText(data.description, { clear: true, paragraph: true, html: true })
+                                            
+                                        }
+                                    </p>
                                 </div>
                             </div>
                         </div>

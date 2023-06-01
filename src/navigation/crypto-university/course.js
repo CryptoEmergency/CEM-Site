@@ -158,12 +158,16 @@ const start = function (data, ID) {
                 params: {
                     filter: filterCost.filter,
                     find: { name: { $regex: Static.filtersSearch.textSearch, $options: "i" } },
-                    sort: filterCost.sort
+                    sort: filterCost.sort,
+
+                    populate: {
+                        path: 'company teachers',
+                    }
                 }
             })
         },
         fn: () => {
-            console.log('=022f2b=', Static.filtersSearch)
+            console.log('=022f2b=', Static.courses)
             return (
                 <div class="page-main">
                     <div class="page-main__container">
@@ -212,7 +216,6 @@ const start = function (data, ID) {
                                                             return (
                                                                 <div class="courses-select-container">
                                                                     {Static.category.map((item) => {
-
                                                                         return (
                                                                             <div class="courses-select__list"
                                                                             // HiddenOut={true}
@@ -235,13 +238,24 @@ const start = function (data, ID) {
                                                                                             } else {
                                                                                                 Static.filtersSearch.categoryActive = this.value
                                                                                             }
+                                                                                            Static.item = await fn.socket.get({
+                                                                                                method: "ListCat",
+                                                                                                params: {
+                                                                                                    filter: {
+                                                                                                        direction: this.value
+                                                                                                    },
+                                                                                                }
+                                                                                            })
                                                                                             filterCost = makeFilters(Static)
                                                                                             Static.courses = await fn.socket.get({
                                                                                                 method: "Courses",
                                                                                                 params: {
                                                                                                     filter: filterCost.filter,
                                                                                                     find: { name: { $regex: Static.filtersSearch.textSearch, $options: "i" } },
-                                                                                                    sort: filterCost.sort
+                                                                                                    sort: filterCost.sort,
+                                                                                                    populate: {
+                                                                                                        path: 'company teachers',
+                                                                                                    }
                                                                                                 }
                                                                                             })
                                                                                             initReload()
@@ -308,7 +322,10 @@ const start = function (data, ID) {
                                                                                                 params: {
                                                                                                     filter: filterCost.filter,
                                                                                                     find: { name: { $regex: Static.filtersSearch.textSearch, $options: "i" } },
-                                                                                                    sort: filterCost.sort
+                                                                                                    sort: filterCost.sort,
+                                                                                                    populate: {
+                                                                                                        path: 'company teachers',
+                                                                                                    }
                                                                                                 }
                                                                                             })
                                                                                             initReload()
@@ -341,7 +358,10 @@ const start = function (data, ID) {
                                                         params: {
                                                             filter: filterCost.filter,
                                                             find: filterCost.find,
-                                                            sort: filterCost.sort
+                                                            sort: filterCost.sort,
+                                                            populate: {
+                                                                path: 'company teachers',
+                                                            }
                                                         }
                                                     })
                                                     initReload()
@@ -349,72 +369,107 @@ const start = function (data, ID) {
                                             />
                                         </div>
                                     </div>
+                                    {
+                                        Static.item != undefined && Static.item.length == 1
+                                            ?
+                                            <div class="courses__category">
+                                                <div class="courses__category_description">
+                                                    <h4>{Static.item[0].name}</h4>
+                                                    <div>{`${Static.item[0].title}.`}</div>
+                                                    <div>{`${Static.item[0].description}.`}</div>
+                                                </div>
+                                            </div>
+                                            :
+                                            Static.item != undefined && Static.item?.length !== 0
+                                                ?
+                                                <div class="courses__category">
+                                                    <div class="courses__category_description">
+                                                        <h4>{Static.item.name}</h4>
+                                                        <div>{`${Static.item.title}.`}</div>
+                                                        <div>{`${Static.item.description}.`}</div>
+                                                    </div>
+                                                </div>
+                                                :
+                                                null
+                                    }
                                     <div class="cards">
                                         <div class="cards__container cards__container_type_courses">
                                             {
                                                 Static.courses.length != 0
-                                                ?
-                                                Static.courses.map((item) => {
-                                                    return (
-                                                        <li class="card card_courses">
-                                                            <a
-                                                                class="card__link card__link_background"
-                                                            // href={`/crypto-university/course/${item._id}`}
-                                                            // onclick={function (e) {
-                                                            //     fn.siteLink(e, { title: "", item: {}, items: {} })
-                                                            // }}
-                                                            >
-                                                                <div class="card__title card__title_courses">
-                                                                    {item.name}
-                                                                </div>
-                                                                <div class="card__description card__description_courses">
-                                                                    {item.description}
-                                                                </div>
-                                                                <div class="card__container card__container_row card__container_indent_course">
-                                                                    <div class="card__cost">
-                                                                        <span>{item.cost} <span class="card__cost_size">₽/мес.</span></span>
+                                                    ?
+                                                    Static.courses.map((item) => {
+                                                        return (
+                                                            <li class="card card_courses">
+                                                                <a
+                                                                    class="card__link card__link_background"
+                                                                >
+                                                                    <div class="card__title card__title_courses">
+                                                                        {item.name}
                                                                     </div>
-                                                                    <div class="card__container card__container_row">
-                                                                        <div class="card__duration">
-                                                                            <span>{item.duration}</span>
+                                                                    <div class="card__description card__description_courses">
+                                                                        {item.description}
+                                                                    </div>
+                                                                    <div class="card__container card__container_row card__container_indent_course">
+                                                                        <div class="card__cost">
+                                                                            <span>{item.cost} <span class="card__cost_size">₽/мес.</span></span>
                                                                         </div>
-                                                                        <div class="card__duration-text">
-                                                                            <span class="card__duration-text_size">
-                                                                                {
-                                                                                    item.timeCount == "month"
-                                                                                        ?
-                                                                                        "Месяца"
-                                                                                        :
-                                                                                        "Дней"
-                                                                                }
-                                                                            </span>
-                                                                            <span class="card__duration-text_color">Срок обучения</span>
+                                                                        <div class="card__container card__container_row">
+                                                                            <div class="card__duration">
+                                                                                <span>{item.duration}</span>
+                                                                            </div>
+                                                                            <div class="card__duration-text">
+                                                                                <span class="card__duration-text_size">
+                                                                                    {
+                                                                                        item.timeCount == "month"
+                                                                                            ?
+                                                                                            "Месяца"
+                                                                                            :
+                                                                                            "Дней"
+                                                                                    }
+                                                                                </span>
+                                                                                <span class="card__duration-text_color">Срок обучения</span>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <a class="card__more card__more_indent_course">
-                                                                    <span
-                                                                        onclick={function (e) {
-                                                                            fn.siteLink(`/crypto-university/show/${item._id}`)
-                                                                        }}
+                                                                    <a class="card__more card__more_indent_course">
+                                                                        <span
+                                                                            // href={`/crypto-university/show/${item._id}`}
+                                                                            onclick={function (e) {
+                                                                                // console.log('=aecfd1=', item)
+                                                                                fn.siteLinkModal(`/crypto-university/show/${item._id}`, { title: `${item.name}`, item })
+                                                                                // fn.siteLink(`/crypto-university/show/${item._id}`)
+                                                                            }}
+                                                                        >
+                                                                            Больше информации
+                                                                        </span>
+                                                                    </a>
+                                                                    <div class="card__category">
+                                                                        <span>{item.category}</span>
+                                                                    </div>
+                                                                    <div
+                                                                        class="card__icon"
+                                                                        onclick={() => [
+                                                                            item.company.map((item) => {
+                                                                                fn.modals.ModalTeachers(item)
+                                                                            })
+                                                                        ]}
                                                                     >
-                                                                        Больше информации
-                                                                    </span>
+                                                                        {
+                                                                            item.icon
+                                                                                ?
+                                                                                <img src={`/assets/upload/worldPress/${item.icon}`} />
+                                                                                :
+                                                                                null
+                                                                        }
+                                                                    </div>
                                                                 </a>
-                                                                <div class="card__category">
-                                                                    <span>{item.category}</span>
-                                                                </div>
-                                                                <div class="card__icon">
-                                                                    <img src={`/assets/upload/worldPress/${item.icon}`} />
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                    )
-                                                })
-                                                :
-                                                <div class="card__undefined">
-                                                    <span>По данному фильтру курсов не найдено</span>
-                                                </div>
+                                                            </li>
+                                                        )
+                                                    })
+                                                    :
+                                                    <div class="card__undefined">
+                                                        <span>По данному фильтру курсов не найдено</span>
+                                                    </div>
                                             }
                                         </div>
                                     </div>

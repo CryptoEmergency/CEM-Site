@@ -116,27 +116,45 @@ const start = function (data, ID) {
     load({
         ID,
         fnLoad: async () => {
-            if (Variable.dataUrl.params) {
+
+            console.log('=4c2d3d=', Static.openModals)
+
+            if (!Static.openModals) {
+
                 Static.item = await fn.socket.get({
                     method: "Courses",
-                    _id: Variable.dataUrl.params,
+                    _id: item._id,
                     params: {
                         populate: {
                             path: 'teachers company',
                         }
                     }
                 })
-                console.log('=9ebbf7=', Static.item)
+
             }
+            if (!Static.item._id) {
+                Static.item = await fn.socket.get({
+                    method: "Courses",
+                    _id: Variable.DataUrl.params,
+                    params: {
+                        populate: {
+                            path: 'teachers company',
+                        }
+                    }
+                })
+            }
+
         },
 
         fn: async () => {
-            console.log('=9ebbf7=', Static.item)
+            // console.log('=9ebbf7=', Static.item)
             if (!item._id) { return (<div><BlockError404 /></div>) }
 
             return (
                 <div class="page-main">
-                    <div class="page-main__container">
+                    <div class="page-main__container"
+                        style={Static.openModals ? "margin-top: 0;" : null}
+                    >
                         <div class="page-main__content"
                             style="padding: 0;"
                         >
@@ -164,27 +182,33 @@ const start = function (data, ID) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="course-learn">
-                                        <div class="course__subtitle">
-                                            Вы научитесь
-                                        </div>
-                                        <ul class="course-learn__list">
-                                            {
-                                                Static.item.learn?.map((item) => {
-                                                    return (
-                                                        <li class="course-learn__item">
-                                                            <div class="course-learn__subtitle">
-                                                                {item.title}
-                                                            </div>
-                                                            <div class="course-learn__description">
-                                                                {item.description}
-                                                            </div>
-                                                        </li>
-                                                    )
-                                                })
-                                            }
-                                        </ul>
-                                    </div>
+                                    {
+                                        Static.item.learn?.length != 0
+                                            ?
+                                            <div class="course-learn">
+                                                <div class="course__subtitle">
+                                                    Вы научитесь
+                                                </div>
+                                                <ul class="course-learn__list">
+                                                    {
+                                                        Static.item.learn?.map((item) => {
+                                                            return (
+                                                                <li class="course-learn__item">
+                                                                    <div class="course-learn__subtitle">
+                                                                        {item.title}
+                                                                    </div>
+                                                                    <div class="course-learn__description">
+                                                                        {item.description}
+                                                                    </div>
+                                                                </li>
+                                                            )
+                                                        })
+                                                    }
+                                                </ul>
+                                            </div>
+                                            :
+                                            null
+                                    }
                                     <div class="course-teachers">
                                         <div class="course__subtitle">
                                             Преподаватели курса
@@ -200,7 +224,9 @@ const start = function (data, ID) {
                                                                 ]}
                                                             >
                                                                 <div class="course-teachers__item">
-                                                                    <img src={`/assets/upload/worldPress/${item.image}`} />
+                                                                    <div class="course-teachers__item_image">
+                                                                        <img src={`/assets/upload/worldPress/${item.image}`} />
+                                                                    </div>
                                                                     <span class="course-teachers__name">{item.name}</span>
                                                                     <span>{item.profession}</span>
                                                                 </div>
@@ -210,30 +236,6 @@ const start = function (data, ID) {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="course-reviews">
-                                        <div class="course__subtitle">
-                                            Отзывы
-                                        </div>
-                                        <div class="course-reviews__container">
-                                            <p class="university-review__soon" style="margin-top: 80px">
-                                                <span style="font-size: 26px;">Отзывы ещё не оставлены</span>
-                                            </p>
-                                            <div class="course-reviews__add"
-                                                onclick={() => {
-                                                    fn.modals.ModalComingSoon()
-                                                }}
-                                            >
-                                                <span>Оставить отзыв</span>
-                                            </div>
-                                            <img class="university-author__image" src={images["university/reviews"]} />
-                                        </div>
-                                    </div>
-                                    <div class="course-questions">
-                                        <div class="course__subtitle">
-                                            Вопросы и ответы
-                                        </div>
-                                        <elements.Accordeon records={arrAccordeon} />
                                     </div>
                                     <div class="course-footer">
                                         <div class="course-footer__container">
@@ -278,7 +280,6 @@ const start = function (data, ID) {
                                                                 <span>-30%</span>
                                                             </div>
                                                         </div>
-
                                                         <div class="course-footer__cost_new">
                                                             {Static.item.costAll} ₽
                                                             <div>Новая цена</div>
@@ -297,7 +298,10 @@ const start = function (data, ID) {
                                                     Static.item.company.map((item) => {
                                                         return (
                                                             <div class="course-footer__company">
-                                                                <h3>Школа «{item.name}»</h3>
+                                                                <div class="course-footer__company_title">
+                                                                    {/* <img src={`/assets/upload/worldPress/${item.image}`} /> */}
+                                                                    <h3>Школа «{item.name}»</h3>
+                                                                </div>
                                                                 <div>
                                                                     <a href={item.siteLink} target="_blank" class={["btn-item", !item.siteLink ? "social-btn_passive" : null]}>
                                                                         <div class="btn-item_text">Веб-сайт</div>
@@ -328,6 +332,30 @@ const start = function (data, ID) {
                                                 }
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="course-reviews">
+                                        <div class="course__subtitle">
+                                            Отзывы
+                                        </div>
+                                        <div class="course-reviews__container">
+                                            <p class="university-review__soon" style="margin-top: 80px">
+                                                <span style="font-size: 26px;">Отзывы ещё не оставлены</span>
+                                            </p>
+                                            <div class="course-reviews__add"
+                                                onclick={() => {
+                                                    fn.modals.ModalComingSoon()
+                                                }}
+                                            >
+                                                <span>Оставить отзыв</span>
+                                            </div>
+                                            <img class="university-author__image" src={images["university/reviews"]} />
+                                        </div>
+                                    </div>
+                                    <div class="course-questions">
+                                        <div class="course__subtitle">
+                                            Вопросы и ответы
+                                        </div>
+                                        <elements.Accordeon records={arrAccordeon} />
                                     </div>
                                 </div>
                             </div>
