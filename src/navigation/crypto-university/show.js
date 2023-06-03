@@ -117,7 +117,7 @@ const start = function (data, ID) {
         ID,
         fnLoad: async () => {
 
-            console.log('=4c2d3d=', Static.openModals)
+            // console.log('=4c2d3d=', Static.openModals)
 
             if (!Static.openModals) {
 
