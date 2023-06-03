@@ -638,7 +638,8 @@ const start = function (data, ID) {
 
                             <div style="display: flex;
                                     justify-content: center; margin-bottom: 40px">
-                                <iframe width="1280" height="720" src="https://www.youtube.com/embed/p1uDhRR4IhE" title="Крипто Юг 2023 (День 1)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                <iframe width="1280" height="720" src="https://www.youtube.com/embed/0NEbLv1NWhs" title="Крипто Юг 2023 (День 1)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
                             </div>
 
                             <div class="c-aboutforum__text c-container">
