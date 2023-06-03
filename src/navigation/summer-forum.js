@@ -451,6 +451,12 @@ const start = function (data, ID) {
             show: false,
         },
         {
+            name: "Владислав Судьин",
+            position: "Зам. председателя Комиссии по инновациям и инвестициям IFSPD",
+            photo: "summer_forum/speaker30",
+            show: false,
+        },
+        {
             name: "Вячеслав Носков",
             position: "PRO BLOCKCHAIN MEDIA",
             photo: "summer_forum/speaker12",
@@ -630,6 +636,11 @@ const start = function (data, ID) {
                                 </div>
                             </div>
 
+                            <div style="display: flex;
+                                    justify-content: center; margin-bottom: 40px">
+                                <iframe width="1280" height="720" src="https://www.youtube.com/embed/p1uDhRR4IhE" title="Крипто Юг 2023 (День 1)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+
                             <div class="c-aboutforum__text c-container">
                                 <p>
                                     Команда <b>Crypto Emergency</b> рада пригласить тебя на второй ежегодный криптофорум <b>Crypto Юг 2023</b>, который состоится  3 и 4 июня в г. Новороссийске.
@@ -702,7 +713,6 @@ const start = function (data, ID) {
                                 <a href="#" class="c-button c-button--gradient2 tiwo_ticketseller" data-event_id="4623" onclick={() => { return false }}>
                                     <span class="c-button__text">Купить билет</span>
                                 </a>
-
                                 <div class="swiper-container" replace={true}>
                                     <div id="summer_forum" class="swiper swiper-post_media" After={() => swiperGo()}>
                                         <div class="swiper-wrapper">

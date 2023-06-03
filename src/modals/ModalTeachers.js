@@ -22,7 +22,7 @@ const ModalTeachers = function (data, ID) {
 
         },
         fn: () => {
-            console.log('=2ce562=', data)
+            // console.log('=2ce562=', data)
             return (
                 <div class="c-modal c-modal--open"
                     style="background: rgba(0, 0, 0, 0.7);"
