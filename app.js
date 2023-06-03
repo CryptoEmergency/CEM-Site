@@ -62,7 +62,12 @@ CEM.initOptions({
     }),
     hooks: {
         routers: function (dataUrl) {
-            // console.log('=d56fcd=', dataUrl)
+            if (Variable.auth && Variable.myInfo && !Variable.myInfo.confirm.registrasion) {
+                console.log('=8b3072=', 123)
+                // Variable.SetModals({ name: "ModalAfterRegisterForm", data: {} })
+                CEM.fn.modals.ModalAfterRegisterForm({})
+            }
+
             return false
         }
     }
