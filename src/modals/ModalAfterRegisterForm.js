@@ -86,8 +86,14 @@ const ModalAfterRegisterForm = function (data, ID) {
         placeholder: Variable.lang.label.nickName,
         errorText: Variable.lang.error_div.nicknameErr,
         condition: async (value) => {
+          console.log('=c018f3 condition=', value)
+          Static.nickName.value = value
           if (await checkBefore(Static, value)) {
+            Static.nickName.valid = true
+
             return true
+          } else {
+            Static.nickName.valid = false
           }
 
         },
@@ -145,6 +151,7 @@ const ModalAfterRegisterForm = function (data, ID) {
 
     },
     fn: () => {
+      console.log('=49e9fa=', Static)
       return (
         <div class="c-modal c-modal--open" id="ModalAfterRegisterForm">
           <section class="c-modal__dialog">
@@ -244,7 +251,8 @@ const ModalAfterRegisterForm = function (data, ID) {
 
 
     if (tmpRes.status === 'ok') {
-      Variable.DelModals("ModalAfterRegisterForm")
+      fn.siteLink("/user/", {})
+      // Variable.DelModals("ModalAfterRegisterForm")
       initReload()
     } else {
       Variable.SetModals({ name: "ModalAlarm", data: { icon: "alarm_icon", text: Variable.lang.error_div[tmpRes.error] } }, true);

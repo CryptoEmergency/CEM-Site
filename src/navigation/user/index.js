@@ -227,7 +227,10 @@ const start = function (userInfo, ID = "mainBlock") {
                 profilePage = "lentaFriends";
                 Static.activeItems = Variable.PageUserProfileMyLenta
             }
-
+            // if (Variable.auth && Variable.myInfo && !Variable.myInfo.confirm.registrasion) {
+            //     console.log('=8b3072=', 123)
+            //     Variable.SetModals({ name: "ModalAfterRegisterForm", data: {} })
+            // }
         },
         () => {
             if (userInfo && userInfo.nickname == Variable.myInfo.nickname) { userInfo = Variable.myInfo }

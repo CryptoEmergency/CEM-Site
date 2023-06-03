@@ -84,7 +84,7 @@ const textElem = function (Static, className, callback, customStyle, paste) {
                         console.log("onPaste", e)
                     }
                 }
-
+                // console.log('=4a458d=', 124)
                 checkInput(Static, this)
                 if (callback) {
 
