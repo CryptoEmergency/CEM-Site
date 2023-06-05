@@ -285,9 +285,10 @@ $fiolet: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
  
 .stats_main { 
     display: flex; 
-    justify-content: space-around; 
+    // justify-content: space-around; 
     padding-top: 20px; 
     padding-bottom: 20px; 
+    margin-left: 20%;
 } 
  
 .stats_1 { 
