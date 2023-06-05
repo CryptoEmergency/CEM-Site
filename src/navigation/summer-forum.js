@@ -629,17 +629,17 @@ const start = function (data, ID) {
                                             <br />
                                             г. Новороссийск
                                         </span>
-                                        <a href="#" class="c-button c-button--gradient2 tiwo_ticketseller" data-event_id="4623" onclick={() => { return false }}>
+                                        {/* <a href="#" class="c-button c-button--gradient2 tiwo_ticketseller" data-event_id="4623" onclick={() => { return false }}>
                                             <span class="c-button__text">{Variable.lang.button.buyTicket}</span>
-                                        </a>
+                                        </a> */}
                                     </div>
                                 </div>
                             </div>
 
-                            <div style="display: flex;
+                            {/* <div style="display: flex;
                                     justify-content: center; margin-bottom: 40px">
                                 <iframe width="1280" height="720" src="https://www.youtube.com/embed/hMJOgeNR7RE" title="Крипто Юг 2023 (День 2)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                            </div>
+                            </div> */}
 
                             <div class="c-aboutforum__text c-container">
                                 <p>
@@ -710,9 +710,9 @@ const start = function (data, ID) {
                                     Мы уверены, что наш криптофорум предоставит тебе всю ценную информацию, деловые возможности и возможности, которых больше нигде не встретишь.
                                 </p>
 
-                                <a href="#" class="c-button c-button--gradient2 tiwo_ticketseller" data-event_id="4623" onclick={() => { return false }}>
+                                {/* <a href="#" class="c-button c-button--gradient2 tiwo_ticketseller" data-event_id="4623" onclick={() => { return false }}>
                                     <span class="c-button__text">Купить билет</span>
-                                </a>
+                                </a> */}
                                 <div class="swiper-container" replace={true}>
                                     <div id="summer_forum" class="swiper swiper-post_media" After={() => swiperGo()}>
                                         <div class="swiper-wrapper">
@@ -759,9 +759,9 @@ const start = function (data, ID) {
 
                         <section class="c-speakers c-container" id="speakers">
                             <h4 class="с-summerforum__title c-speakers__title">{Variable.lang.h.speakersForum}</h4>
-                            <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
+                            {/* <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
                                 <span class="c-button__text">{Variable.lang.button.becomeSpeaker}</span>
-                            </a>
+                            </a> */}
                             <ul class="c-speakers__list">
                                 {
                                     speakers.map((item) => {
@@ -1172,9 +1172,9 @@ const start = function (data, ID) {
                             </div>
                             <img class="c-eventmap__image" src={svg['summer_forum/map']} />
 
-                            <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
+                            {/* <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
                                 <span class="c-button__text">{Variable.lang.button.buyStand}</span>
-                            </a>
+                            </a> */}
                         </section>
 
                         <section class="с-guests c-container" id="guests">
@@ -1565,9 +1565,9 @@ const start = function (data, ID) {
                                     <img src={images["summer_forum/partner_39"]} />
                                 </a>
                             </div>
-                            <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
+                            {/* <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
                                 <span class="c-button__text">{Variable.lang.button.becomePartner}</span>
-                            </a>
+                            </a> */}
                         </section>
 
                         <section class="c-localmap" id="localmap">
@@ -1601,7 +1601,7 @@ const start = function (data, ID) {
                         });
                     }}></script>
                     <script src="https://widget.tiwo.ru/loader/loader.js.php"></script>
-                    <script src="//code.jivo.ru/widget/eSqQ27xJUs" async></script>
+                    {/* <script src="//code.jivo.ru/widget/eSqQ27xJUs" async></script> */}
                 </div >
             )
         }, ID
