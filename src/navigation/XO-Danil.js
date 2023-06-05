@@ -109,6 +109,38 @@ const start = function (data, ID) {
 
         return -1;
     }
+    //функция закритие выигрыша
+    function needClose() {
+        let combs = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6],
+        ];
+
+
+        for (let i = 0; i < combs.length; i++) {
+            const [a, b, c] = combs[i];
+            // console.log('=83ad4f=', arrGame[a], arrGame[b], arrGame[c])
+            if (arrGame[a] == -1 || arrGame[b] == -1 || arrGame[c] == -1) {
+                if (arrGame[a] == 0 && arrGame[b] == 0) {
+                    return c
+                }
+                if (arrGame[a] == 0 && arrGame[c] == 0) {
+                    return b
+                }
+                if (arrGame[b] == 0 && arrGame[c] == 0) {
+                    return a
+                }
+            }
+        }
+
+        return -1;
+    }
     //функция хода противника
     function autoWay() {
 
@@ -125,7 +157,7 @@ const start = function (data, ID) {
         }
 
         let rn = getRandomInt(9)
-
+        let dontLose = needClose()
         let needWin = wantWin()
         console.log('=4ea8e1 needWin=', needWin)
 
@@ -143,11 +175,19 @@ const start = function (data, ID) {
                 count++
                 initReload()
             }
-            else {
+            else if(checkWin == true)
+            {
                 showError("Вы проиграли!")
                 staticRounds.lose++
                 setStorage("staticRounds", staticRounds)
                 startGame = 0
+            }
+            else {
+                if(dontLose == false) {
+                    whoWay = 1
+                    count++
+                    initReload()
+                } 
             }
         }
         else {
@@ -216,8 +256,11 @@ const start = function (data, ID) {
                                                     if (checkWin == false) {
                                                         whoWay = 0
                                                         count++
+                                                        //или сюда, что ниже
                                                         autoWay()
                                                     }
+                                                    //Добавить закрытие(else if)
+                                                    //Новая функция needClose
                                                     else {
                                                         staticRounds.win++
                                                         setStorage("staticRounds", staticRounds)
