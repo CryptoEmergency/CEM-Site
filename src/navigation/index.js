@@ -64,6 +64,73 @@ const makeFilter = function (Static) {
   return objReturn;
 };
 
+const courses = [
+  {
+    name: "btc",
+    price: "7.85"
+  },
+  {
+    name: "eth",
+    price: "67"
+  },
+  {
+    name: "usdt",
+    price: "6.54"
+  },
+  {
+    name: "usdc",
+    price: "8.8"
+  },
+  {
+    name: "bnb",
+    price: "9.9"
+  },
+  {
+    name: "usdc",
+    price: "1.85"
+  },
+  {
+    name: "xrp",
+    price: "3.46"
+  },
+  {
+    name: "ada",
+    price: "9.14"
+  },
+  {
+    name: "doge",
+    price: "2.2"
+  },
+  {
+    name: "trx",
+    price: "67.7"
+  },
+  {
+    name: "atom",
+    price: "100"
+  },
+  {
+    name: "leo",
+    price: "0.49"
+  },
+  {
+    name: "uni",
+    price: "10.01"
+  },
+  {
+    name: "link",
+    price: "50.9"
+  },
+  {
+    name: "icp",
+    price: "55"
+  },
+  {
+    name: "apt",
+    price: "99.9"
+  },
+];
+
 const start = function (data, ID) {
   Variable.Static.HeaderShow = true;
   Variable.Static.FooterShow = false
@@ -121,6 +188,14 @@ const start = function (data, ID) {
       //     fn.socket.get({ method: "Course", params: { filter: {} } })
       // }, 10);
       // console.log("=7f467d tmp=", Static.mainCourse);
+      
+      Static.course = await fn.socket.get({
+        method: "Course",
+        // params: {
+        //   filter: filterStartups.filter,
+        //   sort: filterStartups.sort
+        // }
+      });
 
       Static.dataUsers = {};
       Static.dataQuestions = {};
@@ -198,6 +273,7 @@ const start = function (data, ID) {
 
       return (
         <div class="c-main__body">
+          {/* <Elements.Line Static={Static} records={Static.course}></Elements.Line> */}
           <BlockProjects />
           <div class="с-preview" style="position: relative">
             {/* <img class="с-preview__lines" src={images["background/lines-preview-min"]} />
