@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, init, Variable, CEM } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, init, Variable, CEM, initReload } from "@betarost/cemserver/cem.js";
 // import { fn } from "@src/functions/index.js";
 // import svg from "@assets/svg/index.js";
 import { ButtonShowMore, NotFound } from "@elements/element/index.js";
@@ -8,21 +8,35 @@ const { svg, fn } = CEM
 const UserWalletCard = function ({ balance, coin, course, logo }) {
   return (
     <div class="c-wallet__card">
+      {
+        balance >= 1.6
+        ?
+        <div class="c-wallet__exchange"
+          onclick={() => {
+            fn.modals.ModalExchange({ balance })
+            initReload()
+          }}
+        >
+            <span>{Variable.lang.button.exchange}</span>
+        </div>
+        :
+        null
+      }
       <div class="c-wallet__topline">
         <p>{Variable.lang.p.myBalance}</p>
         <p>
-          {fn.numberFixWithSpaces(balance, 0)} {coin}
+          {fn.numberFixWithSpaces(balance, 2)} {coin}
         </p>
       </div>
 
       <div class="c-wallet__bottomline">
         <div>
           <p>{Variable.lang.p.inUSD}</p>
-          <p>{fn.numberFixWithSpaces(course * balance, 4)}</p>
+          <p>{fn.numberFixWithSpaces(course * balance, 2)}</p>
         </div>
         <div>
           <p>{Variable.lang.p.actualeCurs}</p>
-          <p>{fn.numberFixWithSpaces(course, 4)} </p>
+          <p>{fn.numberFixWithSpaces(course, 2)} </p>
         </div>
       </div>
       {logo ? (
