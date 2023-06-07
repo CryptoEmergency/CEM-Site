@@ -62,6 +62,13 @@ const BlockProjects = async function () {
   await initOne(() => {
     projects = [
       {
+        title: Variable.lang.button.show_all,
+        icon: "menu",
+        link: "",
+        modal: false,
+        modalWindow: true
+      },
+      {
         title: Variable.lang.span.userNews,
         icon: "preview_line_lenta",
         link: "lenta-users",
@@ -191,6 +198,9 @@ const BlockProjects = async function () {
                 fn.siteLinkModal(e, { title: item.title, items: item.items });
               } else {
                 fn.siteLink(e);
+              }
+              if(item.modalWindow){
+                fn.modals.ModalMainPageIconsMenu()
               }
             }}
           >
