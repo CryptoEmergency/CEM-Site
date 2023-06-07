@@ -208,18 +208,6 @@ const start = function (data, ID) {
         <div class="c-main__body">
           <Elements.Line Static={Static} records={Static.course}></Elements.Line>
           <BlockProjects />
-          {/* <Elements.SliderMain /> */}
-          {/* <div class="с-preview" style="position: relative">  
-            <a
-              href=""
-              class="c-currency__all"
-              onclick={() => {
-                fn.modals.ModalMainPageIconsMenu()
-              }}
-            >
-              {Variable.lang.button.show_all}
-            </a>
-          </div> */}
           <elements.sliderBanners />
           <div class="c-lenta">
             {!Variable[Static.nameRecords] ||
