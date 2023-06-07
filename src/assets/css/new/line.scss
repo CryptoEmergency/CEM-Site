@@ -45,10 +45,23 @@
     }
 }
 
-.item-price {
-    color: green;
-    margin-left: 15px;
+.line-price {
+    color: var(--text-fiolet);
+    // margin-right: 10px;
 }
+
+.course-change {
+    position: relative;
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+.line-img_change img {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+}
+
 
 .line-wrap:hover .line-track {
     animation-play-state: paused;
@@ -93,3 +106,30 @@
         -o-transform: translateX(-100%);
     }
 }
+
+// @media(max-width: 992px) {}
+
+@media(max-width: 767px) {
+
+    .line-wrap::before,
+    .line-wrap::after {
+        width: 50px;
+    }
+
+    .line-item {
+        padding: 10px;
+
+        .line-item_img {
+            margin-right: 5px;
+        }
+
+        .line-text {
+            font-size: 14px;
+        }
+    }
+}
+
+// @media(max-width: 464px) {
+
+
+// }

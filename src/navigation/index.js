@@ -64,73 +64,6 @@ const makeFilter = function (Static) {
   return objReturn;
 };
 
-const courses = [
-  {
-    name: "btc",
-    price: "7.85"
-  },
-  {
-    name: "eth",
-    price: "67"
-  },
-  {
-    name: "usdt",
-    price: "6.54"
-  },
-  {
-    name: "usdc",
-    price: "8.8"
-  },
-  {
-    name: "bnb",
-    price: "9.9"
-  },
-  {
-    name: "usdc",
-    price: "1.85"
-  },
-  {
-    name: "xrp",
-    price: "3.46"
-  },
-  {
-    name: "ada",
-    price: "9.14"
-  },
-  {
-    name: "doge",
-    price: "2.2"
-  },
-  {
-    name: "trx",
-    price: "67.7"
-  },
-  {
-    name: "atom",
-    price: "100"
-  },
-  {
-    name: "leo",
-    price: "0.49"
-  },
-  {
-    name: "uni",
-    price: "10.01"
-  },
-  {
-    name: "link",
-    price: "50.9"
-  },
-  {
-    name: "icp",
-    price: "55"
-  },
-  {
-    name: "apt",
-    price: "99.9"
-  },
-];
-
 const start = function (data, ID) {
   Variable.Static.HeaderShow = true;
   Variable.Static.FooterShow = false
@@ -273,79 +206,10 @@ const start = function (data, ID) {
 
       return (
         <div class="c-main__body">
-          {/* <Elements.Line Static={Static} records={Static.course}></Elements.Line> */}
+          <Elements.Line Static={Static} records={Static.course}></Elements.Line>
           <BlockProjects />
-          <div class="с-preview" style="position: relative">
-            {/* <img class="с-preview__lines" src={images["background/lines-preview-min"]} />
-            <div class="с-preview__title">
-              <img class="с-preview__bg" src={images["background/cem"]} />
-              <div class="с-preview__text с-preview__text--auth"> */}
-            {/* <span>{Variable.lang.homePreview.ask}</span>
-            <div class="с-preview__imgblock">
-                <img class="с-preview__img" src={svg.two} />
-                <img class="с-preview__img" src={svg.two5} />
-                {Variable.lang.homePreview.earn}
-            </div> */}
-            {/* </div>
-            </div> */}
-            {() => {
-              if (Static.mainCourse && Object.keys(Static.mainCourse).length) {
-                const arrReturn = Object.keys(Static.mainCourse)
-                  .filter(
-                    (item) =>
-                      typeof Static.mainCourse[item] == "object" &&
-                      item == "cem"
-                  )
-                  .map(function (key) {
-                    let course = Static.mainCourse[key];
-                    return (
-                      <div class="c-currency">
-                        <div class="c-currency__icon">
-                          <div class={`icon-color-${key}`}>
-                            <img src={`/assets/icons/coins/${key}2.svg`} />
-                          </div>
-                        </div>
-                        <div class="c-currency__info">
-                          <div class="c-currency__left">
-                            <div class="c-currency__name">
-                              {key.toLocaleUpperCase() + "/USDT"}
-                            </div>
-                            <div class="c-currency__price">
-                              <span class="btcusdt_price">
-                                {Helpers.numberFixWithSpaces(
-                                  course.usdt,
-                                  key === "cem" ? 4 : 2
-                                )}
-                              </span>
-                            </div>
-                          </div>
-                          <div class="c-currency__right">
-                            <div
-                              class={`c-currency__percent ${course.change >= 0
-                                ? " c-currency__percent--up"
-                                : " c-currency__percent--down"
-                                }`}
-                            >
-                              <img
-                                src={
-                                  course.change >= 0
-                                    ? svg.up_arrow
-                                    : svg.down_arrow
-                                }
-                              />
-                              <span class="btcusdt_change">
-                                {Helpers.numberFixWithSpaces(course.change, 2)}
-                              </span>
-                            </div>
-                            {/* <div class="c-currency__update">24h.</div> */}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  });
-                return arrReturn;
-              }
-            }}
+          {/* <Elements.SliderMain /> */}
+          {/* <div class="с-preview" style="position: relative">  
             <a
               href=""
               class="c-currency__all"
@@ -355,7 +219,7 @@ const start = function (data, ID) {
             >
               {Variable.lang.button.show_all}
             </a>
-          </div>
+          </div> */}
           <elements.sliderBanners />
           <div class="c-lenta">
             {!Variable[Static.nameRecords] ||

@@ -3,9 +3,11 @@ import {
     jsxFrag,
     Variable,
     Helpers,
-    Data
+    Data,
+    CEM
 } from '@betarost/cemserver/cem.js';
 
+const { images, svg, fn } = CEM
 
 const forExport = function ({Static, records, children }) {
     return (
@@ -18,6 +20,9 @@ const forExport = function ({Static, records, children }) {
                 After={($el)=>{
                     Data.Static.widthList = $el.offsetWidth;
                 }}
+                onclick={()=>{
+                    fn.siteLink('/exchange-rates')
+                }}
             >
                 {() => {
                 if (records && Object.keys(records).length) {
@@ -33,13 +38,21 @@ const forExport = function ({Static, records, children }) {
                                 <div class="line-item_img">
                                     <img src={`/assets/icons/coins/${key}2.svg`} ></img>
                                 </div>
-                                <span>{key.toLocaleUpperCase() + "/USDT"}</span>
-                                <span>
-                                    {Helpers.numberFixWithSpaces(
+                                <span class="line-text mr--10">{key.toLocaleUpperCase() + "/USDT"}</span>
+                                <span class="line-text line-price">
+                                    ${Helpers.numberFixWithSpaces(
                                     course.usdt,
                                     key === "cem" ? 4 : 2
                                     )}
                                 </span>
+                                <div class="course-change">
+                                    {Helpers.numberFixWithSpaces(course.change, 2)}
+                                    <div
+                                        class={["line-img_change", course.change >=0 ? "line-img_change_up" : "line-img_change_down"]}
+                                    >
+                                        <img src={course.change >= 0 ? svg.up_arrow : svg.down_arrow}></img>
+                                    </div>
+                                </div>
                             </div>
                         );
                     });
@@ -55,6 +68,9 @@ const forExport = function ({Static, records, children }) {
                 After={($el)=>{
                     Data.Static.widthList = $el.offsetWidth;
                 }}
+                onclick={()=>{
+                    fn.siteLink('/exchange-rates')
+                }}
             >
                 {() => {
                 if (records && Object.keys(records).length) {
@@ -70,13 +86,21 @@ const forExport = function ({Static, records, children }) {
                                 <div class="line-item_img">
                                     <img src={`/assets/icons/coins/${key}2.svg`} ></img>
                                 </div>
-                                <span>{key.toLocaleUpperCase() + "/USDT"}</span>
-                                <span>
-                                    {Helpers.numberFixWithSpaces(
+                                <span class="line-text mr--10">{key.toLocaleUpperCase() + "/USDT"}</span>
+                                <span class="line-text line-price">
+                                    ${Helpers.numberFixWithSpaces(
                                     course.usdt,
                                     key === "cem" ? 4 : 2
                                     )}
                                 </span>
+                                <div class="course-change">
+                                    {Helpers.numberFixWithSpaces(course.change, 2)}
+                                    <div
+                                        class={["line-img_change", course.change >=0 ? "line-img_change_up" : "line-img_change_down"]}
+                                    >
+                                        <img src={course.change >= 0 ? svg.up_arrow : svg.down_arrow}></img>
+                                    </div>
+                                </div>
                             </div>
                         );
                     });
@@ -92,6 +116,9 @@ const forExport = function ({Static, records, children }) {
                 After={($el)=>{
                     Data.Static.widthList = $el.offsetWidth;
                 }}
+                onclick={()=>{
+                    fn.siteLink('/exchange-rates')
+                }}
             >
                 {() => {
                 if (records && Object.keys(records).length) {
@@ -107,13 +134,21 @@ const forExport = function ({Static, records, children }) {
                                 <div class="line-item_img">
                                     <img src={`/assets/icons/coins/${key}2.svg`} ></img>
                                 </div>
-                                <span>{key.toLocaleUpperCase() + "/USDT"}</span>
-                                <span>
-                                    {Helpers.numberFixWithSpaces(
+                                <span class="line-text mr--10">{key.toLocaleUpperCase() + "/USDT"}</span>
+                                <span class="line-text line-price">
+                                    ${Helpers.numberFixWithSpaces(
                                     course.usdt,
                                     key === "cem" ? 4 : 2
                                     )}
                                 </span>
+                                <div class="course-change">
+                                    {Helpers.numberFixWithSpaces(course.change, 2)}
+                                    <div
+                                        class={["line-img_change", course.change >=0 ? "line-img_change_up" : "line-img_change_down"]}
+                                    >
+                                        <img src={course.change >= 0 ? svg.up_arrow : svg.down_arrow}></img>
+                                    </div>
+                                </div>
                             </div>
                         );
                     });
