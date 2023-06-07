@@ -1,27 +1,37 @@
-import { jsx, jsxFrag, init, Variable, CEM, initReload } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, load, Variable, CEM, initReload, Data } from "@betarost/cemserver/cem.js";
 // import { fn } from "@src/functions/index.js";
 // import svg from "@assets/svg/index.js";
 import { ButtonShowMore, NotFound } from "@elements/element/index.js";
 
 const { svg, fn } = CEM
 
-const UserWalletCard = function ({ balance, coin, course, logo }) {
+const UserWalletCard = function ({ Static, balance, coin, course, logo }) {
   return (
     <div class="c-wallet__card">
-      {
+      {/* {
         balance >= 1.6
-        ?
-        <div class="c-wallet__exchange"
-          onclick={() => {
-            fn.modals.ModalExchange({ balance })
-            initReload()
-          }}
-        >
+          ?
+          <div class="c-wallet__exchange"
+            onclick={async () => {
+              console.log('=749e41=', Static)
+
+              fn.modals.ModalExchange({
+                balance,
+                callback: async (trade, countCoin, getNameCoin) => {
+                  Static.trade = await trade
+                  await fn.socket.send({ method: "Transactions", _id: Variable.myInfo._id, params: { balance, coin, countCoin, getNameCoin } })
+                  console.log('=ec8fe4=', Static)
+                  initReload()
+                }
+              })
+              initReload()
+            }}
+          >
             <span>{Variable.lang.button.exchange}</span>
-        </div>
-        :
-        null
-      }
+          </div>
+          :
+          null
+      } */}
       <div class="c-wallet__topline">
         <p>{Variable.lang.p.myBalance}</p>
         <p>
@@ -50,15 +60,26 @@ const UserWalletCard = function ({ balance, coin, course, logo }) {
 
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID });
+  Static.trade = null
 
-  init(
-    async () => {
+  load({
+    ID,
+    fnLoad: async () => {
       Static.nameRecords = "PageUserWallet";
       Static.apiFilter = {
         "amount.cemd": { $gt: 0 },
         userTo: Variable.myInfo._id,
       };
-      await fn.restApi.getCourse({ cache: true, name: "Course", filter: {} });
+      Static.course = await fn.socket.get({ method: "Course", filter: {} });
+      Static.transactionsUsers = await fn.socket.get({
+        method: "TransactionsUsers", params: {
+          filter: {
+            userTo: Variable.myInfo._id,
+          },
+          limit:10,
+          sort: { showDate: -1 },
+        }
+      });
       await fn.restApi.getTransactions({
         cache: true,
         name: Static.nameRecords,
@@ -66,24 +87,98 @@ const start = function (data, ID) {
         limit: 10,
       });
     },
-    () => {
+    fn: () => {
+      console.log('=b650c3=', Static.transactionsUsers)
       return (
         <div class="page-content">
           <div class="c-wallet c-main__body">
             <div class="c-wallet__container">
               <div class="c-wallet__left">
                 <UserWalletCard
+                  Static={Static}
                   logo={true}
                   balance={Variable.myInfo.balance.cemd}
                   course={1}
-                  coin={"CEMD"}
+                  coin={"cemd"}
                 />
+                {
+                  Variable.myInfo.balance.cem > 0
+                    ?
+                    <UserWalletCard
+                      logo={true}
+                      balance={Variable.myInfo.balance.cem}
+                      course={Static.course.cem.usdt}
+                      coin={"CEM"}
+                    />
+                    :
+                    null
+                }
                 {/* <UserWalletCard logo={true} balance={Variable.myInfo.balance.cem} course={Variable.Course.list_records[0].cem.usdt} coin={"CEM"} /> */}
               </div>
             </div>
+            {/* {
+              Static.transactionsUsers?.length > 0
+                ?
+                <div class="c-wallet__operations">
+                  <h3>Транзакции</h3>
+                  <div class="c-wallet__transaction c-wallet__transaction--label">
+                    <div class="c-wallet__transaction--left"> {Variable.lang.p.type} </div>
+                    <div> {Variable.lang.p.date} </div>
+                    <div> {Variable.lang.p.operation} </div>
+                    <div>Конвертация</div>
+                    <div> {Variable.lang.p.status} </div>
+                  </div>
+                  {
+                    Static.transactionsUsers.map((item) => {
+                      return (
+                        <div class="c-wallet__transaction">
+                          <div class="c-wallet__wrap c-wallet__transaction--left">
+                            {item.comment == "Registration" ? (
+                              <img
+                                src={svg["badge/badge2"]}
+                                width="32"
+                                height="36"
+                                class="transactions_small_badge"
+                              />
+                            ) : null}
+                            <span class="transaction_type">
+                              TOKEN SWAP
+                            </span>
+                          </div>
+                          <div> {fn.getDateFormat(item.showDate, "time")} </div>
+                          <div>
+                            СONVERSION
+                          </div>
+                          <div>
+                            <div>+{fn.numberFixWithSpaces(item.getAmountCoin, 2)} {item.getNameCoin}</div>
+                            <div class="c-wallet__transaction--minus">-{item.AmountCoinExchange} {item.nameCoinExchange}</div>
+                            </div>
+                          <div>
+                            {item.status == 0 ? (
+                              <img src={svg["transaction_canceled"]} />
+                            ) : null}
+                            {item.status == 1 ? (
+                              <img src={svg["transaction_new"]} />
+                            ) : null}
+                            {item.status == "pending" ? (
+                              <img src={svg["transaction_in_time"]} />
+                            ) : null}
+                            {item.status == "success" ? (
+                              <img src={svg["transaction_success"]} />
+                            ) : null}
+                          </div>
+                        </div>
+                      )
+                    })
+                  }
+                </div>
+                :
+                null
+            } */}
             <div class="c-wallet__operations">
+              <h3 style="margin-top: 20px">Бонусы</h3>
               <div class="c-wallet__transaction c-wallet__transaction--label">
-                <div> {Variable.lang.p.type} </div>
+                <div class="c-wallet__transaction--left"> {Variable.lang.p.type} </div>
                 <div> {Variable.lang.p.date} </div>
                 <div> {Variable.lang.p.operation} </div>
                 <div> {Variable.lang.p.amount} </div>
@@ -99,7 +194,7 @@ const start = function (data, ID) {
                 ) {
                   return (
                     <div class="c-wallet__transaction">
-                      <div class="c-wallet__wrap">
+                      <div class="c-wallet__wrap c-wallet__transaction--left">
                         {item.comment == "Registration" ? (
                           <img
                             src={svg["badge/badge2"]}
@@ -143,8 +238,7 @@ const start = function (data, ID) {
         </div>
       );
     },
-    ID
-  );
+  })
 };
 export default start;
 // OK

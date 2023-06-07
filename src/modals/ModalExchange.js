@@ -28,7 +28,7 @@ const ModalExchange = function (data, ID) {
             );
         },
         fn: () => {
-            console.log('=cd7f8c=', Static.trade == 0)
+            // console.log('=82203f=', data)
             return (
                 <div class="c-modal c-modal--open"
                     onclick={function (e) {
@@ -108,12 +108,14 @@ const ModalExchange = function (data, ID) {
                         </div>
                         <div class="c-modal__footer">
                             <button
-                                class={["c-button", "c-button--gradient2"]}
+                                class={["c-button", "c-button--gradient2",
+                                    !Static.Insufficient && Static.elCemd?.value > 0 ? null : "c-button--inactive"
+                                ]}
                                 type="button"
-                                // onclick={() => {
-                                //     Static.callback(Static.filterCoins);
-                                //     fn.modals.close(ID);
-                                // }}
+                                onclick={() => {
+                                    Static.callback(Static.trade, Static.elCemd.value, "cem");
+                                    fn.modals.close(ID);
+                                }}
                             >
                                 <span class="c-button__text">{Variable.lang.button.exchange}</span>
                             </button>
