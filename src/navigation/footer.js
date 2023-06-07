@@ -102,7 +102,7 @@ const Footer = async function () {
                                                     >
                                                         <span>{Variable.lang.a.about}</span>
                                                     </a>
-                                                    <a
+                                                    {/* <a
                                                         class="c-footer__link"
                                                         onclick={(e) => {
                                                             fn.siteLinkModal(e, {
@@ -113,7 +113,7 @@ const Footer = async function () {
                                                         href="/blog/"
                                                     >
                                                         <span>{Variable.lang.a.blog}</span>
-                                                    </a>
+                                                    </a> */}
                                                     <a
                                                         class="c-footer__link"
                                                         onclick={(e) => {
@@ -127,20 +127,6 @@ const Footer = async function () {
                                                         href="/career-whith-us/"
                                                     >
                                                         <span>{Variable.lang.a.career}</span>
-                                                    </a>
-                                                    <a
-                                                        class="c-footer__link"
-                                                        onclick={(e) => {
-                                                            fn.siteLinkModal(e, {
-                                                                title: Variable.lang.h.mediaUs,
-                                                                items: fn.itemsMenu.onlyPage({
-                                                                    url: "/media/",
-                                                                }),
-                                                            });
-                                                        }}
-                                                        href="/media/"
-                                                    >
-                                                        <span>{Variable.lang.h.mediaUs}</span>
                                                     </a>
 
                                                     {/* {<a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.university }) }} href="/university/"><span>{Variable.lang.a.university}</span></a>} */}
@@ -331,12 +317,13 @@ const Footer = async function () {
                                             <a
                                                 href="https://apps.apple.com/ru/app/crypto-emergency/id1635628021"
                                                 class="c-button__app"
+                                                target="_blank"
                                             >
                                                 <img src={svg["appstore"]} />
                                             </a>
-                                            {/* <a href="https://play.google.com/store/apps/details?id=com.cryptoemergency" class="c-button__app">
-                                              <img src={svg['googleplay']} />
-                                          </a> */}
+                                            <a href="https://play.google.com/store/apps/details?id=com.cryptoemergency" target="_blank" class="c-button__app">
+                                                <img src={svg['googleplay']} />
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="c-footer__bottom">

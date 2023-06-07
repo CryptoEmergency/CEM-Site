@@ -31,7 +31,10 @@
         "Other": "其他的",
         "tech_blog": "技术的",
         "inf_blog": "通讯的",
-        "experts": "专家"
+        "experts": "专家",
+        "Crypto": "Crypto",
+        "CryptoEmergency": "Crypto Emergency",
+        "Media": "Media about us"
     },
     "button": {
         "login": "入口",

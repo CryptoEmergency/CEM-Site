@@ -31,7 +31,10 @@
         "Other": "Λοιπά",
         "tech_blog": "Τεχνικά",
         "inf_blog": "Πληροφοριακά",
-        "experts": "Εμπειρογνώμονες"
+        "experts": "Εμπειρογνώμονες",
+        "Crypto": "Crypto",
+        "CryptoEmergency": "Crypto Emergency",
+        "Media": "Media about us"
     },
     "button": {
         "login": "Είσοδος",

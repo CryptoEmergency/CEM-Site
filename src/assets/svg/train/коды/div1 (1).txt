@@ -1,0 +1,13 @@
+<div class="res"></div>
+	<div class="game">
+		<div class="field"></div>
+		<div class="field"></div>
+		<div class="field"></div>
+		<div class="field"></div>
+		<div class="field"></div>
+		<div class="field"></div>
+		<div class="field"></div>
+		<div class="field"></div>
+		<div class="field"></div>
+	</div>
+	<button class="new-game">Новая игра</button>

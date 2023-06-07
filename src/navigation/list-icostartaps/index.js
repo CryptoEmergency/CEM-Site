@@ -62,6 +62,7 @@ const showListCalendar = function (Static) {
         onclick={async () => {
           Static.filtersSearch.textCalendar = item.name;
           filterICO = makeFiltersApi(Static)
+          console.log('=b24f82=', filterICO.filter)
           Static.recordsIco = await fn.socket.get({
             method: "Ico",
             params: {

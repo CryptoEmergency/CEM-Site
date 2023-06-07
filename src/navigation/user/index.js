@@ -227,7 +227,10 @@ const start = function (userInfo, ID = "mainBlock") {
                 profilePage = "lentaFriends";
                 Static.activeItems = Variable.PageUserProfileMyLenta
             }
-
+            // if (Variable.auth && Variable.myInfo && !Variable.myInfo.confirm.registrasion) {
+            //     console.log('=8b3072=', 123)
+            //     Variable.SetModals({ name: "ModalAfterRegisterForm", data: {} })
+            // }
         },
         () => {
             if (userInfo && userInfo.nickname == Variable.myInfo.nickname) { userInfo = Variable.myInfo }
@@ -246,7 +249,7 @@ const start = function (userInfo, ID = "mainBlock") {
                             <img
                                 id="currentUserBackground"
                                 class="c-userpreview__bg"
-                                src={userInfo.background && userInfo.background.name ? `/assets/upload/background/${userInfo.background.name}` : images["profile/background/big_background_2"]}
+                                src={userInfo.background && userInfo.background?.name ? `/assets/upload/background/${userInfo.background?.name}` : images["profile/background/big_background_2"]}
                             />
 
                             {() => {
@@ -361,7 +364,7 @@ const start = function (userInfo, ID = "mainBlock") {
                                 <a class="c-usershortinfo__"></a>
                                 <a class="c-usershortinfo__flag">
                                     {/* <img src={userInfo.country.code ? svg["flagsnew/" + userInfo.country.code] : svg["flagsnew/olympics"]} /> */}
-                                    <img src={userInfo.country.code ? `/assets/icons/flagsnew/${userInfo.country.code}.svg` : "/assets/icons/flagsnew/olympics.svg"} />
+                                    <img src={userInfo.country?.code ? `/assets/icons/flagsnew/${userInfo.country?.code}.svg` : "/assets/icons/flagsnew/olympics.svg"} />
                                 </a>
                                 <img class="c-usershortinfo__edit" src={svg.pencil} />
                                 <input
@@ -371,7 +374,7 @@ const start = function (userInfo, ID = "mainBlock") {
                                     value={userInfo.nickname ? userInfo.nickname : userInfo._id}
                                 />
                                 <a href="#" class="c-usershortinfo__rating">
-                                    {Helpers.numberFixWithSpaces(userInfo.statistic.rating, 2)}
+                                    {Helpers.numberFixWithSpaces(userInfo.statistic?.rating, 2)}
                                 </a>
                                 <p></p>
                                 {
@@ -404,7 +407,7 @@ const start = function (userInfo, ID = "mainBlock") {
                                                 initReload()
                                             }}
                                         >
-                                            {userInfo.information && userInfo.information.status ? userInfo.information.status : Variable.lang.span.status}
+                                            {userInfo.information && userInfo.information?.status ? userInfo.information?.status : Variable.lang.span.status}
                                         </div>
                                         :
 
@@ -412,7 +415,7 @@ const start = function (userInfo, ID = "mainBlock") {
                                             class="c-usershortinfo__status"
                                             id="userstatus"
                                         >
-                                            {userInfo.information && userInfo.information.status ? userInfo.information.status : Variable.lang.span.status}
+                                            {userInfo.information && userInfo.information?.status ? userInfo.information?.status : Variable.lang.span.status}
                                         </div>
                                 }
                             </div>
@@ -420,10 +423,10 @@ const start = function (userInfo, ID = "mainBlock") {
                             {/* IF (myInfo._id=userInfo._id) */}
                             <div class="c-userpreview__level">
                                 <div
-                                    style={`width: ${fn.percent(userInfo.statistic.exp, userInfo.statistic.expNext)}%;`}
+                                    style={`width: ${fn.percent(userInfo.statistic?.exp, userInfo.statistic?.expNext)}%;`}
                                     class="c-userpreview__current"
                                 ></div>
-                                <div class="c-userpreview__num">{userInfo.statistic.exp}/{userInfo.statistic.expNext}</div>
+                                <div class="c-userpreview__num">{userInfo?.statistic.exp}/{userInfo?.statistic.expNext}</div>
                             </div>
                         </div>
                     </div>
@@ -444,7 +447,7 @@ const start = function (userInfo, ID = "mainBlock") {
                             ></i>
                             <div class="user_category_gradient_frame">
                                 <div class="user_category_gray_background">
-                                    <span class="user_category_gradient_text">{userInfo.statistic.post}</span>
+                                    <span class="user_category_gradient_text">{userInfo.statistic?.post}</span>
                                 </div>
                             </div>
                         </div>
@@ -472,7 +475,7 @@ const start = function (userInfo, ID = "mainBlock") {
                             ></i>
                             <div class="user_category_gradient_frame">
                                 <div class="user_category_gray_background">
-                                    <span class="user_category_gradient_text">{userInfo.statistic.question}</span>
+                                    <span class="user_category_gradient_text">{userInfo.statistic?.question}</span>
                                 </div>
                             </div>
                         </div>
@@ -487,7 +490,7 @@ const start = function (userInfo, ID = "mainBlock") {
                             ></i>
                             <div class="user_category_gradient_frame">
                                 <div class="user_category_gray_background">
-                                    <span class="user_category_gradient_text">{userInfo.statistic.answer}</span>
+                                    <span class="user_category_gradient_text">{userInfo.statistic?.answer}</span>
                                 </div>
                             </div>
                         </div>
@@ -502,7 +505,7 @@ const start = function (userInfo, ID = "mainBlock") {
                             ></i>
                             <div class="user_category_gradient_frame">
                                 <div class="user_category_gray_background">
-                                    <span class="user_category_gradient_text">{userInfo.statistic.follower}</span>
+                                    <span class="user_category_gradient_text">{userInfo.statistic?.follower}</span>
                                 </div>
                             </div>
                         </div>
@@ -517,7 +520,7 @@ const start = function (userInfo, ID = "mainBlock") {
                             ></i>
                             <div class="user_category_gradient_frame">
                                 <div class="user_category_gray_background">
-                                    <span class="user_category_gradient_text">{userInfo.statistic.subscribe}</span>
+                                    <span class="user_category_gradient_text">{userInfo.statistic?.subscribe}</span>
                                 </div>
                             </div>
                         </div>

@@ -31,7 +31,10 @@
         "Other": "その他",
         "tech_blog": "テクニカル ",
         "inf_blog": "情報的な ",
-        "experts": "エキスパート"
+        "experts": "エキスパート",
+        "Crypto": "Crypto",
+        "CryptoEmergency": "Crypto Emergency",
+        "Media": "Media about us"
     },
     "button": {
         "login": "入口 ",

@@ -1,16 +1,200 @@
 .card {
-    padding: 15px;
     border-radius: 3px;
     border: 1px solid #63697A;
     background: #363B4B;
     list-style-type: none;
 
+    &__container {
+        &_row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &_indent_course {
+            padding-top: 40px;
+
+            @media(max-width: 522px) {
+                padding-top: 24px;
+            }
+        }
+    }
+
+    &_courses {
+        border: 4px dashed #593F62;
+        border-radius: 20px;
+        background: #2f3440;
+
+        @media(max-width: 522px) {
+            border-width: 3px;
+        }
+    }
+
     &__link {
-        display: grid;
-        grid-template-columns: 20% 80%;
-        grid-template-rows: auto;
-        color: inherit;
-        text-decoration: none;
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        padding: 30px;
+        color: #ffffff;
+
+        @media(max-width: 522px) {
+            padding: 14px;
+        }
+
+        &_background {
+                background-image: url("../images/background/course-background.png");
+                border-radius: 20px;
+            }
+    }
+
+    &__title {
+        &_courses {
+            padding-right: 60px;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 29px;
+
+            @media(max-width: 522px) {
+                // padding-right: 50px;
+                font-size: 18px;
+                line-height: 22px;
+            }
+
+            @media(max-width: 375px) {
+                font-size: 16px;
+            }
+        }
+    }
+
+    &__description {
+        font-size: 16px;
+        line-height: 24px;
+
+        @media(max-width: 522px) {
+            padding-right: 50px;
+            font-size: 14px;
+            line-height: 18px;
+        }
+
+        &_courses {
+            padding-top: 20px;
+            -webkit-line-clamp: 3;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+
+            @media(max-width: 522px) {
+                padding-top: 10px;
+            }
+        }
+    }
+
+    &__cost {
+        font-size: 36px;
+        font-weight: 700;
+        line-height: 24px;
+
+        @media(max-width: 522px) {
+            font-size: 28px;
+        }
+
+        @media(max-width: 375px) {
+            font-size: 20px;
+        }
+
+        &_size {
+            font-size: 24px;
+
+            @media(max-width: 522px) {
+                font-size: 18px;
+            }
+
+            @media(max-width: 375px) {
+                font-size: 14px;
+            }
+        }
+    }
+
+    &__duration {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+        padding: 7px 22px;
+        background: linear-gradient(107.19deg, #5F479B 1.5%, rgba(40, 28, 71, 0.2) 109.67%);
+        border-radius: 20px;
+
+        @media(max-width: 522px) {
+            padding: 6px 18px;
+        }
+
+        span {
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 24px;
+
+            @media(max-width: 522px) {
+                font-size: 18px;
+                line-height: 20px;
+            }
+        }
+
+        &-text {
+            display: flex;
+            flex-direction: column;
+
+            &_size {
+                font-size: 16px;
+                line-height: 24px;
+
+                @media(max-width: 522px) {
+                    font-size: 14px;
+                    line-height: 18px;
+                }
+            }
+
+            &_color {
+                font-size: 14px;
+                color: #8EA2D3;
+
+                @media(max-width: 522px) {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
+    &__more {
+
+        &_indent_course {
+            padding-top: 30px;
+
+            @media(max-width: 522px) {
+                padding-top: 20px;
+            }
+        }
+        
+        span {
+            display: inline-flex;
+            cursor: pointer;
+            // transition: color .2s;
+            padding: 16px 31px;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 115%;
+            border-radius: 20px;
+            background: 
+                    linear-gradient(#282828e0, #2f3440) padding-box,
+                    linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%)border-box;
+            border-radius: 50em;
+            border: 2px solid transparent;
+            color: #ffffff;
+
+            @media(max-width: 522px) {
+                padding: 12px 17px;
+                font-size: 12px;
+            }
+        }
     }
 
     &__figure {
@@ -50,5 +234,69 @@
         display: -webkit-box;
         -webkit-box-orient: vertical;
         overflow: hidden;
+    }
+
+    &__category {
+        position: absolute;
+        top: 10px;
+        right: 16px;
+        font-size: 16px;
+
+        @media(max-width: 522px) {
+            top: 6px;
+            right: 10px;
+            font-size: 14px;
+        }
+    
+        span {
+            // font-size: 16px;
+            font-weight: 800;
+            background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+
+    &__icon {
+        position: absolute;
+        bottom: 30px;
+        right: 155px;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.7;
+        }
+
+        @media(max-width: 522px) {
+            bottom: 16px;
+            right: 124px;
+        }
+
+        @media(max-width: 400px) {
+            right: 12px;
+        }
+
+        img {
+            height: 52px;
+
+            @media(max-width: 522px) {
+                height: 40px;
+            }
+        }
+    }
+
+    &__undefined {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 200px;
+        border: 2px solid #474c5a;
+        border-radius: 12px;
+
+        span {
+            text-align: center;
+            font-size: 20px;
+        }
     }
 }

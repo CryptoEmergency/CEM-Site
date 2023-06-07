@@ -42,7 +42,9 @@ const showPoints = function (listPoints) {
 const showTeam = function (listTeam) {
   return listTeam.map((item) => {
     return (
-      <div class="team-item swiper-slide">
+      <div class="team-item swiper-slide"
+        style="display: flex"
+      >
         <div class="team-img">
           <img src={`/assets/upload/worldPress/${item.foto}`}></img>
         </div>
@@ -108,10 +110,10 @@ const start = function (data, ID) {
     },
     fn: () => {
       return (
-        <div class="startap c-main__body">
+        <div class="startap c-main__body page-main">
           <div class="startap-inner">
             <div class="crypto appearience">
-              <div class="social">
+              <div class="social cards">
                 <div class="social-img">
                   {
                     Static.item.cover
@@ -145,7 +147,9 @@ const start = function (data, ID) {
                     :
                     null
                 }
-                <p class="social-desc">{Static.item.descriptionShort}</p>
+                <div class="cards__text cards__text_background_light">
+                  {Static.item.descriptionShort}
+                </div>
 
                 <div class="social-btns">
                   <a href={Static.item.whitePaperLink} target="_blank" class={["btn-item", !Static.item.whitePaperLink ? "social-btn_passive" : null]}>
@@ -168,22 +172,34 @@ const start = function (data, ID) {
             <div class="roadmap appearience">
               {Static.item.roadMap.length ? <h2 class="startap-title">{Variable.lang.h.road_map}</h2> : null}
 
+              {
+                Static.item.roadMap.length && Static.item.roadMap[0].image
+                  ?
+                  <div
+                    style="display: flex; justify-content: center;"
+                  >
+                    <img 
+                      src={`/assets/upload/worldPress/${Static.item.roadMap[0].image}`} 
+                      style="max-width: 100%"
+                    />
+                  </div>
+                  :
+                  <div class="roadmap-inner">
+                    {
+                      Static.item.roadMap.length ?
+                        Static.item.roadMap.map((item) => {
+                          return (
+                            <div class="roadmap-item">
+                              <div class="roadmap-item_year fiolet">{item.year}</div>
+                              <p class="roadmap-item_text">{item.description}</p>
+                            </div>
+                          )
+                        })
+                        : null
+                    }
+                  </div>
+              }
 
-
-              <div class="roadmap-inner">
-                {
-                  Static.item.roadMap.length ?
-                    Static.item.roadMap.map((item) => {
-                      return (
-                        <div class="roadmap-item">
-                          <div class="roadmap-item_year fiolet">{item.year}</div>
-                          <p class="roadmap-item_text">{item.description}</p>
-                        </div>
-                      )
-                    })
-                    : null
-                }
-              </div>
             </div>
 
             <div class="promovideo">
@@ -243,7 +259,7 @@ const start = function (data, ID) {
                       }}
                     </div>
                   </div>
-                  <div class="diagramm-line">
+                  {/* <div class="diagramm-line">
                     <div>
                       {showLines(Static.item.tokenomica)}
                     </div>
@@ -252,7 +268,7 @@ const start = function (data, ID) {
                       {showPoints(Static.item.tokenomica)}
                     </div>
 
-                  </div>
+                  </div> */}
                 </div>
                 :
                 null

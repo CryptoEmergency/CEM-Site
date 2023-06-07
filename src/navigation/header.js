@@ -107,7 +107,7 @@ const Header = async function () {
                                     if (Variable.Static.forumHeaderShow) {
                                         return (
                                             <nav class="c-header__menu c-menu c-menu--forum" style="position: relative;">
-                                                <div class={["connect", !Variable.socketConnect ? "disconnect" : null]}></div>
+                                                {/* <div class={["connect", !Variable.socketConnect ? "disconnect" : null]}></div> */}
                                                 <a
                                                     class="c-logo c-menu__link"
                                                     href="/"
@@ -205,7 +205,7 @@ const Header = async function () {
                                     } else {
                                         return (
                                             <nav class="c-header__menu c-menu" style="position: relative;">
-                                                <div class={["connect", !Variable.socketConnect ? "disconnect" : null]}></div>
+                                                {/* <div class={["connect", !Variable.socketConnect ? "disconnect" : null]}></div> */}
 
                                                 <a
                                                     class="c-logo c-menu__link"
@@ -240,14 +240,14 @@ const Header = async function () {
                                                 </a>
                                                 <a
                                                     class="c-menu__link"
-                                                    href="/blog/"
+                                                    href="/news/"
                                                     onclick={(e) => {
                                                         fn.siteLinkModal(e, {
-                                                            title: Variable.lang.a.blog,
-                                                            items: fn.itemsMenu.onlyPage({ url: "/blog/" }),
+                                                            title: Variable.lang.a.news,
+                                                            items: fn.itemsMenu.onlyPage({ url: "/news/" }),
                                                         });
                                                     }}>
-                                                    {Variable.lang.a.blog}
+                                                    {Variable.lang.a.news}
                                                 </a>
 
 

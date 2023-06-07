@@ -219,19 +219,6 @@ $lightBlue: #00A5F7;
 
     }
 
-    .social-desc {
-      font-weight: 500;
-      font-size: 18px;
-      line-height: 30px;
-      display: flex;
-      align-items: center;
-      color: #E4EAFC;
-
-      @media(max-width: 767px) {
-        font-size: 16px;
-        line-height: 28px;
-      }
-    }
 
     .social-btns {
       display: grid;
@@ -381,7 +368,7 @@ $lightBlue: #00A5F7;
   // tokenomics
   .diagramm {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     grid-gap: 25px;
 
@@ -580,14 +567,16 @@ $lightBlue: #00A5F7;
   }
 
   // hover for diagramm
-  @each $index in $colors{
-    .circle-points_item--#{$index}:hover .progress-circle--#{$index}{
+  @each $index in $colors {
+    .circle-points_item--#{$index}:hover .progress-circle--#{$index} {
       stroke-width: 3
     }
   }
-  .circle-points_item--0:hover .circle-desc{
+
+  .circle-points_item--0:hover .circle-desc {
     font-size: 24px;
   }
+
   // hover for diagramm
   // diagramm line
 
@@ -623,13 +612,16 @@ $lightBlue: #00A5F7;
     margin-bottom: 30px;
   }
 
-  h5> {
+  h5 {
     font-weight: 600;
     font-size: 18px;
     line-height: 175%;
+    text-align: center;
   }
 
   >span {
+    display: flex;
+    justify-content: center;
     text-align: center;
     color: #CAD4F3;
     font-size: 15px;
@@ -648,7 +640,8 @@ $lightBlue: #00A5F7;
   height: auto;
   max-height: 365px;
   margin-bottom: 20px;
-  img{
+
+  img {
     // width: 150px;
     height: 220px;
     background-size: cover;

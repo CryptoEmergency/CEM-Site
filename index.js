@@ -19,6 +19,7 @@ const options = {
   proxy: {
     "/api/v2": {
       target: `https://${target}`,
+      // target: `http://127.0.0.1:6060`,
       secure: false,
       ws: true,
       changeOrigin: true,

@@ -2,6 +2,7 @@ import {
     jsx,
     jsxFrag,
     init,
+    load,
     Variable,
     CEM
 } from "@betarost/cemserver/cem.js";
@@ -15,6 +16,7 @@ import 'swiper/css/bundle';
 const { images, svg, fn } = CEM
 
 const start = function (data, ID) {
+    let [Static, item] = fn.GetParams({ data, ID })
 
     const swiperGo = function (numIndex) {
         let swiper1 = new Swiper(".swiper-post_teachers", {
@@ -106,137 +108,179 @@ const start = function (data, ID) {
         });
     }
 
-    init(
-        null,
-        () => {
+    load({
+        ID,
+        fnLoad: async () => {
+            if (Variable.dataUrl.params) {
+                Static.item = await fn.socket.get({
+                    method: "Teachers",
+                    _id: Variable.dataUrl.params,
+                    params: {
+                        populate: {
+                            path: "courses"
+                        }
+                    }
+                })
+                console.log('=9ebbf7=', Static.item)
+            }
+        },
+        fn: async () => {
+
             return (
-                <div class="c-cryptoteacher c-main__body">
-                    <div class="c-cryptoteacher__container c-container">
-                        <figure class="c-cryptoteacher__photo">
-                            <img src={images["university/teacher2"]} width="" height="" />
-                            <figcaption class="c-cryptoteacher__jobtitle">Ведущий курса, NFT-художник</figcaption>
-                        </figure>
+                <div class="page-main">
+                    <div class="page-main__container">
+                        <div class="page-main__content">
 
-                        <h1 class="c-cryptoteacher__title">{data.teacher.name}</h1>
+                            <div class="teacher teacher_indent">
+                                <figure class="teacher__photo">
+                                    <img src={`/assets/upload/worldPress/${Static.item.image}`} />
+                                    <figcaption class="teacher__jobtitle">Ведущий курса, {Static.item.profession}</figcaption>
+                                </figure>
 
-                        <section class="c-cryptoteacher__biography">
-                            <h5 class="c-cryptoteacher__subtitle">Биография</h5>
-                            <p>
-                                Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.
-                            </p>
-                        </section>
+                                <section class="teacher__biography">
+                                    <h2 class="teacher__title">{Static.item.name}</h2>
+                                    <h5 class="teacher__subtitle">Достижения</h5>
+                                    <p>
+                                        {Static.item.experience}
+                                    </p>
+                                </section>
+                            </div>
+                            
 
-                        <section class="c-cryptoteacher__achievements">
+                            {/* <section class="c-cryptoteacher__achievements">
                             <h5 class="c-cryptoteacher__subtitle">Личные достижения</h5>
                             <p>
                                 Многие думают, что Lorem Ipsum - взятый с потолка псевдо-латинский набор слов, но это не совсем так. Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur", и занялся его поисками в классической латинской литературе. В результате он нашёл неоспоримый первоисточник Lorem Ipsum в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum" ("О пределах добра и зла"), написанной Цицероном в 45 году н.э. Этот трактат по теории этики был очень популярен в эпоху Возрождения. Первая строка Lorem Ipsum, "Lorem ipsum dolor sit amet..", происходит от одной из строк в разделе 1.10.32
                                 Классический текст Lorem Ipsum, используемый с XVI века, приведён ниже. Также даны разделы 1.10.32 и 1.10.33 "de Finibus Bonorum et Malorum" Цицерона и их английский перевод, сделанный H. Rackham, 1914 год.
                             </p>
+                        </section> */}
+
+                            <section class="teacher__courses teacher__courses_indent">
+                                <h5 class="teacher__subtitle">Список курсов преподавателя</h5>
+                                <div class="cards__container cards__container_type_courses">
+
+                                    {Static.item.courses.map((item) => {
+                                        return (
+                                            <li class="card card_courses">
+                                                <a
+                                                    class="card__link card__link_background"
+                                                    href={`/crypto-university/course/${item._id}`}
+                                                    onclick={function (e) {
+                                                        fn.siteLink(e, { title: "", item: {}, items: {} })
+                                                    }}
+                                                >
+                                                    <div class="card__title card__title_courses">
+                                                        {item.name}
+                                                    </div>
+                                                    <div class="card__description card__description_courses">
+                                                        {item.description}
+                                                    </div>
+                                                    <div class="card__container card__container_row card__container_indent_course">
+                                                        <div class="card__cost">
+                                                            <span>{item.cost} ₽/мес.</span>
+                                                        </div>
+                                                        <div class="card__container card__container_row">
+                                                            <div class="card__duration">
+                                                                <span>{item.duration}</span>
+                                                            </div>
+                                                            <div class="card__duration-text">
+                                                                <span class="card__duration-text_size">Месяца</span>
+                                                                <span class="card__duration-text_color">Срок обучения</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card__more card__more_indent_course">
+                                                        <span>Больше информации</span>
+                                                    </div>
+                                                    <div class="card__category">
+                                                        <span>{item.category}</span>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        )
+                                    })}
+
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            );
+
+            return (
+                <div class="c-cryptoteacher c-main__body">
+                    <div class="c-cryptoteacher__container c-container">
+                        <figure class="c-cryptoteacher__photo">
+                            <img src={`/assets/upload/worldPress/${Static.item.image}`} />
+                            <figcaption class="c-cryptoteacher__jobtitle">Ведущий курса, {Static.item.profession}</figcaption>
+                        </figure>
+
+                        <h1 class="c-cryptoteacher__title">{Static.item.name}</h1>
+
+                        <section class="c-cryptoteacher__biography">
+                            <h5 class="c-cryptoteacher__subtitle">Достижения</h5>
+                            <p>
+                                {Static.item.experience}
+                            </p>
                         </section>
+
+                        {/* <section class="c-cryptoteacher__achievements">
+                            <h5 class="c-cryptoteacher__subtitle">Личные достижения</h5>
+                            <p>
+                                Многие думают, что Lorem Ipsum - взятый с потолка псевдо-латинский набор слов, но это не совсем так. Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur", и занялся его поисками в классической латинской литературе. В результате он нашёл неоспоримый первоисточник Lorem Ipsum в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum" ("О пределах добра и зла"), написанной Цицероном в 45 году н.э. Этот трактат по теории этики был очень популярен в эпоху Возрождения. Первая строка Lorem Ipsum, "Lorem ipsum dolor sit amet..", происходит от одной из строк в разделе 1.10.32
+                                Классический текст Lorem Ipsum, используемый с XVI века, приведён ниже. Также даны разделы 1.10.32 и 1.10.33 "de Finibus Bonorum et Malorum" Цицерона и их английский перевод, сделанный H. Rackham, 1914 год.
+                            </p>
+                        </section> */}
 
                         <section class="c-cryptoteacher__courses">
-                            <h5 class="c-cryptoteacher__subtitle">Список курсов</h5>
-                            <ul class="c-cryptoteacher__listcourse c-criptocompany__list">
-                                <li class="">
-                                    <a
-                                        class="c-criptocompany__course"
-                                        href="/crypto-university/course/1/"
-                                        onclick={(e) => {
-                                            e.preventDefault();
-                                            fn.siteLinkModal(e, { title: "Курс по NFT-технологии. Вводный" })
-                                        }}
-                                    >
-                                        <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
-                                        <footer class="c-criptocompany__footer">
-                                            <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-                                            <span class="c-criptocompany__hourse">22 ч</span>
-                                        </footer>
-                                        {/* <div class="c-criptocompany__stiker">
-                                        <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-                                    </div> */}
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="#" class="c-criptocompany__course">
-                                        <span class="c-criptocompany__coursedesc">Курс по NFT-технологии.</span>
-                                        <footer class="c-criptocompany__footer">
-                                            <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-                                            <span class="c-criptocompany__hourse">22 ч</span>
-                                        </footer>
-                                        {/* <div class="c-criptocompany__stiker">
-                                        <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-                                    </div> */}
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="#" class="c-criptocompany__course">
-                                        <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Продвинутый</span>
-                                        <footer class="c-criptocompany__footer">
-                                            <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-                                            <span class="c-criptocompany__hourse">45 ч</span>
-                                        </footer>
-                                        <div class="c-criptocompany__stiker">
-                                            <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </section>
+                            <h5 class="c-cryptoteacher__subtitle">Список курсов преподавателя</h5>
+                            <div class="cards__container cards__container_type_courses">
 
-                        <section class="c-cryptoteacher__reviews c-cryptocourse__reviews">
-                            <h5>Отзывы</h5>
-                            <div class="c-cryptocourse__slider swiper-container">
-                                <div class="swiper swiper-post_reviews" After={() => swiperGo()}>
-                                    <div class="swiper-wrapper">
-                                        <a class="swiper-slide">
-                                            <div class="c-cryptocourse__review">
-                                                <p class="c-cryptocourse__textreview">
-                                                    "Классический текст Lorem Ipsum, используемый с XVI века, приведён ниже. Также даны разделы 1.10.32 и 1.10.33 "de Finibus Bonorum et Malorum
-                                                    Lorem Ipsum, используемый с XVI века, приведён ниже. Также даны разделы 1.10.32 и 1.10.33 "de Finibus Bonorum et Malorum"
-                                                </p>
-                                                <span class="c-cryptocourse__namereview">Лида Г.</span>
-                                                <span class="c-cryptocourse__datereview">12.12.2022</span>
-                                            </div>
-                                        </a>
-                                        <a class="swiper-slide">
-                                            <div class="c-cryptocourse__review">
-                                                <p class="c-cryptocourse__textreview">
-                                                    "Классический текст Lorem Ipsum, используемый с XVI века, приведён ниже. Также даны разделы 1.10.32 и 1.10.33 "de Finibus Bonorum et Malorum"
-                                                </p>
-                                                <span class="c-cryptocourse__namereview">Лида Г.</span>
-                                                <span class="c-cryptocourse__datereview">12.12.2022</span>
-                                            </div>
-                                        </a>
-                                        <a class="swiper-slide">
-                                            <div class="c-cryptocourse__review">
-                                                <p class="c-cryptocourse__textreview">
-                                                    "Классический текст Lorem Ipsum, используемый с XVI века, приведён ниже. Также даны разделы 1.10.32 и 1.10.33 "de Finibus Bonorum et Malorum
-                                                    Lorem Ipsum, используемый с XVI века, приведён ниже."
-                                                </p>
-                                                <span class="c-cryptocourse__namereview">Лида Г.</span>
-                                                <span class="c-cryptocourse__datereview">12.12.2022</span>
-                                            </div>
-                                        </a>
-                                        <a class="swiper-slide">
-                                            <div class="c-cryptocourse__review">
-                                                <p class="c-cryptocourse__textreview">
-                                                    "Классический текст Lorem Ipsum, используемый с XVI века, приведён ниже. Также даны разделы 1.10.32 и 1.10.33 "de Finibus Bonorum et Malorum
-                                                    Lorem Ipsum, используемый с XVI века, приведён ниже. Также даны разделы 1.10.32 и 1.10.33 "de Finibus Bonorum et Malorum"
-                                                </p>
-                                                <span class="c-cryptocourse__namereview">Лида Г.</span>
-                                                <span class="c-cryptocourse__datereview">12.12.2022</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="swiper-pagination swiper-pagination-post_media"></div>
-                                    <div class="swiper-scrollbar-post_media"></div>
-                                </div>
+                                {Static.item.courses.map((item) => {
+                                    return (
+                                        <li class="card card_courses">
+                                            <a
+                                                class="card__link card__link_background"
+                                                href={`/crypto-university/course/${item._id}`}
+                                                onclick={function (e) {
+                                                    fn.siteLink(e, { title: "", item: {}, items: {} })
+                                                }}
+                                            >
+                                                <div class="card__title card__title_courses">
+                                                    {item.name}
+                                                </div>
+                                                <div class="card__description card__description_courses">
+                                                    {item.description}
+                                                </div>
+                                                <div class="card__container card__container_row card__container_indent_course">
+                                                    <div class="card__cost">
+                                                        <span>{item.cost} ₽/мес.</span>
+                                                    </div>
+                                                    <div class="card__container card__container_row">
+                                                        <div class="card__duration">
+                                                            <span>{item.duration}</span>
+                                                        </div>
+                                                        <div class="card__duration-text">
+                                                            <span class="card__duration-text_size">Месяца</span>
+                                                            <span class="card__duration-text_color">Срок обучения</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card__more card__more_indent_course">
+                                                    <span>Больше информации</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    )
+                                })}
+
                             </div>
                         </section>
                     </div>
                 </div>
             );
-        }, ID
+        }
+    }
     );
 };
 export default start;

@@ -121,6 +121,14 @@ const start = function (data, ID) {
       //     fn.socket.get({ method: "Course", params: { filter: {} } })
       // }, 10);
       // console.log("=7f467d tmp=", Static.mainCourse);
+      
+      Static.course = await fn.socket.get({
+        method: "Course",
+        // params: {
+        //   filter: filterStartups.filter,
+        //   sort: filterStartups.sort
+        // }
+      });
 
       Static.dataUsers = {};
       Static.dataQuestions = {};
@@ -198,88 +206,8 @@ const start = function (data, ID) {
 
       return (
         <div class="c-main__body">
+          <Elements.Line Static={Static} records={Static.course}></Elements.Line>
           <BlockProjects />
-          <div class="с-preview" style="position: relative">
-            {/* <img class="с-preview__lines" src={images["background/lines-preview-min"]} />
-            <div class="с-preview__title">
-              <img class="с-preview__bg" src={images["background/cem"]} />
-              <div class="с-preview__text с-preview__text--auth"> */}
-            {/* <span>{Variable.lang.homePreview.ask}</span>
-            <div class="с-preview__imgblock">
-                <img class="с-preview__img" src={svg.two} />
-                <img class="с-preview__img" src={svg.two5} />
-                {Variable.lang.homePreview.earn}
-            </div> */}
-            {/* </div>
-            </div> */}
-            {() => {
-              if (Static.mainCourse && Object.keys(Static.mainCourse).length) {
-                const arrReturn = Object.keys(Static.mainCourse)
-                  .filter(
-                    (item) =>
-                      typeof Static.mainCourse[item] == "object" &&
-                      item == "cem"
-                  )
-                  .map(function (key) {
-                    let course = Static.mainCourse[key];
-                    return (
-                      <div class="c-currency">
-                        <div class="c-currency__icon">
-                          <div class={`icon-color-${key}`}>
-                            <img src={`/assets/icons/coins/${key}2.svg`} />
-                          </div>
-                        </div>
-                        <div class="c-currency__info">
-                          <div class="c-currency__left">
-                            <div class="c-currency__name">
-                              {key.toLocaleUpperCase() + "/USDT"}
-                            </div>
-                            <div class="c-currency__price">
-                              <span class="btcusdt_price">
-                                {Helpers.numberFixWithSpaces(
-                                  course.usdt,
-                                  key === "cem" ? 4 : 2
-                                )}
-                              </span>
-                            </div>
-                          </div>
-                          <div class="c-currency__right">
-                            <div
-                              class={`c-currency__percent ${course.change >= 0
-                                ? " c-currency__percent--up"
-                                : " c-currency__percent--down"
-                                }`}
-                            >
-                              <img
-                                src={
-                                  course.change >= 0
-                                    ? svg.up_arrow
-                                    : svg.down_arrow
-                                }
-                              />
-                              <span class="btcusdt_change">
-                                {Helpers.numberFixWithSpaces(course.change, 2)}
-                              </span>
-                            </div>
-                            {/* <div class="c-currency__update">24h.</div> */}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  });
-                return arrReturn;
-              }
-            }}
-            <a
-              href=""
-              class="c-currency__all"
-              onclick={() => {
-                fn.modals.ModalMainPageIconsMenu()
-              }}
-            >
-              {Variable.lang.button.show_all}
-            </a>
-          </div>
           <elements.sliderBanners />
           <div class="c-lenta">
             {!Variable[Static.nameRecords] ||

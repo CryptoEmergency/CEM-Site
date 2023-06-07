@@ -14,7 +14,6 @@ const calcWidthHeight = function (e) {
 
 const LazyImage = function ({ path, ratio, className, classImg = '', counter = null, onClick = null }) {
     if (className && className.includes('c-groupimage__item--more')) {
-
         return (
             <div class={className} onClick={onClick}>
                 <img

@@ -135,15 +135,15 @@ const Avatar = function ({ author, parent = null, nickName = false, speciality =
       `}
       // onclick={Helpers.siteLink}
       onclick={async (e) => {
-
+        fn.siteLink(e)
         // e.preventDefault();
         // e.stopPropagation();
         // return
-        if (myProfile) {
-          fn.siteLink(e)
-        } else {
-          fn.siteLinkModal(e, { title: author.nickname, style: 'background: #1D2029;', items: fn.itemsMenu.userProfile(author) })
-        }
+        // if (!myProfile) {
+        //   fn.siteLink(e)
+        // } else {
+        //   fn.siteLinkModal(e, { title: author.nickname, style: 'background: #1D2029;', items: fn.itemsMenu.userProfile(author) })
+        // }
 
       }
       }

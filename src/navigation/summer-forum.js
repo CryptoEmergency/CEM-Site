@@ -367,6 +367,12 @@ const start = function (data, ID) {
             show: true,
         },
         {
+            name: "Павел Гудимов",
+            position: "Директор по развитию РАКИБ",
+            photo: "summer_forum/speaker27",
+            show: true,
+        },
+        {
             name: "Алексей Зюзин",
             position: "Организатор Crypto Summit",
             photo: "summer_forum/speaker5",
@@ -384,12 +390,12 @@ const start = function (data, ID) {
             photo: "summer_forum/speaker1",
             show: true,
         },
-        {
-            name: "Александр Балахонцев",
-            position: "Директор Blockchain 24",
-            photo: "summer_forum/speaker4",
-            show: true,
-        },
+        // {
+        //     name: "Александр Балахонцев",
+        //     position: "Директор Blockchain 24",
+        //     photo: "summer_forum/speaker4",
+        //     show: true,
+        // },
         {
             name: "Сергей Павлович",
             position: "Люди PRO",
@@ -415,6 +421,12 @@ const start = function (data, ID) {
             show: false,
         },
         {
+            name: "Олег Иванов",
+            position: "Серийный предприниматель, инвестор",
+            photo: "summer_forum/speaker29",
+            show: false,
+        },
+        {
             name: "Валерий Осипов",
             position: "ArtEmotioChain",
             photo: "summer_forum/speaker8",
@@ -433,9 +445,15 @@ const start = function (data, ID) {
             show: false,
         },
         {
-            name: "Ренат Каличенко",
-            position: "Turov Invest",
-            photo: "summer_forum/speaker11",
+            name: "Кирилл Филимонов",
+            position: "Основатель Россграм",
+            photo: "summer_forum/speaker25",
+            show: false,
+        },
+        {
+            name: "Владислав Судьин",
+            position: "Зам. председателя Комиссии по инновациям и инвестициям IFSPD",
+            photo: "summer_forum/speaker30",
             show: false,
         },
         {
@@ -445,17 +463,23 @@ const start = function (data, ID) {
             show: false,
         },
         {
+            name: "Бурков Максим",
+            position: "Основатель группы web3 компаний Pro Blockchain Media",
+            photo: "summer_forum/speaker26",
+            show: false,
+        },
+        {
             name: "Денис Магданов",
             position: "DUMA NETWORK",
             photo: "summer_forum/speaker13",
             show: false,
         },
-        {
-            name: "Евгений Азизов",
-            position: "Управляющий делами администрации города Новороссийска",
-            photo: "summer_forum/speaker16",
-            show: false,
-        },
+        // {
+        //     name: "Евгений Азизов",
+        //     position: "Управляющий делами администрации города Новороссийска",
+        //     photo: "summer_forum/speaker16",
+        //     show: false,
+        // },
         {
             name: "Сергей Грабский",
             position: "Руководитель Ассоциации цифрового развития Краснодарского края",
@@ -504,6 +528,12 @@ const start = function (data, ID) {
             photo: "summer_forum/speaker24",
             show: false,
         },
+        {
+            name: "Наталья Сазонова",
+            position: "CEO Rabotavkripte",
+            photo: "summer_forum/speaker28",
+            show: false,
+        },
     ]
 
     const guests = [
@@ -514,7 +544,7 @@ const start = function (data, ID) {
             spec: "РАКИБ"
         },
         {
-            link: "https://youtu.be/J0U0ZpEKxlU",
+            link: "https://www.youtube.com/watch?v=VgiBuv63vE8",
             photo: "guest1",
             name: "Владислав Мартынов",
             spec: "Автор курса \"КриптоИнвестор\""
@@ -560,6 +590,12 @@ const start = function (data, ID) {
             photo: "guest4",
             name: "Сергей Павлович",
             spec: "Канал ЛЮДИ PRO"
+        },
+        {
+            link: "https://www.youtube.com/watch?v=2DwcE2PalSQ",
+            photo: "guest9",
+            name: "Владимир Смеркис",
+            spec: "Директор Binance в России"
         }
     ]
 
@@ -593,12 +629,17 @@ const start = function (data, ID) {
                                             <br />
                                             г. Новороссийск
                                         </span>
-                                        <a href="#" class="c-button c-button--gradient2 tiwo_ticketseller" data-event_id="4623" onclick={() => { return false }}>
+                                        {/* <a href="#" class="c-button c-button--gradient2 tiwo_ticketseller" data-event_id="4623" onclick={() => { return false }}>
                                             <span class="c-button__text">{Variable.lang.button.buyTicket}</span>
-                                        </a>
+                                        </a> */}
                                     </div>
                                 </div>
                             </div>
+
+                            {/* <div style="display: flex;
+                                    justify-content: center; margin-bottom: 40px">
+                                <iframe width="1280" height="720" src="https://www.youtube.com/embed/hMJOgeNR7RE" title="Крипто Юг 2023 (День 2)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div> */}
 
                             <div class="c-aboutforum__text c-container">
                                 <p>
@@ -614,6 +655,32 @@ const start = function (data, ID) {
                                     </div>
                                     При поддержке
                                     <img src={images["summer_forum/partner_21"]} />
+                                </p>
+                                <p>
+                                    Расписание форума
+                                    <div style="display: flex; justify-content: center; padding-top: 20px; flex-wrap: wrap; gap: 20px;">
+                                        <img style="margin: 0; max-height: max-content; cursor: pointer;" src={images["summer_forum/forum_schedule1"]} 
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                e.preventDefault();
+                                                fn.modals.ModalViewPhoto({
+                                                    path: images["summer_forum/forum_schedule1"],
+                                                    fullPath: true
+                                                });
+                                            }}
+                                        />
+                                        <img style="margin: 0; max-height: max-content; cursor: pointer;" src={images["summer_forum/forum_schedule2"]} 
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                e.preventDefault();
+                                                fn.modals.ModalViewPhoto({
+                                                    path: images["summer_forum/forum_schedule2"],
+                                                    fullPath: true
+                                                });
+                                            }}
+                                        />
+                                    </div>
+                                    
                                 </p>
                                 <p>
                                     <b>Crypto Юг 2023</b> - прекрасная возможность провести время приятно и с пользой, открыть для себя новые возможности, повысить экспертность и увеличить доход.
@@ -643,10 +710,9 @@ const start = function (data, ID) {
                                     Мы уверены, что наш криптофорум предоставит тебе всю ценную информацию, деловые возможности и возможности, которых больше нигде не встретишь.
                                 </p>
 
-                                <a href="#" class="c-button c-button--gradient2 tiwo_ticketseller" data-event_id="4623" onclick={() => { return false }}>
+                                {/* <a href="#" class="c-button c-button--gradient2 tiwo_ticketseller" data-event_id="4623" onclick={() => { return false }}>
                                     <span class="c-button__text">Купить билет</span>
-                                </a>
-
+                                </a> */}
                                 <div class="swiper-container" replace={true}>
                                     <div id="summer_forum" class="swiper swiper-post_media" After={() => swiperGo()}>
                                         <div class="swiper-wrapper">
@@ -693,9 +759,9 @@ const start = function (data, ID) {
 
                         <section class="c-speakers c-container" id="speakers">
                             <h4 class="с-summerforum__title c-speakers__title">{Variable.lang.h.speakersForum}</h4>
-                            <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
+                            {/* <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
                                 <span class="c-button__text">{Variable.lang.button.becomeSpeaker}</span>
-                            </a>
+                            </a> */}
                             <ul class="c-speakers__list">
                                 {
                                     speakers.map((item) => {
@@ -1106,9 +1172,9 @@ const start = function (data, ID) {
                             </div>
                             <img class="c-eventmap__image" src={svg['summer_forum/map']} />
 
-                            <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
+                            {/* <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
                                 <span class="c-button__text">{Variable.lang.button.buyStand}</span>
-                            </a>
+                            </a> */}
                         </section>
 
                         <section class="с-guests c-container" id="guests">
@@ -1165,6 +1231,14 @@ const start = function (data, ID) {
                         <section class="c-partnersforum c-container" id="partners">
                             <h4 class="с-summerforum__title c-partnersforum__title">{Variable.lang.h.partnersForum}</h4>
                             <div class="c-partnersforum__list">
+                                <a
+                                    target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://keine-exchange.com/?rid=29633"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_36"]} />
+                                </a>
                                 <a
                                     target="_blank"
                                     rel="nofollow nooopener"
@@ -1276,6 +1350,16 @@ const start = function (data, ID) {
                                 >
                                     <img src={images["forum/partner_14"]} />
                             </a>*/}
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://ru.beincrypto.com"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img
+                                        // style="width: 80px"
+                                        src={images["forum/partner_31"]} 
+                                    />
+                                </a>
                                 <a target="_blank"
                                     rel="nofollow nooopener"
                                     href="https://cripta.games"
@@ -1392,7 +1476,9 @@ const start = function (data, ID) {
                                     href="https://pro-blockchain.com/crypto-news"
                                     class="c-partnersforum__item"
                                 >
-                                    <img src={images["summer_forum/partner_23"]} />
+                                    <img src={svg["summer_forum/partner_23"]} 
+                                        style="width: 120px"
+                                    />
                                 </a>
                                 <a target="_blank"
                                     rel="nofollow nooopener"
@@ -1422,10 +1508,66 @@ const start = function (data, ID) {
                                 >
                                     <img src={images["summer_forum/partner_28"]} />
                                 </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://7winds.mobi"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_29"]} />
+                                </a>
+                                {/* <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://www.dixxi.net"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_30"]} />
+                                </a> */}
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://t.me/channel_SoulMate"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_31"]} />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://kollegiya-sokolov.ru"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_32"]} />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://daogogreen.com"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_34"]} style="height: 60px" />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://rossgram.ru"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_37"]}/>
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://altcoinlog.com/"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_38"]} />
+                                </a>
+                                <a target="_blank"
+                                    rel="nofollow nooopener"
+                                    href="https://t.me/unionclub_chat"
+                                    class="c-partnersforum__item"
+                                >
+                                    <img src={images["summer_forum/partner_39"]} />
+                                </a>
                             </div>
-                            <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
+                            {/* <a href="https://t.me/dmitriibelov" target="_blank" class="c-button c-button--gradient2">
                                 <span class="c-button__text">{Variable.lang.button.becomePartner}</span>
-                            </a>
+                            </a> */}
                         </section>
 
                         <section class="c-localmap" id="localmap">
@@ -1459,7 +1601,7 @@ const start = function (data, ID) {
                         });
                     }}></script>
                     <script src="https://widget.tiwo.ru/loader/loader.js.php"></script>
-                    <script src="//code.jivo.ru/widget/eSqQ27xJUs" async></script>
+                    {/* <script src="//code.jivo.ru/widget/eSqQ27xJUs" async></script> */}
                 </div >
             )
         }, ID

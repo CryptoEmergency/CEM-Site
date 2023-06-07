@@ -48,6 +48,9 @@ const sendPost = async (e, Static) => {
     }
 
     fn.initData.posts(Static)
+
+    Static.edittext = ""
+    Static.elEditText.innerText = ""
     initReload()
   } else {
     Variable.SetModals(
@@ -285,7 +288,7 @@ const start = function (data, ID) {
       files[0],
       "posts",
       async function () {
-        Static.mediaInputs.show = true;
+        Static.audioInputs.show = true;
 
 
         // Static.mediaInputs.value.push(obj);
@@ -777,7 +780,7 @@ const start = function (data, ID) {
         Static.originalImage = [];
       }
 
-      // console.log(Static.mediaInputs.value)
+      // console.log("Static.edittext", Static.edittext)
       return (
 
         <div class={[
@@ -808,8 +811,6 @@ const start = function (data, ID) {
             </div>
             <div data-type="posts" class="c-userpostcreate__container create_post_container">
 
-
-
               <div
                 class={[Static.mediaInputs.show ? "create_post_chapter createPostImage" : "c-hidden"]}>
                 {
@@ -818,7 +819,6 @@ const start = function (data, ID) {
 
                     // console.log('=2e07f3=', item)
                     if (item.type != "audio") {
-
 
                       return (
                         <MediaPreview
@@ -830,7 +830,6 @@ const start = function (data, ID) {
                         />
                       );
 
-
                     }
                   })
                 }
@@ -838,10 +837,10 @@ const start = function (data, ID) {
               <div
 
                 class={[Static.audioInputs.show ? "create_post_chapter createPostAudio" : "c-hidden"]}>
-                {() => {
-                  if (Static.audioInputs.value.length > 0) {
+                {
+                  Static.audioInputs.value.length > 0 ?
                     Static.audioInputs.value.map((item, index) => {
-                      // console.log('=82305a= el = ',el)
+
                       return (
                         <MediaPreview
                           item={item}
@@ -852,14 +851,20 @@ const start = function (data, ID) {
                         />
                       );
                     })
-                  }
-                }}
+                    :
+                    null
+                }
               </div>
               <div
+                Element={($el) => {
+                  Static.elEditText = $el
+                }}
 
+                // class={[Static.textInputs.show ? "create_post_chapter create_post_main_text" : "c-hidden"]}
+                // contenteditable="true" 
+                class="create_post_chapter create_post_main_text"
+                contenteditable="plaintext-only"
 
-                class={[Static.textInputs.show ? "create_post_chapter create_post_main_text" : "c-hidden"]}
-                contenteditable="true"
                 oninput={function (e) {
 
                   textLengthCheck(this.innerText.trim(), this)
@@ -869,26 +874,30 @@ const start = function (data, ID) {
 
                 }
                 }
-              >{Static.edittext}</div>
+              >
+                {/* {Static.edittext} */}
+                {fn.editText(Static.edittext, { paragraph: true, clear: true, html: true, noLink: true })}
+              </div>
 
             </div>
 
             <MediaButton
 
 
-              onclickText={async function () {
-                if (Static.textInputs.show === true) {
-                  return;
-                } else {
-                  Static.textInputs.show = true;
-                  Static.textInputs.value = ""
-                  initReload();
-                }
-              }}
+              // onclickText={async function () {
+              //   if (Static.textInputs.show === true) {
+              //     return;
+              //   } else {
+              //     Static.textInputs.show = true;
+              //     Static.textInputs.value = ""
+              //     initReload();
+              //   }
+              // }}
 
               multiple={true}
               onclickPhoto={async function (e) {
                 if (this.files.length == 0) {
+                  // console.log(this.files.type)
                   return;
                 }
 
@@ -927,33 +936,36 @@ const start = function (data, ID) {
                 // console.log('=f1ee74=', Static.files, Object.keys(Static.files).length)
                 if (Object.keys(Static.files).length == 1) {
                   // alert("Один выбираю")
-                  fn.modals.ModalCropImage({
-                    originalImage: null,
-                    file: Static.files[0],
-                    typeUpload: 'posts',
-                    arrMedia: Static.mediaInputs.value,
-                    aspectSelect: Static.mediaInputs.selectAspect,
-                    uploadCropImage: async function (cropper, aspectActive) {
-                      Static.mediaInputs.selectAspect = aspectActive
+                  if (Static.files[0].type.match("image.*")) {
+                    fn.modals.ModalCropImage({
+                      originalImage: null,
+                      file: Static.files[0],
+                      typeUpload: 'posts',
+                      arrMedia: Static.mediaInputs.value,
+                      aspectSelect: Static.mediaInputs.selectAspect,
+                      uploadCropImage: async function (cropper, aspectActive) {
+                        Static.mediaInputs.selectAspect = aspectActive
 
-                      let imageUrl = URL.createObjectURL(Static.files[0]);
-                      const originalImage = new Image();
-                      originalImage.src = imageUrl;
+                        let imageUrl = URL.createObjectURL(Static.files[0]);
+                        const originalImage = new Image();
+                        originalImage.src = imageUrl;
 
-                      sendPhotoOne(Static, cropper, originalImage)
+                        sendPhotoOne(Static, cropper, originalImage)
 
-                      // console.log('=2e552a=',cropper,aspectActive,Static.files)
+                        // console.log('=2e552a=',cropper,aspectActive,Static.files)
 
-                      //                        document.getElementById("spinner").hidden = false
-                      // for (let key in Static.files){
-                      // if (Static.files[key]){
-                      // Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
-                      // } 
+                        //                        document.getElementById("spinner").hidden = false
+                        // for (let key in Static.files){
+                        // if (Static.files[key]){
+                        // Static.mediaInputs.selectAspect ? await loadPhoto(Static.files[key], "posts", null, Static.mediaInputs.selectAspect) : await loadPhoto(Static.files[key], "posts")
+                        // } 
 
-                      // }
-                      return;
-                    }
-                  }, ID)
+                        // }
+                        return;
+                      }
+                    }, ID)
+                  }
+
                 } else {
                   // alert("Много выбираю")
                   fn.modals.ModalCropImage({
@@ -1078,6 +1090,7 @@ const start = function (data, ID) {
                   class="checkbox__input complain_checkbox"
                   onchange={(e) => {
                     Static.forFriends = e.target.checked;
+                    // Static.elEditText.innerText = ""
                     initReload()
                   }}
                   type="checkbox"
@@ -1120,7 +1133,7 @@ const start = function (data, ID) {
               <div class="checkbox">
 
                 <label class="" for="">
-                  формат фото
+                  {Variable.lang.span.photoFormat}
                   <span class="cont_a-link"></span>
                 </label>
               </div>
@@ -1187,7 +1200,7 @@ const start = function (data, ID) {
                 onClick={(e) => { document.getElementsByClassName('c-userpanel__icon--active')[0].click() }}
               >
                 <span class="c-button__text">
-                  Отменить
+                  {Variable.lang.button.resetCrop}
                 </span>
               </button>
               <button

@@ -46,15 +46,11 @@ const showBtn = function (Static) {
 
 const makeFiltersApi = function (Static) {
   let filter = {};
-  let sort = { _id: -1 };
+  let sort = { score: -1 };
 
-  if (Static.filtersSearch.categoryActive !== Variable.lang.categoryName.all) {
+  // if (Static.filtersSearch.categoryActive !== Variable.lang.categoryName.all) {
     filter.category = Static.filtersSearch.categoryActive;
-  }
-
-  if (Static.filtersSearch.categoryActive !== Variable.lang.categoryName.all) {
-    filter.category = Static.filtersSearch.categoryActive;
-  }
+  // }
 
   if (Static.filtersSearch.filterCheck) {
     filter.checked = true;
@@ -69,12 +65,12 @@ let listCategories;
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID })
   listCategories = [
-    Variable.lang.categoryName.all,
+    // Variable.lang.categoryName.all,
+    "CEX",
     "DEX",
-    "CEX"
   ]
   Static.filtersSearch = {
-    categoryActive: Variable.lang.categoryName.all,
+    categoryActive: "CEX",
   };
   Static.showMore = true
 
@@ -82,12 +78,13 @@ const start = function (data, ID) {
     ID,
     fnLoad: async () => {
       Static.nameRecords = "PageTrades"
-      Static.apiFilter = {}
+      // Static.apiFilter = {}
+      filterExchange = makeFiltersApi(Static)
       Static.records = await fn.socket.get({
         method: "Exchanges",
         params: {
-          filter: Static.apiFilter,
-          sort: { score: -1 }
+          filter: filterExchange.filter,
+          sort: filterExchange.sort,
         }
       })
     },
@@ -108,7 +105,7 @@ const start = function (data, ID) {
             {Variable.lang.tableTitle.volume}
           </div> */}
                 <div class="crypto_exchanges-cell">
-                  {Variable.lang.tableTitle.countVisitors}
+                  {Variable.lang.tableTitle.rank}
                 </div>
                 <div class="crypto_exchanges-cell">
                   {Variable.lang.tableTitle.chart}
@@ -163,7 +160,7 @@ const start = function (data, ID) {
                               <span class="crypto_exchanges_percent_green_mobile">
                                 <img src={svg.exange_visitors} />
                               </span>
-                              {fn.numFormat(item.weeklyVisits)}
+                              {fn.numFormat(item.score)}
                             </span>
                           </div>
                         </div>
@@ -193,13 +190,12 @@ const start = function (data, ID) {
               let tmp = await fn.socket.get({
                 method: "Exchanges",
                 params: {
-                  filter: Static.apiFilter,
-                  sort: { score: -1 },
+                  filter: filterExchange.filter,
+                  sort: filterExchange.sort,
                   limit: 50,
                   offset: Static.records.length
                 }
               })
-
 
               if (!tmp || !tmp.length) {
                 Static.showMore = false

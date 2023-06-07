@@ -62,6 +62,13 @@ const BlockProjects = async function () {
   await initOne(() => {
     projects = [
       {
+        title: Variable.lang.button.show_all,
+        icon: "menu",
+        link: "",
+        modal: false,
+        modalWindow: true
+      },
+      {
         title: Variable.lang.span.userNews,
         icon: "preview_line_lenta",
         link: "lenta-users",
@@ -128,17 +135,23 @@ const BlockProjects = async function () {
         items: fn.itemsMenu.onlyPage({ url: "/list-exchange/" }),
         modal: true,
       },
-      {
-        title: Variable.lang.a.blog,
-        icon: "preview_line_blog",
-        link: "blog",
-        items: fn.itemsMenu.onlyPage({ url: "/blog/" }),
-        modal: true,
-      },
+      // {
+      //   title: Variable.lang.a.blog,
+      //   icon: "preview_line_blog",
+      //   link: "blog",
+      //   items: fn.itemsMenu.onlyPage({ url: "/blog/" }),
+      //   modal: true,
+      // },
       {
         title: Variable.lang.h.top_users,
         icon: "preview_line_users",
         link: "users",
+        modal: true,
+      },
+      {
+        title: Variable.lang.a.university,
+        icon: "mortarboard",
+        link: "crypto-university",
         modal: true,
       },
       {
@@ -166,13 +179,13 @@ const BlockProjects = async function () {
         items: fn.itemsMenu.onlyPage({ url: "/career-whith-us/" }),
         modal: true,
       },
-      {
-        title: "Комнаты",
-        icon: "rooms",
-        link: "rooms",
-        items: fn.itemsMenu.onlyPage({ url: "/rooms/" }),
-        modal: false,
-      },
+      // {
+      //   title: "Комнаты",
+      //   icon: "rooms",
+      //   link: "rooms",
+      //   items: fn.itemsMenu.onlyPage({ url: "/rooms/" }),
+      //   modal: false,
+      // },
     ];
 
     projectRecords = projects.map(function (item) {
@@ -185,6 +198,9 @@ const BlockProjects = async function () {
                 fn.siteLinkModal(e, { title: item.title, items: item.items });
               } else {
                 fn.siteLink(e);
+              }
+              if(item.modalWindow){
+                fn.modals.ModalMainPageIconsMenu()
               }
             }}
           >
@@ -203,6 +219,7 @@ const BlockProjects = async function () {
   return (
     <div class="c-projects">
       <Swiper
+        style="max-width: 1300px"
         slide={projectRecords}
         options={swiperOptions}
         className="swiper-icons"

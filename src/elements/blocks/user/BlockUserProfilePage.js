@@ -190,7 +190,7 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                         <div class="about_user_section_inner">
                                             <p>{Variable.lang.p.aboutMe}</p>
                                             <span class="about_me_block">
-                                                {data.userInfo.information.about ? Helpers.clearText(data.userInfo.information.about) : ''}
+                                                {data.userInfo.information?.about ? Helpers.clearText(data.userInfo.information?.about) : ''}
                                             </span>
                                             <img class="edit_about_me" src={svg['pencil']} />
                                             <div class="user_grid_info-1">
@@ -198,36 +198,36 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                     <span>{Variable.lang.label.name}</span>
                                                     <div>
                                                         <img class="editblockinfo" src={svg['pencil']} />
-                                                        <input id="fullname" class="userinfoinput" readonly value={data.userInfo.fullname} /></div>
+                                                        <input id="fullname" class="userinfoinput" readonly value={data.userInfo?.fullname} /></div>
                                                 </div>
                                                 <div class="user_short_info_row">
                                                     <span>{Variable.lang.label.speciality}</span>
                                                     <div>
                                                         <img class="editblockinfo" src={svg['pencil']} />
                                                         {/* <input id="speciality" class="userinfoinput" readonly value={data.userInfo.information.speciality} /> */}
-                                                        <div id="speciality" class="userinfoinput">{data.userInfo.information.speciality}</div>
+                                                        <div id="speciality" class="userinfoinput">{data.userInfo.information?.speciality}</div>
                                                     </div>
                                                 </div>
                                                 <div class="user_short_info_row">
                                                     <span>{Variable.lang.label.country}</span>
-                                                    <div><input id="country" class="userinfoinput" readonly value={data.userInfo.country.eng_name} />
+                                                    <div><input id="country" class="userinfoinput" readonly value={data.userInfo.country?.eng_name} />
                                                     </div>
                                                 </div>
                                                 <div class="user_short_info_row">
                                                     <span>{Variable.lang.label.city}</span>
                                                     <div><img class="editblockinfo" src={svg['pencil']} />
-                                                        <input id="city" class="userinfoinput" readonly value={data.userInfo.information.city} />
+                                                        <input id="city" class="userinfoinput" readonly value={data.userInfo.information?.city} />
                                                     </div>
                                                 </div>
                                                 <div class="user_short_info_row">
                                                     <span>{Variable.lang.label.birthDate}</span>
                                                     <div>
                                                         <img class="editblockinfo" src={svg['pencil']} />
-                                                        <input type="date" id="birthday" class="userinfoinput" readonly value={data.userInfo.information.birthday ? Helpers.getDateFormat(data.userInfo.information.birthday) : ''} /></div>
+                                                        <input type="date" id="birthday" class="userinfoinput" readonly value={data.userInfo.information?.birthday ? Helpers.getDateFormat(data.userInfo.information?.birthday) : ''} /></div>
                                                 </div>
                                                 <div class="user_short_info_row">
                                                     <span>{Variable.lang.span.regDate}</span>
-                                                    <div><input type="date" class="userinfoinput" readonly value={Helpers.getDateFormat(data.userInfo.information.dateCreate)} /></div>
+                                                    <div><input type="date" class="userinfoinput" readonly value={Helpers.getDateFormat(data.userInfo.information?.dateCreate)} /></div>
                                                 </div>
                                             </div>
 
@@ -248,30 +248,30 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                         <div class="about_user_section_inner">
                                             <p>{Variable.lang.p.aboutMe}</p>
                                             {() => {
-                                                if (data.userInfo.information.about) {
+                                                if (data.userInfo.information?.about) {
                                                     return (
-                                                        <span class="about_me_block">{Helpers.clearText(data.userInfo.information.about)}</span>
+                                                        <span class="about_me_block">{Helpers.clearText(data.userInfo.information?.about)}</span>
                                                     )
                                                 }
                                             }}
                                             <div class="user_grid_info-1">
                                                 {() => {
-                                                    if (data.userInfo.fullname) {
+                                                    if (data.userInfo?.fullname) {
                                                         return (
                                                             <div class="user_short_info_row">
                                                                 <span>{Variable.lang.label.name}</span>
-                                                                <div><input id="fullname" class="userinfoinput" readonly value={data.userInfo.fullname} /></div>
+                                                                <div><input id="fullname" class="userinfoinput" readonly value={data.userInfo?.fullname} /></div>
                                                             </div>
                                                         )
                                                     }
                                                 }}
                                                 {() => {
-                                                    if (data.userInfo.information.speciality) {
+                                                    if (data.userInfo.information?.speciality) {
                                                         return (
                                                             <div class="user_short_info_row">
                                                                 <span>{Variable.lang.label.speciality}</span>
                                                                 <div>
-                                                                    {data.userInfo.information.speciality}
+                                                                    {data.userInfo.information?.speciality}
                                                                     {/* <input id="speciality" class="userinfoinput" readonly value={data.userInfo.information.speciality} /> */}
                                                                 </div>
                                                             </div>
@@ -279,31 +279,31 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                     }
                                                 }}
                                                 {() => {
-                                                    if (data.userInfo.country.eng_name) {
+                                                    if (data.userInfo.country?.eng_name) {
                                                         return (
                                                             <div class="user_short_info_row">
                                                                 <span>{Variable.lang.label.country}</span>
-                                                                <div><input id="country" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={data.userInfo.country.eng_name} /></div>
+                                                                <div><input id="country" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={data.userInfo.country?.eng_name} /></div>
                                                             </div>
                                                         )
                                                     }
                                                 }}
                                                 {() => {
-                                                    if (data.userInfo.information.city) {
+                                                    if (data.userInfo.information?.city) {
                                                         return (
                                                             <div class="user_short_info_row">
                                                                 <span>{Variable.lang.label.city}</span>
-                                                                <div><input id="city" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={data.userInfo.information.city} /></div>
+                                                                <div><input id="city" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={data.userInfo.information?.city} /></div>
                                                             </div>
                                                         )
                                                     }
                                                 }}
                                                 {() => {
-                                                    if (data.userInfo.information.dateCreate) {
+                                                    if (data.userInfo.information?.dateCreate) {
                                                         return (
                                                             <div class="user_short_info_row">
                                                                 <span>{Variable.lang.span.regDate}</span>
-                                                                <div><input type="date" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={Helpers.getDateFormat(data.userInfo.information.dateCreate)} /></div>
+                                                                <div><input type="date" class="userinfoinput" data-keyup="saveInfoByEnter" readonly value={Helpers.getDateFormat(data.userInfo.information?.dateCreate)} /></div>
                                                             </div>
                                                         )
                                                     }
@@ -757,7 +757,7 @@ BlockUserProfilePage.answers = function (Static, data) {
                                             }}
                                         >
                                             <div class="user_question_title">
-                                                77-{item.questionId.title}
+                                                {item.questionId.title}
                                             </div>
                                         </a>
                                         <div>
@@ -779,7 +779,8 @@ BlockUserProfilePage.answers = function (Static, data) {
                             </div>
                             <div class={item.best ? 'your_answers_avatar your_answer_text_best' : 'your_answers_avatar'}>
                                 <div class="your_answer_text">
-                                    {Helpers.clearText(item.text)}
+                                    {/* {Helpers.clearText(item.text)} */}
+                                    {fn.editText(item.text, { paragraph: true, clear: true, html: true })}
                                 </div>
                             </div>
                             {() => {
@@ -805,7 +806,7 @@ BlockUserProfilePage.answers = function (Static, data) {
                         <div class="crypto_exchanges_footer">
                             <a class="btn-view-all-a"
                                 onclick={async () => {
-
+                                    console.log('=1882bf=', 123)
                                     let tmp = await sendApi.send({
                                         action: "getAnswers", short: true, filter: {
                                             author: data.userInfo._id,
@@ -815,7 +816,7 @@ BlockUserProfilePage.answers = function (Static, data) {
                                         offset: Static.activeItems.list_records.length
                                     });
 
-                                    Variable.PageUserProfileAnswers.list_records.push(...tmp.list_records)
+                                    Static.activeItems.list_records.push(...tmp.list_records)
                                     initReload()
                                 }
                                 }
@@ -1323,6 +1324,14 @@ BlockUserProfilePage.social = function (Static, data) {
                                         }}
                                         data-id={index}
                                         class="about_user_section_points_menu"
+                                        HiddenOut={function ($el) {
+                                            if ($el.style.display == "block") {
+                                                $el.style = ""
+                                            }
+                                            // console.log('=d474fb=', $el)
+                                            // console.log('=bd914d=', $el.style.display)
+                                            // console.log('=dbf66a=', Static.elShowMenu[index].style.display)
+                                        }}
                                     >
                                         <div
                                             data-id={socialItem._id}

@@ -158,14 +158,22 @@ const ModalMobileMainSettings = function (data, ID) {
                                                     <img src={svg.notes} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.a.notes}</span>
                                                 </a>
-                                                <a onclick={(e) => {
+                                                <a onclick={fn.siteLink} class="user_icon_mobile_visible user_icon" href="/user/affiliate/">
+                                                    <img src={svg["profile_icon-3"]} />
+                                                    <span class="mobile_user_menu_link">{Variable.lang.a.affiliate}</span>
+                                                </a>
+                                                <a onclick={fn.siteLink} class="user_icon_mobile_visible user_icon" href="/user/settings/">
+                                                    <img src={svg["settings_menu"]} />
+                                                    <span class="mobile_user_menu_link">{Variable.lang.text.settings}</span>
+                                                </a>
+                                                {/* <a onclick={(e) => {
                                                     fn.siteLinkModal(e, { title: Variable.lang.h.affiliate, items: fn.itemsMenu.onlyPage({ url: '/affiliate/' }) })
                                                     fn.modals.close(ID)
                                                 }} class="user_icon_mobile_visible user_icon" href="/user/affiliate/">
                                                     <img src={svg["profile_icon-3"]} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.a.affiliate}</span>
-                                                </a>
-                                                <a onclick={(e) => {
+                                                </a> */}
+                                                {/* <a onclick={(e) => {
                                                     fn.siteLinkModal(e, { title: Variable.lang.text.settings })
                                                     fn.modals.close(ID)
                                                 }}
@@ -173,7 +181,7 @@ const ModalMobileMainSettings = function (data, ID) {
                                                     href="/user/settings/">
                                                     <img src={svg["settings_menu"]} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.text.settings}</span>
-                                                </a>
+                                                </a> */}
                                                 <a
                                                     class="user_icon_mobile_visible user_icon"
                                                     href="#"
@@ -280,19 +288,6 @@ const ModalMobileMainSettings = function (data, ID) {
                                 >
                                     <img src={svg.news_menu_icon1} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.news}</span>
-                                </a>
-                                <a
-                                    onclick={(e) => {
-                                        Variable.DelModals("ModalMobileMainSettings");
-                                        fn.siteLinkModal(e, {
-                                            title: Variable.lang.a.blog, items: fn.itemsMenu.onlyPage({ url: '/blog/' })
-                                        })
-                                    }}
-                                    class="user_icon_mobile_visible user_icon"
-                                    href={`${Variable.lang.url}blog/`}
-                                >
-                                    <img src={svg.blog_menu_icon1} />
-                                    <span class="mobile_user_menu_link">{Variable.lang.a.blog}</span>
                                 </a>
                                 {/* <a
                                     data-updating="true"
@@ -573,22 +568,6 @@ const ModalMobileMainSettings = function (data, ID) {
                                                             data.Burger.classList.remove("c-userpanel__icon--active")
                                                         }
                                                         fn.siteLinkModal(e, {
-                                                            title: Variable.lang.a.blog,
-                                                            items: fn.itemsMenu.onlyPage({ url: "/blog/" }),
-                                                        });
-                                                    }}
-                                                    href="/blog/"
-                                                >
-                                                    <span>{Variable.lang.a.blog}</span>
-                                                </a>
-                                                <a
-                                                    class="c-footer__link"
-                                                    onclick={(e) => {
-                                                        fn.modals.close(ID);
-                                                        if (data.Burger) {
-                                                            data.Burger.classList.remove("c-userpanel__icon--active")
-                                                        }
-                                                        fn.siteLinkModal(e, {
                                                             title: Variable.lang.a.career,
                                                             items: fn.itemsMenu.onlyPage({
                                                                 url: "/career-whith-us/",
@@ -598,24 +577,6 @@ const ModalMobileMainSettings = function (data, ID) {
                                                     href="/career-whith-us/"
                                                 >
                                                     <span>{Variable.lang.a.career}</span>
-                                                </a>
-                                                <a
-                                                    class="c-footer__link"
-                                                    onclick={(e) => {
-                                                        fn.modals.close(ID);
-                                                        if (data.Burger) {
-                                                            data.Burger.classList.remove("c-userpanel__icon--active")
-                                                        }
-                                                        fn.siteLinkModal(e, {
-                                                            title: Variable.lang.h.mediaUs,
-                                                            items: fn.itemsMenu.onlyPage({
-                                                                url: "/media/",
-                                                            }),
-                                                        });
-                                                    }}
-                                                    href="/media/"
-                                                >
-                                                    <span>{Variable.lang.h.mediaUs}</span>
                                                 </a>
 
                                                 {/* {<a class="c-footer__link" onclick={(e) => { Helpers.siteLinkModal(e, { title: Variable.lang.a.university }) }} href="/university/"><span>{Variable.lang.a.university}</span></a>} */}
@@ -825,13 +786,14 @@ const ModalMobileMainSettings = function (data, ID) {
                                     <div class="c-footer__accordion c-accordion">
                                         <a
                                             href="https://apps.apple.com/ru/app/crypto-emergency/id1635628021"
+                                            target="_blank"
                                             class="c-button__app"
                                         >
                                             <img src={svg["appstore"]} />
                                         </a>
-                                        {/* <a href="https://play.google.com/store/apps/details?id=com.cryptoemergency" class="c-button__app">
+                                        <a href="https://play.google.com/store/apps/details?id=com.cryptoemergency" target="_blank" class="c-button__app">
                                             <img src={svg['googleplay']} />
-                                        </a> */}
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="c-footer__bottom">

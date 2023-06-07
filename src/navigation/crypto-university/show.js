@@ -6,7 +6,8 @@ import {
     initReload,
     load,
     Data,
-    CEM
+    CEM,
+    Helpers
 } from "@betarost/cemserver/cem.js";
 
 // import { fn } from '@src/functions/index.js';
@@ -18,23 +19,7 @@ import Swiper from 'swiper/bundle';
 
 import 'swiper/css/bundle';
 
-const { images, svg, fn } = CEM
-
-const Tags = function ({ Static, classActive, text, type }) {
-    return (
-        <div class={["tag_button", classActive]}
-            onclick={async () => {
-                if (Static.activeCategory == type) {
-                    return;
-                }
-                Static.activeCategory = type;
-                Static.apiFilter = makeFilter(Static)
-                await fn.restApi.getNews({ name: Static.nameRecords, filter: Static.apiFilter })
-            }}>
-            <span>{text}</span>
-        </div>
-    )
-}
+const { images, svg, fn, elements } = CEM
 
 const makeFilter = function (Static) {
     let objReturn = { type: Static.type }
@@ -53,8 +38,36 @@ const start = function (data, ID) {
 
     Variable.HeaderShow = true;
 
+    const arrAccordeon = [
+        {
+            title: "Подойдёт ли мне эта профессия?",
+            description: "Для тех, кто сомневается, мы спроектировали бесплатную часть, которая поможет получить ответ на этот вопрос. Если вы убедитесь, что выбранная профессия вам не подходит, — это тоже положительный результат.",
+            hidden: true,
+        },
+        {
+            title: "Можно ли обучиться профессии за 5 месяцев?",
+            description: "Да, программа рассчитана на это. Но многое зависит и от вас — чтобы пройти курс до конца, нужно уделять учёбе достаточно времени: читать теорию, практиковаться в тренажёре и делать учебные проекты.",
+            hidden: true,
+        },
+        {
+            title: "Что делать, если я не справлюсь с нагрузкой?",
+            description: "Если вам понадобится сделать паузу в учёбе или уделить больше времени закреплению материала, напишите своему куратору.",
+            hidden: true,
+        },
+        {
+            title: "Смогу ли я найти работу после обучения?",
+            description: "Гарантий нет, но мы верим, что сможете. Мы составляли программу курса, отталкиваясь от современных требований работодателей и обязанностей, которые указаны в вакансиях продакт-менеджеров. Рынок требует, чтобы вы умели делать что-то на практике, а не просто обладали набором знаний. Поэтому мы научим вас не только владеть всеми необходимыми инструментами по управлению продуктами, но и применять их на практике.",
+            hidden: true,
+        },
+        {
+            title: "Если не понравится, я могу вернуть деньги?",
+            description: "Да, причём в любой момент. Если обучение в потоке уже началось, придётся оплатить прошедшие дни — но мы вернём деньги за оставшееся время обучения.",
+            hidden: true,
+        },
+    ];
+
     const swiperGo = function (numIndex) {
-        let swiperitem = new Swiper(".swiper-post_authors", {
+        let swiperitem = new Swiper(".swiper-post_teachers", {
             // effect: "cube",
             grabCursor: true,
             // cubeEffect: {
@@ -83,16 +96,16 @@ const start = function (data, ID) {
                     slidesPerView: 2,
                     spaceBetween: 10
                 },
-                // 768: {
-                //   slidesPerView: 2,
-                //   spaceBetween: 50
-                // },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 50
+                },
                 910: {  //800
-                    slidesPerView: 4,
+                    slidesPerView: 3,
                     spaceBetween: 46,
                 },
                 1240: {
-                    slidesPerView: 6,
+                    slidesPerView: 4,
                     spaceBetween: 30,
                 },
             },
@@ -103,514 +116,253 @@ const start = function (data, ID) {
     load({
         ID,
         fnLoad: async () => {
-            Static.activeCategory = "All"
-            if (Variable.dataUrl.params) {
-                Static.item = await fn.socket.get({ method: "CryptoUniversities", _id: Variable.dataUrl.params })
-                console.log('=9ebbf7=', Static.item)
+
+            // console.log('=4c2d3d=', Static.openModals)
+
+            if (!Static.openModals) {
+
+                Static.item = await fn.socket.get({
+                    method: "Courses",
+                    _id: item._id,
+                    params: {
+                        populate: {
+                            path: 'teachers company',
+                        }
+                    }
+                })
+
             }
+            if (!Static.item._id) {
+                Static.item = await fn.socket.get({
+                    method: "Courses",
+                    _id: Variable.DataUrl.params,
+                    params: {
+                        populate: {
+                            path: 'teachers company',
+                        }
+                    }
+                })
+            }
+
         },
 
         fn: async () => {
-
+            // console.log('=9ebbf7=', Static.item)
             if (!item._id) { return (<div><BlockError404 /></div>) }
 
             return (
-                <div>
-                    {
-                        Static.item.map((item) => {
-                            return (
-                                <div class="page-main__content">
-                                    <div class="university c-main__body">
-                                        <h2 class="university__title">{item.nameCompany}</h2>
-                                        <figure class="university__figure">
-                                            {item.icon
-                                                ?
-                                                <img
-                                                    class="university__logo"
-                                                    src={`/assets/upload/worldPress/${item.icon}`}
-                                                    width="100"
-                                                    height="100"
-                                                />
-                                                :
-                                                <img
-                                                    class="university__logo"
-                                                    src={images["crypto-university"]}
-                                                    width="100"
-                                                    height="100"
-                                                />
-                                            }
-                                        </figure>
-                                        <a class="university__btn c-button c-button--gradient2"
-                                            href={item.siteLink}
-                                            onclick={() => {
-                                                fn.siteLink({ title: "", item: {}, items: {} })
-                                            }}
-                                        >
-                                            <span class="c-button__text">Сайт</span>
-                                        </a>
-                                        <blockquote class="university__slogan">&#8220;{item.tagline}&#8221;</blockquote>
-                                        <p class="university__shortdesc">
-                                            {item.description}
-                                        </p>
-                                        {item.cover
+                <div class="page-main">
+                    <div class="page-main__container"
+                        style={Static.openModals ? "margin-top: 0;" : null}
+                    >
+                        <div class="page-main__content"
+                            style="padding: 0;"
+                        >
+                            <div class="course">
+                                <div class="course__container">
+                                    <div class="course-header">
+                                        <img class="course-header__background"
+                                            src={`/assets/upload/worldPress/${Static.item.cover}`}
+                                        />
+                                        <div class="course-header__container">
+                                            <div class="course-header__title">
+                                                {Static.item.name}
+                                            </div>
+                                            <div class="course-header__description">
+                                                {Static.item.description}
+                                            </div>
+                                            <div class="course-header__company"
+                                                onclick={() => [
+                                                    Static.item.company.map((item) => {
+                                                        fn.modals.ModalTeachers(item)
+                                                    })
+                                                ]}
+                                            >
+                                                <span>Подробнее о школе</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {
+                                        Static.item.learn?.length != 0
                                             ?
-                                            <figure class="university__cover">
-                                                <img class=""
-                                                    src={`/assets/upload/worldPress/${item.cover}`}
-                                                />
-                                            </figure>
+                                            <div class="course-learn">
+                                                <div class="course__subtitle">
+                                                    Вы научитесь
+                                                </div>
+                                                <ul class="course-learn__list">
+                                                    {
+                                                        Static.item.learn?.map((item) => {
+                                                            return (
+                                                                <li class="course-learn__item">
+                                                                    <div class="course-learn__subtitle">
+                                                                        {item.title}
+                                                                    </div>
+                                                                    <div class="course-learn__description">
+                                                                        {item.description}
+                                                                    </div>
+                                                                </li>
+                                                            )
+                                                        })
+                                                    }
+                                                </ul>
+                                            </div>
                                             :
                                             null
-                                        }
-                                        <section class="university__about">
-                                            <h5>О компании</h5>
-                                            <p>{item.aboutCompany}</p>
-                                        </section>
-                                        <div class="university__authors swiper-container">
-                                            <div class="swiper swiper-post_authors" After={() => swiperGo()}>
+                                    }
+                                    <div class="course-teachers">
+                                        <div class="course__subtitle">
+                                            Преподаватели курса
+                                        </div>
+                                        <div class="swiper-container">
+                                            <div class="swiper swiper-post_teachers" After={() => swiperGo()}>
                                                 <div class="swiper-wrapper">
-                                                    {item.teachers.map((teacher) => {
+                                                    {Static.item.teachers?.map((item) => {
                                                         return (
-                                                            <a
-                                                                class="swiper-slide"
-                                                            // href="/crypto-university/teacher/1/"
-                                                            // onclick={function (e) {
-                                                            //     e.preventDefault();
-                                                            //     e.stopPropagation();
-                                                            //     fn.siteLinkModal(e, {
-                                                            //         title: "Преподаватель: Иванов Иван Иванович", teacher: {
-                                                            //             name: "Иванов Иван Иванович"
-                                                            //         }
-                                                            //     })
-                                                            // }}
+                                                            <a class="swiper-slide"
+                                                                onclick={() => [
+                                                                    fn.modals.ModalTeachers(item)
+                                                                ]}
                                                             >
-                                                                <div class="swiper-post_media_image_container">
-                                                                    <figure class="university__sliderwrap">
-                                                                        <img src={`/assets/upload/worldPress/${teacher.image}`} />
-                                                                        {/* <figcaption class="c-criptocompany__slidertitle">{teacher.title}</figcaption> */}
-                                                                        <figcaption class="university__slidertitle">{teacher.name}</figcaption>
-                                                                    </figure>
+                                                                <div class="course-teachers__item">
+                                                                    <div class="course-teachers__item_image">
+                                                                        <img src={`/assets/upload/worldPress/${item.image}`} />
+                                                                    </div>
+                                                                    <span class="course-teachers__name">{item.name}</span>
+                                                                    <span>{item.profession}</span>
                                                                 </div>
                                                             </a>
                                                         )
                                                     })}
                                                 </div>
-                                                <div class="swiper-pagination swiper-pagination-post_media"></div>
-                                                <div class="swiper-scrollbar-post_media"></div>
                                             </div>
                                         </div>
-                                        <section class="university__courses">
-                                            <h5>Курсы</h5>
-                                            <ul class="university__courses-list">
-                                                {item.courses.map((course) => {
-                                                    return (
-                                                        <li class="">
-                                                            <a
-                                                                class="university__course"
-                                                                href={course.link}
-                                                                onclick={(e) => {
-                                                                    // e.preventDefault();
-                                                                    fn.siteLink()
-                                                                }}
-                                                            >
-                                                                <span class="university__course-description">{course.name}</span>
-                                                                <footer class="university__course-footer">
-                                                                    <time class="university__course-time" datetime="">{fn.moment(course.dateStart).format('YYYY-MM-DD')}</time>
-                                                                    <span class="university__course-hourse">{`${course.duration} ч`}</span>
-                                                                </footer>
-                                                                {course.promotion
-                                                                    ?
-                                                                    <div class="university__course-stiker">
-                                                                        <img src={images["university/promotion"]} />
-                                                                    </div>
-                                                                    :
-                                                                    null
+                                    </div>
+                                    <div class="course-footer">
+                                        <div class="course-footer__container">
+                                            <div class="course-footer__info">
+                                                <div class="course-footer__info-header">
+                                                    <div class="course-footer__info_price">
+                                                        Стоимость курса
+                                                    </div>
+                                                    <div>
+                                                        <div class="course-footer__info_duration">
+                                                            Длительность курса: {Static.item.duration}
+                                                            <span>
+                                                                {
+                                                                    Static.item.timeCount == "month"
+                                                                        ?
+                                                                        " месяца"
+                                                                        :
+                                                                        " дней"
                                                                 }
-                                                            </a>
-                                                        </li>
-                                                    )
-                                                })}
-                                            </ul>
-                                        </section>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-            )
-
-            return (
-                <div>
-                    {
-                        Static.item.map((item) => {
-                            return (
-                                <div
-                                    class={[
-                                        "c-criptocompany",
-                                        "c-container",
-                                        Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
-                                    ]}
-                                >
-                                    <h2 class="c-criptocompany__title">{item.nameCompany}</h2>
-                                    <figure class="c-criptocompany__wrapperimg">
-                                        {item.icon
-                                            ?
-                                            <img
-                                                class="c-criptouniversity__logo"
-                                                src={`/assets/upload/worldPress/${item.icon}`}
-                                                width="100"
-                                                height="100"
-                                            />
-                                            :
-                                            <img
-                                                class="c-criptouniversity__logo"
-                                                src={images["crypto-university"]}
-                                                width="100"
-                                                height="100"
-                                            />
-                                        }
-                                    </figure>
-                                    <a class="c-criptocompany__btn c-button c-button--gradient2"
-                                        href={item.siteLink}
-                                        onclick={() => {
-                                            fn.siteLink({ title: "", item: {}, items: {} })
-                                        }}
-                                    >
-                                        <span class="c-button__text">Сайт</span>
-                                    </a>
-                                    <blockquote class="c-criptocompany__slogan">&#8220;{item.tagline}&#8221;</blockquote>
-                                    <p class="c-criptocompany__shortdesc">
-                                        {item.description}
-                                    </p>
-                                    {item.cover
-                                        ?
-                                        <figure class="c-criptocompany__cover">
-                                            <img class=""
-                                                src={`/assets/upload/worldPress/${item.cover}`}
-                                            />
-                                        </figure>
-                                        :
-                                        null
-                                    }
-                                    <section class="c-criptocompany__about">
-                                        <h5>О компании</h5>
-                                        <p>{item.aboutCompany}</p>
-                                    </section>
-                                    <div class="c-criptocompany__authors swiper-container">
-                                        <div class="swiper swiper-post_authors" After={() => swiperGo()}>
-                                            <div class="swiper-wrapper">
-                                                {item.teachers.map((teacher) => {
-                                                    return (
-                                                        <a
-                                                            class="swiper-slide"
-                                                        // href="/crypto-university/teacher/1/"
-                                                        // onclick={function (e) {
-                                                        //     e.preventDefault();
-                                                        //     e.stopPropagation();
-                                                        //     fn.siteLinkModal(e, {
-                                                        //         title: "Преподаватель: Иванов Иван Иванович", teacher: {
-                                                        //             name: "Иванов Иван Иванович"
-                                                        //         }
-                                                        //     })
-                                                        // }}
-                                                        >
-                                                            <div class="swiper-post_media_image_container">
-                                                                <figure class="c-criptocompany__sliderwrap">
-                                                                    <img src={`/assets/upload/worldPress/${teacher.image}`} />
-                                                                    {/* <figcaption class="c-criptocompany__slidertitle">{teacher.title}</figcaption> */}
-                                                                    <figcaption class="c-criptocompany__slidertitle">{teacher.name}</figcaption>
-                                                                </figure>
-                                                            </div>
-                                                        </a>
-                                                    )
-                                                })}
-                                            </div>
-                                            <div class="swiper-pagination swiper-pagination-post_media"></div>
-                                            <div class="swiper-scrollbar-post_media"></div>
-                                        </div>
-                                    </div>
-                                    <section class="c-criptocompany__courses">
-                                        <h5>Курсы</h5>
-                                        <ul class="c-criptocompany__list">
-                                            {item.courses.map((course) => {
-                                                return (
-                                                    <li class="">
-                                                        <a
-                                                            class="c-criptocompany__course"
-                                                            href={course.link}
-                                                            onclick={(e) => {
-                                                                // e.preventDefault();
-                                                                fn.siteLink()
-                                                            }}
-                                                        >
-                                                            <span class="c-criptocompany__coursedesc">{course.name}</span>
-                                                            <footer class="c-criptocompany__footer">
-                                                                <time class="c-criptocompany__time" datetime="">{fn.moment(course.dateStart).format('YYYY-MM-DD')}</time>
-                                                                <span class="c-criptocompany__hourse">{`${course.duration} ч`}</span>
-                                                            </footer>
-                                                            {course.promotion
+                                                            </span>
+                                                        </div>
+                                                        {
+                                                            !Static.item.dateIsKnow
                                                                 ?
-                                                                <div class="c-criptocompany__stiker">
-                                                                    <img src={images["university/promotion"]} />
+                                                                <div class="course-footer__info_data">
+                                                                    Старт курса: {fn.getDateFormat(Static.item.dateStart, "course")}
                                                                 </div>
                                                                 :
-                                                                null
-                                                            }
-
-                                                        </a>
-                                                    </li>
-                                                )
-                                            })}
-                                        </ul>
-
-                                    </section>
+                                                                <div class="course-footer__info_data">
+                                                                    Курс в записи
+                                                                </div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="course-footer__prices">
+                                                    <div class="course-footer__cost">
+                                                        <div class="course-footer__cost_section">
+                                                            <span class="course-footer__cost_old">
+                                                                {`${Static.item.costAll * 1.3} ₽`}
+                                                            </span>
+                                                            <div class="course-footer__cost_discount">
+                                                                <span>-30%</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="course-footer__cost_new">
+                                                            {Static.item.costAll} ₽
+                                                            <div>Новая цена</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <a class="course-footer__enroll tag_button"
+                                                    target="_blank"
+                                                    href={Static.item.linkRecord}
+                                                >
+                                                    <span>Записаться на курс</span>
+                                                </a>
+                                            </div>
+                                            <div class="course-footer__info">
+                                                {
+                                                    Static.item.company.map((item) => {
+                                                        return (
+                                                            <div class="course-footer__company">
+                                                                <div class="course-footer__company_title">
+                                                                    {/* <img src={`/assets/upload/worldPress/${item.image}`} /> */}
+                                                                    <h3>Школа «{item.name}»</h3>
+                                                                </div>
+                                                                <div>
+                                                                    <a href={item.siteLink} target="_blank" class={["btn-item", !item.siteLink ? "social-btn_passive" : null]}>
+                                                                        <div class="btn-item_text">Веб-сайт</div>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="course-footer__social">
+                                                                    {
+                                                                        item.social?.map((item) => {
+                                                                            return (
+                                                                                <div class="course-footer__social_item">
+                                                                                    <a
+                                                                                        href={item.url}
+                                                                                        target="_blank"
+                                                                                        class="course-footer__social_link"
+                                                                                    >
+                                                                                        <img
+                                                                                            src={svg[`${item.channel}-icon`]}
+                                                                                        />
+                                                                                    </a>
+                                                                                </div>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="course-reviews">
+                                        <div class="course__subtitle">
+                                            Отзывы
+                                        </div>
+                                        <div class="course-reviews__container">
+                                            <p class="university-review__soon" style="margin-top: 80px">
+                                                <span style="font-size: 26px;">Отзывы ещё не оставлены</span>
+                                            </p>
+                                            <div class="course-reviews__add"
+                                                onclick={() => {
+                                                    fn.modals.ModalComingSoon()
+                                                }}
+                                            >
+                                                <span>Оставить отзыв</span>
+                                            </div>
+                                            <img class="university-author__image" src={images["university/reviews"]} />
+                                        </div>
+                                    </div>
+                                    <div class="course-questions">
+                                        <div class="course__subtitle">
+                                            Вопросы и ответы
+                                        </div>
+                                        <elements.Accordeon records={arrAccordeon} />
+                                    </div>
                                 </div>
-                            )
-                        })
-                    }
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             )
-
-
-            // return (
-            //     <div
-            //         class={[
-            //             "c-criptocompany",
-            //             "c-container",
-            //             Variable.HeaderShow ? "c-main__body" : "c-main__body--noheader"
-            //         ]}
-            //     >
-            //         <h2 class="c-criptocompany__title">Название компании</h2>
-            //         <figure class="c-criptocompany__wrapperimg">
-            //             <img class="c-criptocompany__logo" src="https://yt3.googleusercontent.com/8HmH6WuhicmT878ZRlUUW6QUJbudwtVAAbmABTmiQGLp58ebjHmf4tIeXTQ4XC_W1K4kAzx8pNw=s900-c-k-c0x00ffffff-no-rj" width="300" height="300" />
-            //         </figure>
-            //         <a class="c-criptocompany__btn c-button c-button--gradient2" href="">
-            //             <span class="c-button__text">Сайт</span>
-            //         </a>
-            //         <blockquote class="c-criptocompany__slogan">&#8220;Слоган компании в пару строк или больше&#8221;</blockquote>
-            //         <p class="c-criptocompany__shortdesc">
-            //             Lorem Ipsum, "Lorem ipsum dolor sit amet..", происходит от одной из строк в разделе 1.10.32
-            //             Классический текст Lorem Ipsum, используемый с XVI века, приведён ниже. Также даны разделы 1.10.32 и 1.10.33 "de Finibus Bonorum et Malorum" Цицерона и их английский перевод, сделанный H. Rackham, 1914 год.
-            //         </p>
-            //         <figure class="c-criptocompany__cover">
-            //             <img class="" src="https://thumbs.dreamstime.com/b/%D0%BC%D0%BE%D0%B4%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%BE%D1%81%D1%82%D0%BE%D0%B9-%D1%86%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%D0%BE%D0%B9-%D0%B3%D1%80%D0%B0%D0%B4%D0%B8%D0%B5%D0%BD%D1%82-%D0%B3%D1%80%D0%B0%D0%B4%D0%B8%D0%B5%D0%BD%D1%82%D0%B0-%D1%81-%D1%8D%D1%84%D1%84%D0%B5%D0%BA%D1%82%D0%BE%D0%BC-%D0%B4%D0%B8%D0%BD%D0%B0%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B9-231031876.jpg" width="100%" height="150" />
-            //         </figure>
-
-            //         <section class="c-criptocompany__about">
-            //             <h5>О компании</h5>
-            //             <p>
-            //                 Многие думают, что Lorem Ipsum - взятый с потолка псевдо-латинский набор слов, но это не совсем так. Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur", и занялся его поисками в классической латинской литературе. В результате он нашёл неоспоримый первоисточник Lorem Ipsum в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum" ("О пределах добра и зла"), написанной Цицероном в 45 году н.э. Этот трактат по теории этики был очень популярен в эпоху Возрождения. Первая строка Lorem Ipsum, "Lorem ipsum dolor sit amet..", происходит от одной из строк в разделе 1.10.32
-            //                 <br />
-            //                 Классический текст Lorem Ipsum, используемый с XVI века, приведён ниже. Также даны разделы 1.10.32 и 1.10.33 "de Finibus Bonorum et Malorum" Цицерона и их английский перевод, сделанный H. Rackham, 1914 год.
-            //             </p>
-            //         </section>
-
-            //         <div class="c-criptocompany__authors swiper-container">
-            //             <div class="swiper swiper-post_authors" After={() => swiperGo()}>
-            //                 <div class="swiper-wrapper">
-            //                     <a
-            //                         class="swiper-slide"
-            //                         href="/crypto-university/teacher/1/"
-            //                         onclick={function (e) {
-            //                             e.preventDefault();
-            //                             e.stopPropagation();
-            //                             fn.siteLinkModal(e, {
-            //                                 title: "Преподаватель: Иванов Иван Иванович", teacher: {
-            //                                     name: "Иванов Иван Иванович"
-            //                                 }
-            //                             })
-            //                         }}
-            //                     >
-            //                         <div class="swiper-post_media_image_container">
-            //                             <figure class="c-criptocompany__sliderwrap">
-            //                                 <img src={images["university/teacher1"]} />
-            //                                 <figcaption class="c-criptocompany__slidertitle">Иванов Иван Иванович</figcaption>
-            //                             </figure>
-            //                         </div>
-            //                     </a>
-            //                     <a
-            //                         class="swiper-slide"
-            //                         href="/crypto-university/teacher/2/"
-            //                         onclick={function (e) {
-            //                             e.preventDefault();
-            //                             e.stopPropagation();
-            //                             fn.siteLinkModal(e, {
-            //                                 title: "Преподаватель: Алексеева Ксения Александровна", teacher: {
-            //                                     name: "Алексеева Ксения Александровна"
-            //                                 }
-            //                             })
-            //                         }}
-            //                     >
-            //                         <div class="swiper-post_media_image_container">
-            //                             <figure class="c-criptocompany__sliderwrap">
-            //                                 <img src={images["university/teacher2"]} />
-            //                                 <figcaption class="c-criptocompany__slidertitle">Алексеева Ксения Александровна</figcaption>
-            //                             </figure>
-            //                         </div>
-            //                     </a>
-            //                     <a
-            //                         class="swiper-slide"
-            //                         href="/crypto-university/teacher/3/"
-            //                         onclick={function (e) {
-            //                             e.preventDefault();
-            //                             e.stopPropagation();
-            //                             fn.siteLinkModal(e, {
-            //                                 title: "Преподаватель: Крылов Петр Ильич", teacher: {
-            //                                     name: "Крылов Петр Ильич"
-            //                                 }
-            //                             })
-            //                         }}
-            //                     >
-            //                         <div class="swiper-post_media_image_container">
-            //                             <figure class="c-criptocompany__sliderwrap">
-            //                                 <img src={images["university/teacher3"]} />
-            //                                 <figcaption class="c-criptocompany__slidertitle">Крылов Петр Ильич</figcaption>
-            //                             </figure>
-            //                         </div>
-            //                     </a>
-            //                     <a
-            //                         class="swiper-slide"
-            //                         href="/crypto-university/teacher/4/"
-            //                         onclick={function (e) {
-            //                             e.preventDefault();
-            //                             e.stopPropagation();
-            //                             fn.siteLinkModal(e, {
-            //                                 title: "Преподаватель: Мальцева Надежда Николаевна", teacher: {
-            //                                     name: "Мальцева Надежда Николаевна"
-            //                                 }
-            //                             })
-            //                         }}
-            //                     >
-            //                         <div class="swiper-post_media_image_container">
-            //                             <figure class="c-criptocompany__sliderwrap">
-            //                                 <img src={images["university/teacher4"]} />
-            //                                 <figcaption class="c-criptocompany__slidertitle">Мальцева Надежда Николаевна</figcaption>
-            //                             </figure>
-            //                         </div>
-            //                     </a>
-            //                 </div>
-            //                 <div class="swiper-pagination swiper-pagination-post_media"></div>
-            //                 <div class="swiper-scrollbar-post_media"></div>
-            //             </div>
-            //         </div>
-
-            //         <section class="c-criptocompany__courses">
-            //             <h5>Курсы</h5>
-
-            //             <div class="tags tags--static c-criptocompany__tags">
-            //                 <Tags
-            //                     Static={Static}
-            //                     text={Variable.lang.categoryName.all}
-
-            //                     classActive={Static.activeCategory == "All" ? "tag_button_active" : ""}
-            //                     type="All"
-            //                 />
-            //                 {/* {() => {
-            //                     // if (Variable[Static.nameRecords + "Category"]) {
-            //                     let arrReturn =
-            //                         // Variable[Static.nameRecords + "Category"].list_records.filter((item) => item.name !== null).map((item) => {
-            //                         Static.CryptoUniversityCategory.filter((item) => item.name !== null).map((item) => {
-
-            //                             return (
-            //                                 <Tags
-            //                                     Static={Static}
-            //                                     text={Variable.lang.categoryName[item.name]}
-            //                                     classActive={Static.activeCategory == item.name ? "tag_button_active" : ""}
-            //                                     type={item.name}
-            //                                 />
-            //                             )
-            //                         })
-            //                     return arrReturn
-            //                     // }
-            //                 }} */}
-            //             </div>
-
-            //             <ul class="c-criptocompany__list">
-            //                 <li class="">
-            //                     <a
-            //                         class="c-criptocompany__course"
-            //                         href="/crypto-university/course/1/"
-            //                         onclick={(e) => {
-            //                             e.preventDefault();
-            //                             fn.siteLinkModal(e, { title: "Курс по NFT-технологии. Вводный" })
-            //                         }}
-            //                     >
-            //                         <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
-            //                         <footer class="c-criptocompany__footer">
-            //                             <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-            //                             <span class="c-criptocompany__hourse">22 ч</span>
-            //                         </footer>
-            //                         {/* <div class="c-criptocompany__stiker">
-            //                             <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-            //                         </div> */}
-            //                     </a>
-            //                 </li>
-            //                 <li class="">
-            //                     <a href="#" class="c-criptocompany__course">
-            //                         <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
-            //                         <footer class="c-criptocompany__footer">
-            //                             <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-            //                             <span class="c-criptocompany__hourse">22 ч</span>
-            //                         </footer>
-            //                         {/* <div class="c-criptocompany__stiker">
-            //                             <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-            //                         </div> */}
-            //                     </a>
-            //                 </li>
-            //                 <li class="">
-            //                     <a href="#" class="c-criptocompany__course">
-            //                         <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
-            //                         <footer class="c-criptocompany__footer">
-            //                             <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-            //                             <span class="c-criptocompany__hourse">22 ч</span>
-            //                         </footer>
-            //                         <div class="c-criptocompany__stiker">
-            //                             <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-            //                         </div>
-            //                     </a>
-            //                 </li>
-            //                 <li class="">
-            //                     <a href="#" class="c-criptocompany__course">
-            //                         <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
-            //                         <footer class="c-criptocompany__footer">
-            //                             <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-            //                             <span class="c-criptocompany__hourse">22 ч</span>
-            //                         </footer>
-            //                         <div class="c-criptocompany__stiker">
-            //                             <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-            //                         </div>
-            //                     </a>
-            //                 </li>
-            //                 <li class="">
-            //                     <a href="#" class="c-criptocompany__course">
-            //                         <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
-            //                         <footer class="c-criptocompany__footer">
-            //                             <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-            //                             <span class="c-criptocompany__hourse">22 ч</span>
-            //                         </footer>
-            //                         {/* <div class="c-criptocompany__stiker">
-            //                             <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-            //                         </div> */}
-            //                     </a>
-            //                 </li>
-            //                 <li class="">
-            //                     <a href="#" class="c-criptocompany__course">
-            //                         <span class="c-criptocompany__coursedesc">Курс по NFT-технологии. Вводный</span>
-            //                         <footer class="c-criptocompany__footer">
-            //                             <time class="c-criptocompany__time" datetime="">22.02.2023</time>
-            //                             <span class="c-criptocompany__hourse">22 ч</span>
-            //                         </footer>
-            //                         {/* <div class="c-criptocompany__stiker">
-            //                             <img src="http://agusha.pro.pichesky.ru/images/header/bg-action.png" />
-            //                         </div> */}
-            //                     </a>
-            //                 </li>
-            //             </ul>
-            //         </section>
-            //     </div>
-            // )
         },
     })
     return

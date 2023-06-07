@@ -124,11 +124,11 @@ const start = function (data, ID) {
                 <div class="crypto_exchanges-cell">
                   {Variable.lang.tableTitle.coins}
                 </div>
-                <div class="crypto_exchanges-cell">
+                {/* <div class="crypto_exchanges-cell">
                   <div class="switch">
                     <input type="checkbox"></input>
                   </div>
-                </div>
+                </div> */}
               </div>
               {!Static.records?.length ? (
                 <NotFound />
