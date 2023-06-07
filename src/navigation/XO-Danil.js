@@ -13,7 +13,7 @@ const { images, svg, fn } = CEM // подключение картинок и ф
 let arrGame = [-1, -1, -1, -1, -1, -1, -1, -1, -1]  // Значения на игровом поле (-1 - поле не занято, 1 - поставили крестик, 0 - поставили нолик)
 let count = 0  // Сколько раз походили
 let startGame = 1 //1-Игра идет, 0 - Игра остановлена
-let whoWay = 1 // чей ход (1 - ходит крестик, 0 - ходит нолик)
+let whoWay = 1 // чей ход (1 - ходит крестик, 0 - ходит нолик)  
 let elError = null // Ссылка на элемент (Окно сообщения)
 let textError = ""  // Переменная с текстом в окне сообщения
 let staticRounds = {
@@ -127,13 +127,13 @@ const start = function (data, ID) {
             const [a, b, c] = combs[i];
             // console.log('=83ad4f=', arrGame[a], arrGame[b], arrGame[c])
             if (arrGame[a] == -1 || arrGame[b] == -1 || arrGame[c] == -1) {
-                if (arrGame[a] == 0 && arrGame[b] == 0) {
+                if (arrGame[a] == 1 && arrGame[b] == 1) {
                     return c
                 }
-                if (arrGame[a] == 0 && arrGame[c] == 0) {
+                if (arrGame[a] == 1 && arrGame[c] == 1) {
                     return b
                 }
-                if (arrGame[b] == 0 && arrGame[c] == 0) {
+                if (arrGame[b] == 1 && arrGame[c] == 1) {
                     return a
                 }
             }
@@ -155,16 +155,24 @@ const start = function (data, ID) {
             alert('Не твой ход')
             return;
         }
-
+        //ход на рандом
         let rn = getRandomInt(9)
-        let dontLose = needClose()
+
+        //нужно выыиграть(комп)-присваивание
         let needWin = wantWin()
         console.log('=4ea8e1 needWin=', needWin)
 
         if (needWin != -1) {
             rn = needWin
+        } else {
+            //не проиграть(комп)-присваивание       
+            let dontLose = needClose()
+            // console.log('=d4137d=', dontLose)
+            if (dontLose != -1) {
+                rn = dontLose
+            }
         }
-
+        // console.log('=02e892=', rn)
 
         if (arrGame[rn] == -1) {
             arrGame[rn] = 0
@@ -175,19 +183,18 @@ const start = function (data, ID) {
                 count++
                 initReload()
             }
-            else if(checkWin == true)
-            {
+            else if (checkWin == true) {
                 showError("Вы проиграли!")
                 staticRounds.lose++
                 setStorage("staticRounds", staticRounds)
                 startGame = 0
             }
             else {
-                if(dontLose == false) {
-                    whoWay = 1
-                    count++
-                    initReload()
-                } 
+                // if(dontLose == false) {
+                whoWay = 1
+                count++
+                initReload()
+                // } 
             }
         }
         else {
@@ -227,7 +234,7 @@ const start = function (data, ID) {
                                     <div class="stats_view"> {staticRounds.draw} </div>
                                 </div>
                             </div>
-                            <div class="">  </div>
+                            <button class="btn_change_way"> Смена хода </button>
                         </div>
                         <div class="one_game ">
 
@@ -286,9 +293,9 @@ const start = function (data, ID) {
 
                                         >
                                             {/* {item == 1 ? 'x' : item == 0 ? "0" : null}  */}
-                                            
+
                                             <img class="diz-gm" src={item == 1 ? svg['train/krest_2'] : item == 0 ? svg['train/null'] : ""} style="fill:red"> </img>
-                                            
+
                                         </div>
                                     )
 
