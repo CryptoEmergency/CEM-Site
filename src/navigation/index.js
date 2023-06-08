@@ -207,7 +207,7 @@ const start = function (data, ID) {
       return (
         <div class="c-main__body">
           <Elements.Line Static={Static} records={Static.course}></Elements.Line>
-          <BlockProjects />
+          {/* <BlockProjects /> */}
           <elements.sliderBanners />
           <div class="c-lenta">
             {!Variable[Static.nameRecords] ||

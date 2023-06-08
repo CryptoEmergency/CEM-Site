@@ -20,7 +20,7 @@ const start = function (data, ID) {
             return (
                 <div class="c-main_body">
                     <div class="pt--70">
-                        <Elements.SliderMenu></Elements.SliderMenu>
+                        <Elements.SliderCEM></Elements.SliderCEM>
                     </div>
                 </div>
             );

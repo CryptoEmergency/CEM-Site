@@ -7,6 +7,7 @@ import {
     initGo,
     Helpers,
     init,
+    Data,
     load,
     CEM
 } from '@betarost/cemserver/cem.js';
@@ -69,7 +70,10 @@ const ModalMobileMainSettings = function (data, ID) {
                 three: false,
                 four: false,
             };
+
+            // Data.Static.menu.classList.add("main-menu_active");
         },
+
         fn: () => {
             return (
                 <div class="c-modal c-modal--open c-modal--fullscreen" id="ModalMobileMainSettings"
@@ -87,7 +91,11 @@ const ModalMobileMainSettings = function (data, ID) {
                         }
                     }
                 >
-                    <section class="c-modal__dialog"
+                    <section 
+                        Element={($el)=>{
+                            Data.Static.menu = $el;
+                        }}
+                        class={["main-menu", data.Burger ? "main-menu_active" : null]}
                         onmouseover={
                             function () {
                                 close = false
@@ -113,11 +121,30 @@ const ModalMobileMainSettings = function (data, ID) {
                                     </div>
                                 </div>
                             </div>
-                            <button
-                                type="button"
-                                class="c-modal__close"
-                                onclick={() => { fn.modals.close(ID) }}
-                            ></button>
+                            <div class="wrap-btns_menu">
+                                {/* <button
+                                    type="button"
+                                    class="c-modal-btn mr--10"
+                                >
+                                    Сервисы
+                                </button> */}
+                                <div 
+                                    class="c-modal-btn mr--10"
+                                    onclick={(e)=>{
+                                        fn.modals.close(ID)
+                                        fn.modals.ModalMainPageIconsMenu()
+                                    }}
+                                >
+                                    <span>{Variable.lang.h.services}</span>
+                                </div>
+                                <button
+                                    style="position: relative; top:auto; right: auto;"
+                                    type="button"
+                                    class="c-modal__close"
+                                    onclick={() => { fn.modals.close(ID) }}
+                                ></button>
+                            </div>
+                            
                         </header>
                         <div class="c-modal__body">
                             <div class="user_mobile_menu_part">
@@ -218,8 +245,94 @@ const ModalMobileMainSettings = function (data, ID) {
                                     class={`user_icon_mobile_visible user_icon ${Variable.dataUrl.adress == "lenta-users" ? "user_icon_active" : ""}`}
                                     href="/lenta-users/"
                                 >
-                                    <img src={svg.user_news_page} />
+                                    <img src={svg.newsBlack} />
                                     <span class="mobile_user_menu_link">{Variable.lang.span.userNews}</span>
+                                </a>
+                                <a
+                                    onclick={fn.siteLink}
+                                    class={`user_icon_mobile_visible user_icon ${Variable.dataUrl.adress == "question" ? "user_icon_active" : ""}`}
+                                    href="/question/"
+                                >
+                                    <img src={svg.user_mobile_answers_and_questions} />
+                                    <span class="mobile_user_menu_link">{Variable.lang.a.questionsAnswers}</span>
+                                </a>
+                                <a
+                                    onclick={(e) => {
+                                        Variable.DelModals("ModalMobileMainSettings");
+                                        fn.siteLinkModal(e, {
+                                            title: Variable.lang.a.icoRating, items: fn.itemsMenu.onlyPage({ url: '/list-icostartapss/' })
+                                        })
+                                    }}
+                                    class="user_icon_mobile_visible user_icon"
+                                    href={`list-icostartaps/`}
+                                >
+                                    <img src={svg.starBlack} />
+                                    <span class="mobile_user_menu_link">{Variable.lang.a.icoRating}</span>
+                                </a>
+                                <a
+                                    onclick={(e) => {
+                                        Variable.DelModals("ModalMobileMainSettings");
+                                        fn.siteLinkModal(e, {
+                                            title: Variable.lang.a.starups, items: fn.itemsMenu.onlyPage({ url: '/list-startaps/' })
+                                        })
+                                    }}
+                                    class="user_icon_mobile_visible user_icon"
+                                    href={`list-startaps/`}
+                                >
+                                    <img src={svg.startapsBlack} />
+                                    <span class="mobile_user_menu_link">{Variable.lang.a.starups}</span>
+                                </a>
+                                <a
+                                    onclick={(e) => {
+                                        Variable.DelModals("ModalMobileMainSettings");
+                                        fn.siteLinkModal(e, {
+                                            title: Variable.lang.a.news, items: fn.itemsMenu.onlyPage({ url: '/news/' })
+                                        })
+                                    }}
+                                    class="user_icon_mobile_visible user_icon"
+                                    href={`${Variable.lang.url}news/`}
+                                >
+                                    <img src={svg.news_menu_icon1} />
+                                    <span class="mobile_user_menu_link">{Variable.lang.a.news}</span>
+                                </a>
+                                <a
+                                    onclick={(e) => {
+                                        Variable.DelModals("ModalMobileMainSettings");
+                                        fn.siteLinkModal(e, {
+                                            title: Variable.lang.a.exchange, items: fn.itemsMenu.onlyPage({ url: '/list-exchange/' })
+                                        })
+                                    }}
+                                    class="user_icon_mobile_visible user_icon"
+                                    href={`list-exchange/`}
+                                >
+                                    <img src={svg.exchangesBlack} />
+                                    <span class="mobile_user_menu_link">{Variable.lang.a.exchange}</span>
+                                </a>
+                                <a
+                                    onclick={(e) => {
+                                        Variable.DelModals("ModalMobileMainSettings");
+                                        fn.siteLinkModal(e, {
+                                            title: Variable.lang.h.top_users, 
+                                        })
+                                    }}
+                                    class="user_icon_mobile_visible user_icon"
+                                    href={`users/`}
+                                >
+                                    <img src={svg.lineUsersBlack} />
+                                    <span class="mobile_user_menu_link">{Variable.lang.h.top_users}</span>
+                                </a>
+                                <a
+                                    onclick={(e) => {
+                                        Variable.DelModals("ModalMobileMainSettings");
+                                        fn.siteLinkModal(e, {
+                                            title: Variable.lang.a.university, 
+                                        })
+                                    }}
+                                    class="user_icon_mobile_visible user_icon"
+                                    href={`crypto-university/`}
+                                >
+                                    <img src={svg.univercsityBlack} />
+                                    <span class="mobile_user_menu_link">{Variable.lang.a.university}</span>
                                 </a>
                                 <a
                                     onclick={(e) => {
@@ -260,23 +373,33 @@ const ModalMobileMainSettings = function (data, ID) {
                                     <span class="mobile_user_menu_link">{Variable.lang.a.experts}</span>
                                 </a>
                                 <a
-                                    onclick={fn.siteLink}
-                                    class={`user_icon_mobile_visible user_icon ${Variable.dataUrl.adress == "question" ? "user_icon_active" : ""}`}
-                                    href="/question/"
+                                    onclick={(e) => {
+                                        Variable.DelModals("ModalMobileMainSettings");
+                                        fn.siteLinkModal(e, {
+                                            title: Variable.lang.a.contentCreater, 
+                                        })
+                                    }}
+                                    class="user_icon_mobile_visible user_icon"
+                                    href={`content-creator/`}
                                 >
-                                    <img src={svg.user_mobile_answers_and_questions} />
-                                    <span class="mobile_user_menu_link">{Variable.lang.a.questionsAnswers}</span>
+                                    <img src={svg.contentmakerBlack} />
+                                    <span class="mobile_user_menu_link">{Variable.lang.a.contentCreater}</span>
+                                </a>
+                                <a
+                                    onclick={(e) => {
+                                        Variable.DelModals("ModalMobileMainSettings");
+                                        fn.siteLinkModal(e, {
+                                            title: Variable.lang.a.career, 
+                                            items: fn.itemsMenu.onlyPage({ url: "/career-whith-us/" })
+                                        })
+                                    }}
+                                    class="user_icon_mobile_visible user_icon"
+                                    href={`career-whith-us/`}
+                                >
+                                    <img src={svg.careersBlack} />
+                                    <span class="mobile_user_menu_link">{Variable.lang.a.career}</span>
                                 </a>
                                 {/* <a
-                                    data-updating="true"
-                                    onclick={Helpers.siteLink}
-                                    class="user_icon_mobile_visible user_icon"
-                                    href={`${Variable.lang.url}chats/`}
-                                >
-                                    <img src={svg.community_chat_menu_icon} />
-                                    <span class="mobile_user_menu_link">{Variable.lang.a.chatsPublic}</span>
-                                </a> */}
-                                <a
                                     onclick={(e) => {
                                         Variable.DelModals("ModalMobileMainSettings");
                                         fn.siteLinkModal(e, {
@@ -288,101 +411,11 @@ const ModalMobileMainSettings = function (data, ID) {
                                 >
                                     <img src={svg.news_menu_icon1} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.news}</span>
-                                </a>
-                                {/* <a
-                                    data-updating="true"
-                                    onclick={Helpers.siteLink}
-                                    class="user_icon_mobile_visible user_icon"
-                                    href={`${Variable.lang.url}startups/`}
-                                >
-                                    <img src={svg.startup_menu_icon} />
-                                    <span class="mobile_user_menu_link">{Variable.lang.a.starups}</span>
                                 </a> */}
-                                {/* <a
-                                    onclick={(e) => {
-                                        Variable.DelModals("ModalMobileMainSettings");
-                                        Helpers.siteLinkModal(e, {
-                                            title: Variable.lang.a.trade, items:
-                                                [
-                                                    {
-                                                        text: Variable.lang.select.share,
-                                                        type: "share",
-                                                        onclick: async () => {
-                                                            try {
-                                                                if (navigator.share) {
-                                                                    await navigator.share({
-                                                                        url: window.location.origin + "/list-trade/",
-                                                                    });
-                                                                }
-                                                            } catch (err) {
-                                                                console.error("Share", err)
-                                                            }
-                                                        }
-                                                    },
-                                                    {
-                                                        text: Variable.lang.p.copy + " URL",
-                                                        type: "copyurl",
-                                                        onclick: async () => {
-                                                            navigator.clipboard.writeText(window.location.origin + "/list-trade/");
-                                                            Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied } }, true)
-                                                        }
-                                                    }
-                                                ]
-                                        })
-                                    }}
-                                    class="user_icon_mobile_visible user_icon"
-                                    href={`${Variable.lang.url}list-trade/`}
-                                >
-                                    <img src={svg.exchange_menu_icon} />
-                                    <span class="mobile_user_menu_link">{Variable.lang.a.trade}</span>
-                                </a> */}
-                                {/* <a
-                                    onclick={(e) => {
-                                        Variable.DelModals("ModalMobileMainSettings");
-                                        Helpers.siteLinkModal(e, {
-                                            title: Variable.lang.a.exchange, items:
-                                                [
-                                                    {
-                                                        text: Variable.lang.select.share,
-                                                        type: "share",
-                                                        onclick: async () => {
-                                                            try {
-                                                                if (navigator.share) {
-                                                                    await navigator.share({
-                                                                        url: window.location.origin + "/list-exchange/",
-                                                                    });
-                                                                }
-                                                            } catch (err) {
-                                                                console.error("Share", err)
-                                                            }
-                                                        }
-                                                    },
-                                                    {
-                                                        text: Variable.lang.p.copy + " URL",
-                                                        type: "copyurl",
-                                                        onclick: async () => {
-                                                            navigator.clipboard.writeText(window.location.origin + "/list-exchange/");
-                                                            Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied } }, true)
-                                                        }
-                                                    }
-                                                ]
-                                        })
-                                    }}
-                                    class="user_icon_mobile_visible user_icon"
-                                    href={`${Variable.lang.url}list-exchange/`}
-                                >
-                                    <img src={svg.exchanger_menu_icon} />
-                                    <span class="mobile_user_menu_link">{Variable.lang.a.exchange}</span>
-                                </a> */}
-                                {/* <a
-                                    data-updating="true"
-                                    onclick={Helpers.siteLink}
-                                    class="user_icon_mobile_visible user_icon"
-                                    href={`${Variable.lang.url}ico-rating/`}
-                                >
-                                    <img src={svg.ico_rating} />
-                                    <span class="mobile_user_menu_link">{Variable.lang.a.icoRating}</span>
-                                </a> */}
+                                
+
+
+                              
                                 <div class="mobile_header_socials desktop_dn" style="display: none;">
                                     <div class="social-icons">
                                         <div class="footer-icon-block">
