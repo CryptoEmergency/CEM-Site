@@ -158,7 +158,9 @@
         "modal_cropImage": "Додавання фото",
         "lottery": "«Word of Mouth» lottery",
         "lotterySubtitle": "WIN the 1000CEM!",
-        "modal_listCoin": "Обрати монети"
+        "modal_listCoin": "Обрати монети",
+        "--------------------------новые слова--------------": "--добавить перевод--",
+        "services": "Services"
     },
     "a": {
         "about": "Про нас",

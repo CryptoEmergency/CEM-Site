@@ -159,7 +159,8 @@
         "lottery": "Loterie «Bouche à oreille»",
         "lotterySubtitle": "GAGNEZ le CEM",
         "------------------новые слова-----------------": "добавить новые слова",
-        "modal_listCoin": "Choose coins"
+        "modal_listCoin": "Choose coins",
+        "services": "Services"
     },
     "a": {
         "about": "À propos de nous",

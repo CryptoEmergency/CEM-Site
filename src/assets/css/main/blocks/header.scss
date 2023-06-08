@@ -284,6 +284,8 @@
 
         .c-userpanel {
             &__icon {
+                cursor: pointer;
+
                 &--burger {
                     display: block;
                     margin-bottom: 0;
@@ -1063,6 +1065,8 @@
     }
 
     &--bottom {
+        display: flex;
+        justify-content: center;
         top: auto;
         bottom: -1px;
         height: 65px; //52px;
@@ -1070,7 +1074,7 @@
         transition: 0.7s;
         z-index: 9999;
         border-top: 1px solid #363C50;
-        max-width: 1240px;
+        // max-width: 1240px;
         left: 50%;
         transform: translateX(-50%);
 
@@ -1081,15 +1085,28 @@
             }
 
             &__icons {
-                flex-direction: row;
-                justify-content: space-between;
+                // flex-direction: row;
+                // justify-content: space-between;
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                grid-gap: 40px;
                 align-items: center;
                 margin-left: 0;
                 margin-top: 0;
-                height: 65px;
+                // height: 65px;
+                max-width: 700px;
 
                 @media(max-width: 1199px) {
-                    padding: 5px 30px;
+                    padding: 0 30px;
+                }
+
+                @media (max-width: 700px) {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    width: 100%;
+                    max-width: 100%;
+                    grid-gap: 0;
                 }
 
                 @media (max-width: 522px) {

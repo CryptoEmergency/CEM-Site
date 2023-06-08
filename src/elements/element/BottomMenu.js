@@ -37,7 +37,8 @@ const BottomMenu = function () {
         }
     }
     // console.log('=b85f6c=', Variable.dataUrl)
-    let Burger
+    let Burger;
+    let BurgerOpen = false;
     return (
         <div class="c-userpanel c-userpanel--bottom">
             <div class="c-userpanel__icons">
@@ -146,7 +147,18 @@ const BottomMenu = function () {
                     Element={($el) => {
                         Burger = $el
                     }}
-                    onClick={(e) => { e.stopPropagation(); fn.modals.ModalMobileMainSettings({ Burger }); Burger.classList.add("c-userpanel__icon--active") }}>
+                    onClick={(e) => { 
+                        e.stopPropagation(); 
+                        
+                        fn.modals.ModalMobileMainSettings({ Burger }); 
+                        // BurgerOpen = !BurgerOpen
+                        // if(BurgerOpen){
+                        //     Burger.classList.add("c-userpanel__icon--active") 
+                        // }else{
+                        //     Burger.classList.remove("c-userpanel__icon--active")
+                        // }
+                        Burger.classList.add("c-userpanel__icon--active") 
+                    }}>
                 </a>
             </div>
             <div class="c-userpanel__addmodal">
