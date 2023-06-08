@@ -19,7 +19,7 @@ const UserWalletCard = function ({ Static, balance, coin, course, logo }) {
                 balance,
                 callback: async (trade, countCoin, getNameCoin) => {
                   Static.trade = await trade
-                  await fn.socket.send({ method: "Transactions", _id: Variable.myInfo._id, params: { balance, coin, countCoin, getNameCoin } })
+                  // await fn.socket.send({ method: "Transactions", _id: Variable.myInfo._id, params: { balance, coin, countCoin, getNameCoin } })
                   console.log('=ec8fe4=', Static)
                   initReload()
                 }
@@ -31,10 +31,33 @@ const UserWalletCard = function ({ Static, balance, coin, course, logo }) {
           </div>
           :
           null
+      }
+      {
+        balance >= 0.1 && coin == "cem"
+          ?
+          <div class="c-wallet__exchange"
+            onclick={async () => {
+              console.log('=749e41=', Static)
+
+              fn.modals.ModalOutputOfCoin({
+                balance, coin,
+                callback: async (countCoin, address, nameCoin) => {
+                  const output = await fn.socket.send({ method: "Output", _id: Variable.myInfo._id, params: { countCoin, address, nameCoin } })
+                  console.log('=ec8fe4=', output)
+                  initReload()
+                }
+              })
+              initReload()
+            }}
+          >
+            <span>вывести</span>
+          </div>
+          :
+          null
       } */}
       <div class="c-wallet__topline">
         <p>{Variable.lang.p.myBalance}</p>
-        <p>
+        <p class="c-wallet__coin_name">
           {fn.numberFixWithSpaces(balance, 2)} {coin}
         </p>
       </div>
@@ -108,7 +131,7 @@ const start = function (data, ID) {
                       logo={true}
                       balance={Variable.myInfo.balance.cem}
                       course={Static.course.cem.usdt}
-                      coin={"CEM"}
+                      coin={"cem"}
                     />
                     :
                     null

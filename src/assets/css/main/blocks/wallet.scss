@@ -75,6 +75,10 @@
         }
     }
 
+    &__coin_name {
+        text-transform: uppercase;
+    }
+
     &__bottomline {
         display: flex;
         justify-content: space-between;

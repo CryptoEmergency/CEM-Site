@@ -11,13 +11,19 @@
         border: 1px solid #404861;
         border-radius: 10px;
 
+        &_title {
+            margin-right: 8px;
+        }
+
         &_name {
             font-size: 22px;
             font-weight: 500;
             margin-right: 8px;
+            text-transform: uppercase;
         }
 
         input {
+            width: 100%;
             margin-right: 10px;
             padding: 5px 10px;
             background: #313541;
@@ -37,6 +43,16 @@
         &_weight {
             margin-bottom: 2px;
             font-weight: 600;
+        }
+
+        &_output {
+            display: flex;
+        }
+    }
+    
+    &__coin {
+        &_uppercase {
+            text-transform: uppercase;
         }
     }
 
