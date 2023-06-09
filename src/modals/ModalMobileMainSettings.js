@@ -132,7 +132,8 @@ const ModalMobileMainSettings = function (data, ID) {
                                     class="c-modal-btn mr--10"
                                     onclick={(e)=>{
                                         fn.modals.close(ID)
-                                        fn.modals.ModalMainPageIconsMenu()
+                                        // fn.modals.ModalMainPageIconsMenu()
+                                        fn.modals.ModalMainServices()
                                     }}
                                 >
                                     <span>{Variable.lang.h.services}</span>
@@ -165,10 +166,10 @@ const ModalMobileMainSettings = function (data, ID) {
                                             <img src={svg["profile_icon-2"]} />
                                             <span class="mobile_user_menu_link">{Variable.lang.a.chats}</span>
                                         </a> */}
-                                                <a onclick={fn.siteLink} class="user_icon_mobile_visible user_icon" href="/user/posts/">
+                                                {/* <a onclick={fn.siteLink} class="user_icon_mobile_visible user_icon" href="/user/posts/">
                                                     <img src={svg["profile_icon-5"]} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.h.createPost}</span>
-                                                </a>
+                                                </a> */}
                                                 <a onclick={fn.siteLink} class="user_icon_mobile_visible user_icon" href="/user/awards/">
                                                     <img src={svg["profile_icon-4"]} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.a.awards}</span>
@@ -181,10 +182,10 @@ const ModalMobileMainSettings = function (data, ID) {
                                                     <img src={svg.absolutely_new_wallet} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.a.wallet}</span>
                                                 </a>
-                                                <a onclick={fn.siteLink} class="user_icon_mobile_visible user_icon" href="/user/notes/">
+                                                {/* <a onclick={fn.siteLink} class="user_icon_mobile_visible user_icon" href="/user/notes/">
                                                     <img src={svg.notes} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.a.notes}</span>
-                                                </a>
+                                                </a> */}
                                                 <a onclick={fn.siteLink} class="user_icon_mobile_visible user_icon" href="/user/affiliate/">
                                                     <img src={svg["profile_icon-3"]} />
                                                     <span class="mobile_user_menu_link">{Variable.lang.a.affiliate}</span>
@@ -257,38 +258,23 @@ const ModalMobileMainSettings = function (data, ID) {
                                     <span class="mobile_user_menu_link">{Variable.lang.a.questionsAnswers}</span>
                                 </a>
                                 <a
-                                    onclick={(e) => {
-                                        Variable.DelModals("ModalMobileMainSettings");
-                                        fn.siteLinkModal(e, {
-                                            title: Variable.lang.a.icoRating, items: fn.itemsMenu.onlyPage({ url: '/list-icostartapss/' })
-                                        })
-                                    }}
+                                    onclick={fn.siteLink}
                                     class="user_icon_mobile_visible user_icon"
-                                    href={`list-icostartaps/`}
+                                    href="/list-icostartaps/"
                                 >
                                     <img src={svg.starBlack} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.icoRating}</span>
                                 </a>
                                 <a
-                                    onclick={(e) => {
-                                        Variable.DelModals("ModalMobileMainSettings");
-                                        fn.siteLinkModal(e, {
-                                            title: Variable.lang.a.starups, items: fn.itemsMenu.onlyPage({ url: '/list-startaps/' })
-                                        })
-                                    }}
+                                    onclick={fn.siteLink}
                                     class="user_icon_mobile_visible user_icon"
-                                    href={`list-startaps/`}
+                                    href="/list-startaps/"
                                 >
                                     <img src={svg.startapsBlack} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.starups}</span>
                                 </a>
                                 <a
-                                    onclick={(e) => {
-                                        Variable.DelModals("ModalMobileMainSettings");
-                                        fn.siteLinkModal(e, {
-                                            title: Variable.lang.a.news, items: fn.itemsMenu.onlyPage({ url: '/news/' })
-                                        })
-                                    }}
+                                    onclick={fn.siteLink}
                                     class="user_icon_mobile_visible user_icon"
                                     href={`${Variable.lang.url}news/`}
                                 >
@@ -296,76 +282,31 @@ const ModalMobileMainSettings = function (data, ID) {
                                     <span class="mobile_user_menu_link">{Variable.lang.a.news}</span>
                                 </a>
                                 <a
-                                    onclick={(e) => {
-                                        Variable.DelModals("ModalMobileMainSettings");
-                                        fn.siteLinkModal(e, {
-                                            title: Variable.lang.a.exchange, items: fn.itemsMenu.onlyPage({ url: '/list-exchange/' })
-                                        })
-                                    }}
+                                    onclick={fn.siteLink}
                                     class="user_icon_mobile_visible user_icon"
-                                    href={`list-exchange/`}
+                                    href="/list-exchange/"
                                 >
                                     <img src={svg.exchangesBlack} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.exchange}</span>
                                 </a>
                                 <a
-                                    onclick={(e) => {
-                                        Variable.DelModals("ModalMobileMainSettings");
-                                        fn.siteLinkModal(e, {
-                                            title: Variable.lang.h.top_users, 
-                                        })
-                                    }}
+                                    onclick={fn.siteLink}
                                     class="user_icon_mobile_visible user_icon"
-                                    href={`users/`}
+                                    href="/users/"
                                 >
                                     <img src={svg.lineUsersBlack} />
                                     <span class="mobile_user_menu_link">{Variable.lang.h.top_users}</span>
                                 </a>
                                 <a
-                                    onclick={(e) => {
-                                        Variable.DelModals("ModalMobileMainSettings");
-                                        fn.siteLinkModal(e, {
-                                            title: Variable.lang.a.university, 
-                                        })
-                                    }}
+                                    onclick={fn.siteLink}
                                     class="user_icon_mobile_visible user_icon"
-                                    href={`crypto-university/`}
+                                    href="/crypto-university/"
                                 >
                                     <img src={svg.univercsityBlack} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.university}</span>
                                 </a>
                                 <a
-                                    onclick={(e) => {
-                                        Variable.DelModals("ModalMobileMainSettings");
-                                        fn.siteLinkModal(e, {
-                                            title: Variable.lang.a.experts, items:
-                                                [
-                                                    {
-                                                        text: Variable.lang.select.share,
-                                                        type: "share",
-                                                        onclick: async () => {
-                                                            try {
-                                                                if (navigator.share) {
-                                                                    await navigator.share({
-                                                                        url: window.location.origin + "/experts/",
-                                                                    });
-                                                                }
-                                                            } catch (err) {
-                                                                console.error("Share", err)
-                                                            }
-                                                        }
-                                                    },
-                                                    {
-                                                        text: Variable.lang.p.copy + " URL",
-                                                        type: "copyurl",
-                                                        onclick: async () => {
-                                                            navigator.clipboard.writeText(window.location.origin + "/experts/");
-                                                            Variable.SetModals({ name: "ModalAlarm", data: { icon: "confirm_icon", text: Variable.lang.text.coppied } }, true)
-                                                        }
-                                                    }
-                                                ]
-                                        })
-                                    }}
+                                    onclick={fn.siteLink}
                                     class={`user_icon_mobile_visible user_icon ${Variable.dataUrl.adress == "experts" ? "user_icon_active" : ""}`}
                                     href="/experts/"
                                 >
@@ -373,32 +314,21 @@ const ModalMobileMainSettings = function (data, ID) {
                                     <span class="mobile_user_menu_link">{Variable.lang.a.experts}</span>
                                 </a>
                                 <a
-                                    onclick={(e) => {
-                                        Variable.DelModals("ModalMobileMainSettings");
-                                        fn.siteLinkModal(e, {
-                                            title: Variable.lang.a.contentCreater, 
-                                        })
-                                    }}
+                                    onclick={fn.siteLink}
                                     class="user_icon_mobile_visible user_icon"
-                                    href={`content-creator/`}
+                                    href="/content-creator/"
                                 >
                                     <img src={svg.contentmakerBlack} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.contentCreater}</span>
                                 </a>
-                                <a
-                                    onclick={(e) => {
-                                        Variable.DelModals("ModalMobileMainSettings");
-                                        fn.siteLinkModal(e, {
-                                            title: Variable.lang.a.career, 
-                                            items: fn.itemsMenu.onlyPage({ url: "/career-whith-us/" })
-                                        })
-                                    }}
+                                {/* <a
+                                    onclick={fn.siteLink}
                                     class="user_icon_mobile_visible user_icon"
-                                    href={`career-whith-us/`}
+                                    href="/career-whith-us/"
                                 >
                                     <img src={svg.careersBlack} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.career}</span>
-                                </a>
+                                </a> */}
                                 {/* <a
                                     onclick={(e) => {
                                         Variable.DelModals("ModalMobileMainSettings");

@@ -1,99 +1,50 @@
 .sliderMenu-wrap {
-    background-color: #232733;
+    max-width: 1200px;
     position: relative;
+}
 
-    .sliderContainer {
-        // max-width: 1300px;
-        max-width: 450px;
+.sliderMenu-wrap .slider-container {
+    font-size: 0;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.slider-container img {
+    height: 340px;
+    // object-fit: cover;
+    object-fit: contain;
+    margin-left: 15px;
+    width: calc(100% / 3);
+}
+
+.slider-container img:first-child {
+    margin-left: 0;
+}
+
+.slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    cursor: pointer;
+
+    &.slider-button_prev {
+        left: -25px;
+    }
+
+    &.slider-button_next {
+        right: -25px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .slider-container img {
+        width: calc(100% / 2);
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .slider-container img {
         width: 100%;
-        position: relative;
-        margin: 0 auto;
-        overflow: hidden;
-    }
-
-    .slider {
-        touch-action: pan-y;
-        margin: 0 15px;
-        display: flex;
-        white-space: nowrap;
-        flex-shrink: 0;
-        width: 800px;
-        // justify-content: center;
-        align-items: center;
-        transform: translate3d(0px, 0, 0);
-    }
-
-    .slider-item {
-        float: left;
-        padding: 10px 25px;
-        transition: all ease 1s;
-
-        a {
-            color: inherit;
-        }
-    }
-
-    .slider-item_inner {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-
-        p {
-            margin-top: 10px;
-            font-size: 11px;
-            line-height: 16px;
-            font-weight: 600;
-        }
-    }
-
-    .slider-item_img {
-        border-radius: 3px;
-        border: 4px solid #303749;
-        // width: 60px;
-        // height: 60px;
-        background: rgba(0, 0, 0, 0);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        z-index: 1;
-        cursor: pointer;
-        text-align: center;
-        overflow: hidden;
-
-        img {
-            width: 70%;
-            height: auto;
-        }
-    }
-
-    .slider-item_img::after {
-        content: "";
-        position: absolute;
-        background: var(--main-gradient);
-    }
-
-
-    .slider-button {
-        position: absolute;
-        top: 50%;
-        transform: translate(0, -50%);
-        height: 40%;
-        width: 20px;
-
-        &_prev {
-            left: 0px;
-        }
-
-        &_next {
-            right: 0px;
-        }
-
-        img {
-            width: 100%;
-            height: auto;
-        }
     }
 }
