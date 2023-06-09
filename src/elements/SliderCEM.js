@@ -67,6 +67,15 @@ const dragStop = () => {
     isDragStart = false;
 }
 
+const slideNext = () => {
+    
+}
+
+const slidePrev = () => {
+
+}
+
+
 const forExport = function ({}) {
     return (
         <div class="sliderMenu-wrap">
@@ -74,6 +83,12 @@ const forExport = function ({}) {
                 class="slider-button slider-button_prev" 
                 role="button"
                 aria-label="Previous slide"
+                Element={($el)=>{
+                    Data.Static.arrowPrev = $el;
+                }}
+                onclick={()=>{
+                    slidePrev();
+                }}
             >
                 <img src={svg.swiper_arrow_left}></img>
             </div>
@@ -96,7 +111,15 @@ const forExport = function ({}) {
                     projects.map((item, index)=>{
                         return(
                             
-                            <img src={images[`slider/${item.icon}`]} alt={item.title}></img>
+                            <img
+                                src={images[`slider/${item.icon}`]} 
+                                alt={item.title}
+                                Element={($el)=>{
+                                    Data.Static[`img${index}`] = $el;
+                                    Data.Static
+                                }}
+                            >
+                            </img>
                            
                         )
                     })
@@ -106,6 +129,12 @@ const forExport = function ({}) {
                 class="slider-button slider-button_next" 
                 role="button"
                 aria-label="Next slide"
+                Element={($el)=>{
+                    Data.Static.arrowNext = $el;
+                }}
+                onclick={()=>{
+                    slideNext();
+                }}
             >
                 <img src={svg.swiper_arrow_right}></img>
             </div>
