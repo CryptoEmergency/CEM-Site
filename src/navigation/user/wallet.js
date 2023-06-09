@@ -8,53 +8,66 @@ const { svg, fn } = CEM
 const UserWalletCard = function ({ Static, balance, coin, course, logo }) {
   return (
     <div class="c-wallet__card">
-      {/* {
-        balance >= 1.6
-          ?
-          <div class="c-wallet__exchange"
-            onclick={async () => {
-              console.log('=749e41=', Static)
+      <div>
+        {
+          balance >= 9
+            ?
+            <div class="c-wallet__exchange"
+              onclick={async () => {
+                // console.log('=749e41=', Static)
 
-              fn.modals.ModalExchange({
-                balance,
-                callback: async (trade, countCoin, getNameCoin) => {
-                  Static.trade = await trade
-                  // await fn.socket.send({ method: "Transactions", _id: Variable.myInfo._id, params: { balance, coin, countCoin, getNameCoin } })
-                  console.log('=ec8fe4=', Static)
-                  initReload()
-                }
-              })
-              initReload()
-            }}
-          >
-            <span>{Variable.lang.button.exchange}</span>
-          </div>
-          :
-          null
-      }
-      {
-        balance >= 0.1 && coin == "cem"
-          ?
-          <div class="c-wallet__exchange"
-            onclick={async () => {
-              console.log('=749e41=', Static)
+                fn.modals.ModalExchange({
+                  balance,
+                  callback: async (trade, countCoin, getNameCoin) => {
+                    // console.log('=3ad621=========', Static)
 
-              fn.modals.ModalOutputOfCoin({
-                balance, coin,
-                callback: async (countCoin, address, nameCoin) => {
-                  const output = await fn.socket.send({ method: "Output", _id: Variable.myInfo._id, params: { countCoin, address, nameCoin } })
-                  console.log('=ec8fe4=', output)
-                  initReload()
-                }
-              })
-              initReload()
-            }}
-          >
-            <span>вывести</span>
-          </div>
-          :
-          null
-      } */}
+                    Static.trade = await trade
+                    let responce = await fn.socket.send({ method: "Transactions", _id: Variable.myInfo._id, params: { balance, coin, countCoin, getNameCoin } })
+                    // console.log('=ec8fe4=', responce)
+                    if (responce?.cem) {
+                      Static.myBalance = responce
+                    }
+                    initReload()
+                  }
+                })
+                initReload()
+              }}
+            >
+              <span>{Variable.lang.button.exchange}</span>
+            </div>
+            :
+            null
+        }
+      </div>
+      <div>
+        {
+          balance >= 0.1 && coin == "cem"
+            ?
+            <div class="c-wallet__exchange"
+              onclick={async () => {
+                // console.log('=749e41=', Static)
+
+                fn.modals.ModalOutputOfCoin({
+                  balance, coin,
+                  callback: async (countCoin, address, nameCoin) => {
+                    // console.log('=3ad621=', Static)
+                    const output = await fn.socket.send({ method: "Output", _id: Variable.myInfo._id, params: { countCoin, address, nameCoin } })
+                    // console.log('=ec8fe4=', output)
+                    if (output?.cem) {
+                      Static.myBalance = output
+                    }
+                    initReload()
+                  }
+                })
+                initReload()
+              }}
+            >
+              <span>вывести</span>
+            </div>
+            :
+            null
+        }
+      </div>
       <div class="c-wallet__topline">
         <p>{Variable.lang.p.myBalance}</p>
         <p class="c-wallet__coin_name">
@@ -99,10 +112,20 @@ const start = function (data, ID) {
           filter: {
             userTo: Variable.myInfo._id,
           },
-          limit:10,
+          limit: 10,
           sort: { showDate: -1 },
         }
       });
+      const resBalance = await fn.socket.get({
+        method: "Users",
+        _id: Variable.myInfo._id,
+        params: {
+          filter: {},
+          select: { balance: 1 }
+        }
+      });
+
+      Static.myBalance = resBalance?.balance
       await fn.restApi.getTransactions({
         cache: true,
         name: Static.nameRecords,
@@ -111,7 +134,7 @@ const start = function (data, ID) {
       });
     },
     fn: () => {
-      console.log('=b650c3=', Static.transactionsUsers)
+      // console.log('=b650c3=', Static.transactionsUsers)
       return (
         <div class="page-content">
           <div class="c-wallet c-main__body">
@@ -120,23 +143,24 @@ const start = function (data, ID) {
                 <UserWalletCard
                   Static={Static}
                   logo={true}
-                  balance={Variable.myInfo.balance.cemd}
+                  balance={Static.myBalance.cemd}
                   course={1}
                   coin={"cemd"}
                 />
                 {
-                  Variable.myInfo.balance.cem > 0
+                  Static.myBalance.cem > 0
                     ?
                     <UserWalletCard
+                      Static={Static}
                       logo={true}
-                      balance={Variable.myInfo.balance.cem}
+                      balance={Static.myBalance.cem}
                       course={Static.course.cem.usdt}
                       coin={"cem"}
                     />
                     :
                     null
                 }
-                {/* <UserWalletCard logo={true} balance={Variable.myInfo.balance.cem} course={Variable.Course.list_records[0].cem.usdt} coin={"CEM"} /> */}
+                {/* <UserWalletCard logo={true} balance={Static.myBalance.cem} course={Variable.Course.list_records[0].cem.usdt} coin={"CEM"} /> */}
               </div>
             </div>
             {/* {

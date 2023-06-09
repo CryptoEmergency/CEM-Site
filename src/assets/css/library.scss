@@ -10,7 +10,7 @@ $roadmapColors: (
   5: #279324,
   6: #D82B56,
 );
-$Zindex:(
+$Zindex: (
   1: 1,
   2: 2,
   3: 3,
@@ -22,13 +22,16 @@ $Zindex:(
   9: 9,
   10: 10,
 );
-@each $key,$value  in $Zindex{
-  .indexZ--#{$key}{
+
+@each $key,
+$value in $Zindex {
+  .indexZ--#{$key} {
     z-index: $value;
     position: relative;
   }
 }
-$indents:(
+
+$indents: (
   0: 0px,
   4: 4px,
   5: 5px,
@@ -56,11 +59,13 @@ $indents:(
   60: 60px,
   70: 70px,
 );
+
 //======== variables colors ========
-a{
+a {
   text-decoration: none;
 }
-h2{
+
+h2 {
   font-size: 44px;
   line-height: 115%;
   color: #FFFFFF;
@@ -68,157 +73,191 @@ h2{
   font-weight: 700;
   margin: 25px 0;
 
-  @media(max-width: 992px){
+  @media(max-width: 992px) {
     font-size: 44px;
   }
-  @media(max-width: 767px){
+
+  @media(max-width: 767px) {
     font-size: 40px;
   }
-  @media(max-width: 464px){
+
+  @media(max-width: 464px) {
     font-size: 30px;
     margin-bottom: 20px;
   }
 }
+
 // ========== container =======
-.page-container{
+.page-container {
   // padding: 80px 0;
   max-width: 1240px;
   margin: 0px auto;
 
-  h1{
+  h1 {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 }
 
-.page-inner{
+.page-inner {
   background: #232733;
   min-height: 500px;
 }
+
 // ========== container =======
 
 // === sections =======
-.section{
+.section {
   padding: 50px 0;
-  @media (max-width: 750px){
+
+  @media (max-width: 750px) {
     padding: 35px 0;
   }
 }
-.section-g{
+
+.section-g {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
-  @media (max-width: 1340px){
+
+  @media (max-width: 1340px) {
     padding-left: 10px;
     padding-right: 10px;
   }
-  @media (max-width: 992px){
+
+  @media (max-width: 992px) {
     grid-gap: 15px;
   }
-  @media (max-width: 875px){
+
+  @media (max-width: 875px) {
     grid-template-columns: repeat(2, 1fr);
   }
-  @media (max-width: 650px){
+
+  @media (max-width: 650px) {
     grid-template-columns: 1fr;
     grid-gap: 7px;
   }
 }
-.section-3{
+
+.section-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
-  @media(max-width: 767px){
+
+  @media(max-width: 767px) {
     grid-template-columns: repeat(2, 1fr);
-    .c-aboutus__project:last-child{
+
+    .c-aboutus__project:last-child {
       grid-column: 1 / span 2;
       grid-row: 2;
     }
   }
-  @media(max-width: 464px){
+
+  @media(max-width: 464px) {
     grid-template-columns: 1fr;
     grid-gap: 0;
-    .c-aboutus__project:last-child{
+
+    .c-aboutus__project:last-child {
       grid-column: auto;
       grid-row: auto;
     }
   }
 }
+
 // === sections =======
 
 //===== font-size, font-weight =====
-$weightText:(
+$weightText: (
   500: 500,
   600: 600,
   700: 700
 );
+
 @each $index,
-$size in $indents{
-  .el-size--#{$index}{
+$size in $indents {
+  .el-size--#{$index} {
     font-size: $size;
   }
 }
+
 @each $index,
-$weight in $weightText{
-  .el-w--#{$index}{
+$weight in $weightText {
+  .el-w--#{$index} {
     font-weight: $weight;
   }
 }
+
 // === font-size, font-weight =====
 
 // === padding, margin =====
 // разноообразные внутренние отступы
 // для новостей, блога, медиа
-.p-lr{
+.p-lr {
   padding: 0;
-  @media (max-width: 1370px){
+
+  @media (max-width: 1370px) {
     padding: 0 30px;
   }
-  @media (max-width: 750px){
+
+  @media (max-width: 750px) {
     padding: 0 15px;
   }
 }
+
 // разноообразные внутренние отступы
 
 @each $index,
-$indent in $indents{
-  .pt--#{$index}{
+$indent in $indents {
+  .pt--#{$index} {
     padding-top: $indent;
   }
-  .pb--#{$index}{
+
+  .pb--#{$index} {
     padding-bottom: $indent;
   }
-  .pl--#{$index}{
+
+  .pl--#{$index} {
     padding-left: $indent;
   }
-  .pr--#{$index}{
+
+  .pr--#{$index} {
     padding-right: $indent;
   }
-  .pX--#{$index}{
+
+  .pX--#{$index} {
     padding: 0 $indent;
   }
-  .pY--#{$index}{
+
+  .pY--#{$index} {
     padding: $indent 0;
   }
-  .mt--#{$index}{
+
+  .mt--#{$index} {
     margin-top: $indent;
   }
-  .mb--#{$index}{
+
+  .mb--#{$index} {
     margin-bottom: $indent;
   }
-  .ml--#{$index}{
+
+  .ml--#{$index} {
     margin-left: $indent;
   }
-  .mr--#{$index}{
+
+  .mr--#{$index} {
     margin-right: $indent;
   }
-  .mX--#{$index}{
+
+  .mX--#{$index} {
     margin: 0 $indent;
   }
-  .mY--#{$index}{
+
+  .mY--#{$index} {
     margin: $indent 0;
   }
 }
+
 // === padding, margin =====
 
 // ===== another style ======
@@ -226,56 +265,62 @@ $indent in $indents{
   display: none;
 }
 
-.img-full{
+.img-full {
   display: flex;
   justify-content: center;
   align-items: center;
   max-height: 550px;
   overflow: hidden;
-  img{
+
+  img {
     max-width: 100%;
     object-fit: contain;
     width: 100%;
     height: 100%;
   }
 }
-.text{
+
+.text {
   font-size: 18px;
   line-height: 25px;
   color: $text;
   font-weight: 500;
 }
-.source{
+
+.source {
   font-style: italic;
   font-weight: 300;
   font-size: 16px;
   line-height: 25px;
   color: $text;
 }
-.link{
+
+.link {
   font-weight: 700;
   background: linear-gradient(56.57deg, #2973FF 0%, #8846D3 51.56%, #FF22AC 105.28%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 // ===== another style ======
 
 
 
 // element
-.el-c{
+.el-c {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.el-color--grey{
+.el-color--grey {
   color: #DBEAFF;
 }
+
 // element
 
 // ========== card-link =======
-.card-link{
+.card-link {
   padding: 20px;
   background: #303545;
   border-radius: 8px;
@@ -284,18 +329,21 @@ $indent in $indents{
   text-decoration: none;
   color: #FFFFFF;
   cursor: pointer;
-  @media(max-width: 992px){
+
+  @media(max-width: 992px) {
     padding: 15px;
   }
-  @media(max-width: 750px){
+
+  @media(max-width: 750px) {
     display: grid;
     grid-template-columns: 100px 1fr;
     grid-template-rows: 72px auto;
     gap: 10px;
     padding: 15px;
     height: 122px;
-    .img-rect_news{
-      img{
+
+    .img-rect_news {
+      img {
         width: 72px;
         height: 72px;
         margin-bottom: 0;
@@ -305,11 +353,13 @@ $indent in $indents{
     }
   }
 }
-.img-rect{
+
+.img-rect {
   padding: 0 0 58% 0;
   overflow: hidden;
   position: relative;
-  img{
+
+  img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -317,33 +367,37 @@ $indent in $indents{
     top: 0;
     left: 0;
   }
-  @media(max-width: 750px){
+
+  @media(max-width: 750px) {
     height: auto;
     margin: 0 10px 5px 0;
     border-radius: 4px;
   }
 }
 
-.img-rect_news{
+.img-rect_news {
   // width: 100px;
   overflow: hidden;
-  img{
+
+  img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 }
 
-.card-subtitle{
+.card-subtitle {
   // height: 100px;
   -webkit-line-clamp: 3;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  @media(max-width: 992px){
+
+  @media(max-width: 992px) {
     font-size: 16px;
   }
-  @media(max-width: 750px){
+
+  @media(max-width: 750px) {
     height: auto;
     padding-top: 0;
     font-size: 16px;
@@ -352,11 +406,13 @@ $indent in $indents{
     // -webkit-box-orient: vertical;
     // overflow: hidden;
   }
-  @media(max-width: 750px){
+
+  @media(max-width: 750px) {
     font-size: 14px;
   }
 }
-.card-desc{
+
+.card-desc {
   font-weight: 500;
   line-height: 24px;
   -webkit-line-clamp: 3;
@@ -364,14 +420,17 @@ $indent in $indents{
   -webkit-box-orient: vertical;
   overflow: hidden;
   align-self: flex-end;
-  @media(max-width: 992px){
+
+  @media(max-width: 992px) {
     font-size: 14px;
   }
-  @media(max-width: 750px){
+
+  @media(max-width: 750px) {
     display: none;
   }
 }
-.card-statistic{
+
+.card-statistic {
   // position: absolute;
   // bottom: 10px;
   display: flex;
@@ -379,23 +438,45 @@ $indent in $indents{
   justify-content: space-between;
   color: #838BA3;
   font-size: 13px;
-  .statistic-icon{
-    img{
+
+  .statistic-icon {
+    img {
       filter: invert(60%) sepia(11%) saturate(674%) hue-rotate(187deg) brightness(91%) contrast(81%);
       height: 10px;
       margin-right: 10px;
     }
   }
 
-  @media(max-width: 750px){
+  @media(max-width: 750px) {
     grid-column: 1 / span 2;
   }
 }
+
 // ========== card-link =======
 
 
 // buttons===========================
 // button close X
+// стили для любой кнопки
+.b {
+  border: none;
+  outline: none;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--main-text);
+  cursor: pointer;
+  background: transparent;
+}
+
+.btn-modal_close {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
+}
+
 .b-close {
   cursor: pointer;
   width: 28px;
@@ -406,7 +487,8 @@ $indent in $indents{
   justify-content: center;
   align-items: center;
   opacity: .7;
-  @media (max-width: 1199px){
+
+  @media (max-width: 1199px) {
     box-shadow: 0 0 15px -2px #8859EC;
     opacity: 1;
   }
@@ -415,7 +497,7 @@ $indent in $indents{
 .b-close:hover {
   box-shadow: 0 0 15px -2px #8859EC;
   opacity: 1;
-  
+
 }
 
 
@@ -443,13 +525,16 @@ $indent in $indents{
     line-height: 22px;
     margin-bottom: 0;
     font-weight: 700;
+
     @media (max-width: 992px) {
       font-size: 18px;
     }
+
     @media (max-width: 767px) {
       font-size: 16px;
     }
   }
+
   @media (max-width: 767px) {
     padding: 15px 31px 15px 15px;
   }
@@ -474,6 +559,7 @@ $indent in $indents{
   max-height: 1000px;
   padding: 15px 25px;
 }
+
 // accordeon=============================
 
 // arrow top / bottom for filters, accordeon and another elements
@@ -484,7 +570,7 @@ $indent in $indents{
   transform: translate(-50%, -50%);
   transition: .3s;
 
-  @media(max-width: 767px){
+  @media(max-width: 767px) {
     right: 5px;
   }
 }
@@ -553,7 +639,7 @@ $indent in $indents{
   grid-template-columns: repeat(2, 1fr);
   grid-auto-rows: 60px;
   grid-column-gap: 10px;
-  grid-template-areas: 
+  grid-template-areas:
     'item-0 .'
     'item-0 item-1'
     '.      item-1'
@@ -567,7 +653,7 @@ $indent in $indents{
     'item-6 item-7'
     '.      item-7';
 
-  .roadmap_item{
+  .roadmap_item {
     display: grid;
     grid-template-columns: 1fr 55px;
 
@@ -585,12 +671,12 @@ $indent in $indents{
       justify-self: start;
     }
 
-    @media(max-width: 767px){
+    @media(max-width: 767px) {
       width: 100%;
     }
   }
 
-    
+
 
   .item-card {
     height: 120px;
@@ -605,7 +691,7 @@ $indent in $indents{
 
     &.item-card--1,
     &.item-card--3,
-    &.item-card--5{
+    &.item-card--5 {
       grid-column: 2;
     }
 
@@ -674,7 +760,7 @@ $indent in $indents{
 
     &.turn-1 img,
     &.turn-3 img,
-    &.turn-5 img{
+    &.turn-5 img {
       left: 40%;
     }
   }
@@ -683,26 +769,28 @@ $indent in $indents{
 
 @each $index,
 $color in $roadmapColors {
-  
-  .roadmap_item--#{$index}{
+
+  .roadmap_item--#{$index} {
     grid-area: item-#{$index};
 
     .item-card--#{$index} {
       border: 1px solid $color;
+
       @media (max-width: 529px) {
         border: none;
       }
     }
   }
- 
+
   .year--#{$index} {
     color: $color;
   }
-  
+
   .turn-#{$index} {
     grid-area: turn-#{$index};
   }
 }
+
 //roadmap========================
 
 // card blocks
@@ -974,16 +1062,18 @@ $color in $roadmapColors {
     left: -3%;
   }
 }
+
 // list goals
 
 // comments (media)
-.comments-form{
+.comments-form {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 50px;
   justify-content: space-between;
 }
-.textarea{
+
+.textarea {
   width: 100%;
   min-height: 41px;
   padding: 10px;
@@ -996,7 +1086,8 @@ $color in $roadmapColors {
   line-height: 1.5rem;
   resize: none;
 }
-.comments-send{
+
+.comments-send {
   position: absolute;
   right: 0;
   cursor: pointer;
@@ -1006,4 +1097,5 @@ $color in $roadmapColors {
   background: transparent;
   border: none;
 }
+
 // comments (media)
