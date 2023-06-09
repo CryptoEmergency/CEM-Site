@@ -179,67 +179,8 @@ const start = function (data, ID) {
     }
     //функция хода противника
     function autoWay() {
-        if (iplay = 1){
-
-        if (count >= 9) {
-            staticRounds.draw++
-            setStorage("staticRounds", staticRounds)
-            showError("Ничья, можешь испытать удачу снова!")
-            startGame = 0
-            return;
-        }
-        if (whoWay == 1) {
-            alert('Не твой ход')
-            return;
-        }
-        //ход на рандом
-        let rn = getRandomInt(9)
-
-        //нужно выыиграть(комп)-присваивание
-        let needWin = wantWin()
-        console.log('=4ea8e1 needWin=', needWin)
-
-        if (needWin != -1) {
-            rn = needWin
-        } else {
-            //не проиграть(комп)-присваивание       
-            let dontLose = needClose()
-            // console.log('=d4137d=', dontLose)
-            if (dontLose != -1) {
-                rn = dontLose
-            }
-        }
-        // console.log('=02e892=', rn)
-
-        if (arrGame[rn] == -1) {
-            arrGame[rn] = 0
-
-            let checkWin = isVictory()
-            if (checkWin == false) {
-                whoWay = 1
-                count++
-                initReload()
-            }
-            else if (checkWin == true) {
-                showError("Вы проиграли!")
-                staticRounds.lose++
-                setStorage("staticRounds", staticRounds)
-                startGame = 0
-            }
-            else {
-                // if(dontLose == false) {
-                whoWay = 1
-                count++
-                initReload()
-                // } 
-            }
-        }
-        else {
-            autoWay()
-        }
-    }
-    else if (iplay = 0){
         
+        if(iplay == 0 || whoWay == 1){
         if (count >= 9) {
             staticRounds.draw++
             setStorage("staticRounds", staticRounds)
@@ -296,7 +237,7 @@ const start = function (data, ID) {
         else {
             autoWay()
         }
-    }
+        }
     }
     
 
@@ -364,45 +305,8 @@ const start = function (data, ID) {
                                         <div
                                             class="block__size__1"
                                             onclick={() => {
-                                                if(iplay = 1) {
-                                                    
-                                                
-                                                if (startGame == 0) {
-                                                    showError("Игра окончена")
-                                                    return;
-                                                }
-
-                                                if (whoWay != 1) {
-                                                    showError("Не твой ход")
-                                                    return;
-                                                }
-
-                                                if (item == -1) {
-                                                    arrGame[index] = 1;
-
-                                                    let checkWin = isVictory()
-                                                    if (checkWin == false) {
-                                                        whoWay = 0
-                                                        count++
-                                                        
-                                                        autoWay()
-                                                    }
-                                                    
-                                                    else {
-                                                        staticRounds.win++
-                                                        setStorage("staticRounds", staticRounds)
-                                                        showError("Вы выиграли")
-                                                        startGame = 0
-                                                    }
-                                                    initReload()
-                                                }
-                                                else {
-                                                    showError("поле занято")
-                                                    // alert('поле занято')
-                                                }
-                                            
-                                            }
-                                            else if (iplay = 0){
+                                               
+                                           
                                                 
                                                 whoWay = 1
                                                 autoWay()
@@ -437,7 +341,7 @@ const start = function (data, ID) {
                                                     showError("поле занято")
                                                     // alert('поле занято')
                                                 }
-                                            }
+                                            
                                         }}
                                         >
                                             {/* {item == 1 ? 'x' : item == 0 ? "0" : null}  */}
