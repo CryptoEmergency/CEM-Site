@@ -11,6 +11,23 @@ import Elements from "@src/elements/export.js";
 
 const fn = CEM.fn
 
+const makeFilter = (Static) => {
+  let ret = {}
+  ret["type"] = "news"
+  ret["languages.code"] = Variable.lang.code == "ru" ? "ru" : "en"
+  ret["moderation"] = true
+  ret["showDate"] = { $lte: new Date() }
+
+  if (Static.activeCategory != "All") {
+    ret["category.name"] = Static.activeCategory
+  } else {
+    null
+  }
+
+  return ret
+}
+
+
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID, initData: "news" });
   Static.showMore = true
@@ -42,7 +59,7 @@ const start = function (data, ID) {
 
     },
     fn: () => {
-      // console.log('=f98e0c=', Static.records)
+      // console.log('=f98e0c=', Static.showMore)
       return (
         <Elements.page.MainContainer class="blog_page_container">
 
@@ -50,6 +67,7 @@ const start = function (data, ID) {
             <div
               class={["tag_button", Static.activeCategory == "All" ? "tag_button_active" : ""]}
               onclick={async () => {
+                Static.showMore = true
                 Static.activeCategory = "All";
                 Static.records = await fn.socket.get({
                   method: "News",
@@ -75,6 +93,7 @@ const start = function (data, ID) {
                     ? "tag_button_active"
                     : ""]}
                   onclick={async () => {
+                    Static.showMore = true
                     Static.activeCategory = item.name;
                     Static.records = await fn.socket.get({
                       method: "News",
@@ -151,13 +170,7 @@ const start = function (data, ID) {
               let tmp = await fn.socket.get({
                 method: "News",
                 params: {
-                  filter: {
-                    type: "news",
-                    "languages.code": Variable.lang.code == "ru" ? "ru" : "en",
-                    "category.name": Static.activeCategory,
-                    moderation: true,
-                    showDate: { $lte: new Date()}
-                  },
+                  filter: makeFilter(Static),
                   limit: 20,
                   offset: Static.records.length
                 },
