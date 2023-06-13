@@ -5,15 +5,15 @@ import {
     load,
     setStorage,
     getStorage,
-    Static,
     CEM
-} from "@betarost/cemserver/cem.js";    
+} from "@betarost/cemserver/cem.js";
 import Elements from "@src/elements/export.js";
 
-const { images, svg, fn } = CEM 
+const { images, svg, fn } = CEM
 
 
 const start = function (data, ID) {
+    let [Static] = fn.GetParams({ data, ID });
 
     load({
         ID,
@@ -24,7 +24,7 @@ const start = function (data, ID) {
                         <div class="page-container">
                             <Elements.SliderCEM
                                 Static={Static}
-                                speed = "2500"
+                                speed="2500"
                             >
                             </Elements.SliderCEM>
                         </div>
