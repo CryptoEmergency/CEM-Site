@@ -119,6 +119,7 @@
 .tag_button span {
     color: #D0D0D0;
     line-height: 42px;
+    white-space: nowrap;
 
     @media (max-width: 750px) {
         line-height: 26px;

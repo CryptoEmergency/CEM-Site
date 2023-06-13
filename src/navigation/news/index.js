@@ -11,17 +11,38 @@ import Elements from "@src/elements/export.js";
 
 const fn = CEM.fn
 
+const makeFilter = (Static) => {
+  let ret = {}
+  ret["type"] = "news"
+  ret["languages.code"] = Variable.lang.code == "ru" ? "ru" : "en"
+  ret["moderation"] = true
+  ret["showDate"] = { $lte: new Date() }
+
+  if (Static.activeCategory != "All") {
+    ret["category.name"] = Static.activeCategory
+  } else {
+    null
+  }
+
+  return ret
+}
+
+
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID, initData: "news" });
   Static.showMore = true
+  // Static.activeCategory = "All";
+
   load({
     ID,
     fnLoad: async () => {
-      Static.categoryList = await fn.restApi.getCategories({
-        filter: { type: "news" },
+      Static.categoryList = await fn.socket.get({
+        method: "ListCategory",
+        params: {
+          filter: { type: "news", active: "true" },
+        },
         limit: 20,
       });
-      // console.log("=ef5982=", Static.categoryList.list_records);
       Static.records = await fn.socket.get({
         method: "News",
         params: {
@@ -32,12 +53,13 @@ const start = function (data, ID) {
             showDate: { $lte: new Date() }
           },
           limit: 20,
-          select: { comments: 1 }
+          // select: { comments: 1 }
         },
       });
 
     },
     fn: () => {
+      // console.log('=f98e0c=', Static.showMore)
       return (
         <Elements.page.MainContainer class="blog_page_container">
 
@@ -45,6 +67,7 @@ const start = function (data, ID) {
             <div
               class={["tag_button", Static.activeCategory == "All" ? "tag_button_active" : ""]}
               onclick={async () => {
+                Static.showMore = true
                 Static.activeCategory = "All";
                 Static.records = await fn.socket.get({
                   method: "News",
@@ -63,13 +86,14 @@ const start = function (data, ID) {
               }}>
               <span>{Variable.lang.categoryName.all}</span>
             </div>
-            {Static.categoryList.list_records.map((item) => {
+            {Static.categoryList.map((item) => {
               return (
                 <div
                   class={["tag_button", Static.activeCategory == item.name
                     ? "tag_button_active"
                     : ""]}
                   onclick={async () => {
+                    Static.showMore = true
                     Static.activeCategory = item.name;
                     Static.records = await fn.socket.get({
                       method: "News",
@@ -78,7 +102,7 @@ const start = function (data, ID) {
                           type: "news",
                           "languages.code":
                             Variable.lang.code == "ru" ? "ru" : "en",
-                          "category.name": item.name,
+                          "category.name": Static.activeCategory,
                           moderation: true
                         },
                       },
@@ -133,7 +157,6 @@ const start = function (data, ID) {
                   }}
                   statisticClass="card-statistic"
                   ElemVisible={() => {
-                    // console.log('=b0902a=',Переменная)
                     fn.recordsView(item._id, "setNews")
                   }}
                 />
@@ -147,12 +170,7 @@ const start = function (data, ID) {
               let tmp = await fn.socket.get({
                 method: "News",
                 params: {
-                  filter: {
-                    type: "news",
-                    "languages.code": Variable.lang.code == "ru" ? "ru" : "en",
-                    moderation: true,
-                    showDate: { $lte: new Date()}
-                  },
+                  filter: makeFilter(Static),
                   limit: 20,
                   offset: Static.records.length
                 },
