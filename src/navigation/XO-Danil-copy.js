@@ -18,8 +18,8 @@ let elError = null // Ссылка на элемент (Окно сообщен�
 let textError = ""  // Переменная с текстом в окне сообщения
 let iplay = 1       //1-крест 0-ноль
 let changeFigure = {
- krest: "X", //отображение фигуры за которую играешь 
- null : "O"
+    krest: "X", //отображение фигуры за которую играешь 
+    null: "O"
 }
 let staticRounds = {
     win: 0,
@@ -81,6 +81,10 @@ const start = function (data, ID) {
         count = 0;
         showError("Новая игра.Начинайте!")
         initReload()
+        if (iplay = 0)
+        {
+            autoWay()
+        }
     }
 
     function wantWin() {
@@ -179,67 +183,69 @@ const start = function (data, ID) {
     }
     //функция хода противника
     function autoWay() {
-        
-        if(iplay == 0 || whoWay == 1){
-        if (count >= 9) {
-            staticRounds.draw++
-            setStorage("staticRounds", staticRounds)
-            showError("Ничья, можешь испытать удачу снова!")
-            startGame = 0
-            return;
-        }
-        if (whoWay == 0) {
-            alert('Не твой ход')
-            return;
-        }
-        //ход на рандом
-        let rn = getRandomInt(9)
-
-        //нужно выыиграть(комп)-присваивание
-        let needWin = wantWin()
-        console.log('=4ea8e1 needWin=', needWin)
-
-        if (needWin != -1) {
-            rn = needWin
-        } else {
-            //не проиграть(комп)-присваивание       
-            let dontLose = needCloseKrest()
-            // console.log('=d4137d=', dontLose)
-            if (dontLose != -1) {
-                rn = dontLose
-            }
-        }
-        // console.log('=02e892=', rn)
-            
-        if (arrGame[rn] == -1) {
-            arrGame[rn] = 1
-
-            let checkWin = isVictory()
-            if (checkWin == false) {
-                whoWay = 0
-                count++
-                initReload()
-            }
-            else if (checkWin == true) {
-                showError("Вы проиграли!")
-                staticRounds.lose++
+        console.log('=51c3b5=', 123)
+        if (iplay == 0 && whoWay == 1) {
+            if (count >= 9) {
+                staticRounds.draw++
                 setStorage("staticRounds", staticRounds)
+                showError("Ничья, можешь испытать удачу снова!")
                 startGame = 0
+                return;
+            }
+            if (whoWay == 0) {
+                alert('Не твой ход')
+                return;
+            }
+            //ход на рандом
+            let rn = getRandomInt(9)
+
+            //нужно выыиграть(комп)-присваивание
+            let needWin = wantWin()
+            console.log('=4ea8e1 needWin=', needWin)
+
+            if (needWin != -1) {
+                rn = needWin
+                
+            } else {
+                //не проиграть(комп)-присваивание       
+                let dontLose = needCloseKrest()
+                // console.log('=d4137d=', dontLose)
+                if (dontLose != -1) {
+                    rn = dontLose
+                }
+            }
+            
+            // console.log('=02e892=', rn)
+            console.log('=asdfa=',2345)
+            if (arrGame[rn] == -1) {
+                arrGame[rn] = 1
+
+                let checkWin = isVictory()
+                if (checkWin == false) {
+                    whoWay = 0
+                    count++
+                    initReload()
+                }
+                else if (checkWin == true) {
+                    showError("Вы проиграли!")
+                    staticRounds.lose++
+                    setStorage("staticRounds", staticRounds)
+                    startGame = 0
+                }
+                else {
+                    // if(dontLose == false) {
+                    whoWay = 0
+                    count++
+                    initReload()
+                    // } 
+                }
             }
             else {
-                // if(dontLose == false) {
-                whoWay = 0
-                count++
-                initReload()
-                // } 
+                autoWay()
             }
         }
-        else {
-            autoWay()
-        }
-        }
     }
-    
+
 
 
     load({
@@ -274,24 +280,56 @@ const start = function (data, ID) {
                                 </div>
                             </div>
                             <div>
-                                
-                            <button class="btn_change_way"
-                                onclick={() => {
-                                    startGame = 1
-                                    restGame()
-                                    iplay = 0
-                                    console.log('=whio=', iplay)
-                                    if(iplay = 0) 
-                                    
-                                {}
-                                else {
-                                    iplay = 1
+
+                                <button class="btn_change_way"
+                                    onclick={() => {
+                                        startGame = 1
+                                        restGame()
+                                        iplay = 0
+                                        console.log('=whio=', iplay)
+                                        autoWay()
+                                        if (iplay =0)
+                                    {
+                                   
+                                   
+                                   
+                                   if (startGame == 0) {
+                                       showError("Игра окончена")
+                                       return;
+                                   }
+                                   if (whoWay != 0) {
+                                       showError("Не твой ход")
+                                       return;
+                                   }
+                                   if (item == -1) {
+                                       arrGame[index] = 0;
+
+                                       let checkWin = isVictory()
+                                       if (checkWin == false) {
+                                           whoWay = 1
+                                           count++
+                                           
+                                           autoWay()
+                                       }
+                                       
+                                       else {
+                                           staticRounds.win++
+                                           setStorage("staticRounds", staticRounds)
+                                           showError("Вы выиграли")
+                                           startGame = 0
+                                       }
+                                       initReload()
+                                   }
+                                   else {
+                                       showError("поле занято")
+                                       // alert('поле занято')
+                                   }
                                 }
-                            }
-                            }
-                            
-                            > Смена хода </button>
-                            <div>Играете за - {changeFigure}</div>
+                                    }
+                                    }
+
+                                > Смена хода </button>
+                                <div>Играете за - {changeFigure}</div>
                             </div>
                         </div>
                         <div class="one_game ">
@@ -299,17 +337,18 @@ const start = function (data, ID) {
                             <table id="field" class="" >
                                 {arrGame.map((item, index) => {
 
-                                    
+
                                     return (
-                                        
+
                                         <div
                                             class="block__size__1"
+
                                             onclick={() => {
-                                               
-                                           
+
+
+
                                                 
-                                                whoWay = 1
-                                                autoWay()
+
                                                 if (startGame == 0) {
                                                     showError("Игра окончена")
                                                     return;
@@ -320,15 +359,15 @@ const start = function (data, ID) {
                                                 }
                                                 if (item == -1) {
                                                     arrGame[index] = 0;
-            
+
                                                     let checkWin = isVictory()
                                                     if (checkWin == false) {
                                                         whoWay = 1
                                                         count++
-                                                        
+
                                                         autoWay()
                                                     }
-                                                    
+
                                                     else {
                                                         staticRounds.win++
                                                         setStorage("staticRounds", staticRounds)
@@ -341,8 +380,8 @@ const start = function (data, ID) {
                                                     showError("поле занято")
                                                     // alert('поле занято')
                                                 }
-                                            
-                                        }}
+
+                                            }}
                                         >
                                             {/* {item == 1 ? 'x' : item == 0 ? "0" : null}  */}
 
@@ -375,7 +414,7 @@ const start = function (data, ID) {
                                 onclick={() => {
                                     startGame = 1
                                     restGame()
-
+                                    
                                 }}
                             >
                                 {/* <script>
