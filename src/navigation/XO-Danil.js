@@ -268,7 +268,7 @@ const start = function (data, ID) {
                 rn = dontLose
             }
         }
-        // console.log('=02e892=', rn)
+         console.log('=02e892=', rn)
             
         if (arrGame[rn] == -1) {
             arrGame[rn] = 1
@@ -339,13 +339,49 @@ const start = function (data, ID) {
                                     startGame = 1
                                     restGame()
                                     iplay = 0
+                                    autoWay()
                                     console.log('=whio=', iplay)
-                                    if(iplay = 0) 
-                                    
-                                {}
-                                else {
-                                    iplay = 1
+                                    if (iplay =0)
+                                    {
+                                   
+                                   
+                                   
+                                   if (startGame == 0) {
+                                       showError("Игра окончена")
+                                       return;
+                                   }
+                                   if (whoWay != 0) {
+                                       showError("Не твой ход")
+                                       return;
+                                   }
+                                   if (item == -1) {
+                                       arrGame[index] = 0;
+
+                                       let checkWin = isVictory()
+                                       if (checkWin == false) {
+                                           whoWay = 1
+                                           count++
+                                           
+                                           autoWay()
+                                       }
+                                       
+                                       else {
+                                           staticRounds.win++
+                                           setStorage("staticRounds", staticRounds)
+                                           showError("Вы выиграли")
+                                           startGame = 0
+                                       }
+                                       initReload()
+                                   }
+                                   else {
+                                       showError("поле занято")
+                                       // alert('поле занято')
+                                   }
                                 }
+                            
+
+
+
                             }
                             }
                             
@@ -404,39 +440,39 @@ const start = function (data, ID) {
                                             }
                                             else if (iplay = 0){
                                                 
-                                                whoWay = 1
-                                                autoWay()
-                                                if (startGame == 0) {
-                                                    showError("Игра окончена")
-                                                    return;
-                                                }
-                                                if (whoWay != 0) {
-                                                    showError("Не твой ход")
-                                                    return;
-                                                }
-                                                if (item == -1) {
-                                                    arrGame[index] = 0;
+                                                // whoWay = 1
+                                                // autoWay()
+                                                // if (startGame == 0) {
+                                                //     showError("Игра окончена")
+                                                //     return;
+                                                // }
+                                                // if (whoWay != 0) {
+                                                //     showError("Не твой ход")
+                                                //     return;
+                                                // }
+                                                // if (item == -1) {
+                                                //     arrGame[index] = 0;
             
-                                                    let checkWin = isVictory()
-                                                    if (checkWin == false) {
-                                                        whoWay = 1
-                                                        count++
+                                                //     let checkWin = isVictory()
+                                                //     if (checkWin == false) {
+                                                //         whoWay = 1
+                                                //         count++
                                                         
-                                                        autoWay()
-                                                    }
+                                                //         autoWay()
+                                                //     }
                                                     
-                                                    else {
-                                                        staticRounds.win++
-                                                        setStorage("staticRounds", staticRounds)
-                                                        showError("Вы выиграли")
-                                                        startGame = 0
-                                                    }
-                                                    initReload()
-                                                }
-                                                else {
-                                                    showError("поле занято")
-                                                    // alert('поле занято')
-                                                }
+                                                //     else {
+                                                //         staticRounds.win++
+                                                //         setStorage("staticRounds", staticRounds)
+                                                //         showError("Вы выиграли")
+                                                //         startGame = 0
+                                                //     }
+                                                //     initReload()
+                                                // }
+                                                // else {
+                                                //     showError("поле занято")
+                                                //     // alert('поле занято')
+                                                // }
                                             }
                                         }}
                                         >
