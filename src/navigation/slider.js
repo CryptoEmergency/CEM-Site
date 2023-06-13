@@ -5,6 +5,7 @@ import {
     load,
     setStorage,
     getStorage,
+    Static,
     CEM
 } from "@betarost/cemserver/cem.js";    
 import Elements from "@src/elements/export.js";
@@ -21,7 +22,11 @@ const start = function (data, ID) {
                 <div class="c-main_body">
                     <div class="pt--70">
                         <div class="page-container">
-                            <Elements.SliderCEM></Elements.SliderCEM>
+                            <Elements.SliderCEM
+                                Static={Static}
+                                speed = "2500"
+                            >
+                            </Elements.SliderCEM>
                         </div>
                     </div>
                 </div>

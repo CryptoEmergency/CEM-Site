@@ -40,6 +40,10 @@ const makeFilter = function (Static) {
   return objReturn
 }
 
+// const findUserGpt = function (Static){
+//   let objReturn = {};
+// }
+
 const makeFilterSort = function (Static) {
   let objReturn = {}
   if (!Static.filters) {
@@ -72,7 +76,10 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
     }
     Static.apiFilter = makeFilter(Static)
     Static.apiFilterSort = makeFilterSort(Static)
-    await fn.restApi.getQuestions({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, sort: Static.apiFilterSort, limit })
+    await fn.restApi.getQuestions({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, sort: Static.apiFilterSort, limit });
+    // Static.filterGtp = findUserGpt()
+    // Static.chatGpt = await fn.restApi.getUsers({ cache: true, name: Static.nameRecords, filter: Static.filterGtp })
+    // console.log('=34b3fa=', Static.chatGpt)
   });
   // console.log(Variable[Static.nameRecords])
   return (
@@ -81,9 +88,28 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
         {
           Variable.DataUrl.adress == "question" && Variable.dataUrl.adress != "index"
             ?
-            <div>
-              <h4>{Variable.lang.h.lastQuestions}</h4>
-              <p>{Variable.lang.p.addQuestionsSlog}</p>
+            <div style="display: flex; align-items: center">
+              <div>
+                <h4>{Variable.lang.h.lastQuestions}</h4>
+                <p>{Variable.lang.p.addQuestionsSlog}</p>
+              </div>
+              {/* <a 
+                class="c-question"
+                onclick={async () => {
+                  Variable.Static.startChatsID = Static.chatGpt
+                  fn.siteLink("/user/chats/");
+                }}
+              >
+                <div class="c-question__avatar">
+                  <Avatar author={Static.chatGpt} />
+                </div>
+                <span>Chat GPT</span>
+                <span
+                  
+                >
+                  Задать вопрос ChatGPT
+                </span>
+              </a> */}
             </div>
             :
             null
