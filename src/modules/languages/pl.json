@@ -77,7 +77,9 @@
         "pre_view": "Wstępny przegląd",
         "allPartners": "Wszyscy partnerzy",
         "resetCrop": "Anulować",
-        "reset": "Anulowanie"
+        "reset": "Anulowanie",
+        "--------------------------новые слова--------------": "--добавить перевод--",
+        "toAsk": "To ask"
     },
     "h": {
         "success": "Pomyślnie!",

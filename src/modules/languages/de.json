@@ -77,7 +77,9 @@
         "pre_view": "Vorschau",
         "allPartners": "Alle Partner",
         "resetCrop": "Absagen",
-        "reset": "Stornierung"
+        "reset": "Stornierung",
+        "--------------------------новые слова--------------": "--добавить перевод--",
+        "toAsk": "To ask"
     },
     "h": {
         "success": "Erfolgreich!",
