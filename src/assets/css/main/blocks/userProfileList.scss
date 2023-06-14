@@ -1664,11 +1664,24 @@
             outline: none;
         }
 
-        img {
-            // height: 14px;
-            width: 14px;
+        .info_img {
+            position: absolute;
+            // right: 0;
+            width: 18px;
             margin-right: 8px;
             cursor: pointer;
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+
+        .deletebigblockinfo {
+            right: -14px;
+        }
+
+        .editbigblockinfo {
+            right: 16px;
         }
 
         &_inner {

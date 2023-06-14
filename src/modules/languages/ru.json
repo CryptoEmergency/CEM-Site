@@ -490,6 +490,8 @@
 		"deleteCommentConfirm": "Вы уверены, что хотите удалить комментарий?",
 		"communityWelcome": "Добро пожаловать в сообщество!",
 		"deleteNotesConfirm": "Вы уверены, что хотите удалить заметку?",
+		"deleteUserInterest": "Вы уверены, что хотите удалить свой интерес?",
+		"deleteUserWork": "Вы уверены, что хотите удалить своё место работы?",
 		"exitConfirm": "Вы уверены, что хотите выйти?",
 		"noneContactsFreelance": "Пользователь не указал никаких контактов.",
 		"aboutQuestionOne": "Цель Crypto Emergency?",
