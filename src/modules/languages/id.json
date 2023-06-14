@@ -77,7 +77,9 @@
 		"pre_view": "Pratinjau",
 		"allPartners": "Semua mitra",
 		"resetCrop": "Cancel",
-		"reset": "Cancellation"
+		"reset": "Cancellation",
+		"--------------------------новые слова--------------": "--добавить перевод--",
+		"toAsk": "To ask"
 	},
 	"h": {
 		"success": "Berhasil!",

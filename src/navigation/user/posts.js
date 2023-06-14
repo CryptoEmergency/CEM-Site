@@ -863,7 +863,8 @@ const start = function (data, ID) {
                 // class={[Static.textInputs.show ? "create_post_chapter create_post_main_text" : "c-hidden"]}
                 // contenteditable="true" 
                 class="create_post_chapter create_post_main_text"
-                contenteditable="plaintext-only"
+                
+                contenteditable={fn.getBrowser == "Firefox" ? "true" : "plaintext-only"}
 
                 oninput={function (e) {
 
@@ -871,9 +872,12 @@ const start = function (data, ID) {
 
                   Static.textInputs.value = this.innerText.trim()
 
+                }}
 
-                }
-                }
+                onPaste={(e) => {
+                  e.preventDefault();
+                  fn.insertCleaning(e)
+                }}
               >
                 {/* {Static.edittext} */}
                 {fn.editText(Static.edittext, { paragraph: true, clear: true, html: true, noLink: true })}

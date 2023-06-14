@@ -102,7 +102,8 @@
         "insertLink": "Insert link",
         "insertImage": "Insert image",
         "fontSize": "Font size",
-        "--------------------------новые слова--------------": "--добавить перевод--"
+        "--------------------------новые слова--------------": "--добавить перевод--",
+        "toAsk": "To ask"
     },
     "h": {
         "success": "Successfully!",
@@ -486,6 +487,8 @@
         "deleteCommentConfirm": "Are you sure you want to delete the comment?",
         "communityWelcome": "Welcome to the community!",
         "deleteNotesConfirm": "Are you sure you want to delete the note?",
+        "deleteUserInterest": "Are you sure you want to delete your interest?",
+        "deleteUserWork": "Are you sure you want to delete your place of work?",
         "exitConfirm": "Are you sure you want to log out?",
         "noneContactsFreelance": "The user did not provide any contacts.",
         "aboutQuestionOne": "What is the goal of Crypto Emergency?",

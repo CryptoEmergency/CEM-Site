@@ -354,6 +354,10 @@ const start = function (data, ID) {
                     class="c-chapter create_post_chapter create_post_main_text"
                     contenteditable="true"
                     oninput={changeTextAnswer}
+                    onPaste={(e) => {
+                      e.preventDefault();
+                      fn.insertCleaning(e)
+                    }}
                     Element={($el) => {
                       elText = $el
                     }}

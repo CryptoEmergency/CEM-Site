@@ -10,9 +10,6 @@ initOne,
 CEM
 } from '@betarost/cemserver/cem.js';
 
-//   import { fn } from "@src/functions/export.js";
-//   import svg from "@assets/svg/index.js";
-//   import images from "@assets/images/index.js";
 const { images, svg, fn } = CEM
 
 const banners = [
@@ -47,13 +44,18 @@ const banners = [
         src: images['slider/6']
     },
 ]
-// const bannersReverse = banners.reverse();
+
 let isDragging = false;
 let startX, startScrollLeft, timeoutId;
-
 let slides = [...banners];
+let sliderPerView = Math.round(Data.widthSliderCarousel / Data.widthSlide);
 
-let currentSlide = 0;
+banners.slice(-sliderPerView).reverse().forEach(slide => {
+    slides.unshift(slide)
+})
+banners.slice(0, sliderPerView).forEach(slide => {
+    slides.push(slide)
+})
 
 const dragStart = (e) => {
 // Records the initial cursor and scroll position of the carousel
@@ -76,48 +78,30 @@ const autoPLay = (speed) => {
     if(!timeoutId){
         timeoutId = setInterval(() => {
             Data.sliderCarousel.scrollLeft += Data.widthSlide;
-            console.log('=3bffd6=', timeoutId)
         }, speed)
     }
-    
 }
-
-let sliderPerView = Math.round(Data.widthSliderCarousel / Data.widthSlide);
-
-banners.slice(-sliderPerView).reverse().forEach(slide => {
-    slides.unshift(slide)
-})
-banners.slice(0, sliderPerView).forEach(slide => {
-    slides.push(slide)
-})
 
 const infinityScroll = () => {
     if(Data.sliderCarousel.scrollLeft === 0){
-        console.log('=6a004e=', "begin")
         Data.sliderCarousel.classList.add("no-transition");
         Data.sliderCarousel.scrollLeft = Data.sliderCarousel.scrollWidth - (2 * Data.widthSliderCarousel);
         Data.sliderCarousel.classList.remove("no-transition");
         initReload()
     }else if(Math.ceil(Data.sliderCarousel.scrollLeft) === Data.sliderCarousel.scrollWidth - Data.widthSliderCarousel){
-        console.log('=eccfbf=', "end")
         Data.sliderCarousel.classList.add("no-transition");
         Data.sliderCarousel.scrollLeft = Data.widthSliderCarousel;
+        // Data.sliderCarousel.scrollLeft = Data.widthSliderCarousel +
         Data.sliderCarousel.classList.remove("no-transition");
         initReload()
     }
-    // if(Data.sliderWrap.matches(":hover")){
-    //     clearTimeout(timeoutId)
-    //     console.log("matches");
-    // }
 }
 
-
-
 const forExport = function ({ Static, speed }) {
-    if (!timeoutId){
-        autoPLay(speed)
-    }
-    console.log('=4beeb7=', timeoutId)
+
+if (!timeoutId){
+    autoPLay(speed)
+}
 return (
     <div 
         class="slider-wrap"
@@ -125,15 +109,13 @@ return (
             Data.sliderWrap = $el
         }}
         onmouseenter={(e)=>{
-            console.log('=234fa4=',123)
             if (timeoutId){
-            clearTimeout(timeoutId);
-             timeoutId=null
+                clearTimeout(timeoutId);
+                timeoutId=null
             }
         }}
         onmouseleave={()=>{
             autoPLay(speed)
-            console.log('=c8a406=', "leave mouse")
         }}
     >
         <div 
@@ -166,12 +148,16 @@ return (
                 Data.widthSliderCarousel = $el.offsetWidth;
                 
             }}
-        
+            onkeydown={(e)=>{
+                if(e.code == 'ArrowLeft'){
+                    console.log('=45cf14=', "нажата 'левая стрелка'")
+                }else if(e.code == 'ArrowRight'){
+                    console.log('=45cf14=', "нажата 'правая стрелка'")
+                }
+            }}
         >
         {
-
             slides.map((item, index)=>{
-
             return(
                 <img 
                     class="slider-slide" 
@@ -193,9 +179,8 @@ return (
             aria-label="Next slide"
             onclick={()=>{
                 Data.sliderCarousel.scrollLeft += -Data.widthSlide;
-                // infinityScroll()
             }}
-            >
+        >
             <img src={svg.swiper_arrow_left}></img>
         </div>
     </div>

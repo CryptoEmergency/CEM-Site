@@ -166,7 +166,7 @@ const ModalConfirmCode = function (data, ID) {
                                                 return (
                                                     <input
                                                         class="test12345"
-                                                        type="text"
+                                                        type="number"
                                                         onKeyUp={(e) => handleKeyUp(e, i)}
                                                         oninput={(e) => change(e, i)}
                                                     ></input>

@@ -281,7 +281,7 @@ const BlockUsers = async function ({ Static, limit = 21 }) {
                             <NotFound />
                             :
                             Variable[Static.nameRecords].list_records.map(function (user, i) {
-                                console.log('=7b2cad= user =', user)
+                                // console.log('=7b2cad= user =', user)
                                 return (
                                     <div class="new_professional_card userLoad" data-id={user._id}>
                                         <div class="new_professional_card_top">

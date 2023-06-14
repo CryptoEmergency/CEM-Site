@@ -11,7 +11,7 @@ import {
   CEM
 } from "@betarost/cemserver/cem.js";
 // import { fn } from '@src/functions/index.js';
-import { MediaButton, MediaPreview, Input } from '@elements/element/index.js';
+import { MediaButton, MediaPreview, Input, Avatar } from '@elements/element/index.js';
 // import svg from '@assets/svg/index.js';
 
 const { svg, fn } = CEM
@@ -240,7 +240,12 @@ const ModalAskQuestion = function (data, ID) {
       inputAudio = Variable.setRef();
 
       selectAspect = null;
-
+      Static.chatGpt = await fn.restApi.getUsers({ 
+        cache: true,  
+        filter:  {
+          _id: '64253afe406a0934b2fca96a'
+        }
+      })
 
     },
     fn: () => {
@@ -276,6 +281,22 @@ const ModalAskQuestion = function (data, ID) {
             </header>
             <div class="c-modal__body" >
               <div class="c-askquestion">
+                <div class="abs-r">
+                  <div 
+                    class="c-question__avatar"
+                    onclick={(e)=>{
+                      if (e.preventDefault) { // стандарт
+                        e.preventDefault();
+                        e.stopPropagation();
+                      } else {                       // IE8-
+                        e.returnValue = false;
+                        e.cancelBubble = true;
+                      }
+                    }}
+                  >
+                    <Avatar author={Static.chatGpt.list_records[0]} />
+                  </div>
+                </div>
                 {/* <form id="askQuestion" onsubmit={sendQuestion}> */}
 
                 {/* <input style="display: none;" type="submit" /> */}
@@ -321,18 +342,16 @@ const ModalAskQuestion = function (data, ID) {
                           <div
                             contenteditable="true"
                             onpaste={function (e) {
-                              alert(1)
                               e.preventDefault()
+                              fn.insertCleaning(e)
 
                             }}
                             oninput={function (e) {
                               if (e.inputType == "insertFromPaste") {
                                 console.log(e)
                               }
-
                               Static.close = false
                               Static.textQuestion.value = this.innerText;
-
                             }}
 
                             class="c-form__field create_post_chapter create_post_main_text"

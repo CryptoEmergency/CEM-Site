@@ -40,9 +40,7 @@ const makeFilter = function (Static) {
   return objReturn
 }
 
-// const findUserGpt = function (Static){
-//   let objReturn = {};
-// }
+
 
 const makeFilterSort = function (Static) {
   let objReturn = {}
@@ -61,6 +59,8 @@ const makeFilterSort = function (Static) {
   return objReturn
 }
 
+
+
 const BlockQuestions = async function ({ Static, limit = 21 }) {
 
   await initOne(async () => {
@@ -77,39 +77,56 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
     Static.apiFilter = makeFilter(Static)
     Static.apiFilterSort = makeFilterSort(Static)
     await fn.restApi.getQuestions({ cache: true, name: Static.nameRecords, filter: Static.apiFilter, sort: Static.apiFilterSort, limit });
-    // Static.filterGtp = findUserGpt()
-    // Static.chatGpt = await fn.restApi.getUsers({ cache: true, name: Static.nameRecords, filter: Static.filterGtp })
-    // console.log('=34b3fa=', Static.chatGpt)
+
+    Static.chatGpt = await fn.restApi.getUsers({ 
+      cache: true,  
+      filter:  {
+        _id: '64253afe406a0934b2fca96a'
+      }
+    })
   });
-  // console.log(Variable[Static.nameRecords])
   return (
     <div class="c-questions">
       <div class="c-questions__header">
         {
           Variable.DataUrl.adress == "question" && Variable.dataUrl.adress != "index"
             ?
-            <div style="display: flex; align-items: center">
+            <div сlass="wrap-question">
               <div>
                 <h4>{Variable.lang.h.lastQuestions}</h4>
                 <p>{Variable.lang.p.addQuestionsSlog}</p>
               </div>
-              {/* <a 
-                class="c-question"
-                onclick={async () => {
-                  Variable.Static.startChatsID = Static.chatGpt
-                  fn.siteLink("/user/chats/");
-                }}
-              >
-                <div class="c-question__avatar">
-                  <Avatar author={Static.chatGpt} />
-                </div>
-                <span>Chat GPT</span>
-                <span
-                  
+              <div class="mb--15">
+                <a 
+                  class="cardDefault"
+                  style="display: flex;align-items: center;"
+                  onclick={async () => {
+                    Variable.Static.startChatsID = Static.chatGpt.list_records[0]
+                    fn.siteLink("/user/chats/");
+                  }}
                 >
-                  Задать вопрос ChatGPT
-                </span>
-              </a> */}
+                  <div 
+                    class="c-question__avatar"
+                    onclick={(e)=>{
+                      if (e.preventDefault) { // стандарт
+                        e.preventDefault();
+                        e.stopPropagation();
+                      } else {                       // IE8-
+                        e.returnValue = false;
+                        e.cancelBubble = true;
+                      }
+                    }}
+                  >
+                    <Avatar author={Static.chatGpt.list_records[0]} />
+                  </div>
+                  <div class="cardDefault-desc">
+                      <span>ChatGPT</span>
+                      <div class="buttonCem mt--15">
+                        {Variable.lang.button.toAsk} Chat GPT
+                      </div>
+                  </div>
+                </a>
+              </div>
             </div>
             :
             null

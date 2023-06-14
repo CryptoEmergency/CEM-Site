@@ -320,6 +320,24 @@ $indent in $indents {
 // element
 
 // ========== card-link =======
+.cardDefault {
+  padding: 15px;
+  width: 100%;
+  max-width: fit-content;
+  background: var(--card-default);
+  border: 1px solid #474c5a;
+  border-radius: 6px;
+  height: auto;
+  color: var(--main-text);
+  cursor: pointer;
+
+  .cardDefault-desc {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+  }
+}
+
 .card-link {
   padding: 20px;
   background: #303545;
@@ -498,6 +516,44 @@ $indent in $indents {
   box-shadow: 0 0 15px -2px #8859EC;
   opacity: 1;
 
+}
+
+.buttonCem {
+  position: relative;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 1;
+  color: var(--main-text);
+  padding: 15px;
+
+  @media(max-width: 464px) {
+    font-size: 12px;
+  }
+}
+
+.buttonCem::after {
+  position: absolute;
+  content: "";
+  display: inline-block;
+  background: var(--main-gradient);
+  height: 78px;
+  width: 400px;
+  z-index: -1;
+  transform: translateX(-300px);
+  transition: transform 400ms ease-in;
+  top: 0;
+}
+
+.buttonCem:hover::after {
+  transform: translateX(-236px);
+
+  @media(max-width: 464px) {
+    transform: translateX(0);
+  }
 }
 
 
@@ -1099,3 +1155,6 @@ $color in $roadmapColors {
 }
 
 // comments (media)
+// .wrap-question {
+//   display: grid;
+// }

@@ -77,7 +77,9 @@
         "pre_view": "anteprima",
         "allPartners": "Tutti i partner",
         "lottery": "«Word of Mouth» lottery",
-        "lotterySubtitle": "WIN the 1000CEM!"
+        "lotterySubtitle": "WIN the 1000CEM!",
+        "--------------------------новые слова--------------": "--добавить перевод--",
+        "toAsk": "To ask"
     },
     "h": {
         "success": "Con successo!",

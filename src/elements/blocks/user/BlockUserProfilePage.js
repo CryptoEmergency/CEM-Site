@@ -190,7 +190,8 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                         <div class="about_user_section_inner">
                                             <p>{Variable.lang.p.aboutMe}</p>
                                             <span class="about_me_block">
-                                                {data.userInfo.information?.about ? Helpers.clearText(data.userInfo.information?.about) : ''}
+                                                {fn.editText(data.userInfo.information?.about, { paragraph: true, clear: true, html: true })}
+                                                {/* {data.userInfo.information?.about ? Helpers.clearText(data.userInfo.information?.about) : ''} */}
                                             </span>
                                             <img class="edit_about_me" src={svg['pencil']} />
                                             <div class="user_grid_info-1">
@@ -250,7 +251,9 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                             {() => {
                                                 if (data.userInfo.information?.about) {
                                                     return (
-                                                        <span class="about_me_block">{Helpers.clearText(data.userInfo.information?.about)}</span>
+                                                        <span class="about_me_block">
+                                                            {Helpers.clearText(data.userInfo.information?.about)}
+                                                            </span>
                                                     )
                                                 }
                                             }}
@@ -345,14 +348,14 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                                     fn.modals.ModalUserInterests({ type: 'add', userInfo: {} });
                                                                 }
                                                             },
-                                                            {
-                                                                text: Variable.lang.button.edit,
-                                                                type: "edit",
-                                                                onclick: async () => {
-                                                                    visibleEditInterest = true
-                                                                    initReload()
-                                                                }
-                                                            }
+                                                            // {
+                                                            //     text: Variable.lang.button.edit,
+                                                            //     type: "edit",
+                                                            //     onclick: async () => {
+                                                            //         visibleEditInterest = true
+                                                            //         initReload()
+                                                            //     }
+                                                            // }
                                                         ]
                                                     }
                                                 />
@@ -363,15 +366,36 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                 {
                                     data.userInfo.interest.map((item, index) => {
                                         return (
-                                            <div>
+                                            <div style="position: relative">
                                                 <b>
                                                     {item.title}
                                                     <img
-                                                        class="editbigblockinfo"
+                                                        class="info_img editbigblockinfo"
                                                         src={svg['pencil']}
-                                                        style={visibleEditInterest ? "display: inline;" : "display: none;"}
+                                                        // style={visibleEditInterest ? "display: inline;" : "display: none;"}
                                                         onclick={async () => {
                                                             fn.modals.ModalUserInterests({ type: 'edit', userInfo: item });
+                                                        }}
+                                                    />
+                                                    <img
+                                                        class="info_img deletebigblockinfo"
+                                                        src={svg['delete2']}
+                                                        onclick={async () => {
+                                                            fn.modals.ModalConfirmAction({
+                                                                action: async () => {
+                                                                    await fn.socket.set({
+                                                                        method: "Users", action: "findOneAndUpdate", _id: Variable.myInfo._id, params: {
+                                                                            update: {
+                                                                                $pull: { interest: { _id: item._id } },
+                                                                            }
+                                                                        }
+                                                                    })
+                                                                    fn.modals.close("ModalConfirmAction")
+                                                                },
+                                                                text: Variable.lang.p.deleteUserInterest,
+                                                                button: Variable.lang.button.yes
+                                                            })
+                                                            initReload()
                                                         }}
                                                     />
                                                 </b>
@@ -404,14 +428,14 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                                     fn.modals.ModalUserAddWork({ type: 'add', userInfo: {} });
                                                                 }
                                                             },
-                                                            {
-                                                                text: Variable.lang.button.edit,
-                                                                type: "edit",
-                                                                onclick: async () => {
-                                                                    visibleEditWork = true
-                                                                    initReload()
-                                                                }
-                                                            }
+                                                            // {
+                                                            //     text: Variable.lang.button.edit,
+                                                            //     type: "edit",
+                                                            //     onclick: async () => {
+                                                            //         visibleEditWork = true
+                                                            //         initReload()
+                                                            //     }
+                                                            // }
 
                                                         ]
                                                     }
@@ -427,11 +451,32 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                 <span>
                                                     {item.title}
                                                     <img
-                                                        class="editworkinfo"
+                                                        class="info_img editbigblockinfo"
                                                         src={svg['pencil']}
-                                                        style={visibleEditWork ? "display: inline;" : "display: none;"}
+                                                        // style={visibleEditWork ? "display: inline;" : "display: none;"}
                                                         onclick={async () => {
                                                             fn.modals.ModalUserAddWork({ type: 'edit', userInfo: item });
+                                                        }}
+                                                    />
+                                                    <img
+                                                        class="info_img deletebigblockinfo"
+                                                        src={svg['delete2']}
+                                                        onclick={async () => {
+                                                            fn.modals.ModalConfirmAction({
+                                                                action: async () => {
+                                                                    await fn.socket.set({
+                                                                        method: "Users", action: "findOneAndUpdate", _id: Variable.myInfo._id, params: {
+                                                                            update: {
+                                                                                $pull: { work: { _id: item._id } },
+                                                                            }
+                                                                        }
+                                                                    })
+                                                                    fn.modals.close("ModalConfirmAction")
+                                                                },
+                                                                text: Variable.lang.p.deleteUserWork,
+                                                                button: Variable.lang.button.yes
+                                                            })
+                                                            initReload()
                                                         }}
                                                     />
                                                 </span>

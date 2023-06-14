@@ -1610,6 +1610,14 @@
 
 .c-askquestion {
 	// padding: 50px;
+	position: relative;
+
+	.abs-r {
+		position: absolute;
+		top: -15px;
+		right: 0;
+
+	}
 
 	&-new {
 		display: flex;
