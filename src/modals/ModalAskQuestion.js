@@ -342,18 +342,16 @@ const ModalAskQuestion = function (data, ID) {
                           <div
                             contenteditable="true"
                             onpaste={function (e) {
-                              alert(1)
                               e.preventDefault()
+                              fn.insertCleaning(e)
 
                             }}
                             oninput={function (e) {
                               if (e.inputType == "insertFromPaste") {
                                 console.log(e)
                               }
-
                               Static.close = false
                               Static.textQuestion.value = this.innerText;
-
                             }}
 
                             class="c-form__field create_post_chapter create_post_main_text"

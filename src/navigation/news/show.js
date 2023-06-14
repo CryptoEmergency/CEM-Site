@@ -1,18 +1,3 @@
-//       return (
-//         <Elements.page.MainContainer
-//           title={Static.item.title}
-//         ></Elements.page.MainContainer>
-//         <div class="c-main__body">
-//           <div class="full_news_container">
-//             <div class="full_news_block">
-//               <div class="full_news_content">
-//                 <BlockShowNews Static={Static} item={item} />
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       );
-
 import { jsx, jsxFrag, load, Variable, initReload, CEM } from "@betarost/cemserver/cem.js";
 
 // import { fn } from "@src/functions/index.js";
