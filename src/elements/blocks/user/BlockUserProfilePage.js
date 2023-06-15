@@ -372,7 +372,7 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                     <img
                                                         class="info_img editbigblockinfo"
                                                         src={svg['pencil']}
-                                                        // style={visibleEditInterest ? "display: inline;" : "display: none;"}
+                                                        style={data.userInfo.nickname == Variable.myInfo.nickname ? "display: inline;" : "display: none;"}
                                                         onclick={async () => {
                                                             fn.modals.ModalUserInterests({ type: 'edit', userInfo: item });
                                                         }}
@@ -380,6 +380,7 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                     <img
                                                         class="info_img deletebigblockinfo"
                                                         src={svg['delete2']}
+                                                        style={data.userInfo.nickname == Variable.myInfo.nickname ? "display: inline;" : "display: none;"}
                                                         onclick={async () => {
                                                             fn.modals.ModalConfirmAction({
                                                                 action: async () => {
@@ -453,7 +454,7 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                     <img
                                                         class="info_img editbigblockinfo"
                                                         src={svg['pencil']}
-                                                        // style={visibleEditWork ? "display: inline;" : "display: none;"}
+                                                        style={data.userInfo.nickname == Variable.myInfo.nickname ? "display: inline;" : "display: none;"}
                                                         onclick={async () => {
                                                             fn.modals.ModalUserAddWork({ type: 'edit', userInfo: item });
                                                         }}
@@ -461,6 +462,7 @@ BlockUserProfilePage.aboutUser = function (Static, data) {
                                                     <img
                                                         class="info_img deletebigblockinfo"
                                                         src={svg['delete2']}
+                                                        style={data.userInfo.nickname == Variable.myInfo.nickname ? "display: inline;" : "display: none;"}
                                                         onclick={async () => {
                                                             fn.modals.ModalConfirmAction({
                                                                 action: async () => {
