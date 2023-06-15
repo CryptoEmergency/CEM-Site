@@ -8,6 +8,8 @@
     cursor: pointer;
     position: absolute;
     top: 50%;
+    opacity: 0.7;
+    transition: 0.4s;
     transform: translate(0, 50%);
     -webkit-transform: translate(0, 50%);
     -moz-transform: translate(0, 50%);
@@ -20,6 +22,15 @@
 
     &_next {
         left: -35px;
+    }
+
+    img {
+        width: 20px;
+        height: 20px;
+    }
+
+    &:hover {
+        opacity: 1;
     }
 }
 
@@ -40,6 +51,7 @@
         cursor: grab;
         user-select: none;
         scroll-behavior: auto;
+        // scroll-behavior: smooth;
         scroll-snap-type: none;
     }
 }
@@ -50,10 +62,14 @@
 
 .slider-slide {
     scroll-snap-align: start;
-    height: 350px;
+    // height: 350px;
+    // height: 200px;
+    overflow: hidden;
     object-fit: contain;
     margin-left: 15px;
     width: calc(100% / 3);
+    // width: calc(100% / 4);
+    transition: all 0.4s linear;
 }
 
 .slider-slide:first-child {

@@ -12,66 +12,66 @@ CEM
 
 const { images, svg, fn } = CEM
 
-const banners = [
-    {
-        // alt: "Crypto Emergency",
-        alt: "1",
-        src: images['slider/1']
-    },
-    {
-        // alt: "Cem Assistant",
-        alt: "2",
-        src: images['slider/2']
-    },
-    {
-        // alt: "CEM Wallet",
-        alt: "3",
-        src: images['slider/3']
-    },
-    {
-        // alt: "CEMD",
-        alt: "4",
-        src: images['slider/4']
-    },
-    {
-        // alt: "DUMA",
-        alt: "5",
-        src: images['slider/5']
-    },
-    {
-        // alt: "CEM",
-        alt: "6",
-        src: images['slider/6']
-    },
-]
+// const banners = [
+//     {
+//         // alt: "Crypto Emergency",
+//         alt: "1",
+//         src: images['slider/1']
+//     },
+//     {
+//         // alt: "Cem Assistant",
+//         alt: "2",
+//         src: images['slider/2']
+//     },
+//     {
+//         // alt: "CEM Wallet",
+//         alt: "3",
+//         src: images['slider/3']
+//     },
+//     {
+//         // alt: "CEMD",
+//         alt: "4",
+//         src: images['slider/4']
+//     },
+//     {
+//         // alt: "DUMA",
+//         alt: "5",
+//         src: images['slider/5']
+//     },
+//     {
+//         // alt: "CEM",
+//         alt: "6",
+//         src: images['slider/6']
+//     },
+// ]
 
 let isDragging = false;
 let startX, startScrollLeft, timeoutId;
-let slides = [...banners];
 let sliderPerView = Math.round(Data.widthSliderCarousel / Data.widthSlide);
 
-banners.slice(-sliderPerView).reverse().forEach(slide => {
-    slides.unshift(slide)
-})
-banners.slice(0, sliderPerView).forEach(slide => {
-    slides.push(slide)
-})
+// let slides = [...banners];
+// banners.slice(-sliderPerView).reverse().forEach(slide => {
+//     slides.unshift(slide)
+// })
+// banners.slice(0, sliderPerView).forEach(slide => {
+//     slides.push(slide)
+// })
 
 const dragStart = (e) => {
-// Records the initial cursor and scroll position of the carousel
     isDragging = true;
-    Data.sliderCarousel.classList.add("dragging");
+    // Data.sliderCarousel.classList.add("dragging");
     startX = e.pageX;
     startScrollLeft = Data.sliderCarousel.scrollLeft;
 }
 const dragging = (e) => {
     if(!isDragging) return; // if isDragging is false return from here
+    e.preventDefault();
     // Updates the scroll position of the carousel based on the cursor movement
     Data.sliderCarousel.scrollLeft = startScrollLeft - (e.pageX - startX);
 }
 const dragStop = (e) => {
     isDragging = false;
-    Data.sliderCarousel.classList.remove("dragging");
+    // Data.sliderCarousel.classList.remove("dragging");
 }
 
 const autoPLay = (speed) => {
@@ -91,32 +91,40 @@ const infinityScroll = () => {
     }else if(Math.ceil(Data.sliderCarousel.scrollLeft) === Data.sliderCarousel.scrollWidth - Data.widthSliderCarousel){
         Data.sliderCarousel.classList.add("no-transition");
         Data.sliderCarousel.scrollLeft = Data.widthSliderCarousel;
-        // Data.sliderCarousel.scrollLeft = Data.widthSliderCarousel +
+        // Data.sliderCarousel.scrollLeft = Data.widthSliderCarousel * 2;
         Data.sliderCarousel.classList.remove("no-transition");
+        console.log('=2b22dd=', "end")
         initReload()
     }
 }
 
-const forExport = function ({ Static, speed }) {
-
-if (!timeoutId){
-    autoPLay(speed)
-}
+const forExport = function ({ speed, arrow, records }) {
+let slides = [...records];
+records.slice(-sliderPerView).reverse().forEach(slide => {
+    slides.unshift(slide)
+})
+records.slice(0, sliderPerView).forEach(slide => {
+    slides.push(slide)
+})
+// console.log('=slides=', slides)
+// if (!timeoutId){
+//     autoPLay(speed)
+// }
 return (
     <div 
         class="slider-wrap"
         After={($el)=>{
             Data.sliderWrap = $el
         }}
-        onmouseenter={(e)=>{
-            if (timeoutId){
-                clearTimeout(timeoutId);
-                timeoutId=null
-            }
-        }}
-        onmouseleave={()=>{
-            autoPLay(speed)
-        }}
+        // onmouseenter={(e)=>{
+        //     if (timeoutId){
+        //         clearTimeout(timeoutId);
+        //         timeoutId=null
+        //     }
+        // }}
+        // onmouseleave={()=>{
+        //     autoPLay(speed)
+        // }}
     >
         <div 
             class="slider-button slider-button_prev"
@@ -159,10 +167,20 @@ return (
         {
             slides.map((item, index)=>{
             return(
+                // <img 
+                //     class="slider-slide" 
+                //     src={item.src} 
+                //     alt={item.alt} 
+                //     draggable="false"
+                //     After={($el)=>{
+                //         Data.widthSlide = $el.offsetWidth;
+                //     }}
+                // >
+                // </img>
                 <img 
                     class="slider-slide" 
-                    src={item.src} 
-                    alt={item.alt} 
+                    src={`/assets/upload/worldPress/${item.name}`} 
+                    // alt={item.alt} 
                     draggable="false"
                     After={($el)=>{
                         Data.widthSlide = $el.offsetWidth;
