@@ -47,7 +47,6 @@ const { images, svg, fn } = CEM
 
 let isDragging = false;
 let startX, startScrollLeft, timeoutId;
-let sliderPerView = Math.round(Data.widthSliderCarousel / Data.widthSlide);
 
 // let slides = [...banners];
 // banners.slice(-sliderPerView).reverse().forEach(slide => {
@@ -85,21 +84,26 @@ const autoPLay = (speed) => {
 const infinityScroll = () => {
     if(Data.sliderCarousel.scrollLeft === 0){
         Data.sliderCarousel.classList.add("no-transition");
-        Data.sliderCarousel.scrollLeft = Data.sliderCarousel.scrollWidth - (2 * Data.widthSliderCarousel);
+        // изначальный вариант написания
+        // Data.sliderCarousel.scrollLeft = Data.sliderCarousel.scrollWidth - (2 * Data.widthSliderCarousel);
+        Data.sliderCarousel.scrollLeft = Data.widthSliderCarousel + Data.widthSlide;
         Data.sliderCarousel.classList.remove("no-transition");
         initReload()
     }else if(Math.ceil(Data.sliderCarousel.scrollLeft) === Data.sliderCarousel.scrollWidth - Data.widthSliderCarousel){
         Data.sliderCarousel.classList.add("no-transition");
-        Data.sliderCarousel.scrollLeft = Data.widthSliderCarousel;
-        // Data.sliderCarousel.scrollLeft = Data.widthSliderCarousel * 2;
+        // изначальный вариант написания
+        // Data.sliderCarousel.scrollLeft = Data.widthSliderCarousel;
+        Data.sliderCarousel.scrollLeft = Data.widthSliderCarousel + Data.widthSlide;
         Data.sliderCarousel.classList.remove("no-transition");
-        console.log('=2b22dd=', "end")
+        console.log('=Data.sliderCarousel.scrollLeft=', Data.sliderCarousel.scrollLeft)
         initReload()
     }
 }
 
 const forExport = function ({ speed, arrow, records }) {
 let slides = [...records];
+
+let sliderPerView = Math.round(Data.widthSliderCarousel / Data.widthSlide);
 records.slice(-sliderPerView).reverse().forEach(slide => {
     slides.unshift(slide)
 })

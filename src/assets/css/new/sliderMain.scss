@@ -42,6 +42,7 @@
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     scrollbar-width: 0;
+    transition: all 0.4s linear;
 
     &.no-transition {
         scroll-behavior: auto;

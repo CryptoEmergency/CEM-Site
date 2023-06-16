@@ -97,13 +97,10 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
                 <p>{Variable.lang.p.addQuestionsSlog}</p>
               </div>
               <div class="mb--15">
-                <a 
+                <div 
                   class="cardDefault"
                   style="display: flex;align-items: center;"
-                  onclick={async () => {
-                    Variable.Static.startChatsID = Static.chatGpt.list_records[0]
-                    fn.siteLink("/user/chats/");
-                  }}
+                  
                 >
                   <div 
                     class="c-question__avatar"
@@ -120,12 +117,35 @@ const BlockQuestions = async function ({ Static, limit = 21 }) {
                     <Avatar author={Static.chatGpt.list_records[0]} />
                   </div>
                   <div class="cardDefault-desc">
-                      <span>ChatGPT</span>
-                      <div class="buttonCem mt--15">
-                        {Variable.lang.button.toAsk} Chat GPT
+                      <div class="cardDafault-title">
+                        <span>ChatGPT</span>
+                        <div>
+                          <a
+                            target="_blank"
+                            href="https://play.google.com/store/apps/details?id=com.cemassistant"
+                          >
+                            <img src={images.googlePlay}></img>
+                          </a>
+                          <a
+                            target="_blank"
+                            href="https://apps.apple.com/by/app/cem-assistant/id6448629326"
+                          >
+                            <img src={images.appStore}></img>
+                          </a>
+                        </div>
                       </div>
+                      <a
+                        onclick={async () => {
+                          Variable.Static.startChatsID = Static.chatGpt.list_records[0]
+                          fn.siteLink("/user/chats/");
+                        }}
+                      >
+                        <div class="buttonCem mt--15">
+                          {Variable.lang.button.toAsk} Chat GPT
+                        </div>
+                      </a>
                   </div>
-                </a>
+                </div>
               </div>
             </div>
             :
