@@ -43,6 +43,7 @@ const start = function (data, ID) {
         },
         limit: 20,
       });
+      // console.log('=Category=', Static.categoryList)
       Static.records = await fn.socket.get({
         method: "News",
         params: {
@@ -62,6 +63,13 @@ const start = function (data, ID) {
       // console.log('=f98e0c=', Static.showMore)
       return (
         <Elements.page.MainContainer class="blog_page_container">
+
+          {/* <div class="mt--20">
+            <Elements.Category
+              records={Static.categoryList}
+            ></Elements.Category>
+          </div> */}
+          
 
           <Elements.page.Container class="tags pb--0 pt--10">
             <div

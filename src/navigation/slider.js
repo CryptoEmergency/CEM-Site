@@ -10,6 +10,57 @@ import Elements from "@src/elements/export.js";
 
 const { images, svg, fn } = CEM
 
+const categories = [
+    {
+        name: 'all',
+        active: true,
+    },
+    {
+        name: 'ico',
+        active: false,
+    },
+    {
+        name: 'ido',
+        active: false,
+    },
+    {
+        name: 'ieo',
+        active: false,
+    },
+    {
+        name: 'igo',
+        active: false,
+    },
+    {
+        name: 'ifo',
+        active: false,
+    },
+    {
+        name: 'category',
+        active: false,
+    },
+    {
+        name: 'startaps',
+        active: false,
+    },
+    {
+        name: 'choose',
+        active: false,
+    },
+    {
+        name: 'ufo',
+        active: false,
+    },
+    {
+        name: 'www',
+        active: false,
+    },
+    {
+        name: 'anya',
+        active: false,
+    }
+]
+
 const makeFilter = () => {
     let filter = {}
   
@@ -30,44 +81,35 @@ const start = async function (data, ID) {
             bannersRecords.push(item)
         }
     });
-    console.log('=bannersRecords=', bannersRecords)
-    // const bannersRecords = records.map(function (item) {
-
-    //     let lang = Variable.lang.code == "ru" ? "ru" : "en";
-    //     if (item.languages.code == lang) {
-    //       return (
-    //         <a
-    //           rel="nofollow noopener"
-    //           target="_blank"
-    //           href={item.link}
-    //           class="swiper-slide"
-    //           onclick={(e) => {
-    //             if (item.modal) {
-    //               fn.siteLink(e)
-    //             }
-    //           }}
-    //         >
-    //           <div>
-    //             <img src={`/assets/upload/worldPress/${item.name}`} />
-    //           </div>
-    //         </a>
-    //       );
-    //     }
-    //   });
-
     load({
         ID,
+        fnLoad: async () => {
+            // filterStartups = makeFiltersApi(Static)
+            // Static.records = await fn.socket.get({
+            //   method: "Startups",
+            //   params: {
+            //     filter: filterStartups.filter,
+            //     sort: filterStartups.sort
+            //   }
+            // });
+        },
         fn: () => {
             return (
                 <div class="c-main_body">
                     <div class="pt--70">
                         <div class="page-container">
                             <div class="mt--25">
-                            <Elements.SliderCEM
-                                speed="2500"
-                                records={bannersRecords}
-                            >
-                            </Elements.SliderCEM>
+                                <Elements.SliderCEM
+                                    speed="2500"
+                                    records={bannersRecords}
+                                >
+                                </Elements.SliderCEM>
+                            </div>
+                            <div class="mt--25">
+                                <Elements.Category
+                                    records={categories}                    
+                                >
+                                </Elements.Category>
                             </div>
                         </div>
                     </div>
