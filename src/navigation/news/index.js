@@ -11,6 +11,78 @@ import Elements from "@src/elements/export.js";
 
 const fn = CEM.fn
 
+let isDrag = false;
+let startX, startScrollLeft;
+let x1 = null; 
+let y1 = null;
+
+const dragStart = (e, Static) => {
+  isDrag = true;
+  Static.categoryCarousel.classList.add("dragging");
+  startX = e.pageX;
+  startScrollLeft = Static.categoryCarousel.scrollLeft
+}
+
+const dragging = (e, Static) => {
+  if(!isDrag) return;
+  e.preventDefault();
+  Static.categoryCarousel.scrollLeft = startScrollLeft - (e.pageX - startX);
+}
+
+const dragStop = (e, Static) => {
+  isDrag = false;
+  Static.categoryCarousel.classList.remove("dragging");
+}
+
+const infiniteScroll = (e, Static) => {
+  if(Static.categoryCarousel.scrollLeft === 0){
+    Static.containerCategory.classList.remove('category-wrap_shadow-left')
+  }else if(Static.categoryCarousel.scrollLeft === Static.categoryCarousel.scrollWidth - Static.categoryCarousel.offsetWidth){
+    Static.containerCategory.classList.remove('category-wrap_shadow-rigth')
+  } else{
+    Static.containerCategory.classList.add('category-wrap_shadow-left')
+    Static.containerCategory.classList.add('category-wrap_shadow-rigth')
+  }
+
+}
+
+const mouseWheel = (e, Static) => {
+  if(e.deltaY < 0){
+    Static.categoryCarousel.scrollLeft += Static.categoryEl.offsetWidth;
+  } else if(e.deltaY > 0){
+    Static.categoryCarousel.scrollLeft -= Static.categoryEl.offsetWidth;
+  }
+}
+
+const clickKey = (e, Static) => {
+  console.log('=55c9c4=', e.code)
+}
+
+const handleTouchStart = (e) => {
+  const firstTouch = e.touches[0];
+  x1 = firstTouch.clientX;
+  y1 = firstTouch.clientY;
+}
+
+const handleTouchMove = (e, Static) => {
+  if(!x1 || !y1) return false;
+  let x2 = e.touches[0].clientX;
+  let y2 = e.touches[0].clientY;
+  let xDiff = x2 - x1;
+  let yDiff = y2 - y1;
+
+  if(Math.abs(xDiff) > Math.abs(yDiff)){
+    if(xDiff > 0){
+      Static.categoryCarousel.scrollLeft -= Static.categoryEl.offsetWidth;
+    }  
+    else{
+      Static.categoryCarousel.scrollLeft += Static.categoryEl.offsetWidth;
+    }
+  }
+  x1 = null;
+  y1 = null;
+}
+
 const makeFilter = (Static) => {
   let ret = {}
   ret["type"] = "news"
@@ -27,11 +99,9 @@ const makeFilter = (Static) => {
   return ret
 }
 
-
 const start = function (data, ID) {
   let [Static] = fn.GetParams({ data, ID, initData: "news" });
   Static.showMore = true
-  // Static.activeCategory = "All";
 
   load({
     ID,
@@ -43,7 +113,6 @@ const start = function (data, ID) {
         },
         limit: 20,
       });
-      // console.log('=Category=', Static.categoryList)
       Static.records = await fn.socket.get({
         method: "News",
         params: {
@@ -54,76 +123,116 @@ const start = function (data, ID) {
             showDate: { $lte: new Date() }
           },
           limit: 20,
-          // select: { comments: 1 }
         },
       });
 
     },
     fn: () => {
-      // console.log('=f98e0c=', Static.showMore)
       return (
         <Elements.page.MainContainer class="blog_page_container">
-
-          {/* <div class="mt--20">
-            <Elements.Category
-              records={Static.categoryList}
-            ></Elements.Category>
-          </div> */}
-          
-
-          <Elements.page.Container class="tags pb--0 pt--10">
-            <div
-              class={["tag_button", Static.activeCategory == "All" ? "tag_button_active" : ""]}
-              onclick={async () => {
-                Static.showMore = true
-                Static.activeCategory = "All";
-                Static.records = await fn.socket.get({
-                  method: "News",
-                  params: {
-                    filter: {
-                      type: "news",
-                      "languages.code":
-                        Variable.lang.code == "ru" ? "ru" : "en",
-                      moderation: true,
-                      showDate: { $lte: new Date() }
-                    },
-
-                  },
-                });
-                initReload();
-              }}>
-              <span>{Variable.lang.categoryName.all}</span>
-            </div>
-            {Static.categoryList.map((item) => {
-              return (
-                <div
-                  class={["tag_button", Static.activeCategory == item.name
-                    ? "tag_button_active"
-                    : ""]}
-                  onclick={async () => {
-                    Static.showMore = true
-                    Static.activeCategory = item.name;
-                    Static.records = await fn.socket.get({
-                      method: "News",
-                      params: {
-                        filter: {
-                          type: "news",
-                          "languages.code":
-                            Variable.lang.code == "ru" ? "ru" : "en",
-                          "category.name": Static.activeCategory,
-                          moderation: true
-                        },
+          <div
+            Element={($el)=>{
+              Static.containerCategory = $el;
+            }}
+            class={[
+              "pY--15",
+              "category-wrap",
+              "category-wrap_shadow-right",
+              
+            ]}
+          >
+            <ul
+              class="category-carousel"
+              Element={($el)=>{
+                Static.categoryCarousel = $el;
+              }}
+              onmousedown={(e)=>{
+                  dragStart(e, Static);
+              }}
+              onmousemove={(e)=>{
+                  dragging(e, Static);
+              }}
+              onmouseup={(e)=>{
+                  dragStop(e, Static);
+              }}
+              onscroll={(e)=>{
+                  infiniteScroll(e, Static);
+              }}
+              // onmouseover={(e)=>{
+              //   onkeydown = clickKey(e, Static)
+              // }}
+              onmouseout={(e)=>{
+                dragStop(e, Static);
+              }}
+              onwheel={(e)=>{
+                  mouseWheel(e, Static);
+              }}
+              ontouchstart={(e)=>{
+                handleTouchStart(e)
+              }}
+              ontouchmove={(e)=>{
+                handleTouchMove(e, Static)
+              }}
+            >
+              <li
+                draggable="false"
+                class={["category-item", Static.activeCategory == "All" ? "category-item_active" : ""]}
+                onclick={async () => {
+                  Static.showMore = true
+                  Static.activeCategory = "All";
+                  Static.records = await fn.socket.get({
+                    method: "News",
+                    params: {
+                      filter: {
+                        type: "news",
+                        "languages.code":
+                          Variable.lang.code == "ru" ? "ru" : "en",
+                        moderation: true,
+                        showDate: { $lte: new Date() }
                       },
-                    });
-                    initReload();
-                  }}>
-                  <span>{Variable.lang.categoryName[item.name]}</span>
-                </div>
-              );
-            })}
-          </Elements.page.Container>
 
-          <Elements.page.Container class="c-news section-g p-lr pt--70">
+                    },
+                  });
+                  initReload();
+                }}>
+                <span>{Variable.lang.categoryName.all}</span>
+              </li>
+              {Static.categoryList.map((item) => {
+                return (
+                  <li
+                    draggable = "false"
+                    Element={($el)=>{
+                        Static.categoryEl = $el;
+                    }}
+                    class={["category-item", Static.activeCategory == item.name
+                      ? "category-item_active"
+                      : ""]}
+                    onclick={async () => {
+                      Static.showMore = true
+                      Static.activeCategory = item.name;
+                      Static.records = await fn.socket.get({
+                        method: "News",
+                        params: {
+                          filter: {
+                            type: "news",
+                            "languages.code":
+                              Variable.lang.code == "ru" ? "ru" : "en",
+                            "category.name": Static.activeCategory,
+                            moderation: true
+                          },
+                        },
+                      });
+                      initReload();
+                    }}>
+                    <span>{Variable.lang.categoryName[item.name]}</span>
+                  </li>
+                );
+              })}
+            </ul>
+            
+          </div>
+
+          <Elements.page.Container class="c-news section-g p-lr">
             {Static.records.map((item) => {
               return (
                 <Elements.cards.Standart
