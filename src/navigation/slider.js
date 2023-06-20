@@ -58,6 +58,10 @@ const categories = [
     {
         name: 'anya',
         active: false,
+    },
+    {
+        name: 'crypto emergency',
+        active: false,
     }
 ]
 

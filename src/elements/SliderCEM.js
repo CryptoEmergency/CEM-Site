@@ -12,49 +12,10 @@ CEM
 
 const { images, svg, fn } = CEM
 
-// const banners = [
-//     {
-//         // alt: "Crypto Emergency",
-//         alt: "1",
-//         src: images['slider/1']
-//     },
-//     {
-//         // alt: "Cem Assistant",
-//         alt: "2",
-//         src: images['slider/2']
-//     },
-//     {
-//         // alt: "CEM Wallet",
-//         alt: "3",
-//         src: images['slider/3']
-//     },
-//     {
-//         // alt: "CEMD",
-//         alt: "4",
-//         src: images['slider/4']
-//     },
-//     {
-//         // alt: "DUMA",
-//         alt: "5",
-//         src: images['slider/5']
-//     },
-//     {
-//         // alt: "CEM",
-//         alt: "6",
-//         src: images['slider/6']
-//     },
-// ]
 
 let isDragging = false;
 let startX, startScrollLeft, timeoutId;
 
-// let slides = [...banners];
-// banners.slice(-sliderPerView).reverse().forEach(slide => {
-//     slides.unshift(slide)
-// })
-// banners.slice(0, sliderPerView).forEach(slide => {
-//     slides.push(slide)
-// })
 
 const dragStart = (e) => {
     isDragging = true;

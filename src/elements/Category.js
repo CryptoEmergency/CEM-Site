@@ -49,8 +49,9 @@ const mouseWheel = (e) => {
     }
 }
 
-const forExport = function ({ records }) {
-
+const forExport = function ({ records, active }) {
+    let activeCategory = active;
+console.log('=10e11e=', records)
 return (
     <div 
         class="category-wrap category-wrap_shadow-right category-wrap_shadow-left"
@@ -76,18 +77,23 @@ return (
                 mouseWheel(e)
             }}
         >
+            <li 
+                class={["category-item", activeCategory == Variable.lang.categoryName.all.toLowerCase() ? "category-item_active" : null]}
+                draggable="false"
+            >
+                <span>{Variable.lang.categoryName.all}</span>
+            </li>
             {
                 records.map((item, index)=>{
                     return(
                         <li 
-                            // class={["category-item", item.active ? "category-item_active" : null]}
-                            class={["category-item"]}
+                            class={["category-item", activeCategory == item.name ? "category-item_active" : null]}
+                            // class={["category-item"]}
                             draggable = "false"
                             Element={($el)=>{
                                 Data.categoryEl = $el;
                             }}
                         >
-                            {/* <span>{item.title}</span> */}
                             <span>{item.name}</span>
                         </li>
                     )
