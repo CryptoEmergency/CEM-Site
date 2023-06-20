@@ -289,6 +289,33 @@ const start = function (data, ID) {
                                                 <a class="course-footer__enroll tag_button"
                                                     target="_blank"
                                                     href={Static.item.linkRecord}
+                                                    onclick={ async function () {
+                                                        if (Variable.auth) {
+                                                            let response = await fn.socket.set({
+                                                                method: "UniversityStatistics", action: "insert", params: {
+                                                                    insert: {
+                                                                        userNickname: Variable.myInfo.nickname,
+                                                                        authorization: Variable.auth,
+                                                                        category: Static.item.category,
+                                                                        course: Static.item._id,
+                                                                        site: this.href,
+                                                                    }
+                                                                }
+                                                            })
+                                                            console.log('=88c5bd=', response)
+                                                        } else {
+                                                            await fn.socket.set({
+                                                                method: "UniversityStatistics", action: "insert", params: {
+                                                                    insert: {
+                                                                        authorization: Variable.auth,
+                                                                        category: Static.item.category,
+                                                                        course: Static.item._id,
+                                                                        site: this.href,
+                                                                    }
+                                                                }
+                                                            })
+                                                        }
+                                                    }}
                                                 >
                                                     <span>Записаться на курс</span>
                                                 </a>
