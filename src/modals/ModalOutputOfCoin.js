@@ -7,7 +7,8 @@ import {
     sendApi,
     Data,
     load,
-    CEM
+    CEM,
+    Helpers
 } from "@betarost/cemserver/cem.js";
 
 import { Input, InputDiv } from '@elements/element/index.js';
@@ -20,6 +21,7 @@ const ModalOutputOfCoin = function (data, ID) {
     Static.elAddress = null
     Static.trade = null
     Static.Insufficient = false
+    Static.dateOfCreate = Helpers.moment(Variable.myInfo.information.dateCreate).subtract(3, "hours").add(2, "week").format();
 
     load({
         ID,
@@ -29,7 +31,7 @@ const ModalOutputOfCoin = function (data, ID) {
             );
         },
         fn: () => {
-            console.log('=82203f=', data)
+            // console.log('=82203f=', data)
             return (
                 <div class="c-modal c-modal--open"
                     onclick={function (e) {
@@ -108,25 +110,27 @@ const ModalOutputOfCoin = function (data, ID) {
                                     Element={($el) => {
                                         Static.elAddress = $el;
                                     }}
-                                    // oninput={() => {
-                                    //     Static.Insufficient = false
-                                    //     if (Static.elCemd.value > data.balance) {
-                                    //         Static.Insufficient = true
-                                    //     }
-                                    //     initReload()
-                                    // }}
+                                    oninput={() => {
+                                        // Static.Insufficient = false
+                                        // if (Static.elCemd.value > data.balance) {
+                                        //     Static.Insufficient = true
+                                        // }
+                                        initReload()
+                                    }}
                                 />
                             </div>
                         </div>
                         <div class="c-modal__footer">
                             <button
                                 class={["c-button", "c-button--gradient2",
-                                    !Static.Insufficient && Static.elCemd?.value > 0 ? null : "c-button--inactive"
+                                    !Static.Insufficient && Static.elCemd?.value > 0 && Static.elAddress.value.length > 0 ? null : "c-button--inactive"
                                 ]}
                                 type="button"
-                                onclick={() => {
-                                    Static.callback(Static.elCemd.value, Static.elAddress.value, data.coin);
-                                    fn.modals.close(ID);
+                                onclick={ () => {
+                                    if (!Static.Insufficient && Static.elCemd?.value > 0 && Static.elAddress.value.length > 0) {
+                                        Static.callback(Static.elCemd.value, Static.elAddress.value, data.coin);
+                                        fn.modals.close(ID);
+                                    }
                                 }}
                             >
                                 <span class="c-button__text">Вывести</span>
