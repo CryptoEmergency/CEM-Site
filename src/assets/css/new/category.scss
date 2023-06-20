@@ -1,0 +1,131 @@
+.category-wrap {
+    position: relative;
+
+    &::before,
+    &::after {
+        position: absolute;
+        content: '';
+        top: 0;
+        width: 50px;
+        height: 100%;
+        z-index: 2;
+    }
+
+    &::before {
+        right: 0;
+        // background: linear-gradient(to right, rgba(255, 255, 255, 0), #1D2029);
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), #232733);
+    }
+
+    &::after {
+        left: 0;
+        // background: linear-gradient(to left, rgba(255, 255, 255, 0), #1D2029);
+        background: linear-gradient(to left, rgba(255, 255, 255, 0), #232733);
+    }
+
+
+    // &.category-wrap_shadow-right {
+    //     position: relative;
+
+    //     &::before {
+    //         position: absolute;
+    //         content: '';
+    //         top: 0;
+    //         width: 150px;
+    //         height: 100%;
+    //         z-index: 2;
+    //     }
+
+    //     &::before {
+    //         right: 0;
+    //         background: linear-gradient(to right, rgba(255, 255, 255, 0), #1D2029);
+
+    //     }
+    // }
+}
+
+.category-carousel {
+    display: grid;
+    grid-auto-flow: column;
+    // grid-auto-columns: calc((100% / 6) - 15px);
+    gap: 15px;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+
+    &.dragging {
+        scroll-snap-type: none;
+        scroll-behavior: auto;
+
+        .category-item {
+            cursor: grab;
+            user-select: none;
+        }
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+}
+
+.category-item {
+    height: 42px;
+    border: 1px solid #63697A;
+    background: #363B4B;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 18px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 1s;
+    // width: 150px;
+    width: fit-content;
+    min-width: 150px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+
+
+    &::after {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 42px;
+        background: var(--main-gradient);
+        left: 0;
+        top: 0;
+        z-index: -1;
+        border-radius: 50px;
+        opacity: 0;
+        transition: 1s;
+    }
+
+    &:hover {
+        background: none;
+        border-color: transparent;
+    }
+
+    &:hover::after {
+        opacity: 1;
+    }
+
+    &_active {
+        background: none;
+        border-color: transparent;
+    }
+
+    &_active::after {
+        opacity: 1;
+    }
+
+    @media(max-width: 464px) {
+        width: 90px;
+        font-size: 14px;
+    }
+
+}

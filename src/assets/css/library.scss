@@ -329,12 +329,38 @@ $indent in $indents {
   border-radius: 6px;
   height: auto;
   color: var(--main-text);
-  cursor: pointer;
+  // cursor: pointer;
 
   .cardDefault-desc {
     font-weight: 700;
     font-size: 16px;
     line-height: 18px;
+
+    .cardDafault-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      img {
+        width: 20px;
+        margin-left: 15px;
+      }
+
+      // img:first-child {
+      //   margin-right: 15px;
+      // }
+    }
+  }
+
+  .mini-icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+  }
+
+  .boxBtn {
+    max-width: 150px;
+    width: 150px;
   }
 }
 
