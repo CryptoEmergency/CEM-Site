@@ -12,6 +12,14 @@
             display: flex;
             align-items: center;
 
+            &_hover {
+                cursor: pointer;
+
+                &:hover {
+                        opacity: 0.6;
+                    }
+            }
+
             @media(max-width: 422px) {
                 justify-content: center;
             }

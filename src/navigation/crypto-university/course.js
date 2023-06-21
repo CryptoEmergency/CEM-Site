@@ -174,7 +174,11 @@ const start = function (data, ID) {
                         <div class="page-main__content">
                             <div class="courses">
                                 <div class="courses__container">
-                                    <div class="university-header__title">
+                                    <div class="university-header__title university-header__title_hover"
+                                        onclick={() => {
+                                            fn.siteLink("/crypto-university")
+                                        }}
+                                    >
                                         <img src={svg["mortarboard"]} />
                                         <p>{Variable.lang.a.university}</p>
                                     </div>
@@ -413,25 +417,43 @@ const start = function (data, ID) {
                                                                     </div>
                                                                     <div class="card__container card__container_row card__container_indent_course">
                                                                         <div class="card__cost">
-                                                                            <span>{item.cost} <span class="card__cost_size">₽/мес.</span></span>
+                                                                            <span>{item.cost}
+                                                                                {item.currency == "rub" 
+                                                                                ? 
+                                                                                    <span class="card__cost_size"> ₽</span>
+                                                                                :
+                                                                                    item.currency == "usd" 
+                                                                                ?
+                                                                                    <span class="card__cost_size"> $</span>
+                                                                                :
+                                                                                null
+                                                                                }
+                                                                            </span>
                                                                         </div>
-                                                                        <div class="card__container card__container_row">
-                                                                            <div class="card__duration">
-                                                                                <span>{item.duration}</span>
-                                                                            </div>
-                                                                            <div class="card__duration-text">
-                                                                                <span class="card__duration-text_size">
-                                                                                    {
-                                                                                        item.timeCount == "month"
-                                                                                            ?
-                                                                                            "Месяца"
-                                                                                            :
-                                                                                            "Дней"
-                                                                                    }
-                                                                                </span>
-                                                                                <span class="card__duration-text_color">Срок обучения</span>
-                                                                            </div>
-                                                                        </div>
+                                                                        {
+                                                                            item.duration != undefined
+                                                                            ?
+                                                                                <div class="card__container card__container_row">
+                                                                                    <div class="card__duration">
+                                                                                        <span>{item.duration}</span>
+                                                                                    </div>
+                                                                                    <div class="card__duration-text">
+                                                                                        <span class="card__duration-text_size">
+                                                                                            {
+                                                                                                item.timeCount == "month"
+                                                                                                    ?
+                                                                                                    "Месяца"
+                                                                                                    :
+                                                                                                    "Дней"
+                                                                                            }
+                                                                                        </span>
+                                                                                        <span class="card__duration-text_color">Срок обучения</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                                :
+                                                                                null
+                                                                        }
+                                                                        
                                                                     </div>
                                                                     <a class="card__more card__more_indent_course">
                                                                         <span

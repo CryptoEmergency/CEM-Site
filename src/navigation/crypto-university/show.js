@@ -274,14 +274,34 @@ const start = function (data, ID) {
                                                     <div class="course-footer__cost">
                                                         <div class="course-footer__cost_section">
                                                             <span class="course-footer__cost_old">
-                                                                {`${Static.item.costAll * 1.3} ₽`}
+                                                                {`${Static.item.cost * 1.3}`}
+                                                                {item.currency == "rub"
+                                                                    ?
+                                                                    <span class="card__cost_size"> ₽</span>
+                                                                    :
+                                                                    item.currency == "usd"
+                                                                        ?
+                                                                        <span class="card__cost_size"> $</span>
+                                                                        :
+                                                                        null
+                                                                }
                                                             </span>
                                                             <div class="course-footer__cost_discount">
                                                                 <span>-30%</span>
                                                             </div>
                                                         </div>
                                                         <div class="course-footer__cost_new">
-                                                            {Static.item.costAll} ₽
+                                                            {Static.item.cost} 
+                                                            {item.currency == "rub"
+                                                                ?
+                                                                <span class="card__cost_size"> ₽</span>
+                                                                :
+                                                                item.currency == "usd"
+                                                                    ?
+                                                                    <span class="card__cost_size"> $</span>
+                                                                    :
+                                                                    null
+                                                            }
                                                             <div>Новая цена</div>
                                                         </div>
                                                     </div>
