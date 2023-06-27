@@ -158,6 +158,7 @@
             text-align: center;
             color: #ffffff;
             cursor: pointer;
+            overflow: hidden;
 
             @media(max-width: 767px) {
                 margin: 0 20px;
@@ -169,11 +170,14 @@
 
             &_image {
                 // max-height: 300px;
-                margin-bottom: 10px;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 20px;
+                
 
                 img {
                     // max-height: 300px;
-                    max-width: 100%;
+                    height: 220px;
                     border-radius: 10px;
             
                     &:hover {

@@ -1344,18 +1344,6 @@ const start = function (data, ID) {
                                                         }
 
                                                         if (!e.target.dataset.timing) {
-                                                            e.target.dataset.timing = Date.now()
-
-                                                            // debugger
-                                                            let timeoutID = setInterval(function () {
-                                                                let diff = Date.now() - e.target.dataset.timing
-                                                                let secs = Math.round(diff / 1000)
-                                                                let res = convertToTime(secs)
-                                                                // debugger
-                                                                // console.log('=b62baa=', res, e.target)
-                                                                e.target.innerHTML = `<span class="messages_timer">${res}</span>`
-                                                                initReload()
-                                                            }, 1000)
 
                                                             await navigator.mediaDevices.getUserMedia({ audio: true })
                                                                 .then(stream => {
@@ -1384,6 +1372,19 @@ const start = function (data, ID) {
                                                                     Static.mediaRecorder.addEventListener("dataavailable", function (event) {
                                                                         audioChunks.push(event.data);
                                                                     })
+
+                                                                    e.target.dataset.timing = Date.now()
+
+                                                                    // debugger
+                                                                    let timeoutID = setInterval(function () {
+                                                                        let diff = Date.now() - e.target.dataset.timing
+                                                                        let secs = Math.round(diff / 1000)
+                                                                        let res = convertToTime(secs)
+                                                                        // debugger
+                                                                        // console.log('=b62baa=', res, e.target)
+                                                                        e.target.innerHTML = `<span class="messages_timer">${res}</span>`
+                                                                        initReload()
+                                                                    }, 1000)
 
                                                                     Static.mediaRecorder.addEventListener("stop", async function () {
                                                                         var audioBlob = new File(audioChunks, "audio.webm", {

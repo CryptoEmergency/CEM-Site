@@ -417,6 +417,8 @@ const start = function (data, ID) {
                                                                     </div>
                                                                     <div class="card__container card__container_row card__container_indent_course">
                                                                         <div class="card__cost">
+                                                                            {item.cost != undefined || null
+                                                                            ?
                                                                             <span>{item.cost}
                                                                                 {item.currency == "rub" 
                                                                                 ? 
@@ -429,6 +431,10 @@ const start = function (data, ID) {
                                                                                 null
                                                                                 }
                                                                             </span>
+                                                                            :
+                                                                                null
+                                                                            }
+                                                                            
                                                                         </div>
                                                                         {
                                                                             item.duration != undefined
