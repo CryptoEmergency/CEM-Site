@@ -26,91 +26,7 @@ let staticRounds = {
     lose: 0,
     draw: 0
 }   // Переменные со значением побед, пор, ничьи
-//Моя функция хода за ноль
-function myWayNull() {
-    if (startGame == 0) {
-        showError("Игра окончена")
-        return;
-    }
-    if (whoWay != 0) {
-        showError("Не твой ход")
-        return;
-    }
-    if (item == -1) {
-        arrGame[index] = 0;
 
-        let checkWin = isVictory()
-        if (checkWin == false) {
-            whoWay = 1
-            count++
-
-            autoWay()
-        }
-
-        else {
-            staticRounds.win++
-            setStorage("staticRounds", staticRounds)
-            showError("Вы выиграли")
-            startGame = 0
-        }
-        initReload()
-    }
-    else {
-        showError("поле занято")
-
-    }
-}
-//Мой ход за крест
-function myWayKrest(index,item) {
-    console.log('=34e543=', index)
-    if (startGame == 0) {
-        showError("Игра окончена")
-        return;
-    }
-
-    if (whoWay != 1) {
-        showError("Не твой ход")
-        return;
-    }
-
-    if (item == -1) {
-        arrGame[index] = 1;
-
-        let checkWin = isVictory()
-        if (checkWin == false) {
-            whoWay = 0
-            count++
-
-            autoWay()
-        }
-
-        else {
-            staticRounds.win++
-            setStorage("staticRounds", staticRounds)
-            showError("Вы выиграли")
-            startGame = 0
-        }
-        initReload()
-    }
-    else {
-        showError("поле занято")
-        // alert('поле занято')
-    }
-    return arrGame.map((index)=>{
-        return(
-            <div
-            class={[
-                "diz-gm"
-            ]}
-            onclick={async() => {
-                myWayKrest
-            }}
-            >
-
-            </div>
-        )
-    })
-}
 // Функция отображения окна сообщения
 const showError = function (text) {
     textError = text
@@ -165,11 +81,11 @@ const start = function (data, ID) {
         count = 0;
         showError("Новая игра.Начинайте!")
         initReload()
-        if (iplay = 0) {
+        if (iplay == 0) {
             autoWay()
         }
     }
-
+    //Комбинация выигрыша (бот-за ноль)
     function wantWin() {
         let combs = [
             [0, 1, 2],
@@ -194,6 +110,38 @@ const start = function (data, ID) {
                     return b
                 }
                 if (arrGame[b] == 0 && arrGame[c] == 0) {
+                    return a
+                }
+            }
+        }
+
+        return -1;
+    }
+    //Комбинация выигрыша (бот-за крест)
+    function wantWinForKrest() {
+        let combs = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6],
+        ];
+
+
+        for (let i = 0; i < combs.length; i++) {
+            const [a, b, c] = combs[i];
+            // console.log('=83ad4f=', arrGame[a], arrGame[b], arrGame[c])
+            if (arrGame[a] == -1 || arrGame[b] == -1 || arrGame[c] == -1) {
+                if (arrGame[a] == 1 && arrGame[b] == 1) {
+                    return c
+                }
+                if (arrGame[a] == 1 && arrGame[c] == 1) {
+                    return b
+                }
+                if (arrGame[b] == 1 && arrGame[c] == 1) {
                     return a
                 }
             }
@@ -268,13 +216,7 @@ const start = function (data, ID) {
     function autoWay() {
         console.log('=51c3b5=', 123)
         if (iplay == 0 && whoWay == 1) {
-            if (count >= 9) {
-                staticRounds.draw++
-                setStorage("staticRounds", staticRounds)
-                showError("Ничья, можешь испытать удачу снова!")
-                startGame = 0
-                return;
-            }
+            
             if (whoWay == 0) {
                 showError("Не твой ход")
                 return;
@@ -283,11 +225,11 @@ const start = function (data, ID) {
             let rn = getRandomInt(9)
 
             //нужно выыиграть(комп)-присваивание
-            let needWin = wantWin()
-            console.log('=4ea8e1 needWin=', needWin)
+            let needWinforKrest = wantWinForKrest()
+            console.log('=4ea8e1 needWin=', needWinforKrest)
 
-            if (needWin != -1) {
-                rn = needWin
+            if (needWinforKrest != -1) {
+                rn = needWinforKrest
 
             } else {
                 //не проиграть(комп)-присваивание       
@@ -296,6 +238,14 @@ const start = function (data, ID) {
                 if (dontLose != -1) {
                     rn = dontLose
                 }
+            }
+            if (count == 9) {
+                staticRounds.draw++
+                setStorage("staticRounds", staticRounds)
+                showError("Ничья, можешь испытать удачу снова!")
+                startGame = 0
+                
+                return;
             }
 
             // console.log('=02e892=', rn)
@@ -362,6 +312,7 @@ const start = function (data, ID) {
                 arrGame[rn] = 0
 
                 let checkWin = isVictory()
+                console.log('=autoway__!=', whoWay)
                 if (checkWin == false) {
                     whoWay = 1
                     count++
@@ -389,11 +340,174 @@ const start = function (data, ID) {
 
 
 
+    //Мой ход за ноль
+    function myWayNull (index,item) {
+        console.log('sjdflkja mywaynull',item)
+    if (startGame == 0) {
+        showError("Игра окончена")
+        return;
+    }
+    if (whoWay != 0) {
+        showError("Не твой ход")
+        return;
+    }
+    if (item == -1) {
+        arrGame[index] = 0;
+
+        let checkWin = isVictory()
+        if (checkWin == false) {
+            whoWay = 1
+            count++
+
+            autoWay()
+        }
+
+        else {
+            staticRounds.win++
+            setStorage("staticRounds", staticRounds)
+            showError("Вы выиграли")
+            startGame = 0
+        }
+        initReload()
+    }
+    else {
+        showError("поле занято")
+
+    }
+    return arrGame.map((index,item) => {
+        return (
+            <div
+                class={[
+                    "diz-gm"
+                ]}
+                onclick={async () => {
+                    myWayNull()
+                }}
+            >
+
+            </div>
+        )
+    })
+    }
+
+
+    //Мой ход за крест
+    function myWayKrest(index, item) {
+
+        console.log('=fb204a  myWayKrest=', index, item)
+        if (iplay == 1) {
+            console.log('=34e543=', index)
+            if (startGame == 0) {
+                showError("Игра окончена")
+                return;
+            }
+
+            if (whoWay != 1) {
+                showError("Не твой ход")
+                return;
+            }
+
+            if (item == -1) {
+
+                arrGame[index] = 1;
+
+                let checkWin = isVictory()
+                if (checkWin == false) {
+                    whoWay = 0
+                    count++
+
+                    autoWay()
+                }
+
+                else {
+                    staticRounds.win++
+                    setStorage("staticRounds", staticRounds)
+                    showError("Вы выиграли")
+                    startGame = 0
+                }
+                initReload()
+            }
+            else {
+                showError("поле занято")
+                // alert('поле занято')
+            }
+            return arrGame.map((index, item) => {
+                return (
+                    <div
+                        class={[
+                            "diz-gm"
+                        ]}
+                        onclick={async () => {
+                            myWayKrest()
+                        }}
+                    >
+
+                    </div>
+                )
+            })
+        }
+        // else if (iplay == 0) {
+        //     console.log('=sdffsdf=', item)
+        //     if (startGame == 0) {
+
+        //         showError("Игра окончена")
+        //         return;
+        //     }
+        //     if (whoWay != 0) {
+        //         showError("Не твой ход")
+        //         return;
+        //     }
+        //     if (item == -1) {
+
+        //         arrGame[index] = 0;
+
+        //         let checkWin = isVictory()
+        //         if (checkWin == false) {
+        //             whoWay = 1
+        //             count++
+
+        //             autoWay()
+        //         }
+
+        //         else {
+        //             staticRounds.win++
+        //             setStorage("staticRounds", staticRounds)
+        //             showError("Вы выиграли")
+        //             startGame = 0
+        //         }
+        //         initReload()
+        //     }
+        //     else {
+        //         showError("поле занято")
+
+        //     }
+        //     return arrGame.map((index, item) => {
+        //         return (
+        //             <div
+        //                 class={[
+        //                     "diz-gm"
+        //                 ]}
+        //                 onclick={async () => {
+        //                     myWayKrest()
+        //                 }}
+        //             >
+        //                 <img class="diz-gm" src={item == 1 ? svg['train/krest_2'] : item == 0 ? svg['train/null'] : ""} style="fill:red"> </img>
+
+        //             </div>
+
+        //         )
+        //     })
+        // }
+
+
+    }
+
+
     load({
         ID,
         fn: () => {
 
-
+           
 
             return (
                 <div class='c-main__body'>
@@ -424,26 +538,45 @@ const start = function (data, ID) {
 
                                 <button class="btn_change_way"
                                     onclick={() => {
-                                        startGame = 1
+                                        if(iplay==0){
+                                            iplay = 1
+                                            startGame = 1
+                                            restGame()
+                                            myWayKrest()
+                                        }else{
+                                            iplay = 0
+                                            startGame = 1
                                         restGame()
                                         iplay = 0
                                         console.log('=whio=', iplay)
                                         autoWay()
-                                        if (iplay = 0) {
-                                            myWayNull
+                                        
+                                            myWayNull()
+                                        
                                         }
+
+                                        // startGame = 1
+                                        // restGame()
+                                        // iplay = 0
+                                        // console.log('=whio=', iplay)
+                                        // autoWay()
+                                        // if (iplay == 0) {
+                                        //     myWayNull()
+                                        // }
+                                        
                                     }
                                     }
+                                   
 
                                 > Смена хода </button>
-                                <div>Играете за - {changeFigure}</div>
+                                <div>Играете за - {changeFigure.item}</div>
                             </div>
                         </div>
                         <div class="one_game ">
 
                             <table id="field" class="" >
                                 {/* {myWayKrest(arrGame)} */}
-                                
+
                                 {arrGame.map((item, index) => {
 
 
@@ -453,7 +586,14 @@ const start = function (data, ID) {
                                             class="block__size__1"
                                             //addEventListener()
                                             onclick={() => {
-                                                myWayKrest(index)
+                                                if (iplay == 1) {
+                                                    myWayKrest(index, item)
+                                                }
+
+                                                if (iplay == 0) {
+
+                                                    myWayNull(index,item)
+                                                }
 
 
 
