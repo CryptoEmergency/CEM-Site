@@ -189,7 +189,7 @@ const start = function (data, ID) {
             return;
         }
         if (whoWay == 1) {
-            alert('Не твой ход')
+            showError('Не твой ход')
             return;
         }
         //ход на рандом
@@ -238,6 +238,7 @@ const start = function (data, ID) {
             autoWay()
         }
     }
+    //ход противника за крест
     else if (iplay = 0){
         
         if (count >= 9) {
@@ -248,7 +249,7 @@ const start = function (data, ID) {
             return;
         }
         if (whoWay == 0) {
-            alert('Не твой ход')
+            showError("Не твой ход")
             return;
         }
         //ход на рандом
@@ -339,13 +340,10 @@ const start = function (data, ID) {
                                     startGame = 1
                                     restGame()
                                     iplay = 0
-                                    autoWay()
                                     console.log('=whio=', iplay)
+                                    autoWay()
                                     if (iplay =0)
                                     {
-                                   
-                                   
-                                   
                                    if (startGame == 0) {
                                        showError("Игра окончена")
                                        return;
