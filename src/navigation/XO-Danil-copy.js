@@ -437,9 +437,7 @@ const start = function (data, ID) {
                         class={[
                             "diz-gm"
                         ]}
-                        onclick={async () => {
-                            myWayKrest()
-                        }}
+                        onclick={myWayKrest}
                     >
 
                     </div>
@@ -584,7 +582,6 @@ const start = function (data, ID) {
 
                                         <div
                                             class="block__size__1"
-                                            //addEventListener()
                                             onclick={() => {
                                                 if (iplay == 1) {
                                                     myWayKrest(index, item)
@@ -611,15 +608,7 @@ const start = function (data, ID) {
 
                                 }
                                 )}
-                                {/* <div class=""> sdfaj </div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div>wfwsfw</div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div> */}
+                                
                             </table>
 
                         </div>
@@ -635,10 +624,7 @@ const start = function (data, ID) {
                                     restGame()
 
                                 }}
-                            >
-                                {/* <script>
-                                restGame()
-                                </script> */}
+                            >                                
                                 Заново ;)
                             </button>
                         </div>
