@@ -567,7 +567,7 @@ const start = function (data, ID) {
                                    
 
                                 > Смена хода </button>
-                                <div>Играете за - {changeFigure.item}</div>
+                                {/* <div>Играете за - {changeFigure.item}</div> */}
                             </div>
                         </div>
                         <div class="one_game ">
