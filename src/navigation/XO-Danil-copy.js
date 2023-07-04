@@ -254,24 +254,41 @@ const start = function (data, ID) {
                 arrGame[rn] = 1
 
                 let checkWin = isVictory()
-                if (checkWin == false) {
-                    whoWay = 0
+                if (!checkWin) {
                     count++
+                    if (count == 9) {
+                        staticRounds.draw++
+                        setStorage("staticRounds", staticRounds)
+                        showError("Ничья, можешь испытать удачу снова!")
+                        startGame = 0
+                        return;
+                    }
+                    whoWay = 0
                     initReload()
-                }
-                else if (checkWin == true) {
+                } else {
                     showError("Вы проиграли!")
                     staticRounds.lose++
                     setStorage("staticRounds", staticRounds)
                     startGame = 0
                 }
-                else {
-                    // if(dontLose == false) {
-                    whoWay = 0
-                    count++
-                    initReload()
-                    // } 
-                }
+            //     if (checkWin == false) {
+            //         whoWay = 0
+            //         count++
+            //         initReload()
+            //     }
+            //     else if (checkWin == true) {
+            //         showError("Вы проиграли!")
+            //         staticRounds.lose++
+            //         setStorage("staticRounds", staticRounds)
+            //         startGame = 0
+            //     }
+            //     else {
+            //         // if(dontLose == false) {
+            //         whoWay = 0
+            //         count++
+            //         initReload()
+            //         // } 
+            //     }
             }
             else {
                 autoWay()
@@ -371,7 +388,7 @@ const start = function (data, ID) {
         initReload()
     }
     else {
-        showError("поле занято")
+        //showError("поле занято")
 
     }
     return arrGame.map((index,item) => {
@@ -428,7 +445,7 @@ const start = function (data, ID) {
                 initReload()
             }
             else {
-                showError("поле занято")
+                //showError("поле занято")
                 // alert('поле занято')
             }
             return arrGame.map((index, item) => {
@@ -444,69 +461,113 @@ const start = function (data, ID) {
                 )
             })
         }
-        // else if (iplay == 0) {
-        //     console.log('=sdffsdf=', item)
-        //     if (startGame == 0) {
-
-        //         showError("Игра окончена")
-        //         return;
-        //     }
-        //     if (whoWay != 0) {
-        //         showError("Не твой ход")
-        //         return;
-        //     }
-        //     if (item == -1) {
-
-        //         arrGame[index] = 0;
-
-        //         let checkWin = isVictory()
-        //         if (checkWin == false) {
-        //             whoWay = 1
-        //             count++
-
-        //             autoWay()
-        //         }
-
-        //         else {
-        //             staticRounds.win++
-        //             setStorage("staticRounds", staticRounds)
-        //             showError("Вы выиграли")
-        //             startGame = 0
-        //         }
-        //         initReload()
-        //     }
-        //     else {
-        //         showError("поле занято")
-
-        //     }
-        //     return arrGame.map((index, item) => {
-        //         return (
-        //             <div
-        //                 class={[
-        //                     "diz-gm"
-        //                 ]}
-        //                 onclick={async () => {
-        //                     myWayKrest()
-        //                 }}
-        //             >
-        //                 <img class="diz-gm" src={item == 1 ? svg['train/krest_2'] : item == 0 ? svg['train/null'] : ""} style="fill:red"> </img>
-
-        //             </div>
-
-        //         )
-        //     })
-        // }
-
-
     }
+    function gamewithFriend(index,item) {
+        if (iplay == -1 && whoWay == 1)
+        {
+        if (startGame == 0) {
+            showError("Игра окончена")
+            return;
+        }
+        if (whoWay != 1) {
+            showError("Не твой ход")
+            return;
+        }
+        if (item == -1) {
 
+            arrGame[index] = 1;
+
+            let checkWin = isVictory()
+            if (checkWin == false) {
+                whoWay = 0
+                count++
+
+                //Second_player()
+            }
+
+            else {
+                //staticRounds.win++
+                //setStorage("staticRounds", staticRounds)
+                showError("Выиграл крест")
+                startGame = 0
+            }
+            initReload()
+        }
+        
+        else {
+            //Second_player()
+            //showError("поле занято")
+            
+        }
+
+
+        return arrGame.map((index, item) => {
+            return (
+                <div
+                    class={[
+                        "diz-gm"
+                    ]}
+                    onclick={gamewithFriend}
+                >     </div>
+            )
+        })
+    }
+    else if (whoWay == 0)
+    {
+        if (count >= 9) {
+            //staticRounds.draw++
+            //setStorage("staticRounds", staticRounds)
+            showError("Ничья, можете испытать удачу снова!")
+            startGame = 0
+            return;
+        }
+        if (whoWay == 1) {
+            showError('Не твой ход')
+            return;
+        }
+    if (arrGame[index] == -1) {
+        arrGame[index] = 0
+
+        let checkWin = isVictory()
+        console.log('=autoway__!=', whoWay)
+        if (checkWin == false) {
+            whoWay = 1
+            count++
+            initReload()
+        }
+        else if (checkWin == true) {
+            showError("Выиграл нолик")
+            //staticRounds.lose++
+            //setStorage("staticRounds", staticRounds)
+            startGame = 0
+        }
+        else {
+            
+            //whoWay = 1
+            count++
+            initReload()
+            
+        }
+    }
+    return arrGame.map((index, item) => {
+        return (
+            <div
+                class={[
+                    "diz-gm"
+                ]}
+                onclick={gamewithFriend}
+            >        </div>
+        )
+    })
+    }
+    } 
+
+
+    
 
     load({
         ID,
         fn: () => {
-
-           
-
             return (
                 <div class='c-main__body'>
                     <div class="conteiner-game">
@@ -552,34 +613,34 @@ const start = function (data, ID) {
                                             myWayNull()
                                         
                                         }
-
-                                        // startGame = 1
-                                        // restGame()
-                                        // iplay = 0
-                                        // console.log('=whio=', iplay)
-                                        // autoWay()
-                                        // if (iplay == 0) {
-                                        //     myWayNull()
-                                        // }
-                                        
                                     }
                                     }
-                                   
-
                                 > Смена хода </button>
-                                {/* <div>Играете за - {changeFigure.item}</div> */}
+                                <button class ="btn_game_with_friend"
+                                onclick = {() =>{
+                                    if(iplay == 1 || iplay == 0)
+                                    {
+                                    iplay = -1
+                                    startGame = 1 
+                                    restGame()
+                                    gamewithFriend()
+                                    }
+                                    else {
+                                    iplay = 1
+                                    startGame = 1
+                                    restGame()
+                                    myWayKrest()
+                                    }
+
+                                }}
+                                >Игра с другом</button>
                             </div>
                         </div>
                         <div class="one_game ">
 
                             <table id="field" class="" >
-                                {/* {myWayKrest(arrGame)} */}
-
                                 {arrGame.map((item, index) => {
-
-
                                     return (
-
                                         <div
                                             class="block__size__1"
                                             onclick={() => {
@@ -591,12 +652,10 @@ const start = function (data, ID) {
 
                                                     myWayNull(index,item)
                                                 }
-
-
-
-
-
-
+                                                if (iplay == -1)
+                                                {
+                                                    gamewithFriend(index,item)
+                                                }
                                             }}
                                         >
                                             {/* {item == 1 ? 'x' : item == 0 ? "0" : null}  */}
@@ -605,7 +664,6 @@ const start = function (data, ID) {
 
                                         </div>
                                     )
-
                                 }
                                 )}
                                 
