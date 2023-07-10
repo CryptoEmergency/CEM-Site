@@ -725,6 +725,7 @@
     height: auto;
 }
 
+
 .wi_lo {
     display: flex;
     justify-content: space-around;
@@ -811,5 +812,33 @@
 //   animation-name: slidein;
 }
 
+.one_game_sea_war {
+    display: flex;
+    justify-content: space-around;
+    height: auto;
+}
+#field_sea_war  {
+    display: grid;
+    grid-template-columns:3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
+    grid-template-rows:3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
+    width: 610px;
+    height: 610px;
+    border: 1px ;
+    border-style: solid ;
+    border-image: linear-gradient(to right, darkblue, darkorchid) 1;
+    //background: linear-gradient(to top, red, purple);
+    // border-color: linaer-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
+    //text-align: center;
+    //font-weight: bold;
+}
+.block_size_sea_war{
+    border: 1px ;
+    border-style: solid ;
+    border-image: linear-gradient(to right, darkblue, darkorchid) 1;
+    
+    //border-color: linaer-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
+    width: 55px;
+    height: auto;
+}
 
 
