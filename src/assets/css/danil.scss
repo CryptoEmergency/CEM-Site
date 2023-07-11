@@ -616,6 +616,19 @@
     color: #8859ec;
     padding-top: 15px;
     padding-bottom: 15px;
+    animation-duration: 3s;
+  animation-name: slideinnn;
+}
+@keyframes slideinnn {
+    from {
+        margin-left: 100%;
+        width: 300%;
+      }
+    
+      to {
+        margin-left: 0%;
+        width: 100%;
+      }
 }
 
 .start__game {
@@ -625,6 +638,8 @@
     color: #8859ec;
     padding-top: 15px;
     padding-bottom: 15px;
+    animation-duration: 6s;
+  animation-name: slideinnn;
 }
 
 .stats_main {
@@ -659,10 +674,34 @@
 }
 
 .btn_change_way{
-    background: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
+    background: linear-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
+    background-size: 400% 400%;
+	animation: gradienttt 4s ease infinite;
+	transform: translate3d(0, 0, 0);
+
+
     border-radius: 8px;
     text-align: center;
-    color: #FFFFFF;
+    height: 50px;
+    width: 150px;
+    font-size: 18px;
+    font-style: oblique;
+    color: cyan;
+}
+.btn_game_with_friend{
+    background: linear-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
+    background-size: 400% 400%;
+	animation: gradienttt 4s ease infinite;
+	transform: translate3d(0, 0, 0);
+
+
+    border-radius: 8px;
+    text-align: center;
+    height: 50px;
+    width: 150px;
+    font-size: 18px;
+    font-style: oblique;
+    color: cyan;
 }
 
 .st-gm{
@@ -686,6 +725,7 @@
     height: auto;
 }
 
+
 .wi_lo {
     display: flex;
     justify-content: space-around;
@@ -693,7 +733,11 @@
     margin-bottom: 20px;
 }
 .block__size__1{
-    border: 1px solid rgb(221, 212, 212);
+    border: 1px ;
+    border-style: solid ;
+    border-image: linear-gradient(to right, darkblue, darkorchid) 1;
+    
+    //border-color: linaer-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
     width: 150px;
     height: auto;
 }
@@ -705,26 +749,43 @@
     fill:#8859ec;
     width: 140px;
     height: auto;
+
     filter: invert(77%) sepia(19%) saturate(1363%) hue-rotate(138deg) brightness(97%) contrast(82%);
+   
 }
 
 .restart_game {
     display: flex;
     justify-content: center;
     border-radius: 8px;
+    
 }
 .btn_reset_gm{
-        background: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
-        padding: 13px;
-        border-radius: 8px;
-        
-        height: 50 px;
-        //text-decoration: none;
-        color: #FFFFFF;
-        //display: flex;
-        text-align: center;
-        //justify-content: space-between;
-        font-size: 20px;
+    background: linear-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
+    background-size: 400% 400%;
+	animation: gradienttt 4s ease infinite;
+	transform: translate3d(0, 0, 0);
+
+
+    border-radius: 8px;
+    text-align: center;
+    height: 50px;
+    width: 150px;
+    font-size: 18px;
+    font-style: oblique;
+    color: cyan;
+}
+
+@keyframes gradienttt {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 #field  {
@@ -733,7 +794,11 @@
     grid-template-rows: 3fr 3fr 3fr;
     width: 450px;
     height: 450px;
-    border: 1px solid rgb(221, 212, 212);
+    border: 1px ;
+    border-style: solid ;
+    border-image: linear-gradient(to right, darkblue, darkorchid) 1;
+    background: linear-gradient(to top, red, purple);
+    // border-color: linaer-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
     //text-align: center;
     //font-weight: bold;
 }
@@ -743,7 +808,37 @@
     color:#8859ec;
     height: auto;
     text-align: center;
+//     animation-duration: 1s;
+//   animation-name: slidein;
 }
 
+.one_game_sea_war {
+    display: flex;
+    justify-content: space-around;
+    height: auto;
+}
+#field_sea_war  {
+    display: grid;
+    grid-template-columns:3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
+    grid-template-rows:3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
+    width: 610px;
+    height: 610px;
+    border: 1px ;
+    border-style: solid ;
+    border-image: linear-gradient(to right, darkblue, darkorchid) 1;
+    //background: linear-gradient(to top, red, purple);
+    // border-color: linaer-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
+    //text-align: center;
+    //font-weight: bold;
+}
+.block_size_sea_war{
+    border: 1px ;
+    border-style: solid ;
+    border-image: linear-gradient(to right, darkblue, darkorchid) 1;
+    
+    //border-color: linaer-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
+    width: 55px;
+    height: auto;
+}
 
 

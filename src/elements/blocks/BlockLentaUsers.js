@@ -201,6 +201,9 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
               {item.updateTime ? Variable.lang.text.update + " " + fn.getDateFormat(item.updateTime, "now") : fn.getDateFormat(item.showDate, "now")}
             </span>
             <div class="user_post_statistic_item">
+              <Evaluation Static={Static} item={item} index={index} action="Post" />
+            </div>
+            <div class="user_post_statistic_item">
               <div class="user_post_statistic_image">
                 <img src={svg["question_answers"]} />
                 <span>{item.statistic.comments} </span>
@@ -209,9 +212,7 @@ const BlockLentaUsers = function ({ Static, changeToogle, ElemVisible, item, ind
                 <img src={svg["question_views"]} /> {item.statistic.view}
               </div>
             </div>
-            <div class="user_post_statistic_item">
-              <Evaluation Static={Static} item={item} index={index} action="Post" />
-            </div>
+            
           </div>
         </div>
       </div>
