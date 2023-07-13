@@ -133,6 +133,18 @@ const start = function (data, ID) {
     {
       name: "Blockchain",
     },
+    {
+      name: "Bridge",
+    },
+    {
+      name: "Wallet",
+    },
+    {
+      name: "Cloud",
+    },
+    {
+      name: "Services",
+    },
   ];
 
   let [Static] = fn.GetParams({ data, ID });
