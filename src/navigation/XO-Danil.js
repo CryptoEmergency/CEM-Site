@@ -7,26 +7,23 @@ import {
     getStorage,
     CEM
 } from "@betarost/cemserver/cem.js";    // Стандартные библиотеки
-
 const { images, svg, fn } = CEM // подключение картинок и функций
 // Значения на игровом поле (-1 - поле не занято, 1 - поставили крестик, 0 - поставили нолик)
-let arrGame = [-1, -1, -1, -1, -1, -1, -1, -1, -1,-1,-1
-                -1, -1, -1, -1, -1, -1, -1, -1, -1,-1,-1
-                -1, -1, -1, -1, -1, -1, -1, -1, -1,-1,-1
-                -1, -1, -1, -1, -1, -1, -1, -1, -1,-1,-1
-                -1, -1, -1, -1, -1, -1, -1, -1, -1,-1,-1
-                -1, -1, -1, -1, -1, -1, -1, -1, -1,-1,-1
-                -1, -1, -1, -1, -1, -1, -1, -1, -1,-1,-1
-                -1, -1, -1, -1, -1, -1, -1, -1, -1,-1,-1
-                -1, -1, -1, -1, -1, -1, -1, -1, -1,-1,-1
-                -1, -1, -1, -1, -1, -1, -1, -1, -1,-1,-1
-                -1, -1, -1, -1, -1, -1, -1, -1, -1,-1,-1,
-                -1, -1, -1, -1, -1, -1, -1, -1, -1,-1]  
+let arrGame = [[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]]
 let bords = {
-    fourbords: [1,1,1,1],
-    triplebords:[2,2,2],
-    doublebords:[3,3],
-    onebords:[4]
+    fourbords: [1, 1, 1, 1],
+    triplebords: [2, 2, 2],
+    doublebords: [3, 3],
+    onebords: [4]
 }
 let count = 0  // Сколько раз походили
 let startGame = 1 //1-Игра идет, 0 - Игра остановлена
@@ -35,25 +32,125 @@ let elError = null // Ссылка на элемент (Окно сообщен�
 let textError = ""  // Переменная с текстом в окне сообщения
 let iplay = 1       //1-крест 0-ноль
 let changeFigure = {
- krest: "X", //отображение фигуры за которую играешь 
- null : "O"
+    krest: "X", //отображение фигуры за которую играешь 
+    null: "O"
 }
 let staticRounds = {
     win: 0,
     lose: 0,
     draw: 0
 }   // Переменные со значением побед, пор, ничьи
+let ship;
 
 
+function dragstart_handler(ev) {
+    console.log('=217ecd=', 123, ev)
+    // Add the target element's id to the data transfer object
+    ev.dataTransfer.setData("text/plain", ev.target.id);
+}
+
+
+// var ship = document.getElementById(images['train/result']);
+// all.onmousedown = function(e) { 
+
+
+//     var coords = getCoords(ship);
+//     var shiftX = e.pageX - coords.left;
+//     var shiftY = e.pageY - coords.top;
+
+//     ship.style.position = 'absolute';
+//     document.body.appendChild(ship);
+//     moveAt(e);
+
+//     ship.style.zIndex = 1000; // над другими элементами
+
+//     function moveAt(e) {
+//       ship.style.left = e.pageX - shiftX + 'px';
+//       ship.style.top = e.pageY - shiftY + 'px';
+//     }
+
+//     document.onmousemove = function(e) {
+//       moveAt(e);
+//     };
+
+//     ship.onmouseup = function() {
+//       document.onmousemove = null;
+//       ship.onmouseup = null;
+//     };
+
+//   }
+
+//   ship.ondragstart = function() {
+//     return false;
+//   };
+
+//   function getCoords(elem) {   // кроме IE8-
+//     var box = elem.getBoundingClientRect();
+//     return {
+//       top: box.top + pageYOffset,
+//       left: box.left + pageXOffset
+//     };
+//     }
+const parallelepiped = document.querySelector('#field');
+let locationX = 0;
+let locationY = 0;
+
+function moveShip(event) {
+    return
+    let left = event.clientX - locationX;
+    let top = event.clientY - locationY;
+    if (left < 0) {
+        // выходит за границу параллелепипеда слева, останавливаем
+        left = 0;
+    }
+    if (left > parallelepiped.scrollWidth - ship.scrollWidth) {
+        // выходит за границу параллелепипеда справа, останавливаем
+        left = parallelepiped.scrollWidth - ship.scrollWidth;
+    }
+    ship.style.left = left + 'px';
+    // с top нужно сделать аналогично
+    ship.style.top = top + 'px';
+}
+
+// ship.addEventListener('mousedown', function(event) {
+//   if(ship.style.left){
+//      locationX = event.pageX - ship.style.left.replace('px', '');
+//   }else{
+//      locationX = event.pageX - 20;
+//   }
+//   if(ship.style.top){
+//      locationY = event.pageY - ship.style.top.replace('px', '');
+//   }else{
+//      locationY = event.pageY - 20;
+//   }
+//   moveship(event)
+//   // добавляем отслеживание события перемещения
+//   document.addEventListener('mousemove', moveship);
+// });
+
+document.addEventListener('mouseup', function (event) {
+    // убираем отслеживание события перемещения
+    // document.removeEventListener('mousemove', moveship);
+});
 const start = function (data, ID) {
-   
+
 
 
     load({
         ID,
         fn: () => {
-
-
+            let ttt = []
+            arrGame.forEach((item, index) => {
+                // console.log('=b831ce=', item)
+                item.forEach((item2, index2) => {
+                    ttt.push(<div
+                        class="block_size_sea_war"
+                        onclick={() => {
+                            console.log('=a3574a=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
+                        }}
+                    ></div>)
+                })
+            })
 
             return (
                 <div class='c-main__body'>
@@ -81,64 +178,60 @@ const start = function (data, ID) {
                                 </div>
                             </div>
                             <div>
-                                
-                            <button class="btn_change_way"
-                                onclick={() => {
 
-                            }
-                            }
-                            
-                            > Смена хода </button>
-                            <div>Играете за - {changeFigure}</div>
+                                <button class="btn_change_way"
+                                    onclick={() => {
+
+                                    }
+                                    }
+
+                                > Смена хода </button>
+                                <div>Играете за - {changeFigure}</div>
                             </div>
+
+
+                            <table
+                                Element={($el) => {
+                                    $el.addEventListener("dragstart", dragstart_handler);
+                                }}
+                                id="ship4" class="" draggable="true">
+                                <div class="block_size_sea_war"></div>
+                                <div class="block_size_sea_war"></div>
+                                <div class="block_size_sea_war"></div>
+                                <div class="block_size_sea_war"></div>
+                            </table>
+
                         </div>
                         <div class="one_game_sea_war ">
 
                             <table id="field_sea_war" class="" >
-                                {arrGame.map((item, index) => {
+                                {ttt}
 
-                                    
-                                    return (
-                                        
-                                        <div
-                                            class="block_size_sea_war"
-                                            onclick={() => {
-                                                
-                                        }}
-                                        >
-                                            {/* {item == 1 ? 'x' : item == 0 ? "0" : null}  */}
 
-                                            {/* <img class="diz-gm" src={item == 1 ? svg['train/krest_2'] : item == 0 ? svg['train/null'] : ""} style="fill:red"> </img> */}
-
-                                        </div>
-                                    )
-
-                                }
-                                )}
-                                
                             </table>
-                            <table id="field_sea_war" class="" >
-                                {arrGame.map((item, index) => {
+                            <table
+                                id="field_sea_war" class=""
+                                onmousemove={(e) => {
+                                    // ship.style.position = 'fixed'
+                                    // ship.style.left = e.clientX + -20 + 'px'
+                                    // ship.style.top = e.clientY + -30 + 'px'
+                                    // moveShip()
 
-                                    
-                                    return (
-                                        
-                                        <div
-                                            class="block_size_sea_war"
-                                            onclick={() => {
-                                                
-                                        }}
-                                        >
-                                            {/* {item == 1 ? 'x' : item == 0 ? "0" : null}  */}
 
-                                            {/* <img class="diz-gm" src={item == 1 ? svg['train/krest_2'] : item == 0 ? svg['train/null'] : ""} style="fill:red"> </img> */}
+                                }}
+                            >
 
-                                        </div>
-                                    )
+                                <div
+                                    class="ship"
+                                    Element={($el) => {
+                                        ship = $el;
+                                    }}
 
-                                }
-                                )}
-                                
+                                >
+                                    <img src={images['train/result']}></img>
+                                </div>
+                                {ttt}
+
                             </table>
 
                         </div>
@@ -150,10 +243,10 @@ const start = function (data, ID) {
 
                             <button class="btn_reset_gm"
                                 onclick={() => {
-                                    
+                                    console.log('=fade39=', ship)
                                 }}
                             >
-                                
+
                                 Заново ;)
                             </button>
                         </div>
