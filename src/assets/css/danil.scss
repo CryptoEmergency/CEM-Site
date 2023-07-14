@@ -617,18 +617,19 @@
     padding-top: 15px;
     padding-bottom: 15px;
     animation-duration: 3s;
-  animation-name: slideinnn;
+    animation-name: slideinnn;
 }
+
 @keyframes slideinnn {
     from {
         margin-left: 100%;
         width: 300%;
-      }
-    
-      to {
+    }
+
+    to {
         margin-left: 0%;
         width: 100%;
-      }
+    }
 }
 
 .start__game {
@@ -639,7 +640,7 @@
     padding-top: 15px;
     padding-bottom: 15px;
     animation-duration: 6s;
-  animation-name: slideinnn;
+    animation-name: slideinnn;
 }
 
 .stats_main {
@@ -651,48 +652,35 @@
 
 .stats_1 {
     display: grid;
-    grid-template-columns: 40% 60%; 
+    grid-template-columns: 40% 60%;
     grid-template-rows: 1fr 1fr;
-    
+
 }
-.stats_2{
-    display:grid;
+
+.stats_2 {
+    display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
 
-.stats_view_pr{
+.stats_view_pr {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    
+
 }
-.stats_view{
+
+.stats_view {
     display: flex;
     justify-content: center;
     border: 1px solid rgb(221, 212, 212);
     //outline-style: solid;
-   
+
 }
 
-.btn_change_way{
-    background: linear-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
+.btn_change_way {
+    background: linear-gradient(89.03deg, #2c66b8 0.54%, #3926eb, #5036ad, #8859ec 97.66%);
     background-size: 400% 400%;
-	animation: gradienttt 4s ease infinite;
-	transform: translate3d(0, 0, 0);
-
-
-    border-radius: 8px;
-    text-align: center;
-    height: 50px;
-    width: 150px;
-    font-size: 18px;
-    font-style: oblique;
-    color: cyan;
-}
-.btn_game_with_friend{
-    background: linear-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
-    background-size: 400% 400%;
-	animation: gradienttt 4s ease infinite;
-	transform: translate3d(0, 0, 0);
+    animation: gradienttt 4s ease infinite;
+    transform: translate3d(0, 0, 0);
 
 
     border-radius: 8px;
@@ -704,19 +692,35 @@
     color: cyan;
 }
 
-.st-gm{
+.btn_game_with_friend {
+    background: linear-gradient(89.03deg, #2c66b8 0.54%, #3926eb, #5036ad, #8859ec 97.66%);
+    background-size: 400% 400%;
+    animation: gradienttt 4s ease infinite;
+    transform: translate3d(0, 0, 0);
+
+
+    border-radius: 8px;
+    text-align: center;
+    height: 50px;
+    width: 150px;
+    font-size: 18px;
+    font-style: oblique;
+    color: cyan;
+}
+
+.st-gm {
     //не используется
     background: linear-gradient(89.03deg, #2c66b8 0.54%, #8859ec 97.66%);
-        padding: 13px;
-        border-radius: 8px;
-        
-        height: 50 px;
-        //text-decoration: none;
-        color: #FFFFFF;
-        //display: flex;
-        text-align: center;
-        //justify-content: space-between;
-        font-size: 20px;
+    padding: 13px;
+    border-radius: 8px;
+
+    height: 50 px;
+    //text-decoration: none;
+    color: #FFFFFF;
+    //display: flex;
+    text-align: center;
+    //justify-content: space-between;
+    font-size: 20px;
 }
 
 .one_game {
@@ -732,39 +736,42 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.block__size__1{
-    border: 1px ;
-    border-style: solid ;
+
+.block__size__1 {
+    border: 1px;
+    border-style: solid;
     border-image: linear-gradient(to right, darkblue, darkorchid) 1;
-    
+
     //border-color: linaer-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
     width: 150px;
     height: auto;
 }
+
 .diz-gm {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-content: center;
-    color:random($limit: 10);
-    fill:#8859ec;
+    color: random($limit: 10);
+    fill: #8859ec;
     width: 140px;
     height: auto;
 
     filter: invert(77%) sepia(19%) saturate(1363%) hue-rotate(138deg) brightness(97%) contrast(82%);
-   
+
 }
 
 .restart_game {
     display: flex;
     justify-content: center;
     border-radius: 8px;
-    
+
 }
-.btn_reset_gm{
-    background: linear-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
+
+.btn_reset_gm {
+    background: linear-gradient(89.03deg, #2c66b8 0.54%, #3926eb, #5036ad, #8859ec 97.66%);
     background-size: 400% 400%;
-	animation: gradienttt 4s ease infinite;
-	transform: translate3d(0, 0, 0);
+    animation: gradienttt 4s ease infinite;
+    transform: translate3d(0, 0, 0);
 
 
     border-radius: 8px;
@@ -777,39 +784,42 @@
 }
 
 @keyframes gradienttt {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
-#field  {
+#field {
     display: grid;
-    grid-template-columns:3fr 3fr 3fr;
+    grid-template-columns: 3fr 3fr 3fr;
     grid-template-rows: 3fr 3fr 3fr;
     width: 450px;
     height: 450px;
-    border: 1px ;
-    border-style: solid ;
+    border: 1px;
+    border-style: solid;
     border-image: linear-gradient(to right, darkblue, darkorchid) 1;
     background: linear-gradient(to top, red, purple);
     // border-color: linaer-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
     //text-align: center;
     //font-weight: bold;
 }
-#modalsetin{
+
+#modalsetin {
     padding-top: 140px;
     font-size: 25px;
-    color:#8859ec;
+    color: #8859ec;
     height: auto;
     text-align: center;
-//     animation-duration: 1s;
-//   animation-name: slidein;
+    //     animation-duration: 1s;
+    //   animation-name: slidein;
 }
 
 .one_game_sea_war {
@@ -817,28 +827,54 @@
     justify-content: space-around;
     height: auto;
 }
-#field_sea_war  {
+
+#field_sea_war {
     display: grid;
-    grid-template-columns:3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
-    grid-template-rows:3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
-    width: 610px;
-    height: 610px;
-    border: 1px ;
-    border-style: solid ;
+    grid-template-columns: 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
+    grid-template-rows: 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
+    width: 600px;
+    height: 600px;
+    border: 1px;
+    border-style: solid;
     border-image: linear-gradient(to right, darkblue, darkorchid) 1;
     //background: linear-gradient(to top, red, purple);
     // border-color: linaer-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
     //text-align: center;
     //font-weight: bold;
+    position: relative;
+    overflow: hidden;
 }
-.block_size_sea_war{
-    border: 1px ;
-    border-style: solid ;
+
+.block_size_sea_war {
+    border: 1px;
+    border-style: solid;
     border-image: linear-gradient(to right, darkblue, darkorchid) 1;
-    
+
     //border-color: linaer-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
-    width: 55px;
+    width: 60px;
     height: auto;
 }
 
+#ship4 {
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr 3fr;
+    grid-template-rows: 3fr;
+    width: 240px;
+    height: 60px;
+    border: 1px;
+    border-style: solid;
+    border-image: linear-gradient(to right, darkblue, darkorchid) 1;
+    //background: linear-gradient(to top, red, purple);
+    // border-color: linaer-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
+    //text-align: center;
+    //font-weight: bold;
+    position: relative;
+    overflow: hidden;
+}
 
+.ship {
+    width: 100px;
+    height: 100px;
+    transition: 0.01s linear;
+    //position:absolute;
+}

@@ -90,6 +90,19 @@
             &__link {
                 display: none;
             }
+
+            &__icon {
+                height: 25px;
+                width: auto;
+
+                img {
+                    height: 100%;
+                }
+
+                @media(max-width: 464px) {
+                    width: 20px;
+                }
+            }
         }
 
         .c-logo {

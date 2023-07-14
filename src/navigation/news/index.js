@@ -16,6 +16,8 @@ let startX, startScrollLeft;
 let x1 = null; 
 let y1 = null;
 
+let body = document.querySelector('body');
+
 const dragStart = (e, Static) => {
   isDrag = true;
   Static.categoryCarousel.classList.add("dragging");
@@ -52,10 +54,6 @@ const mouseWheel = (e, Static) => {
   } else if(e.deltaY > 0){
     Static.categoryCarousel.scrollLeft -= Static.categoryEl.offsetWidth;
   }
-}
-
-const clickKey = (e, Static) => {
-  console.log('=55c9c4=', e.code)
 }
 
 const handleTouchStart = (e) => {
@@ -135,14 +133,13 @@ const start = function (data, ID) {
               Static.containerCategory = $el;
             }}
             class={[
-              "pY--15",
               "category-wrap",
               "category-wrap_shadow-right",
               
             ]}
           >
             <ul
-              class="category-carousel"
+              class="category-carousel pY--15"
               Element={($el)=>{
                 Static.categoryCarousel = $el;
               }}
@@ -158,9 +155,6 @@ const start = function (data, ID) {
               onscroll={(e)=>{
                   infiniteScroll(e, Static);
               }}
-              // onmouseover={(e)=>{
-              //   onkeydown = clickKey(e, Static)
-              // }}
               onmouseout={(e)=>{
                 dragStop(e, Static);
               }}
@@ -172,6 +166,12 @@ const start = function (data, ID) {
               }}
               ontouchmove={(e)=>{
                 handleTouchMove(e, Static)
+              }}
+              onmouseenter={(e)=>{
+                body.classList.add('disable_scroll');
+              }}
+              onmouseleave={(e)=>{
+                body.classList.remove('disable_scroll');
               }}
             >
               <li
