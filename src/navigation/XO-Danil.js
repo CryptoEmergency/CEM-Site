@@ -43,8 +43,25 @@ let staticRounds = {
 let ship;
 
 
-function dragstart_handler(ev) {
+
+function dtest(ev) {
     console.log('=217ecd=', 123, ev)
+    ev.dataTransfer.setData("Test", ev.target.id);
+
+
+}
+
+function dtest2(ev) {
+    console.log('=96851e=', "dtest2")
+
+}
+
+function dtest3(ev) {
+
+
+}
+
+function dragstart_handler(ev) {
     // Add the target element's id to the data transfer object
     ev.dataTransfer.setData("text/plain", ev.target.id);
 }
@@ -132,6 +149,10 @@ document.addEventListener('mouseup', function (event) {
     // убираем отслеживание события перемещения
     // document.removeEventListener('mousemove', moveship);
 });
+
+let whatIDrop = ""
+
+let tmppOneRaz = false
 const start = function (data, ID) {
 
 
@@ -147,6 +168,41 @@ const start = function (data, ID) {
                         class="block_size_sea_war"
                         onclick={() => {
                             console.log('=a3574a=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
+                        }}
+                        Element={($el) => {
+
+                            // if (!tmppOneRaz) {
+                            tmppOneRaz = true
+                            // $el.addEventListener("dragenter", () => {
+                            //     // console.log('=dragenter=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
+
+                            // });
+
+                            // $el.addEventListener("dragleave", () => {
+                            //     // console.log('=dragleave=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
+
+                            // });
+
+                            $el.addEventListener("drop", function (e) {
+                                console.log('=5d3ebf=', this, whatIDrop)
+                                this.classList.add("colorbackall")
+                                console.log('=drop=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
+                                e.preventDefault();
+                               //
+                               const id = e.dataTransfer.getData('text');
+                               const draggableElement = document.getElementById(id);
+                               const dropzone = e.target;
+                               dropzone.appendChild(draggableElement);
+                               e.dataTransfer.clearData();
+                            });
+
+
+                            $el.addEventListener("dragover", (e) => {
+                                // console.log('=dragover=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
+                                e.preventDefault();
+                            });
+                            // }
+
                         }}
                     ></div>)
                 })
@@ -186,30 +242,93 @@ const start = function (data, ID) {
                                     }
 
                                 > Смена хода </button>
-                                <div>Играете за - {changeFigure}</div>
+                                {/* <div>Играете за - {changeFigure}</div> */}
                             </div>
 
 
                             <table
                                 Element={($el) => {
-                                    $el.addEventListener("dragstart", dragstart_handler);
+                                    $el.addEventListener("dragstart", () => {
+                                        console.log('=43c63d=', "drag start 4")
+                                        whatIDrop = "4 палубы"
+                                    });
+                                    
+                                    $el.addEventListener("drop",  () => {
+                                        
+                                        //найти get
+                                        // var data = e.dataTransfer.getData("colorbackall");
+                                        // e.target.appendChild(document.getElementById(data));  
+
+                                    });
+                                    // fourbords.forEach((item, index) => {
+                                    //     // console.log('=b831ce=', item)
+                                    //     item.forEach((item, index2) => {
+                                    //         ttt.push(<div class="block_size_sea_war" id="exzample1"
+
+                                    //             onclick={() => {
+                                    //                 console.log('=a3574a=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
+
+                                    //             }}
+                                    //         ></div>)
+                                    //     })
+                                    // })
+                                    //<div class="block_size_sea_war" id="exzample1"></div>
+
                                 }}
-                                id="ship4" class="" draggable="true">
-                                <div class="block_size_sea_war"></div>
-                                <div class="block_size_sea_war"></div>
-                                <div class="block_size_sea_war"></div>
-                                <div class="block_size_sea_war"></div>
+                                id="ship4" class="" draggable="true" >
+                                {([1, 2, 3, 4]).map(() => {
+                                    return (
+                                        <div class="block_size_sea_war" id="exzample1"></div>
+                                    )
+                                })}
+                                {/* <div class="block_size_sea_war" id="exzample2"></div>
+                                <div class="block_size_sea_war" id="exzample3"></div>
+                                <div class="block_size_sea_war" id="exzample4"></div> */}
+                            </table>
+
+                            <table
+                                Element={($el) => {
+                                    $el.addEventListener("dragstart", () => {
+                                        console.log('=43c63d=', "drag start 4")
+                                        whatIDrop = "3 палубы"
+                                    });
+                                    $el.addEventListener("drop", dtest2);
+                                    // fourbords.forEach((item, index) => {
+                                    //     // console.log('=b831ce=', item)
+                                    //     item.forEach((item, index2) => {
+                                    //         ttt.push(<div class="block_size_sea_war" id="exzample1"
+
+                                    //             onclick={() => {
+                                    //                 console.log('=a3574a=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
+
+                                    //             }}
+                                    //         ></div>)
+                                    //     })
+                                    // })
+                                    //<div class="block_size_sea_war" id="exzample1"></div>
+
+                                }}
+                                id="ship3" class="" draggable="true" >
+                                {([1, 2, 3]).map(() => {
+                                    return (
+                                        <div class="block_size_sea_war" id="exzample1"></div>
+                                    )
+                                })}
+                                {/* <div class="block_size_sea_war" id="exzample2"></div>
+                                <div class="block_size_sea_war" id="exzample3"></div>
+                                <div class="block_size_sea_war" id="exzample4"></div> */}
                             </table>
 
                         </div>
+                        
                         <div class="one_game_sea_war ">
 
-                            <table id="field_sea_war" class="" >
+                            <table id="field_sea_war" class="">
                                 {ttt}
 
 
                             </table>
-                            <table
+                            {/* <table
                                 id="field_sea_war" class=""
                                 onmousemove={(e) => {
                                     // ship.style.position = 'fixed'
@@ -232,7 +351,7 @@ const start = function (data, ID) {
                                 </div>
                                 {ttt}
 
-                            </table>
+                            </table> */}
 
                         </div>
                         <div class="wi_lo">
