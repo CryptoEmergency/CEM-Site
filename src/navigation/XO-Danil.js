@@ -41,25 +41,14 @@ let staticRounds = {
     draw: 0
 }   // Переменные со значением побед, пор, ничьи
 let ship;
-
-
+let ships = [1, 2, 3, 4]
+let positionShip, field;
 
 function dtest(ev) {
     console.log('=217ecd=', 123, ev)
     ev.dataTransfer.setData("Test", ev.target.id);
-
-
 }
 
-function dtest2(ev) {
-    console.log('=96851e=', "dtest2")
-
-}
-
-function dtest3(ev) {
-
-
-}
 
 function dragstart_handler(ev) {
     // Add the target element's id to the data transfer object
@@ -151,10 +140,9 @@ document.addEventListener('mouseup', function (event) {
 });
 
 let whatIDrop = ""
-
+let count1 = 0;
 let tmppOneRaz = false
 const start = function (data, ID) {
-
 
 
     load({
@@ -162,12 +150,13 @@ const start = function (data, ID) {
         fn: () => {
             let ttt = []
             arrGame.forEach((item, index) => {
-                // console.log('=b831ce=', item)
+                // console.log('=b831ce=', index)
                 item.forEach((item2, index2) => {
                     ttt.push(<div
                         class="block_size_sea_war"
+                        id={count1++}
                         onclick={() => {
-                            console.log('=a3574a=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
+                            // console.log('=a3574a=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
                         }}
                         Element={($el) => {
 
@@ -184,27 +173,82 @@ const start = function (data, ID) {
                             // });
 
                             $el.addEventListener("drop", function (e) {
-                                console.log('=5d3ebf=', this, whatIDrop)
-                                this.classList.add("colorbackall")
+
+                                arrGame[index][index2] = 1
+                                let indexField = ((index + 1) * (index2 + 1)) - 1
+                                // console.log('=4e694c=',arrGame)
+                                let testId = this.id - 100;
+                                console.log('=cb163c=',testId)
+
+                                
+                                // console.log('=18a32b=',indexField)
+                                // console.log('=5d3ebf=', positionShip )
+                                if (positionShip == 1) {
+                                    field.childNodes[testId].classList.add("colorbackall")
+                                    field.childNodes[testId+1].classList.add("colorbackall")
+                                    field.childNodes[testId+2].classList.add("colorbackall")
+                                    field.childNodes[testId+3].classList.add("colorbackall")   
+                                } else if (positionShip == 2) {
+                                    field.childNodes[testId].classList.add("colorbackall")
+                                    field.childNodes[testId+1].classList.add("colorbackall")
+                                    field.childNodes[testId+2].classList.add("colorbackall")
+                                    field.childNodes[testId-1].classList.add("colorbackall")
+                                }
+                                // field.childNodes[index2].classList.add("colorbackall")
+
+                                // console.log('=b12f14=',field.childNodes[indexField].classList.add("colorbackall"))
+                                
+                                // arrGame.map((index,index2)=>{
+                                    
+                                // })
+                                //var bordssize = function size(arrGame,index,index2,item) {
+                                    // this.classList.add("colorbackall")
+                                    
+                                //    arrGame.map((index2,i) => {
+                                //     index2.map((item, i2) => {
+                                //         if (this.classList.add("colorbackall"))
+                                //         {
+                                //             index2 + 1
+                                //             console.log('=ee0aaf=',arrGame)
+                                //         } else {
+                                //             console.log('=fcb4db=',"Что это такое")
+                                //         }
+                                //     })
+                                        
+                                //    })
+                                // index2.map(item, i) {
+                                //     console.log('=7b13e4=',i)
+                                // }
+                                
+                                
+                                        //this.classList.add("colorbackall")
+                                    
+                                //}
+                                //this.classList.add("colorbackall")
+                                
+                                
+
+                                
                                 console.log('=drop=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
                                 e.preventDefault();
                                //
                                const id = e.dataTransfer.getData('text');
                                const draggableElement = document.getElementById(id);
-                               const dropzone = e.target;
-                               dropzone.appendChild(draggableElement);
-                               e.dataTransfer.clearData();
+                               //const dropzone = e.target;
+                               //dropzone.appendChild(draggableElement);
+                               //e.dataTransfer.clearData();
                             });
 
 
                             $el.addEventListener("dragover", (e) => {
+                                console.log('=837db3!!!!!!!=',positionShip)
                                 // console.log('=dragover=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
                                 e.preventDefault();
                             });
                             // }
 
                         }}
-                    ></div>)
+                    >{index2}</div>)
                 })
             })
 
@@ -275,12 +319,21 @@ const start = function (data, ID) {
                                     //<div class="block_size_sea_war" id="exzample1"></div>
 
                                 }}
-                                id="ship4" class="" draggable="true" >
-                                {([1, 2, 3, 4]).map(() => {
+                                id="ship4" class="ship-4" draggable="true" >
+                                    
+                                {ships.map((item, i) => {
                                     return (
-                                        <div class="block_size_sea_war" id="exzample1"></div>
+                                        <div class="block_size_sea_war"
+                                            ondragover={() => {
+                                                positionShip = i+1
+                                                // console.log('=6ebc65=', positionShip)
+                                            }}
+                                        ></div>
                                     )
+
                                 })}
+
+                        
                                 {/* <div class="block_size_sea_war" id="exzample2"></div>
                                 <div class="block_size_sea_war" id="exzample3"></div>
                                 <div class="block_size_sea_war" id="exzample4"></div> */}
@@ -292,7 +345,6 @@ const start = function (data, ID) {
                                         console.log('=43c63d=', "drag start 4")
                                         whatIDrop = "3 палубы"
                                     });
-                                    $el.addEventListener("drop", dtest2);
                                     // fourbords.forEach((item, index) => {
                                     //     // console.log('=b831ce=', item)
                                     //     item.forEach((item, index2) => {
@@ -311,7 +363,7 @@ const start = function (data, ID) {
                                 id="ship3" class="" draggable="true" >
                                 {([1, 2, 3]).map(() => {
                                     return (
-                                        <div class="block_size_sea_war" id="exzample1"></div>
+                                        <div class="block_size_sea_war" id="exzample2"></div>
                                     )
                                 })}
                                 {/* <div class="block_size_sea_war" id="exzample2"></div>
@@ -323,7 +375,11 @@ const start = function (data, ID) {
                         
                         <div class="one_game_sea_war ">
 
-                            <table id="field_sea_war" class="">
+                            <table id="field_sea_war" class=""
+                                Element={($el) => {
+                                    field = $el
+                                }}
+                            >
                                 {ttt}
 
 
