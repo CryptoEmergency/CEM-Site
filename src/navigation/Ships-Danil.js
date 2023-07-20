@@ -8,11 +8,18 @@ import {
     CEM
 } from "@betarost/cemserver/cem.js";    // Стандартные библиотеки
 const { images, svg, fn } = CEM // подключение картинок и функций
+
+let prostoArr = []
+for (let i = 0; i < 100; i++) { // выведет 0, затем 1, затем 2
+    prostoArr.push(i % 10)
+}
+
+
 // Значения на игровом поле (-1 - поле не занято, 1 - поставили крестик, 0 - поставили нолик)
-let arrGame = [[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+let arrGame = [[-1, 1, -1, -1, -1, -1, -1, -1, -1, -1],
 [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
 [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-[-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+[-1, -1, 1, -1, -1, -1, -1, -1, -1, -1],
 [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
 [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
 [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
@@ -26,10 +33,10 @@ let bords = {
     onebords: [4]
 }
 let MyShips = {
-    s4:1,
-    s3:2,
-    s2:3,
-    s1:4
+    s4: 1,
+    s3: 2,
+    s2: 3,
+    s1: 4
 }
 let count = 0  // Сколько раз походили
 let startGame = 1 //1-Игра идет, 0 - Игра остановлена
@@ -49,7 +56,7 @@ let staticRounds = {
 let ship;
 let ships = [1, 2, 3, 4]
 let positionShip, field;
-let positionShip_1,positionShip_2,positionShip_3,positionShip_4;
+let positionShip_1, positionShip_2, positionShip_3, positionShip_4;
 
 function dtest(ev) {
     console.log('=217ecd=', 123, ev)
@@ -155,154 +162,40 @@ const start = function (data, ID) {
     load({
         ID,
         fn: () => {
-            let ttt = []
-            arrGame.forEach((item, index) => {
-                // console.log('=b831ce=', index)
-                item.forEach((item2, index2) => {
-                    ttt.push(<div
-                        class="block_size_sea_war"
-                        id={count1++}
-                        onclick={() => {
-                            // console.log('=a3574a=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
-                        }}
-                        Element={($el) => {
+            <div class="block_size_sea_war"
+            id={count1++}
+            Element={($el) => {
 
-                            // if (!tmppOneRaz) {
-                            tmppOneRaz = true
-                            // $el.addEventListener("dragenter", () => {
-                            //     // console.log('=dragenter=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
+                
+                tmppOneRaz = true
+                
 
-                            // });
+                $el.addEventListener("drop", function (e) {
+                    //arrGame[index][index2] = 1
+                    //let indexField = ((index + 1) * (index2 + 1)) - 1
+                    // console.log('=4e694c=',arrGame)
+                    //let testId = this.id - 100;
+                    this.classList.add("colorbackall")
 
-                            // $el.addEventListener("dragleave", () => {
-                            //     // console.log('=dragleave=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
-
-                            // });
-
-                            $el.addEventListener("drop", function (e) {
-
-                                arrGame[index][index2] = 1
-                                let indexField = ((index + 1) * (index2 + 1)) - 1
-                                // console.log('=4e694c=',arrGame)
-                                let testId = this.id - 100;
-                                console.log('=cb163c=',testId)
-
-                                
-                                // console.log('=18a32b=',indexField)
-                                // console.log('=5d3ebf=', positionShip )
-                                if (positionShip_4 == 1) {
-                                    field.childNodes[testId].classList.add("colorbackall")
-                                    field.childNodes[testId+1].classList.add("colorbackall")
-                                    field.childNodes[testId+2].classList.add("colorbackall")
-                                    field.childNodes[testId+3].classList.add("colorbackall")   
-                                } else if (positionShip_4 == 2) {
-                                    field.childNodes[testId].classList.add("colorbackall")
-                                    field.childNodes[testId+1].classList.add("colorbackall")
-                                    field.childNodes[testId+2].classList.add("colorbackall")
-                                    field.childNodes[testId-1].classList.add("colorbackall")
-                                }
-                                else if (positionShip_4 == 3) {
-                                    field.childNodes[testId].classList.add("colorbackall")
-                                    field.childNodes[testId+1].classList.add("colorbackall")
-                                    field.childNodes[testId-1].classList.add("colorbackall")
-                                    field.childNodes[testId-2].classList.add("colorbackall")
-                                }
-                                else if (positionShip_4 == 4) {
-                                    field.childNodes[testId].classList.add("colorbackall")
-                                    field.childNodes[testId-1].classList.add("colorbackall")
-                                    field.childNodes[testId-2].classList.add("colorbackall")
-                                    field.childNodes[testId-3].classList.add("colorbackall")
-                                }
-                                else 
-
-                                if (positionShip_3 == 1) {
-                                    field.childNodes[testId].classList.add("colorbackall")
-                                    field.childNodes[testId+1].classList.add("colorbackall")
-                                    field.childNodes[testId+2].classList.add("colorbackall")
-                                }
-                                else if (positionShip_3 == 2) {
-                                    field.childNodes[testId].classList.add("colorbackall")
-                                    field.childNodes[testId-1].classList.add("colorbackall")
-                                    field.childNodes[testId+1].classList.add("colorbackall")
-                                }
-                                else if (positionShip_3 == 3) {
-                                    field.childNodes[testId].classList.add("colorbackall")
-                                    field.childNodes[testId-1].classList.add("colorbackall")
-                                    field.childNodes[testId-2].classList.add("colorbackall")
-                                }
-                                else
-
-                                if (positionShip_2 == 1) {
-                                    field.childNodes[testId].classList.add("colorbackall")
-                                    field.childNodes[testId+1].classList.add("colorbackall")
-                                }
-                                else  if (positionShip_2 == 2) {
-                                    field.childNodes[testId].classList.add("colorbackall")
-                                    field.childNodes[testId-1].classList.add("colorbackall")
-                                }
-                                else
-
-                                if (positionShip_1 == 1) {
-                                    field.childNodes[testId].classList.add("colorbackall")
-                                }
-                                else
-                                // field.childNodes[index2].classList.add("colorbackall")
-
-                                // console.log('=b12f14=',field.childNodes[indexField].classList.add("colorbackall"))
-                                
-                                // arrGame.map((index,index2)=>{
-                                    
-                                // })
-                                //var bordssize = function size(arrGame,index,index2,item) {
-                                    // this.classList.add("colorbackall")
-                                    
-                                //    arrGame.map((index2,i) => {
-                                //     index2.map((item, i2) => {
-                                //         if (this.classList.add("colorbackall"))
-                                //         {
-                                //             index2 + 1
-                                //             console.log('=ee0aaf=',arrGame)
-                                //         } else {
-                                //             console.log('=fcb4db=',"Что это такое")
-                                //         }
-                                //     })
-                                        
-                                //    })
-                                // index2.map(item, i) {
-                                //     console.log('=7b13e4=',i)
-                                // }
-                                
-                                
-                                        //this.classList.add("colorbackall")
-                                    
-                                //}
-                                //this.classList.add("colorbackall")
-                                
-                                
-
-                                
-                                console.log('=drop=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
-                                e.preventDefault();
-                               //
-                               const id = e.dataTransfer.getData('text');
-                               const draggableElement = document.getElementById(id);
-                               //const dropzone = e.target;
-                               //dropzone.appendChild(draggableElement);
-                               //e.dataTransfer.clearData();
-                            });
+                    console.log('=cb163c=',testId)
+                    console.log('=drop=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
+                    e.preventDefault();
+                   //
+                   const id = e.dataTransfer.getData(1);
+                   const draggableElement = document.getElementById(id);
+                   
+                });
 
 
-                            $el.addEventListener("dragover", (e) => {
-                                console.log('=837db3!!!!!!!=',positionShip)
-                                // console.log('=dragover=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
-                                e.preventDefault();
-                            });
-                            // }
+                $el.addEventListener("dragover", (e) => {
+                    console.log('=837db3!!!!!!!=',positionShip)
+                    // console.log('=dragover=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
+                    e.preventDefault();
+                });
+               
 
-                        }}
-                    >{index2}</div>)
-                })
-            })
+            }}
+         ></div>
 
             return (
                 <div class='c-main__body'>
@@ -348,36 +241,25 @@ const start = function (data, ID) {
                                         console.log('=43c63d=', "drag start 4")
                                         whatIDrop = "4 палубы"
                                     });
-                                    
-                                    $el.addEventListener("drop",  () => {
+
+                                    $el.addEventListener("drop", () => {
+                                        
                                         
                                         //найти get
                                         // var data = e.dataTransfer.getData("colorbackall");
                                         // e.target.appendChild(document.getElementById(data));  
 
                                     });
-                                    // fourbords.forEach((item, index) => {
-                                    //     // console.log('=b831ce=', item)
-                                    //     item.forEach((item, index2) => {
-                                    //         ttt.push(<div class="block_size_sea_war" id="exzample1"
-
-                                    //             onclick={() => {
-                                    //                 console.log('=a3574a=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
-
-                                    //             }}
-                                    //         ></div>)
-                                    //     })
-                                    // })
-                                    //<div class="block_size_sea_war" id="exzample1"></div>
+                                    
 
                                 }}
                                 id="ship4" class="ship-4" draggable="true" >
-                                    
+
                                 {bords.fourbords.map((item, i) => {
                                     return (
                                         <div class="block_size_sea_war"
                                             ondragover={() => {
-                                                positionShip_4 = i+1
+                                                positionShip_4 = i + 1
                                                 // console.log('=6ebc65=', positionShip)
                                             }}
                                         ></div>
@@ -385,7 +267,7 @@ const start = function (data, ID) {
 
                                 })}
 
-                        
+
                                 {/* <div class="block_size_sea_war" id="exzample2"></div>
                                 <div class="block_size_sea_war" id="exzample3"></div>
                                 <div class="block_size_sea_war" id="exzample4"></div> */}
@@ -397,90 +279,79 @@ const start = function (data, ID) {
                                         console.log('=43c63d=', "drag start 4")
                                         whatIDrop = "3 палубы"
                                     });
-                                    // fourbords.forEach((item, index) => {
-                                    //     // console.log('=b831ce=', item)
-                                    //     item.forEach((item, index2) => {
-                                    //         ttt.push(<div class="block_size_sea_war" id="exzample1"
-
-                                    //             onclick={() => {
-                                    //                 console.log('=a3574a=', "Строка => ", index + 1, "Столбец => ", index2 + 1)
-
-                                    //             }}
-                                    //         ></div>)
-                                    //     })
-                                    // })
-                                    //<div class="block_size_sea_war" id="exzample1"></div>
+                                    
 
                                 }}
                                 id="ship3" class="" draggable="true" >
                                 {bords.triplebords.map((item, i) => {
                                     return (
                                         <div class="block_size_sea_war" id="exzample2"
-                                        ondragover={() => {
-                                            positionShip_3 = i+1
-                                            // console.log('=6ebc65=', positionShip)
-                                        }}
+                                            ondragover={() => {
+                                                positionShip_3 = i + 1
+                                                // console.log('=6ebc65=', positionShip)
+                                            }}
                                         >
-                                            
+
                                         </div>
                                     )
-                                })}                        
+                                })}
                             </table>
                             <table
                                 Element={($el) => {
                                     $el.addEventListener("dragstart", () => {
                                         console.log('=43c63d=', "drag start 4")
                                         whatIDrop = "3 палубы"
-                                    });                                 
+                                    });
                                 }}
                                 id="ship2" class="" draggable="true" >
                                 {bords.doublebords.map((item, i) => {
                                     return (
                                         <div class="block_size_sea_war" id="exzample3"
-                                        ondragover={() => {
-                                            positionShip_2 = i+1
-                                            // console.log('=6ebc65=', positionShip)
-                                        }}
+                                            ondragover={() => {
+                                                positionShip_2 = i + 1
+                                                // console.log('=6ebc65=', positionShip)
+                                            }}
                                         >
-                                            
+
                                         </div>
                                     )
-                                })}                        
+                                })}
                             </table>
                             <table
                                 Element={($el) => {
                                     $el.addEventListener("dragstart", () => {
                                         console.log('=43c63d=', "drag start 4")
                                         whatIDrop = "3 палубы"
-                                    });                                 
+                                    });
                                 }}
                                 id="ship1" class="" draggable="true" >
                                 {bords.doublebords.map((item, i) => {
                                     return (
                                         <div class="block_size_sea_war" id="exzample4"
-                                        ondragover={() => {
-                                            positionShip_1 = i+1
-                                            // console.log('=6ebc65=', positionShip)
-                                        }}
+                                            ondragover={() => {
+                                                positionShip_1 = i + 1
+                                                // console.log('=6ebc65=', positionShip)
+                                            }}
                                         >
-                                            
+
                                         </div>
                                     )
-                                })}                        
+                                })}
                             </table>
 
                         </div>
-                        
+
                         <div class="one_game_sea_war ">
 
                             <table id="field_sea_war" class=""
                                 Element={($el) => {
                                     field = $el
-                                }}
-                            >
-                                {ttt}
-
-
+                                }}>
+                                {prostoArr.map((item, index) => {
+                                    return (
+                                        <div class={["block_size_sea_war", arrGame[Math.floor(index / 10)][item] != -1 ? "colorbackall" : null]} >{arrGame[Math.floor(index / 10)][item]}</div>
+                                    )
+                                })}
                             </table>
                             {/* <table
                                 id="field_sea_war" class=""
