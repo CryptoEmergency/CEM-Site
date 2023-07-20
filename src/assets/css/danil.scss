@@ -872,9 +872,82 @@
     overflow: hidden;
 }
 
+#ship3 {
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr;
+    grid-template-rows: 3fr;
+    width: 180px;
+    height: 60px;
+    border: 1px;
+    border-style: solid;
+    border-image: linear-gradient(to right, darkblue, darkorchid) 1;
+    //background: linear-gradient(to top, red, purple);
+    // border-color: linaer-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
+    //text-align: center;
+    //font-weight: bold;
+    position: relative;
+    overflow: hidden;
+}
+#ship2 {
+    display: grid;
+    grid-template-columns: 3fr 3fr ;
+    grid-template-rows: 3fr;
+    width: 120px;
+    height: 60px;
+    border: 1px;
+    border-style: solid;
+    border-image: linear-gradient(to right, darkblue, darkorchid) 1;
+    //background: linear-gradient(to top, red, purple);
+    // border-color: linaer-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
+    //text-align: center;
+    //font-weight: bold;
+    position: relative;
+    overflow: hidden;
+}
+#ship1 {
+    display: grid;
+    grid-template-columns: 3fr  ;
+    grid-template-rows: 3fr;
+    width: 60px;
+    height: 60px;
+    border: 1px;
+    border-style: solid;
+    border-image: linear-gradient(to right, darkblue, darkorchid) 1;
+    //background: linear-gradient(to top, red, purple);
+    // border-color: linaer-gradient(89.03deg, #2c66b8 0.54%,#3926eb,#5036ad, #8859ec 97.66%);
+    //text-align: center;
+    //font-weight: bold;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.colorbackall {
+    background-color: #8859ec;
+}
+.colorbackall2 {
+    background-color: blue;
+}
+
 .ship {
     width: 100px;
     height: 100px;
     transition: 0.01s linear;
     //position:absolute;
+}
+
+.ship-4 {
+    background-color: #FFFFFF;
+}
+
+#exzample2 {
+    background-color: yellow;
+}
+
+#exzample3 {
+    background-color: greenyellow;
+}
+
+#exzample4 {
+    background-color: black;
 }

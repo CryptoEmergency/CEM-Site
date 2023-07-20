@@ -118,7 +118,7 @@ const start = function (data, ID) {
             name: "Design",
         },
         {
-            name: "Business",
+            name: "Crypto Jobs",
         },
         {
             name: "Languages",
@@ -474,7 +474,13 @@ const start = function (data, ID) {
                                                                         </span>
                                                                     </a>
                                                                     <div class="card__category">
-                                                                        <span>{item.category}</span>
+                                                                        {
+                                                                            item.category.map((item) => {
+                                                                                return (
+                                                                                    <span>{item}</span>
+                                                                                )
+                                                                            })
+                                                                        }
                                                                     </div>
                                                                     <div
                                                                         class="card__icon"
