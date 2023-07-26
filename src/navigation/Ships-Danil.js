@@ -38,6 +38,7 @@ let arrGame = [
   [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
 ];
 
+let whoWay;
 let dropNow;
 let onStart = false;
 let MyShips = {
@@ -91,6 +92,10 @@ function StartGame(){
       }
 }
 
+function generationShip(index,item,$el)
+{
+ 
+}
 
 const addListner = function (item, index, $el) {
   if (arrEl[index]) {
@@ -103,6 +108,8 @@ const addListner = function (item, index, $el) {
   $el.addEventListener("drop", function (e) {
     // if (!oneAction) {
     console.log("=ba5b23=", Math.floor(index / 10), item, dropNow);
+
+    // generationShip()
     let whatShip = Number(dropNow[1]);
     if (Number(item) + whatShip > 10) {
       alert("низя");
@@ -170,8 +177,45 @@ const ogranichenRyadom = function (row, col, num, position) {
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
-function autoWayFill(){
+function autoWayFill(item,index,whatShip,row,col){
+
+    let rr = getRandomInt(99)
+   
+    let rown = Math.round(rr / 10) - 1
+    let column = (rr % 10) 
+    if(rr < 10 )
+    {
+     // column = 0 
+      rown = 0
+    }
     
+    console.log('=637d3b=',rr , rown , column)
+    if (Number(item) + whatShip > 10) {
+      alert("низя");
+      return;
+    }
+
+    if (!checkAllowPole(item, Math.floor(index / 10), whatShip)) {
+      alert("тоже низя");
+      return;
+    }
+    if (row > 9 || row < 0 || col > 9 || col < 0)
+       {
+    arrGame[rown][column] = 4
+    if (arrGame[rown][column] = 4 )
+    {
+      arrGame[rown][column + 1] = 4
+      arrGame[rown][column +2] = 4
+      arrGame[rown][column + 3] = 4
+    }
+    initReload()
+    // return;
+    // initReload() 
+   }
+  
+    
+    
+
 } 
 const showShip = (key) => {
   if (MyShips[key] < 1) {
@@ -204,7 +248,9 @@ const start = function (data, ID) {
   load({
     ID,
     fn: () => {
+      console.log('=8dbbc3=', arrGame)
       return (
+        
         <div class="c-main__body">
           <div class="conteiner-game">
             <div class="start__pr">Практическая работа в Crypto Emergency</div>
@@ -226,24 +272,37 @@ const start = function (data, ID) {
               </div>
               {!onStart
               ?
-               <div>
+               <div style="display:flex;justify-content:space-around;">
                 <button class="btn_change_way"
                 onclick = {() => {
                     RestPole()
                 }}
                 > Сбросить расстановку </button>
+                <button class="btn_change_way" 
+                onclick = {() => {
+                    autoWayFill()
+                    
+                }}
+               
+                >
+                  Случайная расстановка
+                </button>
               </div>
               :
               null}
              
-              {showShip("s4")}
+             
+            </div>
+                    
+            <div class="one_game_sea_war ">
+            <div slyler="dislay:grid;grid-template-columns:25% 25% 25% 25%;">
+            {showShip("s4")}
               {showShip("s3")}
               {showShip("s2")}
               {showShip("s1")}
-            </div>
-
-            <div class="one_game_sea_war ">
+              </div>
               <table id="field_sea_war">
+              
                 {prostoArr.map((item, index) => {
                   return (
                     <div
