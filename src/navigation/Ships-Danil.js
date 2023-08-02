@@ -146,6 +146,13 @@ const addNull = function (row, col) {
   arrGame[row][col] = 0;
   return;
 };
+const addNull_1 = function (rown, colmn) {
+  if (rown > 9 || rown < 0 || colmn > 9 || colmn < 0) {
+    return;
+  }
+  arrGame[rown][colmn] = 0;
+  return;
+};
 
 const ogranichenRyadom = function (row, col, num, position) {
   if (num == 1) {
@@ -159,7 +166,7 @@ const ogranichenRyadom = function (row, col, num, position) {
 
     addNull(row, col + 1);
     addNull(row, col - 1);
-  } else {
+  } else  {
     addNull(row - 1, col - 1);
     addNull(row - 1, col);
     addNull(row - 1, col + 1);
@@ -177,15 +184,30 @@ const ogranichenRyadom = function (row, col, num, position) {
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
-function autoWayFill(item,index,whatShip,row,col){
+function autoWayFill(item,index,whatShip){
+
+    RestPole()
+
+    
+
+    let r3 = getRandomInt(99)
+    let rown_1 = Math.round(r3 / 10) - 1
+    let column_1 = (r3 % 10)
+    if(r3 < 10)
+    {
+      rown_1 = 0
+    }
+
+    let vdh = getRandomInt(2)
+    console.log('=60c6b8=',vdh, r3)
+
 
     let rr = getRandomInt(99)
-   
     let rown = Math.round(rr / 10) - 1
     let column = (rr % 10) 
     if(rr < 10 )
     {
-     // column = 0 
+     
       rown = 0
     }
     
@@ -199,20 +221,262 @@ function autoWayFill(item,index,whatShip,row,col){
       alert("тоже низя");
       return;
     }
-    if (row > 9 || row < 0 || col > 9 || col < 0)
-       {
+    
     arrGame[rown][column] = 4
+    //if () {}
+    if (vdh == 0)
+    {
+      if (column <= 6)
+      {
     if (arrGame[rown][column] = 4 )
     {
       arrGame[rown][column + 1] = 4
-      arrGame[rown][column +2] = 4
-      arrGame[rown][column + 3] = 4
-    }
-    initReload()
-    // return;
-    // initReload() 
-   }
+      arrGame[rown][column + 2] = 4
+      arrGame[rown][column + 3] = 4     
+      
+      addNull_1(rown - 1, column - 1);
+      addNull_1(rown - 1, column);
+      addNull_1(rown - 1, column + 1);
+
+      addNull_1(rown - 1, column + 2);
+      addNull_1(rown - 1, column + 3);
+      addNull_1(rown - 1, column + 4);
   
+      addNull_1(rown + 1, column - 1);
+      addNull_1(rown + 1, column);
+      addNull_1(rown + 1, column + 1);
+
+      addNull_1(rown + 1, column + 2);
+      addNull_1(rown + 1, column + 3);
+      addNull_1(rown + 1, column + 4);
+      
+      addNull_1(rown, column + 4);
+      addNull_1(rown, column - 1);
+     
+    }
+  }    
+    else if (column == 7)
+    {
+      if(arrGame[rown][column] = 4)
+      { 
+      arrGame[rown][column - 1] = 4
+      arrGame[rown][column + 1] = 4
+      arrGame[rown][column + 2] = 4
+      
+      addNull_1(rown - 1, column - 1);
+      addNull_1(rown - 1, column);
+      addNull_1(rown - 1, column + 1);
+      addNull_1(rown - 1, column - 2);
+
+      addNull_1(rown - 1, column + 2);
+      addNull_1(rown - 1, column + 3);
+  
+      addNull_1(rown + 1, column - 1);
+      addNull_1(rown + 1, column);
+      addNull_1(rown + 1, column + 1);
+      addNull_1(rown + 1, column - 2);
+
+      addNull_1(rown + 1, column + 2);
+      addNull_1(rown + 1, column + 3);
+  
+      addNull_1(rown, column + 3);
+      addNull_1(rown, column - 2);
+
+      }
+    } 
+    else if(column == 8){
+      if (arrGame[rown][column] = 4)
+      {       
+      arrGame[rown][column - 2] = 4
+      arrGame[rown][column - 1] = 4
+      arrGame[rown][column + 1] = 4
+      
+      addNull_1(rown - 1, column - 1);
+      addNull_1(rown - 1, column);
+      addNull_1(rown - 1, column + 1);
+      addNull_1(rown - 1, column - 2);
+
+      addNull_1(rown - 1, column + 2);
+      addNull_1(rown - 1, column - 3);
+  
+      addNull_1(rown + 1, column - 1);
+      addNull_1(rown + 1, column);
+      addNull_1(rown + 1, column + 1);
+      addNull_1(rown + 1, column - 2);
+
+      addNull_1(rown + 1, column + 2);
+      addNull_1(rown + 1, column - 3);
+  
+      addNull_1(rown, column + 2);
+      addNull_1(rown, column - 3);
+
+    }
+    } 
+    else if (column == 9){
+      if(arrGame[rown][column] = 4)
+      { 
+      arrGame[rown][column - 1] = 4
+      arrGame[rown][column - 2] = 4
+      arrGame[rown][column - 3] = 4
+      
+      addNull_1(rown - 1, column - 1);
+      addNull_1(rown - 1, column);
+      addNull_1(rown - 1, column -2);
+      addNull_1(rown - 1, column - 3);
+
+      addNull_1(rown - 1, column + 2);
+      addNull_1(rown - 1, column - 4);
+  
+      addNull_1(rown + 1, column - 1);
+      addNull_1(rown + 1, column);
+      addNull_1(rown + 1, column - 2);
+      addNull_1(rown + 1, column - 3);
+
+      addNull_1(rown + 1, column + 2);
+      addNull_1(rown + 1, column - 4);
+  
+      addNull_1(rown, column + 2);
+      addNull_1(rown, column - 4);
+
+      }
+    }
+    
+    MyShips.s4 = 0
+    initReload()
+  }
+  
+  
+   else if (vdh == 1)
+   { 
+    if (rown <= 6)
+      {
+    if (arrGame[rown][column] = 4 )
+    {
+      arrGame[rown + 1][column ] = 4
+      arrGame[rown + 2][column ] = 4
+      arrGame[rown + 3][column ] = 4
+      
+      addNull_1(rown - 1, column - 1);
+      addNull_1(rown , column -1);
+      addNull_1(rown + 1, column - 1);
+
+      addNull_1(rown +2, column -1);
+      addNull_1(rown +3, column -1);
+      addNull_1(rown +4, column -1);
+  
+      addNull_1(rown - 1, column + 1);
+      addNull_1(rown , column +1);
+      addNull_1(rown + 1, column + 1);
+
+      addNull_1(rown + 2, column + 1);
+      addNull_1(rown + 3, column + 1);
+      addNull_1(rown + 4, column + 1);
+      
+      addNull_1(rown + 4, column );
+      addNull_1(rown -1, column );
+      
+    }}
+    else if (rown == 7)
+    {
+      if (arrGame[rown][column] = 4 )
+      {
+      arrGame[rown - 1][column] = 4
+      arrGame[rown + 1][column] = 4
+      arrGame[rown + 2][column] = 4
+      
+      addNull_1(rown - 1, column - 1);
+      addNull_1(rown , column -1);
+      addNull_1(rown + 1, column - 1);
+      addNull_1(rown - 2, column - 1);
+
+      addNull_1(rown + 2, column -1);
+      addNull_1(rown + 3, column -1);
+  
+      addNull_1(rown - 1, column + 1);
+      addNull_1(rown , column +1);
+      addNull_1(rown + 1, column + 1);
+      addNull_1(rown - 2, column + 1);
+
+      addNull_1(rown + 2, column + 1);
+      addNull_1(rown + 3, column + 1);
+  
+      addNull_1(rown + 3, column );
+      addNull_1(rown - 2, column );
+
+      }
+    } 
+    else if(rown == 8){
+      if (arrGame[rown][column] = 4){      
+      arrGame[rown + 1][column] = 4
+      arrGame[rown - 1][column] = 4
+      arrGame[rown - 2][column] = 4
+      
+      addNull_1(rown - 1, column - 1);
+      addNull_1(rown , column - 1);
+      addNull_1(rown + 1, column - 1);
+      addNull_1(rown - 2, column - 1);
+
+      addNull_1(rown + 2, column - 1);
+      addNull_1(rown - 3, column - 1);
+  
+      addNull_1(rown - 1, column + 1);
+      addNull_1(rown , column + 1);
+      addNull_1(rown + 1, column + 1);
+      addNull_1(rown - 2, column +1);
+
+      addNull_1(rown + 2, column + 1);
+      addNull_1(rown - 3, column + 1);
+  
+      addNull_1(rown + 2, column );
+      addNull_1(rown - 3, column );
+
+      }
+    } 
+    else if (rown == 9){
+      if (arrGame[rown][column] = 4){ 
+      arrGame[rown - 1][column] = 4
+      arrGame[rown - 2][column] = 4
+      arrGame[rown - 3][column] = 4
+      
+      addNull_1(rown - 1, column - 1);
+      addNull_1(rown , column - 1);
+      addNull_1(rown - 2, column - 1);
+      addNull_1(rown - 3, column - 1);
+
+      addNull_1(rown + 2, column - 1);
+      addNull_1(rown - 4, column - 1);
+  
+      addNull_1(rown - 1, column + 1);
+      addNull_1(rown , column + 1);
+      addNull_1(rown - 2, column + 1);
+      addNull_1(rown - 3, column + 1);
+
+      addNull_1(rown + 2, column + 1);
+      addNull_1(rown - 4, column + 1);
+  
+      addNull_1(rown + 2, column);
+      addNull_1(rown - 4, column);
+
+      }
+    }
+    MyShips.s4 = 0
+    initReload()
+      }
+
+  
+  else{}
+  // for ( i = 0; i < 2 ; i++)
+  // {
+    vdh = getRandomInt(2)
+    arrGame[rown_1][column_1] = 4
+    if (arrGame[rown_1][column_1] == 4)
+    {
+      arrGame[rown_1][column_1 + 1] = 4
+      arrGame[rown_1][column_1 + 2] = 4
+    }
+  //}
+    initReload()
+    
     
     
 
