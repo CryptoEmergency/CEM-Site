@@ -1,4 +1,4 @@
-import { jsx, jsxFrag, CEM } from "@betarost/cemserver/cem.js";
+import { jsx, jsxFrag, Variable, CEM } from "@betarost/cemserver/cem.js";
 
 const { images, svg, fn } = CEM
 
@@ -89,7 +89,7 @@ const forExport = function ({ records }) {
         ) : 
         (
           <div class="notFound">
-            <span>Records not found in table</span>
+            <span>{Variable.lang.p.notFound}</span>
             <img src={svg.notFound} />
           </div>
         )
