@@ -36,6 +36,7 @@ const dragStop = (e) => {
 
 const infiniteScroll = () => {
     if(Data.categoryCarousel.scrollLeft === 0){
+        Data.categoryCarousel.classList.remove("category-wrap_shadow-left");
     }else if(Data.categoryCarousel.scrollLeft === Data.categoryCarousel.scrollWidth - Data.categoryCarousel.offsetWidth){
         Data.categoryCarousel.classList.remove("category-wrap_shadow-right");
     }

@@ -171,7 +171,7 @@ const start = function (data, ID) {
           sort: filterICO.sort,
         }
       });
-      
+      console.log('=e889c7=',Static.recordsIco)
     },
     fn: () => {
       return (

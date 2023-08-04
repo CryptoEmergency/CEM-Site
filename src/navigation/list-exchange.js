@@ -32,6 +32,7 @@ const start = function (data, ID) {
           // filter: Static.apiFilter,
         }
       });
+      console.log('=566d8d=',Static.records)
     },
     fn: () => {
       return (

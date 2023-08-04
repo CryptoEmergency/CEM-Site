@@ -104,10 +104,7 @@ const ModalFilterCoin = function (data, ID) {
                       ]}
                       onclick={() => {
                         if (Static.filterCoins.includes(item.name)) {
-                          Static.filterCoins.splice(
-                            Static.filterCoins.indexOf(item.name),
-                            1
-                          );
+                          Static.filterCoins.splice(Static.filterCoins.indexOf(item.name), 1);
                         } else {
                           Static.filterCoins.push(item.name);
                         }
