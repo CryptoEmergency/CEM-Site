@@ -1,5 +1,5 @@
 {
-  "name": "Crypto-Emergency.com",
+  "name": "crypto-emergency.com",
   "version": "1.0.0",
   "type": "module",
   "private": true,
@@ -17,5 +17,18 @@
     "socket.io-client": "^4.6.1",
     "swiper": "^9.1.1",
     "web3": "^1.9.0"
-  }
+  },
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CryptoEmergency/CEM-Site.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CryptoEmergency/CEM-Site/issues"
+  },
+  "homepage": "https://github.com/CryptoEmergency/CEM-Site#readme",
+  "description": ""
 }

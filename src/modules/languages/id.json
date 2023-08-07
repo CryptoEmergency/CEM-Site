@@ -384,7 +384,17 @@
 		"lotteryQuest6": "Answer a shortest quiz.",
 		"lotteryQuiz": "How many CEMD do everyone get for registration in Crypto Emergency?",
 		"aboutObjectiveTitle": "Our Mission",
-		"aboutObjective": "Unite crypto-enthusiasts all over the world on one multifunctional platform Crypto Emergency, which will give them all necessary tools to communicate, learn, earn, money and create their own content."
+		"aboutObjective": "Unite crypto-enthusiasts all over the world on one multifunctional platform Crypto Emergency, which will give them all necessary tools to communicate, learn, earn, money and create their own content.",
+		"aboutQuestionOne": "What is the goal of Crypto Emergency?",
+		"aboutQuestionTwo": "How to earn or buy CEM tokens?",
+		"aboutQuestionThree": "How to withdraw earned CEM from the platform?",
+		"aboutQuestionFour": "Is the project only available in Russia?",
+		"aboutQuestionFive": "Can I download the app on my phone?",
+		"aboutAnswerOne": "Bring together crypto enthusiasts from all over the world on a multifunctional platform that includes all the necessary tools for communication, education, earning, and creating their own content.",
+		"aboutAnswerTwo": "You can officially buy CEM on the Bitmart exchange. You can also engage in active activity on the platform and earn a new level for actions on the platform, and receive CEM as a reward for reaching a new level. Stay tuned for news on Telegram, as various contests may appear where you can receive CEM as a reward.",
+		"aboutAnswerThree": "You can withdraw the earned CEM on our platform to your account at any time for showing activity. Automatically in your personal account in the «My assets» tab. The minimum withdrawal amount is 10CEM.",
+		"aboutAnswerFour": "Our platform has a huge ecosystem that is fully translated into 16 languages worldwide, and the main sections of the platform can already be used in 60 languages. The platform is available in all markets, including China.",
+		"aboutAnswerFive": "Yes! All projects in our ecosystem are available on both Android and iPhone. Download links can be found at the bottom of the page or simply by searching in the app stores."
 	},
 	"text": {
 		"starups": "Perusahaan rintisan ",

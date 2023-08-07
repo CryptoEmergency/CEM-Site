@@ -13,6 +13,7 @@ import Elements from "@src/elements/export.js";
 const { images, svg, fn } = CEM
 
 const showListStartaps = function (listStartaps) {
+  console.log('=7c8695=',listStartaps)
   return listStartaps.map((item) => {
     return (
       <div
