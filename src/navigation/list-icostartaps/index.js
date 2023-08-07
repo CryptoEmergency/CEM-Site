@@ -171,13 +171,11 @@ const start = function (data, ID) {
           sort: filterICO.sort,
         }
       });
-      
+      console.log('=e889c7=',Static.recordsIco)
     },
     fn: () => {
       return (
         <Elements.page.MainContainer>
-          {/* <img src={svg["background/left"]} class={["ico-back", "ico-back-left"]} /> */}
-          {/* <img src={svg["background/right"]} class={["ico-back", "ico-back-right"]} /> */}
 
           <div class="tags tags-ico">{showBtn(Static)}</div>
           <Elements.page.Container class="pt--70">

@@ -135,8 +135,8 @@ const start = function (data, ID) {
                         Static.item.social.map((item) => {
                           return (
                             <a href={item.url} class="icons-item">
-                              <div class="icons-img">
-                                <img src={svg[`${item.channel}-icon`]}></img>
+                              <div class={["icons-img", item.channel == "medium" ? "icons-img_medium" : null ]}>
+                                <img class={item.channel == "medium" ? "medium" : null} src={svg[`${item.channel}-icon`]}></img>
                               </div>
                               {/* <span class="icons-text">{item.channel}</span> */}
                             </a>

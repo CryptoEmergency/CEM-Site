@@ -144,8 +144,9 @@ const start = function (data, ID) {
                     <div class="info-social">
                       {Static.item.social.map((item) => {
                         return (
-                          <a href={item.url} class="info-social_link">
+                          <a href={item.url} class={["info-social_link", item.channel == "medium" ? "info-social_link_medium" : null ]}>
                             <img
+                              class={item.channel == "medium" ? "medium" : null}
                               src={svg[`${item.channel}-icon`]}
                               alt={`${item.channel}`}
                             />

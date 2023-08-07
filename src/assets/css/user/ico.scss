@@ -148,7 +148,15 @@ $icon: #353a46;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
   border: 1px solid #474c5a;
+  position: relative;
+}
 
+.list-ico_empty {
+  height: 500px;
+
+  @media(max-width: 767px) {
+    height: 350px;
+  }
 }
 
 @media(max-width: 992px) {
@@ -769,9 +777,18 @@ $icon: #353a46;
     background: $icon;
     margin-right: 15px;
 
+    &_medium {
+      background: #ffffff;
+    }
+
 
     >img {
       max-height: 18px;
+    }
+
+    & .medium {
+      width: 108%;
+      max-height: 108%;
     }
   }
 
