@@ -507,19 +507,32 @@ function autoWayFillOnebords(item, index, whatShip, row, col) {
   let column_4_2 = r1_2 % 10;
   let column_4_3 = r1_3 % 10;
   let column_4_4 = r1_4 % 10;
-  if (r1 < 10 || r1_2 < 10 || r1_3 < 10 || r4_4 < 10) {
+  if (r1 < 10 || r1_2 < 10 || r1_3 < 10 || r1_4 < 10) {
     rown_4 = 0;
     rown_4_2 = 0;
     rown_4_3 = 0;
     rown_4_4 = 0;
   }
-  let vdh_4_1 = getRandomInt(2);
-  let vdh_4_2 = getRandomInt(2);
-  let vdh_4_3 = getRandomInt(2);
-  let vdh_4_4 = getRandomInt(2);
+  
+      arrGame[rown_4][column_4] = 1;
+      if (arrGame[rown_4][column_4] == 1) {
+        MyShips.s1 = 3;
+      }
+      arrGame[rown_4_2][column_4_2] = 1;
+      if (arrGame[rown_4_2][column_4_2] == 1) {
+        MyShips.s1 = 2;
+      }
+      arrGame[rown_4_3][column_4_3] = 1;
+      if (arrGame[rown_4_3][column_4_3] == 1) {
+        MyShips.s1 = 1;
+      }
+      arrGame[rown_4_4][column_4_4] = 1;
+      if (arrGame[rown_4_4][column_4_4] == 1) {
+        MyShips.s1 = 0;
+      }
 }
 
-function autoWayFill(item, index, whatShip, row, col) {
+function autoWayFill(item, index, whatShip, row, col,rown_1, column_1,rown_1_2,column_1_2) {
   RestPole();
 
   // let r3 = getRandomInt(99);
@@ -767,179 +780,30 @@ function autoWayFill(item, index, whatShip, row, col) {
     initReload();
   } else {
   }
-
-  autoWayFillTrbords();
-
-  if (row == -1) {
+  
+  if (!checkAllowPole22(rown_1, column_1, whatShip)) {
     autoWayFillTrbords();
+    return;
   }
+  
+  if (!checkAllowPole22(rown_1_2, column_1_2, whatShip)) {
+    autoWayFillTrbords();
+    return;
+  }
+  autoWayFillTrbords();
   autoWayFillDubords();
+  autoWayFillOnebords();
 
-  //дОБАВЛЕНИЕ 3 ПАЛУБНОГО
-
-  // let vdh_2_1 = getRandomInt(2);
-  // let vdh_2_2 = getRandomInt(2);
-  // //Первый корабль (3)
-
-  // if (vdh_2_1 == 0) {
-  //   if (column_1 <= 7) {
-  //     arrGame[rown_1][column_1] = 3;
-  //     if (arrGame[rown_1][column_1] == 3) {
-  //       arrGame[rown_1][column_1 + 1] = 3;
-  //       arrGame[rown_1][column_1 + 2] = 3;
-  //     }
-  //   }
-  //   if (column_1 == 8) {
-  //     arrGame[rown_1][column_1] = 3;
-  //     if (arrGame[rown_1][column_1] == 3) {
-  //       arrGame[rown_1][column_1 + 1] = 3;
-  //       arrGame[rown_1][column_1 - 1] = 3;
-  //     }
-  //   }
-  //   if (column_1 == 9) {
-  //     arrGame[rown_1][column_1] = 3;
-  //     if (arrGame[rown_1][column_1] == 3) {
-  //       arrGame[rown_1][column_1 - 1] = 3;
-  //       arrGame[rown_1][column_1 - 2] = 3;
-  //     }
-  //   }
-  //   MyShips.s3 = 1;
-  // } else if (vdh_2_1 == 1) {
-  //   if (rown_1 <= 7) {
-  //     arrGame[rown_1][column_1] = 3;
-  //     if (arrGame[rown_1][column_1] == 3) {
-  //       arrGame[rown_1 + 1][column_1] = 3;
-  //       arrGame[rown_1 + 2][column_1] = 3;
-  //     }
-  //   }
-  //   if (rown_1 == 8) {
-  //     arrGame[rown_1][column_1] = 3;
-  //     if (arrGame[rown_1][column_1] == 3) {
-  //       arrGame[rown_1 + 1][column_1] = 3;
-  //       arrGame[rown_1 - 1][column_1] = 3;
-  //     }
-  //   }
-  //   if (rown_1 == 9) {
-  //     arrGame[rown_1][column_1] = 3;
-  //     if (arrGame[rown_1][column_1] == 3) {
-  //       arrGame[rown_1 - 1][column_1] = 3;
-  //       arrGame[rown_1 - 2][column_1] = 3;
-  //     }
-  //   }
-  //   MyShips.s3 = 1;
-  // }
-
-  // //Второй корабль(3)
-  // if (vdh_2_2 == 0) {
-  //   if (column_1_2 <= 7) {
-  //     arrGame[rown_1_2][column_1_2] = 3;
-  //     if (arrGame[rown_1_2][column_1_2] == 3) {
-  //       arrGame[rown_1_2][column_1_2 + 1] = 3;
-  //       arrGame[rown_1_2][column_1_2 + 2] = 3;
-  //     }
-  //   }
-  //   if (column_1_2 == 8) {
-  //     arrGame[rown_1_2][column_1_2] = 3;
-  //     if (arrGame[rown_1_2][column_1_2] == 3) {
-  //       arrGame[rown_1_2][column_1_2 + 1] = 3;
-  //       arrGame[rown_1_2][column_1_2 - 1] = 3;
-  //     }
-  //   }
-  //   if (column_1_2 == 9) {
-  //     arrGame[rown_1_2][column_1_2] = 3;
-  //     if (arrGame[rown_1_2][column_1_2] == 3) {
-  //       arrGame[rown_1_2][column_1_2 - 1] = 3;
-  //       arrGame[rown_1_2][column_1_2 - 2] = 3;
-  //     }
-  //   }
-  //   MyShips.s3 = 0;
-  // } else if (vdh_2_2 == 1) {
-  //   if (rown_1_2 <= 7) {
-  //     arrGame[rown_1_2][column_1_2] = 3;
-  //     if (arrGame[rown_1_2][column_1_2] == 3) {
-  //       arrGame[rown_1_2 + 1][column_1_2] = 3;
-  //       arrGame[rown_1_2 + 2][column_1_2] = 3;
-  //     }
-  //   }
-  //   if (rown_1_2 == 8) {
-  //     arrGame[rown_1_2][column_1_2] = 3;
-  //     if (arrGame[rown_1_2][column_1_2] == 3) {
-  //       arrGame[rown_1_2 + 1][column_1_2] = 3;
-  //       arrGame[rown_1_2 - 1][column_1_2] = 3;
-  //     }
-  //   }
-  //   if (rown_1_2 == 9) {
-  //     arrGame[rown_1_2][column_1_2] = 3;
-  //     if (arrGame[rown_1_2][column_1_2] == 3) {
-  //       arrGame[rown_1_2 - 1][column_1_2] = 3;
-  //       arrGame[rown_1_2 - 2][column_1_2] = 3;
-  //     }
-  //   }
-  //   MyShips.s3 = 0;
-  // }
-
-  // if (arrGame[rown][column] == 0 || arrGame[rown][column] == 4) {
-  //   //autoWayFill()
-  // } else {
-  // arrGame[rown_1_2][column_1_2] = 3;
-  // if (arrGame[rown_1_2][column_1_2] == 3) {
-  //   arrGame[rown_1_2][column_1_2 + 1] = 3;
-  //   arrGame[rown_1_2][column_1_2 + 2] = 3;
-  // }
-  // }
-
-  //   if (arrGame[rown_1][column_1] == 0 || arrGame[rown_1][column_1] == 4)
-  //   {
-  //     if (column_1 >= 5 && countSH == 1 )
-  //     {
-  //   arrGame[rown_1][column_1 - 3] = 3
-  //     if (arrGame[rown_1][column_1 - 3] == 3)
-  //     {
-  //       arrGame[rown_1][column_1 - 2] = 3
-  //       arrGame[rown_1][column_1 - 1] = 3
-  //       countSH = 0
-  //     }
-  //   }
-  //   else if (column_1 <= 4 && countSH == 1)
-  //   arrGame[rown_1][column_1 + 3] = 3
-  //     if (arrGame[rown_1][column_1 + 3] == 3)
-  //       {
-  //         arrGame[rown_1][column_1 + 2] = 3
-  //         arrGame[rown_1][column_1 + 4] = 3
-  //         countSH = 0
-  //       }
-  //   else if(rown_1 >= 5 && countSH == 1)
-  //   {
-  //     arrGame[rown_1 - 3][column_1] = 3
-  //     if (arrGame[rown_1 - 3][column_1] == 3)
-  //       {
-  //         arrGame[rown_1 - 2][column_1] = 3
-  //         arrGame[rown_1 - 1][column_1] = 3
-  //         countSH = 0
-  //       }
-  //   }
-  //   else if(rown_1 <= 4 && countSH == 1)
-  //   {
-  //     arrGame[rown_1 + 3][column_1] = 3
-  //     if (arrGame[rown_1 + 3][column_1] == 3)
-  //       {
-  //         arrGame[rown_1 + 2][column_1] = 3
-  //         arrGame[rown_1 + 4][column_1] = 3
-  //         countSH = 0
-  //       }
-  //   }
-  // }
-  // else if (countSH == 1) {
-  //   arrGame[rown_1][column_1 ] = 3
-  //   if (arrGame[rown_1][column_1] == 3)
-  //   {
-  //     arrGame[rown_1][column_1 + 1] = 3
-  //     arrGame[rown_1][column_1 + 2] = 3
-  //   }
-  // }
-  //}
   initReload();
 }
+
+function fire_sea_war(){
+
+  let fire = 0
+  fire = 10
+
+}
+
 const showShip = (key) => {
   if (MyShips[key] < 1) {
     return <div></div>;
@@ -1045,10 +909,16 @@ const start = function (data, ID) {
                 })}
               </table>
               {onStart ? (
-                <table id="field_sea_war">
+                <table id="field_sea_war"
+                onclick ={()=>{
+                  fire_sea_war();
+                  
+                }}
+                >
                   {prostoArr.map((item, index) => {
                     return <div class={["block_size_sea_war"]}></div>;
-                  })}
+                  })} 
+                  <img class = "hit_sw" src = {item == 10 ? svg['train/krest_2'] : item == 0 ? alert("попробуйте в другое место") : ""}></img>
                 </table>
               ) : null}
             </div>
