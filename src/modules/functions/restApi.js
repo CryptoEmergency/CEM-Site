@@ -297,7 +297,7 @@ restApi.getNews = async function ({ cache, name, limit = 6, offset = 0, filter =
     }
 }
 
-restApi.getAnswers = async function ({ cache, name, limit = 6, offset = 0, filter, select, sort = { showDate: 1 }, firstRecord }) {
+restApi.getAnswers = async function ({ cache, name, limit = 20, offset = 0, filter, select, sort = { showDate: 1 }, firstRecord }) {
 
     let defaultFilter = {
     }

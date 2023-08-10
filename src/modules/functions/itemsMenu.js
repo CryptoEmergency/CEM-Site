@@ -643,7 +643,7 @@ itemsMenu.answer = function (Static, item, active) {
                                     author: Variable.myInfo._id,
                                 },
                                 select: { best: 1, active: 1, author: 1, statistic: 1, showDate: 1, media: 1, text: 1, comments: 1, questionId: 1 },
-                                limit: 10
+                                limit: 20
                             });
                             Static.activeItems = response
 
