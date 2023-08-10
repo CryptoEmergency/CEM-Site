@@ -494,7 +494,7 @@ const start = function (data, ID) {
 
                         setTimeout(async function () {
 
-                          Static.itemAnswer = await fn.restApi.getAnswers({ filter: { questionId: item._id }, limit: 6, sort: { showDate: -1 } })
+                          Static.itemAnswer = await fn.restApi.getAnswers({ filter: { questionId: item._id }, limit: 20, sort: { showDate: -1 } })
                           elAnswerForm.hidden = true;
                           elAnswerToggle.innerHTML = '<span>' + Variable.lang.button.giveAnswer + '</span>'
 
@@ -519,7 +519,7 @@ const start = function (data, ID) {
                   () => {
                     setTimeout(async function () {
                       Static.itemAnswer = {}
-                      Static.itemAnswer = await fn.restApi.getAnswers({ filter: { questionId: item._id }, limit: 6, sort: { showDate: -1 } })
+                      Static.itemAnswer = await fn.restApi.getAnswers({ filter: { questionId: item._id }, limit: 20, sort: { showDate: -1 } })
 
                       initReload()
                     }, 700)
