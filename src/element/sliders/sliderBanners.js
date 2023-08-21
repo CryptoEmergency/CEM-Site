@@ -57,10 +57,23 @@ const makeFilter = () => {
   return filter
 }
 
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array
+}
+
 const BlockBanners = async function () {
   const records = await fn.socket.get({ method: "Banners", params: { filter: makeFilter() } })
-  // console.log('=84a49b=', records)
-  const bannersRecords = records.map(function (item) {
+  let lang = Variable.lang.code == "ru" ? "ru" : "en";
+  let recordsFilter = shuffleArray(records.filter(item => item.languages.code == lang))
+
+
+  const bannersRecords = recordsFilter.map(function (item) {
 
     let lang = Variable.lang.code == "ru" ? "ru" : "en";
     if (item.languages.code == lang) {
