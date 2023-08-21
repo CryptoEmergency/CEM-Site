@@ -797,12 +797,13 @@ function autoWayFill(item, index, whatShip, row, col,rown_1, column_1,rown_1_2,c
   initReload();
 }
 
-function fire_sea_war(){
+function fire_sea_war(row,col){
 
-  let fire = 0
-  fire = 10
+  prostoArr.item = 10
 
 }
+
+
 
 const showShip = (key) => {
   if (MyShips[key] < 1) {
@@ -860,7 +861,7 @@ const start = function (data, ID) {
                   <button
                     class="btn_change_way"
                     onclick={() => {
-                      // RestPole();
+                      RestPole();
                       console.log(checkAllowPole22(1, 2, 4, "pravo"));
                     }}
                   >
@@ -902,23 +903,28 @@ const start = function (data, ID) {
                       Element={($el) => {
                         addListner(item, index, $el);
                       }}
+                      onclick ={()=>{
+                  fire_sea_war();
+                  
+                }}
                     >
                       {onStart ? null : arrGame[Math.floor(index / 10)][item]}
+                      <img class = "hit_sw" src = {item == 10 ? svg['train/krest_2'] : ""}></img>
                     </div>
                   );
                 })}
               </table>
               {onStart ? (
                 <table id="field_sea_war"
-                onclick ={()=>{
-                  fire_sea_war();
+                // onclick ={()=>{
+                //   fire_sea_war();
                   
-                }}
+                // }}
                 >
                   {prostoArr.map((item, index) => {
                     return <div class={["block_size_sea_war"]}></div>;
                   })} 
-                  <img class = "hit_sw" src = {item == 10 ? svg['train/krest_2'] : item == 0 ? alert("попробуйте в другое место") : ""}></img>
+                  {/* <img class = "hit_sw" src = {item == 10 ? svg['train/krest_2'] : ""}></img> */}
                 </table>
               ) : null}
             </div>
