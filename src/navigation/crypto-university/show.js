@@ -33,6 +33,18 @@ const makeFilter = function (Static) {
     return objReturn
 }
 
+const indexFearAndGread = async function () {
+        const url = `https://api.alternative.me/fng/`
+        fetch(url).then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log(data.data[0]);
+    });
+}
+
+indexFearAndGread()
+
 const start = function (data, ID) {
     let [Static, item] = fn.GetParams({ data, ID, initData: "cryptouniversity_show" })
 
@@ -144,10 +156,11 @@ const start = function (data, ID) {
                 })
             }
 
+            
+
         },
 
         fn: async () => {
-            // console.log('=9ebbf7=', Static.item)
             if (!item._id) { return (<div><BlockError404 /></div>) }
 
             return (
@@ -273,7 +286,9 @@ const start = function (data, ID) {
                                                 <div class="course-footer__prices">
                                                     <div class="course-footer__cost">
                                                         <div class="course-footer__cost_section">
-                                                            <span class="course-footer__cost_old">
+                                                            <span class="course-footer__cost_old"
+                                                                style={item.name?.indexOf("Kata.Academy")>= 0 || Static.item.name?.indexOf("Kata.Academy")>= 0 ? "display: none" : null}
+                                                            >
                                                                 {`${Static.item.cost * 1.3}`}
                                                                 {item.currency == "rub"
                                                                     ?
@@ -286,11 +301,19 @@ const start = function (data, ID) {
                                                                         null
                                                                 }
                                                             </span>
-                                                            <div class="course-footer__cost_discount">
-                                                                <span>-30%</span>
+                                                            <div class="course-footer__cost_discount"
+                                                                style={item.name?.indexOf("Kata.Academy")>= 0 || Static.item.name?.indexOf("Kata.Academy")>= 0 ? "border: 0" : null}
+                                                            >
+                                                                {
+                                                                    Static?.item?.name?.indexOf("Kata.Academy")
+                                                                    ?
+                                                                    null
+                                                                    :
+                                                                    <span>-30%</span>
+                                                                }
                                                             </div>
                                                         </div>
-                                                        <div class="course-footer__cost_new">
+                                                        <div class={["course-footer__cost_new", item.name?.indexOf("Kata.Academy")>= 0 || Static.item.name?.indexOf("Kata.Academy")>= 0 ? "course-footer__cost_kata" : null]}>
                                                             {Static.item.cost} 
                                                             {item.currency == "rub"
                                                                 ?
@@ -300,9 +323,13 @@ const start = function (data, ID) {
                                                                     ?
                                                                     <span class="card__cost_size"> $</span>
                                                                     :
+                                                                    item.name?.indexOf("kata.academy") || Static.item.name?.indexOf("kata.academy")
+                                                                    ?
+                                                                    <span>% от зарплаты после трудоустройства</span>
+                                                                    :
                                                                     null
                                                             }
-                                                            <div>Новая цена</div>
+                                                            <div>{item.name?.indexOf("Kata.Academy")>= 0 || Static.item.name?.indexOf("Kata.Academy")>= 0 ? null : "Новая цена"}</div>
                                                         </div>
                                                     </div>
                                                 </div>
