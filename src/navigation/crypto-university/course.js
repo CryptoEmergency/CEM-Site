@@ -277,6 +277,7 @@ const start = function (data, ID) {
                                             </div>
                                             <div class="courses-select">
                                                 <div class="courses-select--default"
+                                                
                                                     onclick={() => {
                                                         if (!Static.selectCost) {
                                                             Static.selectCost = true
@@ -404,6 +405,7 @@ const start = function (data, ID) {
                                                 Static.courses.length != 0
                                                     ?
                                                     Static.courses.map((item) => {
+                                                        console.log('=1bc979=',item.name.indexOf("Kata.Academy"))
                                                         return (
                                                             <li class="card card_courses">
                                                                 <a
@@ -416,7 +418,7 @@ const start = function (data, ID) {
                                                                         {item.description}
                                                                     </div>
                                                                     <div class="card__container card__container_row card__container_indent_course">
-                                                                        <div class="card__cost">
+                                                                        <div class={["card__cost", item.name.indexOf("Kata.Academy")>= 0 ? "card__cost_kata" : null]}>
                                                                             {item.cost != undefined || null
                                                                             ?
                                                                             <span>{item.cost}
@@ -427,6 +429,10 @@ const start = function (data, ID) {
                                                                                     item.currency == "usd" 
                                                                                 ?
                                                                                     <span class="card__cost_size"> $</span>
+                                                                                :
+                                                                                    item.name.indexOf("kata.academy")
+                                                                                ?
+                                                                                <span>% от зарплаты после трудоустройства</span>
                                                                                 :
                                                                                 null
                                                                                 }
