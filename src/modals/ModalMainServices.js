@@ -16,7 +16,7 @@ const { svg, fn } = CEM
 const ModalMainServices = function (data, ID) {
   load({
     ID,
-    fnLoad: async () => {},
+    fnLoad: async () => { },
     fn: () => {
       return (
         <div class="wrap-modal">
@@ -26,7 +26,7 @@ const ModalMainServices = function (data, ID) {
                 <h2 class="modal-subtitle">{Variable.lang.h.services}</h2>
                 <button
                   class="b btn-modal_close"
-                  onclick={(e)=>{
+                  onclick={(e) => {
                     fn.modals.close(ID);
                   }}
                 >
@@ -38,7 +38,7 @@ const ModalMainServices = function (data, ID) {
                   <a
                     href="/lenta-users/"
                     class="c-allservices__link"
-                    onclick={fn.siteLink} 
+                    onclick={fn.siteLink}
                   >
                     <div class="c-allservices__wrap">
                       <img src={svg["preview_line_lenta"]} alt="" />
@@ -48,7 +48,7 @@ const ModalMainServices = function (data, ID) {
                   <a
                     href="/question/"
                     class="c-allservices__link"
-                    onclick={fn.siteLink} 
+                    onclick={fn.siteLink}
                   >
                     <div class="c-allservices__wrap">
                       <img src={svg["preview_line_questions"]} alt="" />
@@ -58,7 +58,7 @@ const ModalMainServices = function (data, ID) {
                   <a
                     href="/content-creator/"
                     class="c-allservices__link"
-                    onclick={fn.siteLink} 
+                    onclick={fn.siteLink}
                   >
                     <div class="c-allservices__wrap">
                       <img src={svg["contentmaker"]} alt="" />
@@ -68,7 +68,7 @@ const ModalMainServices = function (data, ID) {
                   <a
                     href="/experts/"
                     class="c-allservices__link"
-                    onclick={fn.siteLink} 
+                    onclick={fn.siteLink}
                   >
                     <div class="c-allservices__wrap">
                       <img src={svg["preview_line_experts"]} alt="" />
@@ -78,7 +78,7 @@ const ModalMainServices = function (data, ID) {
                   <a
                     href="/users/"
                     class="c-allservices__link"
-                    onclick={fn.siteLink} 
+                    onclick={fn.siteLink}
                   >
                     <div class="c-allservices__wrap">
                       <img src={svg["preview_line_users"]} alt="" />
@@ -88,7 +88,7 @@ const ModalMainServices = function (data, ID) {
                   <a
                     href="/list-trade/"
                     class="c-allservices__link"
-                    onclick={fn.siteLink} 
+                    onclick={fn.siteLink}
                   >
                     <div class="c-allservices__wrap">
                       <img src={svg["preview_line_exchange"]} alt="" />
@@ -98,7 +98,7 @@ const ModalMainServices = function (data, ID) {
                   <a
                     href="/list-exchange/"
                     class="c-allservices__link"
-                    onclick={fn.siteLink} 
+                    onclick={fn.siteLink}
                   >
                     <div class="c-allservices__wrap">
                       <img src={svg["exchanges"]} alt="" />
@@ -108,7 +108,7 @@ const ModalMainServices = function (data, ID) {
                   <a
                     href="/exchange-rates/"
                     class="c-allservices__link"
-                    onclick={fn.siteLink} 
+                    onclick={fn.siteLink}
                   >
                     <div class="c-allservices__wrap">
                       <img src={svg["rates"]} alt="" />
@@ -118,7 +118,7 @@ const ModalMainServices = function (data, ID) {
                   <a
                     href="/list-icostartaps/"
                     class="c-allservices__link"
-                    onclick={fn.siteLink} 
+                    onclick={fn.siteLink}
                   >
                     <div class="c-allservices__wrap">
                       <img src={svg["star1"]} alt="" />
@@ -128,7 +128,7 @@ const ModalMainServices = function (data, ID) {
                   <a
                     href="/list-startaps/"
                     class="c-allservices__link"
-                    onclick={fn.siteLink} 
+                    onclick={fn.siteLink}
                   >
                     <div class="c-allservices__wrap">
                       <img src={svg["startup"]} alt="" />
@@ -138,7 +138,7 @@ const ModalMainServices = function (data, ID) {
                   <a
                     href="/news/"
                     class="c-allservices__link"
-                    onclick={fn.siteLink} 
+                    onclick={fn.siteLink}
                   >
                     <div class="c-allservices__wrap">
                       <img src={svg["preview_line_news"]} alt="" />
@@ -148,14 +148,14 @@ const ModalMainServices = function (data, ID) {
                   <a
                     href="/career-whith-us/"
                     class="c-allservices__link"
-                    onclick={fn.siteLink} 
+                    onclick={fn.siteLink}
                   >
                     <div class="c-allservices__wrap">
                       <img src={svg["career_with_us_icon"]} alt="" />
                     </div>
                     <p>{Variable.lang.a.careerUs}</p>
                   </a>
-                  <a
+                  {/* <a
                     href="/crypto-university/"
                     class="c-allservices__link"
                     onclick={fn.siteLink} 
@@ -164,7 +164,7 @@ const ModalMainServices = function (data, ID) {
                       <img src={svg["mortarboard"]} alt="" />
                     </div>
                     <p>{Variable.lang.a.university}</p>
-                  </a>
+                  </a> */}
                 </div>
               </main>
             </div>

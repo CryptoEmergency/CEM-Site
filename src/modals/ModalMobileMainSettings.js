@@ -211,14 +211,14 @@ const ModalMobileMainSettings = function (data, ID) {
                                     <img src={svg.lineUsersBlack} />
                                     <span class="mobile_user_menu_link">{Variable.lang.h.top_users}</span>
                                 </a>
-                                <a
+                                {/* <a
                                     onclick={fn.siteLink}
                                     class="user_icon_mobile_visible user_icon"
                                     href="/crypto-university/"
                                 >
                                     <img src={svg.univercsityBlack} />
                                     <span class="mobile_user_menu_link">{Variable.lang.a.university}</span>
-                                </a>
+                                </a> */}
                                 <a
                                     onclick={fn.siteLink}
                                     class={`user_icon_mobile_visible user_icon ${Variable.dataUrl.adress == "experts" ? "user_icon_active" : ""}`}
