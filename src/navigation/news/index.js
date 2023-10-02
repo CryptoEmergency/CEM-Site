@@ -260,10 +260,10 @@ const start = function (data, ID) {
                     class: "img-rect_news",
                   }}
                   statistic={{
-                    question_views: {
-                      value: item.statistic.view,
-                      class: "statistic-icon",
-                    },
+                    // question_views: {
+                    //   value: item.statistic.view,
+                    //   class: "statistic-icon",
+                    // },
                     question_answers: {
                       value: item.statistic.comments,
                       class: "statistic-icon",
