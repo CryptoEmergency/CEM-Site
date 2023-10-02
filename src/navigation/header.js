@@ -249,12 +249,12 @@ const Header = async function () {
                                                     }}>
                                                     {Variable.lang.a.news}
                                                 </a>
-                                                <a 
+                                                {/* <a 
                                                     target="_blank" 
                                                     href="https://twitter.com/cryptoemergency" 
                                                     class="c-menu__icon">
                                                     <img src={svg['socials/twitter']}></img>
-                                                </a>
+                                                </a> */}
 
 
                                             </nav>
