@@ -106,7 +106,7 @@ const start = function (data, ID) {
           params: {}
         })
       }
-      // console.log("Static.item", Static.item)
+      console.log("Static.item", Static.item)
     },
     fn: () => {
       return (
