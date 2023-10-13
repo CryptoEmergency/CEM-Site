@@ -258,9 +258,11 @@ const start = function (data, ID) {
               }
             )}
           </div>
+          
           <a href="https://freekassa.ru" target="_blank" rel="noopener noreferrer">
             <img src="https://cdn.freekassa.ru/banners/small-dark-1.png" title="Прием платежей на сайте" />
           </a>
+
         </div>
       );
     }
