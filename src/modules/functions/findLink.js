@@ -8,7 +8,7 @@ const forExport = function (str) {
     if (str.match(linkRegular) != null) {
         let arrUrl = str.match(linkRegular)
 
-        arrUrl = arrUrl.filter(function(elem, index, arr) {
+        arrUrl = arrUrl.filter(function (elem, index, arr) {
             return index === arr.indexOf(elem);
         })
 
@@ -17,8 +17,8 @@ const forExport = function (str) {
             if (link.length > 35) {
                 shortLink = link.slice(0, 35) + '...'
             }
-
-            str = str.replaceAll(link, `<a href="${link}" class="global-link" rel="nofollow noopener" target="_blank">${shortLink}</a>`)
+            str = str.replace(link, `<a href="${link}" class="global-link" rel="nofollow noopener" target="_blank">${shortLink}</a>`);
+            // str = str.replaceAll(link, `<a href="${link}" class="global-link" rel="nofollow noopener" target="_blank">${shortLink}</a>`)
         })
     }
     return str
