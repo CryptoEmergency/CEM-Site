@@ -32,7 +32,7 @@ const start = function (data, ID) {
           // filter: Static.apiFilter,
         }
       });
-      console.log('=566d8d=',Static.records)
+      console.log('=566d8d=', Static.records)
     },
     fn: () => {
       return (
@@ -73,6 +73,14 @@ const start = function (data, ID) {
                 }}
               ></img>
             </div>
+            <div class="crypto_exchanges-title">
+              <div>
+                <h4>Быстрый обмен Crypto</h4>
+                <iframe title="Exolix widget" src="https://exolix.com/widget/BTC:BTC-USDT:TRX?a=1&locale=ru&t=mTGWI0GpMY3c0d22UWmk75zqM7n4ogIr8atoV7bpVAYkayVrDBK10T24g3Y75uX5&template=wobrand" width="315px" height="268px" frameBorder="0" style="overflow:hidden" scrolling="no"></iframe>
+              </div>
+
+            </div>
+
 
             <div class="checked-coins">
               {Static.filterCoins.length ? (
