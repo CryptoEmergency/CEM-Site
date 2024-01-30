@@ -222,12 +222,15 @@ const start = function (data, ID) {
                 :
                 null
             } */}
+<<<<<<< HEAD
 
             {/* <div>
               <h4>Быстрый обмен Crypto</h4>
               <iframe title="Exolix widget" src="https://exolix.com/widget/BTC:BTC-USDT:TRX?a=1&locale=ru&t=mTGWI0GpMY3c0d22UWmk75zqM7n4ogIr8atoV7bpVAYkayVrDBK10T24g3Y75uX5&template=wobrand" width="315px" height="268px" frameBorder="0" style="overflow:hidden" scrolling="no"></iframe>
             </div> */}
 
+=======
+>>>>>>> parent of e86dc567 (.)
             <div class="c-wallet__operations">
               <h3 style="margin-top: 20px">Бонусы</h3>
               <div class="c-wallet__transaction c-wallet__transaction--label">

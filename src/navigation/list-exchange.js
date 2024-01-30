@@ -32,7 +32,7 @@ const start = function (data, ID) {
           // filter: Static.apiFilter,
         }
       });
-      console.log('=566d8d=', Static.records)
+      console.log('=566d8d=',Static.records)
     },
     fn: () => {
       return (
@@ -73,6 +73,7 @@ const start = function (data, ID) {
                 }}
               ></img>
             </div>
+<<<<<<< HEAD
             {/* <div class="crypto_exchanges-title">
               <div>
                 <h4>Быстрый обмен Crypto</h4>
@@ -81,6 +82,8 @@ const start = function (data, ID) {
 
             </div> */}
 
+=======
+>>>>>>> parent of e86dc567 (.)
 
             <div class="checked-coins">
               {Static.filterCoins.length ? (

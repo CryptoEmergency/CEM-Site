@@ -55,49 +55,49 @@
     transition: 0.75;
 }
 
-.general_sponsor_banner {
+.general_sponsor_banner{
     display: block;
-    width: 40%;
+    width: 40%; 
     margin: 0 auto;
-    background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%);
-    padding: 2px;
+    background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); 
+    padding: 2px; 
     border-radius: 6px
 }
 
-.forum_timesheet {
+.forum_timesheet{
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
     flex-wrap: wrap;
 }
 
-.forum_timesheet img {
+.forum_timesheet img{
     width: 49.5%;
     border-radius: 6px;
 }
 
-.forum_end_photos {
+.forum_end_photos{
     display: grid;
     grid-template-columns: calc(25% - 7.5px) calc(25% - 7.5px) calc(25% - 7.5px) calc(25% - 7.5px);
     grid-gap: 10px;
 }
 
-.forum_end_photos img {
+.forum_end_photos img{
     width: 100%;
     cursor: pointer;
     transition: 0.5s;
     border-radius: 5px;
 }
 
-.forum_end_photos img:hover {
+.forum_end_photos img:hover{
     opacity: 0.8;
 }
 
-.all_photo_button_container {
+.all_photo_button_container{
     width: 300px;
     height: 60px;
     margin: 0 auto;
-    background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%);
+    background: linear-gradient(115.23deg, rgba(193, 38, 206, 0.7) 15.28%, rgba(40, 76, 203, 0.7) 97.16%); 
     padding: 2px;
     display: block;
     border-radius: 5px;
@@ -108,7 +108,7 @@
     margin-top: 10px;
 }
 
-.all_photo_button {
+.all_photo_button{
     width: 100%;
     height: 100%;
     display: flex;
@@ -119,7 +119,7 @@
     transition: 1s;
 }
 
-.all_photo_button_container:hover .all_photo_button {
+.all_photo_button_container:hover .all_photo_button{
     background: none;
 }
 
@@ -159,7 +159,7 @@
         display: grid !important;
     }
 
-    .forum_timesheet img {
+    .forum_timesheet img{
         width: 100%;
         border-radius: 6px;
         margin-bottom: 10px;
@@ -169,13 +169,12 @@
 
 @media(max-width: 800px) {
 
-    .general_sponsor_banner {
-        width: 90%;
+    .general_sponsor_banner{
+        width: 90%; 
     }
-
-    .speaker_item {
-        display: grid;
-        grid-template-columns: 200px 320px;
+    .speaker_item{
+        display: grid; 
+        grid-template-columns: 200px 320px; 
 
         align-items: center;
         font-size: 14px;
@@ -198,7 +197,7 @@
         height: 300px;
     }
 
-    .forum_end_photos {
+    .forum_end_photos{
         grid-template-columns: calc(50% - 5px) calc(50% - 5px);
         grid-gap: 10px;
     }
@@ -207,11 +206,6 @@
 @media(max-width: 450px) {
     .video-container-forum iframe {
         height: 220px;
-    }
-
-    .h_iframe {
-        height: 376px;
-        width: 450px;
     }
 }
 
@@ -226,16 +220,4 @@
     .video-container-forum iframe {
         height: 200px;
     }
-
-    .h_iframe {
-        height: 376px;
-        width: 400px;
-    }
-}
-
-
-
-.h_iframe {
-    height: 376px;
-    width: 560px;
 }
