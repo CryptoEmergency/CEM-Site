@@ -1,3 +1,6 @@
 node_modules
-public
 package-lock.json
+public
+public/*.js
+public/*.css
+public/fonts/*.ttf
